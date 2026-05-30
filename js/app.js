@@ -15,6 +15,7 @@ import { renderCountLearn, renderFeed, renderCollect, renderBigNumbers } from ".
 import { renderHarakat } from "./games/harakat.js";
 import { renderExplore } from "./games/explore.js";
 import { renderShadowMatch, renderSoundMatch, renderFindIt } from "./games/match.js";
+import { renderOppositesMatch } from "./games/opposites.js";
 import { renderGarden } from "./screens/garden.js";
 import { renderParent } from "./screens/parent.js";
 import { renderAR } from "./screens/ar.js";
@@ -35,6 +36,7 @@ Router.register("explore", renderExplore);
 Router.register("shadowMatch", renderShadowMatch);
 Router.register("soundMatch", renderSoundMatch);
 Router.register("findIt", renderFindIt);
+Router.register("oppositesMatch", renderOppositesMatch);
 Router.register("garden", renderGarden);
 Router.register("parent", renderParent);
 Router.register("ar", renderAR);

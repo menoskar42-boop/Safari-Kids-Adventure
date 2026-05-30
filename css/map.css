@@ -123,3 +123,8 @@
 .bg-shapes   { background: linear-gradient(160deg, #43e0d0, #1aa7a0); }
 .bg-jobs     { background: linear-gradient(160deg, #ffb347, #ff7e5f); }
 .bg-body     { background: linear-gradient(160deg, #ff9eb5, #ff5f8d); }
+.bg-transport { background: linear-gradient(160deg, #6dd5fa, #2980b9); }
+.bg-food     { background: linear-gradient(160deg, #ffd86f, #fc6262); }
+.bg-weekdays { background: linear-gradient(160deg, #a18cd1, #fbc2eb); }
+.bg-opposites { background: linear-gradient(160deg, #30cfd0, #330867); }
+.bg-words    { background: linear-gradient(160deg, #84fab0, #8fd3f4); }

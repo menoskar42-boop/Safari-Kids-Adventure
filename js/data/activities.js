@@ -158,4 +158,34 @@ export const ACTIVITIES = {
     { emoji: "🔎", title: "جِد الجزء", desc: "اضغط على الجزء المطلوب", screen: "findIt",
       params: { datasetKey: "body", title: "🔎 جِد الجزء", verb: "أين", bg: "linear-gradient(180deg,#ffc2d2,#ff5f8d)" } },
   ],
+  transport: [
+    { emoji: "🚗", title: "استكشف المواصلات", desc: "اضغط على كل وسيلة لتعرفها", screen: "explore",
+      params: { datasetKey: "transport", title: "🚗 عالم المواصلات", sound: true, bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
+    { emoji: "🔎", title: "جِد الوسيلة", desc: "اضغط على الوسيلة المطلوبة", screen: "findIt",
+      params: { datasetKey: "transport", title: "🔎 جِد الوسيلة", verb: "اضغط على", bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
+  ],
+  food: [
+    { emoji: "🍔", title: "استكشف الطعام", desc: "اضغط على كل طعام لتعرفه", screen: "explore",
+      params: { datasetKey: "food", title: "🍔 مطبخ الطعام", bg: "linear-gradient(180deg,#ffe6a0,#fc6262)" } },
+    { emoji: "🔎", title: "جِد الطعام", desc: "اضغط على الطعام المطلوب", screen: "findIt",
+      params: { datasetKey: "food", title: "🔎 جِد الطعام", verb: "أحضِر", bg: "linear-gradient(180deg,#ffe6a0,#fc6262)" } },
+  ],
+  weekdays: [
+    { emoji: "📅", title: "تعلّم الأيام", desc: "اضغط على كل يوم لتعرفه", screen: "explore",
+      params: { datasetKey: "weekdays", title: "📅 أيام الأسبوع", bg: "linear-gradient(180deg,#c3b0ec,#fbc2eb)" } },
+    { emoji: "🔎", title: "جِد اليوم", desc: "اضغط على اليوم المطلوب", screen: "findIt",
+      params: { datasetKey: "weekdays", title: "🔎 جِد اليوم", verb: "اضغط على", bg: "linear-gradient(180deg,#c3b0ec,#fbc2eb)" } },
+  ],
+  opposites: [
+    { emoji: "↔️", title: "طابق الضدّ", desc: "صِل كل شيء بضدّه", screen: "oppositesMatch",
+      params: {} },
+    { emoji: "🔎", title: "استكشف الأضداد", desc: "اضغط على كل كلمة لتعرفها", screen: "explore",
+      params: { datasetKey: "opposites", title: "↔️ عالم الأضداد", bg: "linear-gradient(180deg,#5fd5d6,#4a2a8a)" } },
+  ],
+  words: [
+    { emoji: "📦", title: "استكشف الكلمات", desc: "اضغط على كل كلمة لتعرفها", screen: "explore",
+      params: { datasetKey: "words", title: "📦 صندوق الكلمات", bg: "linear-gradient(180deg,#a8f5c8,#8fd3f4)" } },
+    { emoji: "🔎", title: "جِد الكلمة", desc: "اضغط على الكلمة المطلوبة", screen: "findIt",
+      params: { datasetKey: "words", title: "🔎 جِد الكلمة", verb: "اضغط على", bg: "linear-gradient(180deg,#a8f5c8,#8fd3f4)" } },
+  ],
 };

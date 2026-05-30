@@ -9,6 +9,11 @@ import { COLORS } from "./colors.js";
 import { SHAPES } from "./shapes.js";
 import { JOBS } from "./jobs.js";
 import { BODY_PARTS } from "./body.js";
+import { TRANSPORT } from "./transport.js";
+import { FOOD } from "./food.js";
+import { WEEKDAYS } from "./weekdays.js";
+import { OPPOSITES_FLAT } from "./opposites.js";
+import { WORDS } from "./words.js";
 
 const DATASETS = {
   arabic: {
@@ -31,6 +36,11 @@ const DATASETS = {
   shapes: { key: "shapes", lang: "ar-EG", glyphKind: "emoji", items: SHAPES },
   jobs: { key: "jobs", lang: "ar-EG", glyphKind: "emoji", items: JOBS },
   body: { key: "body", lang: "ar-EG", glyphKind: "emoji", items: BODY_PARTS },
+  transport: { key: "transport", lang: "ar-EG", glyphKind: "emoji", items: TRANSPORT },
+  food: { key: "food", lang: "ar-EG", glyphKind: "emoji", items: FOOD },
+  weekdays: { key: "weekdays", lang: "ar-EG", glyphKind: "emoji", items: WEEKDAYS },
+  opposites: { key: "opposites", lang: "ar-EG", glyphKind: "emoji", items: OPPOSITES_FLAT },
+  words: { key: "words", lang: "ar-EG", glyphKind: "emoji", items: WORDS },
 };
 
 export function getDataset(key) {
