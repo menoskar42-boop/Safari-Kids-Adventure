@@ -32,10 +32,10 @@ function page({ slug, title, description, h1, emoji, bodyHtml, type = "website" 
 </head>
 <body>
 <header class="seo-header">
-  <a class="seo-logo" href="/">🦁 عالم الاستكشاف السحري</a>
+  <a class="seo-logo" href="/explore">🦁 عالم الاستكشاف السحري</a>
 </header>
 <main class="seo-main">
-  <p class="seo-crumbs"><a href="/">الرئيسية</a> › ${esc(h1)}</p>
+  <p class="seo-crumbs"><a href="/explore">الرئيسية</a> › ${esc(h1)}</p>
   <h1>${emoji} ${esc(h1)}</h1>
   <article class="seo-article">${bodyHtml}</article>
   <nav class="seo-related" aria-label="روابط">
@@ -49,7 +49,7 @@ function page({ slug, title, description, h1, emoji, bodyHtml, type = "website" 
 </main>
 <footer class="seo-footer">
   <p>عالم الاستكشاف السحري — تطبيق تعليمي تفاعلي للأطفال من ٣ إلى ٦ سنوات.</p>
-  <p><a href="/">العودة إلى الصفحة الرئيسية</a></p>
+  <p><a href="/explore">العودة إلى صفحة الاستكشاف</a></p>
 </footer>
 </body>
 </html>`;

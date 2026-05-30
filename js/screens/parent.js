@@ -51,10 +51,19 @@ export function renderParent() {
     wrap.appendChild(row);
   });
 
+  // روابط الآباء: أدلة ومعلومات (صفحات المحتوى/الأرشفة)
+  const guidesLink = document.createElement("a");
+  guidesLink.className = "candy-btn";
+  guidesLink.href = "/explore";
+  guidesLink.style.cssText =
+    "display:block;width:fit-content;margin:24px auto 0;text-decoration:none;text-align:center;background:linear-gradient(180deg,#7c5fe6,#5b3fb5)";
+  guidesLink.textContent = "📖 أدلة ومعلومات للآباء";
+  wrap.appendChild(guidesLink);
+
   // إعادة ضبط
   const reset = document.createElement("button");
   reset.className = "candy-btn";
-  reset.style.cssText = "display:block;margin:20px auto 0;background:linear-gradient(180deg,#ff8a8a,#ff5d5d)";
+  reset.style.cssText = "display:block;margin:14px auto 0;background:linear-gradient(180deg,#ff8a8a,#ff5d5d)";
   reset.textContent = "🗑️ إعادة ضبط التقدّم";
   reset.addEventListener("click", () => {
     Sfx.tap();

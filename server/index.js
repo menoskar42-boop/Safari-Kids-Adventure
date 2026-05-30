@@ -35,8 +35,13 @@ app.get("/robots.txt", (_req, res) => {
   res.type("text/plain").send(renderRobots());
 });
 
-// الصفحة الرئيسية الغنيّة (HTML كامل يُؤرشَف بلا JavaScript)
+// الرابط الرئيسي يفتح التطبيق التفاعلي مباشرة (أفضل تجربة للطفل)
 app.get("/", (_req, res) => {
+  res.sendFile(path.join(ROOT, "index.html"));
+});
+
+// صفحة المحتوى الغنيّة للأرشفة (SEO) على /explore
+app.get("/explore", (_req, res) => {
   res.type("html").send(renderHomePage());
 });
 
