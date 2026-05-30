@@ -1,0 +1,71 @@
+// ===== نظام المكافآت: نجوم + شخصيات وألعاب تُجمع =====
+import { Store } from "./storage.js";
+import { Sfx } from "./audio.js";
+import { Confetti } from "./confetti.js";
+import { Speech } from "./speech.js";
+
+// مجموعة العناصر القابلة للجمع (حيوانات أليفة، سيارات، أجنحة، قبعات...)
+export const COLLECTIBLES = [
+  { id: "pet-cat", emoji: "🐱", name: "قطة صغيرة" },
+  { id: "pet-dog", emoji: "🐶", name: "كلب لطيف" },
+  { id: "pet-bunny", emoji: "🐰", name: "أرنب" },
+  { id: "pet-panda", emoji: "🐼", name: "باندا" },
+  { id: "car-red", emoji: "🚗", name: "سيارة حمراء" },
+  { id: "car-race", emoji: "🏎️", name: "سيارة سباق" },
+  { id: "wings", emoji: "🦋", name: "أجنحة سحرية" },
+  { id: "hat-magic", emoji: "🎩", name: "قبعة الساحر" },
+  { id: "crown", emoji: "👑", name: "تاج ذهبي" },
+  { id: "rocket", emoji: "🚀", name: "صاروخ" },
+  { id: "unicorn", emoji: "🦄", name: "حصان وحيد القرن" },
+  { id: "robot", emoji: "🤖", name: "روبوت صديق" },
+  { id: "balloon", emoji: "🎈", name: "بالون" },
+  { id: "rainbow", emoji: "🌈", name: "قوس قزح" },
+  { id: "star-trophy", emoji: "🏆", name: "كأس البطل" },
+];
+
+let starCounterEl = null;
+export function bindStarCounter(el) {
+  starCounterEl = el;
+  updateStarCounter();
+}
+export function updateStarCounter() {
+  if (starCounterEl) starCounterEl.innerHTML = `⭐ <span>${Store.stars}</span>`;
+}
+
+/** منح نجوم مع مؤثرات */
+export function awardStars(n = 1) {
+  Store.addStars(n);
+  Sfx.star();
+  Confetti.stars();
+  updateStarCounter();
+}
+
+/** منح عنصر جديد للمجموعة إذا لم يكن مملوكاً */
+export function grantRandomCollectible() {
+  const locked = COLLECTIBLES.filter((c) => !Store.hasCollected(c.id));
+  if (!locked.length) return null;
+  const item = locked[(Math.random() * locked.length) | 0];
+  Store.addToCollection(item.id);
+  return item;
+}
+
+/** نافذة احتفال عند ربح عنصر جديد */
+export function showRewardPopup(item, onClose) {
+  Sfx.unlockReward();
+  Confetti.burst();
+  const overlay = document.createElement("div");
+  overlay.className = "cheer";
+  overlay.innerHTML = `
+    <div class="cheer-card">
+      <div class="cheer-emoji">${item.emoji}</div>
+      <div class="cheer-text">مكافأة جديدة!</div>
+      <p style="font-size:20px;font-weight:700;color:var(--c-ink);margin:.2em 0 1em">${item.name}</p>
+      <button class="candy-btn" id="rewardOk">رائع! 🎉</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  Speech.ar(`حصلت على ${item.name}`);
+  overlay.querySelector("#rewardOk").addEventListener("click", () => {
+    overlay.remove();
+    if (onClose) onClose();
+  });
+}

@@ -1,0 +1,91 @@
+// ===== تعريف مناطق العالم السحري =====
+// كل منطقة لها: معرّف، اسم عربي/إنجليزي، إيموجي، لون خلفية، ورسالة المرشد.
+// "ready" تعني أن محتوى المنطقة جاهز (يُفعّل تدريجياً مع كل مرحلة تطوير).
+
+export const REGIONS = [
+  {
+    id: "arabic",
+    name: "قلعة الحروف العربية",
+    nameEn: "Arabic Letters",
+    emoji: "🔤",
+    bg: "bg-arabic",
+    guide: "هيا نتعلّم الحروف العربية ونجمع النجوم!",
+    ready: false,
+  },
+  {
+    id: "english",
+    name: "قلعة الحروف الإنجليزية",
+    nameEn: "English Letters",
+    emoji: "🔠",
+    bg: "bg-english",
+    guide: "Let's learn English letters together!",
+    ready: false,
+  },
+  {
+    id: "numbers",
+    name: "مدينة الأرقام",
+    nameEn: "Numbers City",
+    emoji: "🔢",
+    bg: "bg-numbers",
+    guide: "تعال نعدّ معاً ونلعب بالأرقام!",
+    ready: false,
+  },
+  {
+    id: "animals",
+    name: "غابة الحيوانات",
+    nameEn: "Animals Forest",
+    emoji: "🦁",
+    bg: "bg-animals",
+    guide: "أصدقاؤنا الحيوانات في انتظارك!",
+    ready: false,
+  },
+  {
+    id: "fish",
+    name: "بحر الأسماك",
+    nameEn: "Fish Sea",
+    emoji: "🐠",
+    bg: "bg-fish",
+    guide: "هيا نغوص في البحر ونكتشف الأسماك!",
+    ready: false,
+  },
+  {
+    id: "birds",
+    name: "عالم الطيور",
+    nameEn: "Birds World",
+    emoji: "🦜",
+    bg: "bg-birds",
+    guide: "الطيور تطير في السماء، تعال نراها!",
+    ready: false,
+  },
+  {
+    id: "fruits",
+    name: "مزرعة الفواكه",
+    nameEn: "Fruits Farm",
+    emoji: "🍎",
+    bg: "bg-fruits",
+    guide: "سوق الفواكه السحري ينتظرك!",
+    ready: false,
+  },
+  {
+    id: "colors",
+    name: "حديقة الألوان",
+    nameEn: "Colors Garden",
+    emoji: "🎨",
+    bg: "bg-colors",
+    guide: "تعال نلعب بكل الألوان الجميلة!",
+    ready: false,
+  },
+  {
+    id: "shapes",
+    name: "عالم الأشكال",
+    nameEn: "Shapes World",
+    emoji: "⭐",
+    bg: "bg-shapes",
+    guide: "أشكال كثيرة تنتظر أن تكتشفها!",
+    ready: false,
+  },
+];
+
+export function getRegion(id) {
+  return REGIONS.find((r) => r.id === id);
+}
