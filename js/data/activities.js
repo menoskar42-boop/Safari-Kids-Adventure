@@ -38,6 +38,20 @@ export const ACTIVITIES = {
       screen: "harakat",
       params: {},
     },
+    {
+      emoji: "🔠",
+      title: "الحرف الناقص",
+      desc: "رتّب الحروف واملأ الناقص",
+      screen: "sequence",
+      params: { datasetKey: "arabic", lang: "ar-EG", title: "🔠 الحرف الناقص" },
+    },
+    {
+      emoji: "🧠",
+      title: "المراجعة الذكية",
+      desc: "راجع ما تعلّمته من الحروف",
+      screen: "review",
+      params: { datasetKey: "arabic", lang: "ar-EG", title: "🧠 مراجعة الحروف" },
+    },
   ],
   english: [
     {
@@ -67,6 +81,20 @@ export const ACTIVITIES = {
       desc: "Trace the letter",
       screen: "trace",
       params: { datasetKey: "english", lang: "en-US" },
+    },
+    {
+      emoji: "🔠",
+      title: "الحرف الناقص",
+      desc: "Find the missing letter",
+      screen: "sequence",
+      params: { datasetKey: "english", lang: "en-US", title: "🔠 الحرف الناقص" },
+    },
+    {
+      emoji: "🧠",
+      title: "المراجعة الذكية",
+      desc: "Review what you learned",
+      screen: "review",
+      params: { datasetKey: "english", lang: "en-US", title: "🧠 مراجعة الحروف" },
     },
   ],
   numbers: [
@@ -104,6 +132,20 @@ export const ACTIVITIES = {
       desc: "استمع واختر الرقم الصحيح",
       screen: "bigNumbers",
       params: {},
+    },
+    {
+      emoji: "🔢",
+      title: "الرقم الناقص",
+      desc: "رتّب الأرقام واملأ الناقص",
+      screen: "sequence",
+      params: { datasetKey: "numbers", title: "🔢 الرقم الناقص" },
+    },
+    {
+      emoji: "🧠",
+      title: "المراجعة الذكية",
+      desc: "راجع ما تعلّمته من الأرقام",
+      screen: "review",
+      params: { datasetKey: "numbers", title: "🧠 مراجعة الأرقام" },
     },
   ],
   animals: [

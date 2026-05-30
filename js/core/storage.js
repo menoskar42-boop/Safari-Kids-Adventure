@@ -10,6 +10,8 @@ const DEFAULT_STATE = {
   collection: [],
   // أعلى منطقة مفتوحة (الفهرس) — تُفتح المناطق تدريجياً
   unlockedIndex: 0,
+  // العناصر التي رآها الطفل (للمراجعة المتباعدة): "datasetKey:itemKey"
+  seen: [],
 };
 
 let state = load();
@@ -70,6 +72,21 @@ export const Store = {
   // عدد المناطق المكتملة (لفتح المناطق المتقدّمة تدريجياً)
   completedCount() {
     return Object.values(state.regions).filter((r) => r && r.completed).length;
+  },
+
+  // تسجيل أن الطفل رأى عنصراً (حرف/رقم) — للمراجعة المتباعدة
+  markSeen(datasetKey, itemKey) {
+    const id = `${datasetKey}:${itemKey}`;
+    if (!state.seen.includes(id)) {
+      state.seen.push(id);
+      if (state.seen.length > 400) state.seen.shift();
+      persist();
+    }
+  },
+  // العناصر المرئية من مجموعة معيّنة (مصفوفة مفاتيح العناصر)
+  seenKeys(datasetKey) {
+    const p = datasetKey + ":";
+    return state.seen.filter((s) => s.startsWith(p)).map((s) => s.slice(p.length));
   },
 
   unlockNext(index) {

@@ -5,6 +5,7 @@ import { getDataset } from "../data/datasets.js";
 import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
+import { Store } from "../core/storage.js";
 import { gameTopbar } from "./common.js";
 
 export function renderFlashcards({ regionId, regionIndex, datasetKey, lang, title }) {
@@ -92,6 +93,8 @@ export function renderFlashcards({ regionId, regionIndex, datasetKey, lang, titl
 
   function render(auto = true) {
     const it = items[i];
+    // سجّل أن الطفل رأى هذا العنصر (للمراجعة المتباعدة لاحقاً)
+    Store.markSeen(datasetKey, it.char ?? (it.value != null ? String(it.value) : it.name));
     card.innerHTML = glyphHtml(it);
     card.style.animation = "none";
     void card.offsetWidth;
