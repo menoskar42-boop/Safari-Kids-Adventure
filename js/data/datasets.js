@@ -2,6 +2,11 @@
 import { ARABIC_LETTERS } from "./arabicLetters.js";
 import { ENGLISH_LETTERS } from "./englishLetters.js";
 import { ANIMALS } from "./animals.js";
+import { FISH } from "./fish.js";
+import { BIRDS } from "./birds.js";
+import { FRUITS } from "./fruits.js";
+import { COLORS } from "./colors.js";
+import { SHAPES } from "./shapes.js";
 
 const DATASETS = {
   arabic: {
@@ -17,6 +22,11 @@ const DATASETS = {
     items: ENGLISH_LETTERS,
   },
   animals: { key: "animals", lang: "ar-EG", glyphKind: "emoji", items: ANIMALS },
+  fish: { key: "fish", lang: "ar-EG", glyphKind: "emoji", items: FISH },
+  birds: { key: "birds", lang: "ar-EG", glyphKind: "emoji", items: BIRDS },
+  fruits: { key: "fruits", lang: "ar-EG", glyphKind: "emoji", items: FRUITS },
+  colors: { key: "colors", lang: "ar-EG", glyphKind: "emoji", items: COLORS },
+  shapes: { key: "shapes", lang: "ar-EG", glyphKind: "emoji", items: SHAPES },
 };
 
 export function getDataset(key) {
