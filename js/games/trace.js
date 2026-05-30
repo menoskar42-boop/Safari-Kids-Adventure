@@ -99,11 +99,20 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
         y: (t.clientY - r.top) * (RES / r.height),
       };
     }
+    // ارسم نقطة دائرية عند الإحداثي (لتعمل الضغطة الواحدة دون سحب)
+    function dot(p) {
+      dctx.beginPath();
+      dctx.arc(p.x, p.y, dctx.lineWidth / 2, 0, Math.PI * 2);
+      dctx.fill();
+    }
     function start(e) {
       e.preventDefault();
       drawing = true;
       last = pos(e);
+      dctx.fillStyle = dctx.strokeStyle;
+      dot(last); // أثر فوري عند مجرّد اللمس
       Sfx.pop();
+      checkCoverage(); // قد تكتمل النقطة بضغطة واحدة (مثل نقطة ذ/خ)
     }
     function move(e) {
       if (!drawing) return;
