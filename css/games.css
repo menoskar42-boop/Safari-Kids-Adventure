@@ -113,6 +113,36 @@
 .cheer .cheer-emoji { font-size: clamp(70px, 20vw, 120px); animation: wobble .6s ease infinite; }
 .cheer .cheer-text { font-size: clamp(22px, 6vw, 34px); font-weight: 800; color: var(--c-purple); margin: 10px 0; }
 
+/* شهادة الإنجاز */
+.certificate {
+  background: linear-gradient(160deg, #fffdf5, #fff3d6);
+  border: 6px double var(--c-orange);
+  border-radius: 24px;
+  padding: 26px 28px;
+  text-align: center;
+  max-width: min(86vw, 380px);
+  box-shadow: var(--shadow-card);
+  animation: pop-in .4s ease;
+}
+.cert-ribbon {
+  font-size: clamp(20px, 6vw, 28px);
+  font-weight: 800;
+  color: var(--c-orange);
+  margin-bottom: 8px;
+}
+.cert-line { font-size: clamp(13px, 3.6vw, 16px); color: var(--c-ink); margin: 6px 0; font-weight: 700; }
+.cert-name {
+  font-size: clamp(24px, 7vw, 36px);
+  font-weight: 800;
+  color: var(--c-purple);
+  margin: 8px 0;
+  border-bottom: 3px dashed var(--c-pink);
+  display: inline-block;
+  padding: 0 12px 6px;
+}
+.cert-seal { font-size: clamp(44px, 13vw, 70px); margin: 8px 0; }
+.cert-foot { font-size: 13px; color: #9a8; font-weight: 800; margin-bottom: 14px; }
+
 /* منطقة السماء المتساقطة (لعبة الاصطياد) */
 .sky {
   position: relative;

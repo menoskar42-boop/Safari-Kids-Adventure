@@ -25,6 +25,7 @@ import { renderParent } from "./screens/parent.js";
 import { renderAR } from "./screens/ar.js";
 import { renderVideos } from "./screens/videos.js";
 import { renderStory } from "./screens/story.js";
+import { renderProfile } from "./screens/profile.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -51,6 +52,7 @@ Router.register("parent", renderParent);
 Router.register("ar", renderAR);
 Router.register("videos", renderVideos);
 Router.register("story", renderStory);
+Router.register("profile", renderProfile);
 
 // شاشة البداية
 const splash = document.getElementById("splash");

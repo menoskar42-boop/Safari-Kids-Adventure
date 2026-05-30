@@ -5,6 +5,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { bindStarCounter, bindStreak } from "../core/rewards.js";
+import { avatarEmoji } from "./profile.js";
 
 const GUIDE = "🐨"; // المرشد اللطيف
 
@@ -31,12 +32,13 @@ export function renderHome() {
   `;
   screen.appendChild(topbar);
 
-  // لافتة المرشد
+  // لافتة المرشد (تعرض أفاتار الطفل واسمه، وتفتح الملف عند الضغط)
   const banner = document.createElement("div");
   banner.className = "guide-banner";
+  const who = Store.childName ? `مرحباً يا ${Store.childName}!` : "مرحباً يا بطل!";
   banner.innerHTML = `
-    <div class="guide-emoji">${GUIDE}</div>
-    <div class="bubble">مرحباً يا بطل! اختر منطقة لنبدأ المغامرة ✨</div>
+    <button class="guide-emoji" id="profileBtn" style="background:none;border:none;cursor:pointer">${avatarEmoji()}</button>
+    <div class="bubble">${who} اختر منطقة لنبدأ المغامرة ✨</div>
   `;
   screen.appendChild(banner);
 
@@ -98,6 +100,10 @@ export function renderHome() {
   setTimeout(() => {
     bindStarCounter(screen.querySelector("#starCounter"));
     bindStreak(screen.querySelector("#streakBadge"));
+    screen.querySelector("#profileBtn").addEventListener("click", () => {
+      Sfx.tap();
+      Router.go("profile");
+    });
     screen.querySelector("#rewardsBtn").addEventListener("click", () => {
       Sfx.tap();
       Router.go("rewards");

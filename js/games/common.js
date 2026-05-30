@@ -75,6 +75,7 @@ export function showCheer(emoji, text, onClose) {
 
 /** إنهاء نشاط: منح نجوم، تحديث تقدّم المنطقة، احتمال مكافأة، ثم رجوع */
 export function finishActivity({ regionId, regionIndex, stars = 5, onDone }) {
+  const wasCompleted = Store.regionProgress(regionId).completed;
   awardStars(stars);
   Confetti.burst();
   Store.setRegionStars(regionId, (Store.regionProgress(regionId).stars || 0) + stars);
@@ -89,8 +90,39 @@ export function finishActivity({ regionId, regionIndex, stars = 5, onDone }) {
     if (onDone) onDone();
   };
 
-  showCheer("🏆", "أحسنت يا بطل!", () => {
-    if (reward) showRewardPopup(reward, done);
+  // شهادة إنجاز عند إكمال المنطقة لأول مرة
+  const finish = () => {
+    if (!wasCompleted) showCertificate(regionId, done);
     else done();
+  };
+
+  showCheer("🏆", "أحسنت يا بطل!", () => {
+    if (reward) showRewardPopup(reward, finish);
+    else finish();
+  });
+}
+
+/** شهادة إنجاز قابلة للحفظ عند إكمال قسم لأول مرة */
+export function showCertificate(regionId, onClose) {
+  const name = Store.childName || "البطل الصغير";
+  const overlay = document.createElement("div");
+  overlay.className = "cheer";
+  overlay.innerHTML = `
+    <div class="certificate">
+      <div class="cert-ribbon">🏅 شهادة إنجاز</div>
+      <p class="cert-line">تُمنح هذه الشهادة إلى</p>
+      <p class="cert-name">${name}</p>
+      <p class="cert-line">لإكماله بنجاح وتميّز 🌟</p>
+      <div class="cert-seal">🦁</div>
+      <p class="cert-foot">عالم الاستكشاف السحري</p>
+      <button class="candy-btn" id="certOk">رائع! 🎉</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  Sfx.win();
+  Confetti.stars();
+  Speech.ar(`مبروك يا ${name}، حصلت على شهادة إنجاز`);
+  overlay.querySelector("#certOk").addEventListener("click", () => {
+    overlay.remove();
+    if (onClose) onClose();
   });
 }

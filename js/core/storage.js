@@ -20,6 +20,8 @@ const DEFAULT_STATE = {
   dailyGoal: 5,
   // تذكير وقت الشاشة بالدقائق (0 = مُعطّل)
   screenTimeMin: 0,
+  // أفاتار الطفل (معرّف من الكنوز المجموعة) — افتراضي المرشد
+  avatarId: "",
 };
 
 // تاريخ اليوم محلياً بصيغة YYYY-MM-DD
@@ -141,6 +143,23 @@ export const Store = {
   },
   setScreenTime(min) {
     state.screenTimeMin = Math.max(0, min | 0);
+    persist();
+  },
+
+  // أفاتار الطفل
+  get avatarId() {
+    return state.avatarId || "";
+  },
+  setAvatar(id) {
+    state.avatarId = id;
+    persist();
+  },
+  // اسم الطفل
+  get childName() {
+    return state.childName || "";
+  },
+  setChildName(name) {
+    state.childName = String(name || "").slice(0, 20);
     persist();
   },
 
