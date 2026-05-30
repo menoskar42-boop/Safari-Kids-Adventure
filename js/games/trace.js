@@ -7,7 +7,7 @@ import { gameTopbar, shuffle, showCheer, finishActivity, examplePhrase } from ".
 
 const TRACE_COUNT = 6;
 const RES = 300; // دقّة داخلية ثابتة
-const THRESHOLD = 0.45; // نسبة التغطية المطلوبة
+const THRESHOLD = 0.62; // نسبة التغطية المطلوبة (أعلى كي لا يكتمل قبل إتمام الشكل)
 
 export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
   const ds = getDataset(datasetKey);
@@ -82,9 +82,9 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
     let maskTotal = 0;
     for (let p = 3; p < maskData.length; p += 4) if (maskData[p] > 40) maskTotal++;
 
-    // إعداد قلم الرسم
+    // إعداد قلم الرسم (فرشاة أنحف ليكون التتبّع أدقّ ويشمل النقطة)
     dctx.lineCap = dctx.lineJoin = "round";
-    dctx.lineWidth = 36;
+    dctx.lineWidth = 26;
     dctx.strokeStyle = "#ff6fb5";
 
     let drawing = false;
