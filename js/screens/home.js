@@ -18,6 +18,7 @@ export function renderHome() {
   topbar.innerHTML = `
     <div style="display:flex;gap:8px">
       <button class="icon-btn" id="rewardsBtn" title="كنوزي">🎁</button>
+      <button class="icon-btn" id="videosBtn" title="أغاني وفيديو">🎵</button>
       <button class="icon-btn" id="gardenBtn" title="حديقتي">🌳</button>
       <button class="icon-btn" id="arBtn" title="الواقع المعزّز">📸</button>
       <button class="icon-btn" id="parentBtn" title="ولي الأمر">⚙️</button>
@@ -96,6 +97,10 @@ export function renderHome() {
     screen.querySelector("#rewardsBtn").addEventListener("click", () => {
       Sfx.tap();
       Router.go("rewards");
+    });
+    screen.querySelector("#videosBtn").addEventListener("click", () => {
+      Sfx.tap();
+      Router.go("videos");
     });
     screen.querySelector("#gardenBtn").addEventListener("click", () => {
       Sfx.tap();

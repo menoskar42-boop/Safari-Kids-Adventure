@@ -282,6 +282,108 @@ button { font-family: inherit; cursor: pointer; border: none; }
   animation: pop-in .25s ease both;
 }
 
+/* ===== شاشة الأغاني والفيديو ===== */
+.video-cats {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px 16px;
+  -webkit-overflow-scrolling: touch;
+}
+.video-cat {
+  flex: 0 0 auto;
+  background: #fff;
+  color: var(--c-ink);
+  font-weight: 800;
+  font-size: clamp(13px, 3.6vw, 16px);
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-card);
+  transition: transform .12s ease;
+}
+.video-cat:active { transform: scale(.92); }
+.video-cat.active { background: linear-gradient(180deg, var(--c-pink), #e0489a); color: #fff; }
+
+.video-player { padding: 8px 16px 4px; }
+.video-frame {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  background: #000;
+}
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-now {
+  text-align: center;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, .2);
+  font-size: clamp(15px, 4vw, 19px);
+  margin: 10px 0;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 10px 16px 30px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+@media (min-width: 620px) { .video-grid { grid-template-columns: repeat(3, 1fr); } }
+.video-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 14px 10px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform .12s ease;
+  animation: pop-in .35s ease both;
+}
+.video-card:active { transform: scale(.95); }
+.video-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  background: linear-gradient(160deg, #ffd6f0, #c8a8ff);
+  display: grid;
+  place-items: center;
+  font-size: clamp(38px, 11vw, 56px);
+}
+.video-play {
+  position: absolute;
+  inset-block-end: 6px;
+  inset-inline-end: 8px;
+  background: rgba(0, 0, 0, .55);
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+}
+.video-title {
+  font-weight: 800;
+  font-size: clamp(13px, 3.6vw, 16px);
+  color: var(--c-ink);
+  text-align: center;
+}
+
 /* ===== حركات ===== */
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }

@@ -20,6 +20,7 @@ import { renderOppositesMatch } from "./games/opposites.js";
 import { renderGarden } from "./screens/garden.js";
 import { renderParent } from "./screens/parent.js";
 import { renderAR } from "./screens/ar.js";
+import { renderVideos } from "./screens/videos.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -42,6 +43,7 @@ Router.register("oppositesMatch", renderOppositesMatch);
 Router.register("garden", renderGarden);
 Router.register("parent", renderParent);
 Router.register("ar", renderAR);
+Router.register("videos", renderVideos);
 
 // شاشة البداية
 const splash = document.getElementById("splash");
