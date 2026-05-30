@@ -23,6 +23,7 @@ import { renderGarden } from "./screens/garden.js";
 import { renderParent } from "./screens/parent.js";
 import { renderAR } from "./screens/ar.js";
 import { renderVideos } from "./screens/videos.js";
+import { renderStory } from "./screens/story.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -48,6 +49,7 @@ Router.register("garden", renderGarden);
 Router.register("parent", renderParent);
 Router.register("ar", renderAR);
 Router.register("videos", renderVideos);
+Router.register("story", renderStory);
 
 // شاشة البداية
 const splash = document.getElementById("splash");

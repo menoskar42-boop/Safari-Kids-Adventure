@@ -147,6 +147,13 @@ export const ACTIVITIES = {
       screen: "review",
       params: { datasetKey: "numbers", title: "🧠 مراجعة الأرقام" },
     },
+    {
+      emoji: "📖",
+      title: "قصة: النجوم الخمس",
+      desc: "استمع لقصة عن العدّ",
+      screen: "story",
+      params: { storyId: "count-stars" },
+    },
   ],
   animals: [
     {
@@ -170,6 +177,13 @@ export const ACTIVITIES = {
       screen: "soundMatch",
       params: { datasetKey: "animals", title: "🔊 أصوات الحيوانات", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" },
     },
+    {
+      emoji: "📖",
+      title: "قصة: الأسد والصديق",
+      desc: "استمع لقصة جميلة",
+      screen: "story",
+      params: { storyId: "lion-friend" },
+    },
   ],
   fish: [
     { emoji: "🐠", title: "استكشف البحر", desc: "اضغط على كل سمكة لتعرفها", screen: "explore",
@@ -178,6 +192,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "fish", title: "🎣 اصطياد السمك", verb: "اصطد", bg: "linear-gradient(180deg,#7fe0ff,#1aa7ff)" } },
     { emoji: "🌑", title: "طابق الظل", desc: "اعرف السمكة من ظلها", screen: "shadowMatch",
       params: { datasetKey: "fish", title: "🌑 ظل السمكة", bg: "linear-gradient(180deg,#7fe0ff,#1aa7ff)" } },
+    { emoji: "📖", title: "قصة: السمكة الشجاعة", desc: "استمع لقصة جميلة", screen: "story",
+      params: { storyId: "brave-fish" } },
   ],
   birds: [
     { emoji: "🦜", title: "استكشف الطيور", desc: "اضغط على كل طائر لتعرفه", screen: "explore",
@@ -194,6 +210,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "fruits", title: "🧺 أحضِر الفاكهة", verb: "أحضِر", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
     { emoji: "🌑", title: "طابق الظل", desc: "اعرف الفاكهة من ظلها", screen: "shadowMatch",
       params: { datasetKey: "fruits", title: "🌑 ظل الفاكهة", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
+    { emoji: "📖", title: "قصة: شجرة التفاح", desc: "استمع لقصة جميلة", screen: "story",
+      params: { storyId: "apple-tree" } },
   ],
   colors: [
     { emoji: "🎨", title: "استكشف الألوان", desc: "اضغط على كل لون لتعرفه", screen: "explore",
