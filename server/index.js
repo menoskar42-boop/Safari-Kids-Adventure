@@ -19,7 +19,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // نقبل JSON كبيراً نسبياً (لإرسال صوت base64 للنسخ الصوتي)
 app.use(express.json({ limit: "8mb" }));
