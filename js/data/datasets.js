@@ -8,6 +8,7 @@ import { FRUITS } from "./fruits.js";
 import { COLORS } from "./colors.js";
 import { SHAPES } from "./shapes.js";
 import { JOBS } from "./jobs.js";
+import { BODY_PARTS } from "./body.js";
 
 const DATASETS = {
   arabic: {
@@ -29,6 +30,7 @@ const DATASETS = {
   colors: { key: "colors", lang: "ar-EG", glyphKind: "emoji", items: COLORS },
   shapes: { key: "shapes", lang: "ar-EG", glyphKind: "emoji", items: SHAPES },
   jobs: { key: "jobs", lang: "ar-EG", glyphKind: "emoji", items: JOBS },
+  body: { key: "body", lang: "ar-EG", glyphKind: "emoji", items: BODY_PARTS },
 };
 
 export function getDataset(key) {

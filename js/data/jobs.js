@@ -17,4 +17,10 @@ export const JOBS = [
   { name: "حكَم", en: "Judge", emoji: "👨‍⚖️", sound: "الحكَم يحكم بالعدل" },
   { name: "ميكانيكي", en: "Mechanic", emoji: "👨‍🔧", sound: "الميكانيكي يصلّح السيارات" },
   { name: "ساعي البريد", en: "Mail carrier", emoji: "📮", sound: "ساعي البريد يوصّل الرسائل" },
+  { name: "ضابط", en: "Officer", emoji: "💂", sound: "الضابط يحرس البلاد" },
+  { name: "جندي", en: "Soldier", emoji: "🪖", sound: "الجندي يدافع عن وطنه" },
+  { name: "خبّاز", en: "Baker", emoji: "🥖", sound: "الخبّاز يصنع الخبز الطازج" },
+  { name: "حلّاق", en: "Barber", emoji: "💈", sound: "الحلّاق يقصّ الشعر" },
+  { name: "سائق", en: "Driver", emoji: "🚕", sound: "السائق يقود السيارة" },
+  { name: "صيّاد", en: "Fisherman", emoji: "🎣", sound: "الصيّاد يصطاد السمك" },
 ];

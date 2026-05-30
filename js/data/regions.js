@@ -93,6 +93,15 @@ export const REGIONS = [
     guide: "تعال نتعرّف على المهن ومن يساعدنا كل يوم!",
     ready: true,
   },
+  {
+    id: "body",
+    name: "جسم الإنسان",
+    nameEn: "My Body",
+    emoji: "🧍",
+    bg: "bg-body",
+    guide: "تعال نتعرّف على أجزاء جسمنا!",
+    ready: true,
+  },
 ];
 
 export function getRegion(id) {
