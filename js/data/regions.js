@@ -28,7 +28,7 @@ export const REGIONS = [
     emoji: "🔢",
     bg: "bg-numbers",
     guide: "تعال نعدّ معاً ونلعب بالأرقام!",
-    ready: false,
+    ready: true,
   },
   {
     id: "animals",

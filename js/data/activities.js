@@ -48,6 +48,28 @@ export const ACTIVITIES = {
       params: { datasetKey: "english", lang: "en-US" },
     },
   ],
-  // numbers: [...]   ← المرحلة الرابعة
+  numbers: [
+    {
+      emoji: "🔢",
+      title: "تعرّف على الأرقام",
+      desc: "اسمع الرقم وعُدّ معه",
+      screen: "countLearn",
+      params: {},
+    },
+    {
+      emoji: "🍌",
+      title: "أطعم الصديق",
+      desc: "أعطِ الحيوان العدد المطلوب",
+      screen: "feed",
+      params: {},
+    },
+    {
+      emoji: "⭐",
+      title: "اجمع الكنوز",
+      desc: "اجمع العدد المطلوب من النجوم",
+      screen: "collect",
+      params: {},
+    },
+  ],
   // animals: [...]   ← المرحلة الخامسة
 };
