@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, progressDots, shuffle, finishActivity } from "./common.js";
+import { gameTopbar, progressDots, shuffle, finishActivity, examplePhrase } from "./common.js";
 
 export function renderLearn({ regionId, regionIndex, datasetKey, lang }) {
   const ds = getDataset(datasetKey);
@@ -26,7 +26,7 @@ export function renderLearn({ regionId, regionIndex, datasetKey, lang }) {
   function speakLetter(it) {
     Speech.sequence([
       { text: it.name, lang: speakLang },
-      { text: `${it.name} مثل ${it.word}`, lang: speakLang },
+      { text: examplePhrase(it, speakLang), lang: speakLang },
     ]);
   }
 

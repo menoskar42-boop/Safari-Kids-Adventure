@@ -19,7 +19,7 @@ export const REGIONS = [
     emoji: "🔠",
     bg: "bg-english",
     guide: "Let's learn English letters together!",
-    ready: false,
+    ready: true,
   },
   {
     id: "numbers",

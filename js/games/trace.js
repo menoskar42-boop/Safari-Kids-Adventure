@@ -3,7 +3,7 @@ import { getDataset } from "../data/datasets.js";
 import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
-import { gameTopbar, shuffle, showCheer, finishActivity } from "./common.js";
+import { gameTopbar, shuffle, showCheer, finishActivity, examplePhrase } from "./common.js";
 
 const TRACE_COUNT = 6;
 const RES = 300; // دقّة داخلية ثابتة
@@ -132,7 +132,7 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
         done = true;
         paintGuide("#34d399");
         Sfx.correct();
-        Speech.say(`${it.name} مثل ${it.word}`, { lang: speakLang });
+        Speech.say(examplePhrase(it, speakLang), { lang: speakLang });
         box.animate(
           [{ transform: "scale(1)" }, { transform: "scale(1.12)" }, { transform: "scale(1)" }],
           { duration: 500 }
@@ -162,7 +162,7 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
     tools.append(sayBtn, clearBtn);
     stage.appendChild(tools);
 
-    Speech.say(`ارسم حرف ${it.name}`, { lang: speakLang });
+    Speech.ar(`ارسم حرف ${it.name}`);
   }
 
   function next() {

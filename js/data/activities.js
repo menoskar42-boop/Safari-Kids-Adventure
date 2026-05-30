@@ -25,7 +25,29 @@ export const ACTIVITIES = {
       params: { datasetKey: "arabic", lang: "ar-EG" },
     },
   ],
-  // english: [...]   ← المرحلة الثالثة
+  english: [
+    {
+      emoji: "🎓",
+      title: "تعرّف على الحروف",
+      desc: "Listen and tap the word",
+      screen: "learn",
+      params: { datasetKey: "english", lang: "en-US" },
+    },
+    {
+      emoji: "🎯",
+      title: "اصطياد الحروف",
+      desc: "Catch what starts with the letter",
+      screen: "catch",
+      params: { datasetKey: "english", lang: "en-US" },
+    },
+    {
+      emoji: "✏️",
+      title: "ارسم الحرف",
+      desc: "Trace the letter",
+      screen: "trace",
+      params: { datasetKey: "english", lang: "en-US" },
+    },
+  ],
   // numbers: [...]   ← المرحلة الرابعة
   // animals: [...]   ← المرحلة الخامسة
 };

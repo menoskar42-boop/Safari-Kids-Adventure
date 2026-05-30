@@ -10,6 +10,13 @@ import {
   showRewardPopup,
 } from "../core/rewards.js";
 
+/** عبارة المثال بلغة العنصر: "أَلِف مثل أرنب" أو "A for Apple" */
+export function examplePhrase(item, lang) {
+  return lang && lang.startsWith("en")
+    ? `${item.name} for ${item.word}`
+    : `${item.name} مثل ${item.word}`;
+}
+
 /** خلط مصفوفة (نسخة جديدة) */
 export function shuffle(arr) {
   const a = arr.slice();
