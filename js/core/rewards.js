@@ -38,6 +38,28 @@ export function awardStars(n = 1) {
   Sfx.star();
   Confetti.stars();
   updateStarCounter();
+  // تقدّم الهدف اليومي — احتفال عند بلوغه لأول مرة اليوم
+  const reachedGoal = Store.addDailyProgress(n);
+  updateStreakUI();
+  if (reachedGoal) {
+    Sfx.win();
+    Confetti.burst();
+    Speech.ar("أحسنت! حقّقت هدف اليوم");
+  }
+}
+
+// ===== واجهة السلسلة اليومية =====
+let streakEl = null;
+export function bindStreak(el) {
+  streakEl = el;
+  updateStreakUI();
+}
+export function updateStreakUI() {
+  if (!streakEl) return;
+  const s = Store.streak;
+  const d = Store.dailyStars;
+  const g = Store.dailyGoal;
+  streakEl.innerHTML = `🔥 <span>${s}</span> · ⭐ ${Math.min(d, g)}/${g}`;
 }
 
 /** منح عنصر جديد للمجموعة إذا لم يكن مملوكاً */

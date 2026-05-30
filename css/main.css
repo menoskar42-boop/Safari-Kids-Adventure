@@ -151,6 +151,18 @@ button { font-family: inherit; cursor: pointer; border: none; }
   border-radius: 999px;
   box-shadow: var(--shadow-card);
 }
+.streak-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(180deg, #ff924c, #ff5d5d);
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(12px, 3.4vw, 15px);
+  padding: 3px 12px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-card);
+}
 
 /* ===== أزرار عامة ===== */
 .candy-btn {

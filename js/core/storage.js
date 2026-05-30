@@ -12,7 +12,24 @@ const DEFAULT_STATE = {
   unlockedIndex: 0,
   // العناصر التي رآها الطفل (للمراجعة المتباعدة): "datasetKey:itemKey"
   seen: [],
+  // السلسلة اليومية والهدف
+  streak: 0,
+  lastActiveDate: "", // "YYYY-MM-DD"
+  dailyStars: 0,
+  dailyDate: "",
+  dailyGoal: 5,
 };
+
+// تاريخ اليوم محلياً بصيغة YYYY-MM-DD
+function today() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+function yesterdayOf(dateStr) {
+  const d = new Date(dateStr + "T00:00:00");
+  d.setDate(d.getDate() - 1);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
 
 let state = load();
 
@@ -87,6 +104,46 @@ export const Store = {
   seenKeys(datasetKey) {
     const p = datasetKey + ":";
     return state.seen.filter((s) => s.startsWith(p)).map((s) => s.slice(p.length));
+  },
+
+  // ===== السلسلة اليومية =====
+  // تُستدعى عند فتح التطبيق: تُحدّث السلسلة وتعيد ضبط تقدّم اليوم
+  touchDaily() {
+    const t = today();
+    if (state.lastActiveDate === t) {
+      // نفس اليوم — لا تغيير
+    } else if (state.lastActiveDate === yesterdayOf(t)) {
+      state.streak = (state.streak || 0) + 1; // يوم متتالٍ
+    } else {
+      state.streak = 1; // انقطعت السلسلة أو أول مرة
+    }
+    state.lastActiveDate = t;
+    if (state.dailyDate !== t) {
+      state.dailyDate = t;
+      state.dailyStars = 0;
+    }
+    persist();
+  },
+  get streak() {
+    return state.streak || 0;
+  },
+  get dailyStars() {
+    return state.dailyStars || 0;
+  },
+  get dailyGoal() {
+    return state.dailyGoal || 5;
+  },
+  // تقدّم اليوم؛ تعيد true عند بلوغ الهدف لأول مرة اليوم
+  addDailyProgress(n = 1) {
+    const t = today();
+    if (state.dailyDate !== t) {
+      state.dailyDate = t;
+      state.dailyStars = 0;
+    }
+    const before = state.dailyStars;
+    state.dailyStars += n;
+    persist();
+    return before < state.dailyGoal && state.dailyStars >= state.dailyGoal;
   },
 
   unlockNext(index) {

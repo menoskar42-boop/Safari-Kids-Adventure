@@ -4,7 +4,7 @@ import { Store } from "../core/storage.js";
 import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
-import { bindStarCounter } from "../core/rewards.js";
+import { bindStarCounter, bindStreak } from "../core/rewards.js";
 
 const GUIDE = "🐨"; // المرشد اللطيف
 
@@ -24,7 +24,10 @@ export function renderHome() {
       <button class="icon-btn" id="parentBtn" title="ولي الأمر">⚙️</button>
     </div>
     <h2>🗺️ خريطة المغامرة</h2>
-    <span class="star-counter" id="starCounter">⭐ <span>0</span></span>
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+      <span class="star-counter" id="starCounter">⭐ <span>0</span></span>
+      <span class="streak-badge" id="streakBadge">🔥 <span>0</span></span>
+    </div>
   `;
   screen.appendChild(topbar);
 
@@ -94,6 +97,7 @@ export function renderHome() {
   // ربط الأحداث بعد الإضافة
   setTimeout(() => {
     bindStarCounter(screen.querySelector("#starCounter"));
+    bindStreak(screen.querySelector("#streakBadge"));
     screen.querySelector("#rewardsBtn").addEventListener("click", () => {
       Sfx.tap();
       Router.go("rewards");

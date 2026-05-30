@@ -5,6 +5,7 @@ import { Speech, setAISpeech } from "./core/speech.js";
 import { checkAI } from "./core/ai.js";
 import { mountAssistantButton } from "./core/assistant.js";
 import { REGIONS } from "./data/regions.js";
+import { Store } from "./core/storage.js";
 import { renderHome } from "./screens/home.js";
 import { renderRegion } from "./screens/region.js";
 import { renderRewards } from "./screens/rewards.js";
@@ -59,6 +60,9 @@ const startBtn = document.getElementById("startBtn");
 function startApp() {
   // فتح السياق الصوتي وتهيئة النطق بعد تفاعل المستخدم
   Sfx.unlock();
+
+  // تحديث السلسلة اليومية (Streak)
+  Store.touchDaily();
 
   // فحص توفّر خادم OpenAI: إن توفّر نستخدم نطق الـ AI، وإلا Web Speech
   checkAI().then((ready) => {
