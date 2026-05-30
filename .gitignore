@@ -1,0 +1,20 @@
+# التبعيات
+node_modules/
+
+# أسرار البيئة — لا تُرفع أبداً
+.env
+.env.local
+
+# سجلّات
+*.log
+npm-debug.log*
+
+# نظام التشغيل / المحرّرات
+.DS_Store
+.vscode/
+.idea/
+
+# Replit
+.upm/
+.config/
+.cache/

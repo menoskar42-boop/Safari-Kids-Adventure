@@ -10,7 +10,7 @@ export const REGIONS = [
     emoji: "🔤",
     bg: "bg-arabic",
     guide: "هيا نتعلّم الحروف العربية ونجمع النجوم!",
-    ready: false,
+    ready: true,
   },
   {
     id: "english",
@@ -19,7 +19,7 @@ export const REGIONS = [
     emoji: "🔠",
     bg: "bg-english",
     guide: "Let's learn English letters together!",
-    ready: false,
+    ready: true,
   },
   {
     id: "numbers",
@@ -28,7 +28,7 @@ export const REGIONS = [
     emoji: "🔢",
     bg: "bg-numbers",
     guide: "تعال نعدّ معاً ونلعب بالأرقام!",
-    ready: false,
+    ready: true,
   },
   {
     id: "animals",
@@ -37,7 +37,7 @@ export const REGIONS = [
     emoji: "🦁",
     bg: "bg-animals",
     guide: "أصدقاؤنا الحيوانات في انتظارك!",
-    ready: false,
+    ready: true,
   },
   {
     id: "fish",
@@ -46,7 +46,7 @@ export const REGIONS = [
     emoji: "🐠",
     bg: "bg-fish",
     guide: "هيا نغوص في البحر ونكتشف الأسماك!",
-    ready: false,
+    ready: true,
   },
   {
     id: "birds",
@@ -55,7 +55,7 @@ export const REGIONS = [
     emoji: "🦜",
     bg: "bg-birds",
     guide: "الطيور تطير في السماء، تعال نراها!",
-    ready: false,
+    ready: true,
   },
   {
     id: "fruits",
@@ -64,7 +64,7 @@ export const REGIONS = [
     emoji: "🍎",
     bg: "bg-fruits",
     guide: "سوق الفواكه السحري ينتظرك!",
-    ready: false,
+    ready: true,
   },
   {
     id: "colors",
@@ -73,7 +73,7 @@ export const REGIONS = [
     emoji: "🎨",
     bg: "bg-colors",
     guide: "تعال نلعب بكل الألوان الجميلة!",
-    ready: false,
+    ready: true,
   },
   {
     id: "shapes",
@@ -82,7 +82,7 @@ export const REGIONS = [
     emoji: "⭐",
     bg: "bg-shapes",
     guide: "أشكال كثيرة تنتظر أن تكتشفها!",
-    ready: false,
+    ready: true,
   },
 ];
 

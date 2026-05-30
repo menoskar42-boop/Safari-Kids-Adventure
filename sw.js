@@ -1,5 +1,5 @@
 // ===== Service Worker: تخزين مؤقت للعمل دون اتصال =====
-const CACHE = "safari-kids-v1";
+const CACHE = "safari-kids-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -28,6 +28,8 @@ self.addEventListener("activate", (e) => {
 
 self.addEventListener("fetch", (e) => {
   if (e.request.method !== "GET") return;
+  // لا نخزّن طلبات الـ API (نطق/سؤال/نسخ) — يجب أن تذهب للخادم دائماً
+  if (new URL(e.request.url).pathname.startsWith("/api/")) return;
   e.respondWith(
     caches.match(e.request).then(
       (cached) =>

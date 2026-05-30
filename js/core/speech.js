@@ -1,6 +1,17 @@
-// ===== النطق عبر Web Speech API (عربي + إنجليزي) =====
+// ===== النطق الهجين: OpenAI TTS أولاً ثم Web Speech كبديل =====
+import { isAIReady, aiSpeak, aiStop } from "./ai.js";
+
 let voices = [];
 let enabled = "speechSynthesis" in window;
+let useAI = false; // يُضبط من checkAI() عبر setAISpeech()
+
+// خرائط أصوات OpenAI حسب اللغة (يمكن تعديلها لاحقاً)
+const AI_VOICE = { ar: "alloy", en: "nova" };
+
+/** تفعيل/تعطيل النطق بالـ AI (يستدعيه app.js بعد فحص الخادم) */
+export function setAISpeech(on) {
+  useAI = Boolean(on);
+}
 
 function refreshVoices() {
   if (!enabled) return;
@@ -34,7 +45,27 @@ export const Speech = {
    * @param {object} opts  { lang:'ar-EG'|'en-US', rate, pitch, onend }
    */
   say(text, opts = {}) {
-    if (!enabled || !text) {
+    if (!text) {
+      if (opts.onend) setTimeout(opts.onend, 300);
+      return;
+    }
+    const lang = opts.lang || "ar-EG";
+
+    // المسار المفضّل: OpenAI TTS (صوت أوضح وأدفأ للأطفال)
+    if (useAI && isAIReady()) {
+      const voice = AI_VOICE[lang.slice(0, 2)] || undefined;
+      aiSpeak(text, { voice }).then(
+        () => { if (opts.onend) opts.onend(); },
+        () => this._webSpeak(text, opts) // أي فشل → بديل فوري
+      );
+      return;
+    }
+    this._webSpeak(text, opts);
+  },
+
+  // النطق عبر متصفح الجهاز (Web Speech) — البديل الدائم
+  _webSpeak(text, opts = {}) {
+    if (!enabled) {
       if (opts.onend) setTimeout(opts.onend, 300);
       return;
     }
@@ -79,6 +110,7 @@ export const Speech = {
   },
 
   stop() {
+    aiStop();
     if (enabled) window.speechSynthesis.cancel();
   },
 };
