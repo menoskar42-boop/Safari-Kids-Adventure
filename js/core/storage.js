@@ -67,6 +67,11 @@ export const Store = {
     return index <= state.unlockedIndex;
   },
 
+  // عدد المناطق المكتملة (لفتح المناطق المتقدّمة تدريجياً)
+  completedCount() {
+    return Object.values(state.regions).filter((r) => r && r.completed).length;
+  },
+
   unlockNext(index) {
     if (index + 1 > state.unlockedIndex) {
       state.unlockedIndex = index + 1;

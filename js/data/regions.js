@@ -11,6 +11,7 @@ export const REGIONS = [
     bg: "bg-arabic",
     guide: "هيا نتعلّم الحروف العربية ونجمع النجوم!",
     ready: true,
+    open: true,
   },
   {
     id: "english",
@@ -20,6 +21,7 @@ export const REGIONS = [
     bg: "bg-english",
     guide: "Let's learn English letters together!",
     ready: true,
+    open: true,
   },
   {
     id: "numbers",
@@ -29,6 +31,7 @@ export const REGIONS = [
     bg: "bg-numbers",
     guide: "تعال نعدّ معاً ونلعب بالأرقام!",
     ready: true,
+    open: true,
   },
   {
     id: "animals",
@@ -38,6 +41,7 @@ export const REGIONS = [
     bg: "bg-animals",
     guide: "أصدقاؤنا الحيوانات في انتظارك!",
     ready: true,
+    open: true,
   },
   {
     id: "fish",
@@ -74,6 +78,7 @@ export const REGIONS = [
     bg: "bg-colors",
     guide: "تعال نلعب بكل الألوان الجميلة!",
     ready: true,
+    open: true,
   },
   {
     id: "shapes",
@@ -83,6 +88,7 @@ export const REGIONS = [
     bg: "bg-shapes",
     guide: "أشكال كثيرة تنتظر أن تكتشفها!",
     ready: true,
+    open: true,
   },
   {
     id: "jobs",

@@ -40,8 +40,20 @@ export function renderHome() {
   const grid = document.createElement("div");
   grid.className = "regions-grid";
 
+  // المناطق التأسيسية مفتوحة دائماً. المناطق المتقدّمة تُفتح تدريجياً:
+  // كل منطقة يكملها الطفل تفتح واحدة جديدة من المتقدّمة.
+  const completed = Store.completedCount();
+  let lockedSeen = 0;
+
   REGIONS.forEach((region, index) => {
-    const unlocked = Store.isUnlocked(index);
+    let unlocked;
+    if (region.open) {
+      unlocked = true;
+    } else {
+      // المنطقة المتقدّمة رقم (lockedSeen) تُفتح إذا أكمل الطفل عدداً كافياً
+      unlocked = lockedSeen < completed;
+      lockedSeen++;
+    }
     const prog = Store.regionProgress(region.id);
 
     const card = document.createElement("button");
