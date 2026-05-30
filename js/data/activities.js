@@ -71,5 +71,27 @@ export const ACTIVITIES = {
       params: {},
     },
   ],
-  // animals: [...]   ← المرحلة الخامسة
+  animals: [
+    {
+      emoji: "🦁",
+      title: "استكشف الحيوانات",
+      desc: "اضغط على كل حيوان ليتكلّم",
+      screen: "explore",
+      params: { datasetKey: "animals", title: "🦁 غابة الحيوانات", sound: true },
+    },
+    {
+      emoji: "🌑",
+      title: "طابق الظل",
+      desc: "اعرف الحيوان من ظله",
+      screen: "shadowMatch",
+      params: { datasetKey: "animals", title: "🌑 ظل الحيوان", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" },
+    },
+    {
+      emoji: "🔊",
+      title: "أصوات الحيوانات",
+      desc: "من صاحب هذا الصوت؟",
+      screen: "soundMatch",
+      params: { datasetKey: "animals", title: "🔊 أصوات الحيوانات", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" },
+    },
+  ],
 };

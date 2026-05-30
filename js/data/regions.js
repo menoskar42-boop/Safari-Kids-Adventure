@@ -37,7 +37,7 @@ export const REGIONS = [
     emoji: "🦁",
     bg: "bg-animals",
     guide: "أصدقاؤنا الحيوانات في انتظارك!",
-    ready: false,
+    ready: true,
   },
   {
     id: "fish",

@@ -1,6 +1,7 @@
 // ===== سجلّ مجموعات البيانات (لتمريرها للألعاب عبر مفتاح نصّي) =====
 import { ARABIC_LETTERS } from "./arabicLetters.js";
 import { ENGLISH_LETTERS } from "./englishLetters.js";
+import { ANIMALS } from "./animals.js";
 
 const DATASETS = {
   arabic: {
@@ -15,7 +16,7 @@ const DATASETS = {
     glyphKind: "letter",
     items: ENGLISH_LETTERS,
   },
-  // numbers: ...  ← المرحلة الرابعة
+  animals: { key: "animals", lang: "ar-EG", glyphKind: "emoji", items: ANIMALS },
 };
 
 export function getDataset(key) {
