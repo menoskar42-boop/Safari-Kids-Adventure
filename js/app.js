@@ -11,6 +11,8 @@ import { renderTrace } from "./games/trace.js";
 import { renderCountLearn, renderFeed, renderCollect } from "./games/count.js";
 import { renderExplore } from "./games/explore.js";
 import { renderShadowMatch, renderSoundMatch, renderFindIt } from "./games/match.js";
+import { renderGarden } from "./screens/garden.js";
+import { renderParent } from "./screens/parent.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -26,6 +28,8 @@ Router.register("explore", renderExplore);
 Router.register("shadowMatch", renderShadowMatch);
 Router.register("soundMatch", renderSoundMatch);
 Router.register("findIt", renderFindIt);
+Router.register("garden", renderGarden);
+Router.register("parent", renderParent);
 
 // شاشة البداية
 const splash = document.getElementById("splash");

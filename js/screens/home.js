@@ -16,7 +16,11 @@ export function renderHome() {
   const topbar = document.createElement("div");
   topbar.className = "topbar";
   topbar.innerHTML = `
-    <button class="icon-btn" id="rewardsBtn" title="مكافآتي">🎁</button>
+    <div style="display:flex;gap:8px">
+      <button class="icon-btn" id="rewardsBtn" title="كنوزي">🎁</button>
+      <button class="icon-btn" id="gardenBtn" title="حديقتي">🌳</button>
+      <button class="icon-btn" id="parentBtn" title="ولي الأمر">⚙️</button>
+    </div>
     <h2>🗺️ خريطة المغامرة</h2>
     <span class="star-counter" id="starCounter">⭐ <span>0</span></span>
   `;
@@ -79,6 +83,14 @@ export function renderHome() {
     screen.querySelector("#rewardsBtn").addEventListener("click", () => {
       Sfx.tap();
       Router.go("rewards");
+    });
+    screen.querySelector("#gardenBtn").addEventListener("click", () => {
+      Sfx.tap();
+      Router.go("garden");
+    });
+    screen.querySelector("#parentBtn").addEventListener("click", () => {
+      Sfx.tap();
+      Router.go("parent");
     });
     Speech.ar("مرحباً يا بطل! اختر منطقة لنبدأ المغامرة");
   }, 0);
