@@ -215,6 +215,7 @@ export function renderHomePage() {
 </main>
 <footer class="seo-footer">
   <p>عالم الاستكشاف السحري — تطبيق تعليمي تفاعلي للأطفال من ٣ إلى ٦ سنوات.</p>
+  <p><a href="/about">حول التطبيق</a> · <a href="/privacy">سياسة الخصوصية</a> · <a href="/guides">أدلة الآباء</a></p>
 </footer>
 </body>
 </html>`;
@@ -237,6 +238,8 @@ export function renderSitemap() {
       priority: "0.7",
       freq: "monthly",
     })),
+    { loc: `${SITE.url}/about`, priority: "0.5", freq: "yearly" },
+    { loc: `${SITE.url}/privacy`, priority: "0.4", freq: "yearly" },
   ];
   const body = urls
     .map(

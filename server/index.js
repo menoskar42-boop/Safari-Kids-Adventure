@@ -13,6 +13,7 @@ import {
 } from "./seoRender.js";
 import { GUIDES } from "./guidesContent.js";
 import { renderGuidePage, renderGuidesIndex } from "./guidesRender.js";
+import { renderAboutPage, renderPrivacyPage } from "./pagesRender.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -37,6 +38,14 @@ app.get("/robots.txt", (_req, res) => {
 // الصفحة الرئيسية الغنيّة (HTML كامل يُؤرشَف بلا JavaScript)
 app.get("/", (_req, res) => {
   res.type("html").send(renderHomePage());
+});
+
+// ===== الصفحات الثابتة (حول / الخصوصية) =====
+app.get("/about", (_req, res) => {
+  res.type("html").send(renderAboutPage());
+});
+app.get("/privacy", (_req, res) => {
+  res.type("html").send(renderPrivacyPage());
 });
 
 // صفحات الأقسام الغنيّة: ‎/arabic-letters , ‎/animals , ...
