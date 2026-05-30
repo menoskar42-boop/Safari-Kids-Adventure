@@ -4,6 +4,7 @@ import { Router } from "../core/router.js";
 import { Sfx } from "../core/audio.js";
 import { Speech } from "../core/speech.js";
 import { ACTIVITIES } from "../data/activities.js";
+import { FEATURES } from "../core/features.js";
 
 export function renderRegion({ id, index }) {
   const region = getRegion(id);
@@ -20,7 +21,10 @@ export function renderRegion({ id, index }) {
   `;
   screen.appendChild(topbar);
 
-  const activities = ACTIVITIES[id];
+  // نُخفي أنشطة الميزات المعطّلة (القصص حالياً)
+  const activities = (ACTIVITIES[id] || []).filter(
+    (a) => !(a.screen === "story" && !FEATURES.stories)
+  );
 
   if (region.ready && activities && activities.length) {
     // قائمة الأنشطة

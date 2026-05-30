@@ -6,6 +6,7 @@ import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { bindStarCounter, bindStreak } from "../core/rewards.js";
 import { avatarEmoji } from "./profile.js";
+import { FEATURES } from "../core/features.js";
 
 const GUIDE = "🐨"; // المرشد اللطيف
 
@@ -19,7 +20,7 @@ export function renderHome() {
   topbar.innerHTML = `
     <div style="display:flex;gap:8px">
       <button class="icon-btn" id="rewardsBtn" title="كنوزي">🎁</button>
-      <button class="icon-btn" id="videosBtn" title="أغاني وفيديو">🎵</button>
+      ${FEATURES.videos ? '<button class="icon-btn" id="videosBtn" title="أغاني وفيديو">🎵</button>' : ""}
       <button class="icon-btn" id="gardenBtn" title="حديقتي">🌳</button>
       <button class="icon-btn" id="arBtn" title="الواقع المعزّز">📸</button>
       <button class="icon-btn" id="parentBtn" title="ولي الأمر">⚙️</button>
@@ -108,7 +109,8 @@ export function renderHome() {
       Sfx.tap();
       Router.go("rewards");
     });
-    screen.querySelector("#videosBtn").addEventListener("click", () => {
+    const videosBtn = screen.querySelector("#videosBtn");
+    if (videosBtn) videosBtn.addEventListener("click", () => {
       Sfx.tap();
       Router.go("videos");
     });

@@ -153,6 +153,10 @@
 }
 .falling {
   position: absolute;
+  left: 0;
+  top: 0;
   font-size: clamp(40px, 11vw, 64px);
+  line-height: 1;
   cursor: pointer;
+  will-change: transform;
 }
