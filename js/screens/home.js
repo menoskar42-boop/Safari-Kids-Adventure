@@ -19,6 +19,7 @@ export function renderHome() {
     <div style="display:flex;gap:8px">
       <button class="icon-btn" id="rewardsBtn" title="كنوزي">🎁</button>
       <button class="icon-btn" id="gardenBtn" title="حديقتي">🌳</button>
+      <button class="icon-btn" id="arBtn" title="الواقع المعزّز">📸</button>
       <button class="icon-btn" id="parentBtn" title="ولي الأمر">⚙️</button>
     </div>
     <h2>🗺️ خريطة المغامرة</h2>
@@ -87,6 +88,10 @@ export function renderHome() {
     screen.querySelector("#gardenBtn").addEventListener("click", () => {
       Sfx.tap();
       Router.go("garden");
+    });
+    screen.querySelector("#arBtn").addEventListener("click", () => {
+      Sfx.tap();
+      Router.go("ar");
     });
     screen.querySelector("#parentBtn").addEventListener("click", () => {
       Sfx.tap();
