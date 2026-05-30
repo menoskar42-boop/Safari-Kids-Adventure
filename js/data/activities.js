@@ -24,6 +24,13 @@ export const ACTIVITIES = {
       screen: "trace",
       params: { datasetKey: "arabic", lang: "ar-EG" },
     },
+    {
+      emoji: "ﹷ",
+      title: "الحركات",
+      desc: "الفتحة والضمة والكسرة",
+      screen: "harakat",
+      params: {},
+    },
   ],
   english: [
     {
@@ -68,6 +75,13 @@ export const ACTIVITIES = {
       title: "اجمع الكنوز",
       desc: "اجمع العدد المطلوب من النجوم",
       screen: "collect",
+      params: {},
+    },
+    {
+      emoji: "🔢",
+      title: "الأرقام حتى ٢٠",
+      desc: "استمع واختر الرقم الصحيح",
+      screen: "bigNumbers",
       params: {},
     },
   ],

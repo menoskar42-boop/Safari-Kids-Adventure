@@ -1,5 +1,5 @@
 // ===== ألعاب الأرقام والعدّ =====
-import { NUMBERS, COUNT_EMOJIS } from "../data/numbers.js";
+import { NUMBERS, NUMBERS_10, COUNT_EMOJIS } from "../data/numbers.js";
 import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
@@ -33,10 +33,10 @@ export function renderCountLearn({ regionId, regionIndex }) {
   let i = 0;
 
   function render() {
-    const num = NUMBERS[i];
+    const num = NUMBERS_10[i];
     const emoji = rand(COUNT_EMOJIS);
     stage.innerHTML = "";
-    stage.appendChild(progressDots(NUMBERS.length, i - 1));
+    stage.appendChild(progressDots(NUMBERS_10.length, i - 1));
 
     const glyph = document.createElement("div");
     glyph.className = "hero-glyph";
@@ -78,8 +78,70 @@ export function renderCountLearn({ regionId, regionIndex }) {
 
   function next() {
     i++;
-    if (i >= NUMBERS.length) finishActivity({ regionId, regionIndex, stars: 6, onDone: back });
+    if (i >= NUMBERS_10.length) finishActivity({ regionId, regionIndex, stars: 6, onDone: back });
     else render();
+  }
+
+  setTimeout(render, 0);
+  return screen;
+}
+
+// ===== لعبة: تعرّف على الأرقام الكبيرة ١١–٢٠ (استمع ثم اختر الرقم) =====
+export function renderBigNumbers({ regionId, regionIndex }) {
+  const { screen, stage, back } = baseScreen("🔢 الأرقام حتى ٢٠", regionId, regionIndex);
+  // نركّز على ١١–٢٠ مع مراجعة بعض الأصغر
+  const pool = NUMBERS.slice(10); // 11..20
+  const rounds = shuffle(pool);
+  let r = 0;
+
+  function render() {
+    const target = rounds[r];
+    stage.innerHTML = "";
+    stage.appendChild(progressDots(rounds.length, r - 1));
+
+    const ask = document.createElement("p");
+    ask.style.cssText = "font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.18);font-size:clamp(18px,5vw,24px)";
+    ask.textContent = "أين هذا الرقم؟ 🔊";
+    stage.appendChild(ask);
+
+    const listen = document.createElement("button");
+    listen.className = "candy-btn";
+    listen.style.fontSize = "clamp(20px,6vw,28px)";
+    listen.textContent = "🔊 استمع";
+    listen.addEventListener("click", () => { Sfx.tap(); speakBoth(target); });
+    stage.appendChild(listen);
+
+    // خيارات: الرقم الصحيح + جاران مشتّتان
+    const others = shuffle(pool.filter((n) => n.value !== target.value)).slice(0, 2);
+    const choices = shuffle([target, ...others]);
+
+    const row = document.createElement("div");
+    row.className = "choice-row";
+    choices.forEach((n) => {
+      const b = document.createElement("button");
+      b.className = "choice";
+      b.style.fontWeight = "800";
+      b.textContent = n.arDigit;
+      b.addEventListener("click", () => {
+        if (n.value === target.value) {
+          Sfx.correct();
+          b.classList.add("correct");
+          awardStars(1);
+          speakBoth(target);
+          r++;
+          if (r >= rounds.length) setTimeout(() => finishActivity({ regionId, regionIndex, stars: 8, onDone: back }), 900);
+          else setTimeout(render, 1000);
+        } else {
+          Sfx.wrong();
+          b.classList.add("wrong");
+          setTimeout(() => b.classList.remove("wrong"), 450);
+        }
+      });
+      row.appendChild(b);
+    });
+    stage.appendChild(row);
+
+    setTimeout(() => speakBoth(target), 300);
   }
 
   setTimeout(render, 0);
