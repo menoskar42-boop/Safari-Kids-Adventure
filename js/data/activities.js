@@ -4,6 +4,13 @@
 export const ACTIVITIES = {
   arabic: [
     {
+      emoji: "👀",
+      title: "شوف واعرف",
+      desc: "تصفّح الحروف واعرف كلّ حرف",
+      screen: "flashcards",
+      params: { datasetKey: "arabic", lang: "ar-EG", title: "👀 شوف واعرف الحروف" },
+    },
+    {
       emoji: "🎓",
       title: "تعرّف على الحروف",
       desc: "اسمع الحرف واضغط على الكلمة",
@@ -34,6 +41,13 @@ export const ACTIVITIES = {
   ],
   english: [
     {
+      emoji: "👀",
+      title: "شوف واعرف",
+      desc: "Browse letters, know each one",
+      screen: "flashcards",
+      params: { datasetKey: "english", lang: "en-US", title: "👀 شوف واعرف الحروف" },
+    },
+    {
       emoji: "🎓",
       title: "تعرّف على الحروف",
       desc: "Listen and tap the word",
@@ -56,6 +70,13 @@ export const ACTIVITIES = {
     },
   ],
   numbers: [
+    {
+      emoji: "👀",
+      title: "شوف واعرف",
+      desc: "تصفّح الأرقام واعرف كلّ رقم",
+      screen: "flashcards",
+      params: { datasetKey: "numbers", title: "👀 شوف واعرف الأرقام" },
+    },
     {
       emoji: "🔢",
       title: "تعرّف على الأرقام",
