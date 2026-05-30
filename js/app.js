@@ -64,6 +64,12 @@ function startApp() {
   // تحديث السلسلة اليومية (Streak)
   Store.touchDaily();
 
+  // تذكير وقت الشاشة (إن فعّله ولي الأمر): رسالة لطيفة بعد المدّة المحدّدة
+  const stMin = Store.screenTimeMin;
+  if (stMin > 0) {
+    setTimeout(() => showScreenTimeReminder(), stMin * 60 * 1000);
+  }
+
   // فحص توفّر خادم OpenAI: إن توفّر نستخدم نطق الـ AI، وإلا Web Speech
   checkAI().then((ready) => {
     setAISpeech(ready);
@@ -82,6 +88,24 @@ function startApp() {
 }
 
 startBtn.addEventListener("click", startApp);
+
+// رسالة تذكير لطيفة بانتهاء وقت اللعب (ليست قفلاً صارماً — تطبيق ويب)
+function showScreenTimeReminder() {
+  Speech.stop();
+  const overlay = document.createElement("div");
+  overlay.className = "cheer";
+  overlay.innerHTML = `
+    <div class="cheer-card">
+      <div class="cheer-emoji">🌙</div>
+      <div class="cheer-text">حان وقت الراحة!</div>
+      <p style="font-size:18px;font-weight:700;color:var(--c-ink);margin:.2em 0 1em">
+        أحسنت اليوم يا بطل 🌟<br>لنأخذ استراحة قصيرة.</p>
+      <button class="candy-btn" id="stOk">حسناً 👍</button>
+    </div>`;
+  document.body.appendChild(overlay);
+  Speech.ar("حان وقت الراحة، أحسنت اليوم يا بطل");
+  overlay.querySelector("#stOk").addEventListener("click", () => overlay.remove());
+}
 
 // تسجيل Service Worker للعمل دون اتصال (اختياري وآمن إن لم يوجد)
 if ("serviceWorker" in navigator) {

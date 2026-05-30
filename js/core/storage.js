@@ -18,6 +18,8 @@ const DEFAULT_STATE = {
   dailyStars: 0,
   dailyDate: "",
   dailyGoal: 5,
+  // تذكير وقت الشاشة بالدقائق (0 = مُعطّل)
+  screenTimeMin: 0,
 };
 
 // تاريخ اليوم محلياً بصيغة YYYY-MM-DD
@@ -133,6 +135,15 @@ export const Store = {
   get dailyGoal() {
     return state.dailyGoal || 5;
   },
+  // تذكير وقت الشاشة (بالدقائق)
+  get screenTimeMin() {
+    return state.screenTimeMin || 0;
+  },
+  setScreenTime(min) {
+    state.screenTimeMin = Math.max(0, min | 0);
+    persist();
+  },
+
   // تقدّم اليوم؛ تعيد true عند بلوغ الهدف لأول مرة اليوم
   addDailyProgress(n = 1) {
     const t = today();

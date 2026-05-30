@@ -29,6 +29,7 @@ export function renderParent() {
   summary.style.cssText = "display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:18px";
   summary.innerHTML = `
     ${stat("⭐", Store.stars, "نجمة")}
+    ${stat("🔥", Store.streak, "يوم متتالٍ")}
     ${stat("🗺️", `${doneCount}/${REGIONS.length}`, "مناطق")}
     ${stat("🎁", `${collected}/${COLLECTIBLES.length}`, "كنوز")}`;
   wrap.appendChild(summary);
@@ -60,6 +61,33 @@ export function renderParent() {
   guidesLink.textContent = "📖 أدلة ومعلومات للآباء";
   wrap.appendChild(guidesLink);
 
+  // تذكير وقت الشاشة
+  const stBox = document.createElement("div");
+  stBox.style.cssText =
+    "background:#fff;border-radius:18px;padding:14px;margin-top:18px;box-shadow:var(--shadow-card);text-align:center";
+  const opts = [0, 10, 15, 20, 30];
+  stBox.innerHTML = `<div style="font-weight:800;color:var(--c-ink);margin-bottom:10px">⏰ تذكير وقت اللعب</div>`;
+  const row = document.createElement("div");
+  row.style.cssText = "display:flex;gap:8px;flex-wrap:wrap;justify-content:center";
+  opts.forEach((m) => {
+    const b = document.createElement("button");
+    b.className = "video-cat" + (Store.screenTimeMin === m ? " active" : "");
+    b.textContent = m === 0 ? "بدون" : `${m} دقيقة`;
+    b.addEventListener("click", () => {
+      Sfx.tap();
+      Store.setScreenTime(m);
+      row.querySelectorAll(".video-cat").forEach((x) => x.classList.remove("active"));
+      b.classList.add("active");
+    });
+    row.appendChild(b);
+  });
+  stBox.appendChild(row);
+  const stNote = document.createElement("p");
+  stNote.style.cssText = "font-size:12px;color:#7a6ca8;margin:10px 0 0";
+  stNote.textContent = "تذكير لطيف داخل التطبيق بعد المدّة (يُطبّق عند فتح التطبيق التالي).";
+  stBox.appendChild(stNote);
+  wrap.appendChild(stBox);
+
   // إعادة ضبط
   const reset = document.createElement("button");
   reset.className = "candy-btn";
@@ -80,10 +108,37 @@ export function renderParent() {
   note.textContent = "يُحفظ التقدّم على هذا الجهاز فقط.";
   wrap.appendChild(note);
 
-  screen.appendChild(wrap);
+  // ===== بوّابة الآباء: سؤال بسيط لمنع دخول الطفل =====
+  const gate = document.createElement("div");
+  gate.className = "stage";
+  const a = 3 + ((Math.random() * 6) | 0);
+  const b = 2 + ((Math.random() * 6) | 0);
+  gate.innerHTML = `
+    <div class="hero-emoji">🔒</div>
+    <p style="font-weight:800;color:var(--c-purple);font-size:clamp(18px,5vw,24px)">للآباء فقط</p>
+    <p style="font-weight:800;color:var(--c-ink);font-size:clamp(20px,6vw,28px)">كم يساوي ${a} + ${b}؟</p>
+    <input id="gateInput" inputmode="numeric" style="font-size:26px;font-weight:800;text-align:center;width:120px;padding:10px;border-radius:16px;border:3px solid var(--c-purple)" />
+    <div style="margin-top:14px"><button class="candy-btn" id="gateOk">دخول</button></div>
+    <p id="gateErr" style="color:var(--c-red);font-weight:700;margin-top:8px;min-height:1.2em"></p>`;
+  screen.appendChild(gate);
 
   setTimeout(() => {
     screen.querySelector("#backBtn").addEventListener("click", () => { Sfx.tap(); Router.go("home"); });
+    const input = gate.querySelector("#gateInput");
+    const submit = () => {
+      if (parseInt(input.value, 10) === a + b) {
+        Sfx.correct();
+        gate.remove();
+        screen.appendChild(wrap);
+      } else {
+        Sfx.wrong();
+        gate.querySelector("#gateErr").textContent = "إجابة غير صحيحة، حاول مجدداً";
+        input.value = "";
+      }
+    };
+    gate.querySelector("#gateOk").addEventListener("click", submit);
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
+    input.focus();
   }, 0);
 
   return screen;
