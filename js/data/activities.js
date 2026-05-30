@@ -144,4 +144,12 @@ export const ACTIVITIES = {
     { emoji: "🔎", title: "جِد الشكل", desc: "اضغط على الشكل المطلوب", screen: "findIt",
       params: { datasetKey: "shapes", title: "🔎 جِد الشكل", verb: "اضغط على", bg: "linear-gradient(180deg,#7ff0e6,#14b8a8)" } },
   ],
+  jobs: [
+    { emoji: "👋", title: "استكشف المهن", desc: "اضغط على كل مهنة لتعرفها", screen: "explore",
+      params: { datasetKey: "jobs", title: "👨‍🚒 مدينة المهن", sound: true, bg: "linear-gradient(180deg,#ffd6a3,#ff7e5f)" } },
+    { emoji: "🧩", title: "من يفعل هذا؟", desc: "اعرف صاحب العمل", screen: "soundMatch",
+      params: { datasetKey: "jobs", title: "🧩 من صاحب هذا العمل؟", prompt: "من يفعل هذا العمل؟ 🔊", bg: "linear-gradient(180deg,#ffd6a3,#ff7e5f)" } },
+    { emoji: "🔎", title: "جِد المهنة", desc: "اضغط على المهنة المطلوبة", screen: "findIt",
+      params: { datasetKey: "jobs", title: "🔎 جِد المهنة", verb: "اضغط على", bg: "linear-gradient(180deg,#ffd6a3,#ff7e5f)" } },
+  ],
 };

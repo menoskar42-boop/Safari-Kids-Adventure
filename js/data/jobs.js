@@ -1,0 +1,20 @@
+// ===== بيانات الوظائف والمهن =====
+// name: عربي | en: إنجليزي | emoji | sound: جملة تعريفية بما تفعله المهنة
+export const JOBS = [
+  { name: "طبيب", en: "Doctor", emoji: "👨‍⚕️", sound: "الطبيب يعالج المرضى" },
+  { name: "ممرضة", en: "Nurse", emoji: "👩‍⚕️", sound: "الممرضة تساعد المرضى" },
+  { name: "معلّم", en: "Teacher", emoji: "👨‍🏫", sound: "المعلّم يعلّم الأطفال" },
+  { name: "شرطي", en: "Police officer", emoji: "👮", sound: "الشرطي يحمي الناس" },
+  { name: "رجل إطفاء", en: "Firefighter", emoji: "👨‍🚒", sound: "رجل الإطفاء يطفئ الحريق" },
+  { name: "طبّاخ", en: "Chef", emoji: "👨‍🍳", sound: "الطبّاخ يطهو الطعام اللذيذ" },
+  { name: "مزارع", en: "Farmer", emoji: "👨‍🌾", sound: "المزارع يزرع الخضروات" },
+  { name: "طيّار", en: "Pilot", emoji: "👨‍✈️", sound: "الطيّار يقود الطائرة" },
+  { name: "رائد فضاء", en: "Astronaut", emoji: "👨‍🚀", sound: "رائد الفضاء يسافر إلى الفضاء" },
+  { name: "عالِم", en: "Scientist", emoji: "👨‍🔬", sound: "العالِم يجري التجارب" },
+  { name: "مهندس", en: "Engineer", emoji: "👷", sound: "المهندس يبني المنازل" },
+  { name: "فنّان", en: "Artist", emoji: "👨‍🎨", sound: "الفنّان يرسم لوحات جميلة" },
+  { name: "مغنّي", en: "Singer", emoji: "👨‍🎤", sound: "المغنّي يغنّي بصوت جميل" },
+  { name: "حكَم", en: "Judge", emoji: "👨‍⚖️", sound: "الحكَم يحكم بالعدل" },
+  { name: "ميكانيكي", en: "Mechanic", emoji: "👨‍🔧", sound: "الميكانيكي يصلّح السيارات" },
+  { name: "ساعي البريد", en: "Mail carrier", emoji: "📮", sound: "ساعي البريد يوصّل الرسائل" },
+];

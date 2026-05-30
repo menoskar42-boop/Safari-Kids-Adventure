@@ -84,6 +84,15 @@ export const REGIONS = [
     guide: "أشكال كثيرة تنتظر أن تكتشفها!",
     ready: true,
   },
+  {
+    id: "jobs",
+    name: "مدينة المهن",
+    nameEn: "Jobs City",
+    emoji: "👨‍🚒",
+    bg: "bg-jobs",
+    guide: "تعال نتعرّف على المهن ومن يساعدنا كل يوم!",
+    ready: true,
+  },
 ];
 
 export function getRegion(id) {

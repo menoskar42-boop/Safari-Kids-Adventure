@@ -7,6 +7,7 @@ import { BIRDS } from "./birds.js";
 import { FRUITS } from "./fruits.js";
 import { COLORS } from "./colors.js";
 import { SHAPES } from "./shapes.js";
+import { JOBS } from "./jobs.js";
 
 const DATASETS = {
   arabic: {
@@ -27,6 +28,7 @@ const DATASETS = {
   fruits: { key: "fruits", lang: "ar-EG", glyphKind: "emoji", items: FRUITS },
   colors: { key: "colors", lang: "ar-EG", glyphKind: "emoji", items: COLORS },
   shapes: { key: "shapes", lang: "ar-EG", glyphKind: "emoji", items: SHAPES },
+  jobs: { key: "jobs", lang: "ar-EG", glyphKind: "emoji", items: JOBS },
 };
 
 export function getDataset(key) {

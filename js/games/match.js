@@ -85,16 +85,17 @@ export function renderShadowMatch({ regionId, regionIndex, datasetKey, title, bg
   return screen;
 }
 
-// ===== أصوات الحيوانات =====
-export function renderSoundMatch({ regionId, regionIndex, datasetKey, title, bg }) {
+// ===== أصوات الحيوانات / "من يفعل هذا؟" للمهن =====
+export function renderSoundMatch({ regionId, regionIndex, datasetKey, title, bg, prompt }) {
   const items = getDataset(datasetKey).items;
   const { screen, stage, back } = frame(title || "🔊 أصوات الحيوانات", bg, regionId, regionIndex);
+  const question = prompt || "من صاحب هذا الصوت؟ 🔊";
   runRounds({
     stage, items, regionId, regionIndex, back, stars: 7,
     setup(stage, target, pool, onPick) {
       const ask = document.createElement("p");
       ask.style.cssText = "font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2);font-size:clamp(17px,4.6vw,22px)";
-      ask.textContent = "من صاحب هذا الصوت؟ 🔊";
+      ask.textContent = question;
       stage.appendChild(ask);
 
       const sayBtn = document.createElement("button");
