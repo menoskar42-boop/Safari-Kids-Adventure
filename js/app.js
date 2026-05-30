@@ -3,6 +3,7 @@ import { Router } from "./core/router.js";
 import { Sfx } from "./core/audio.js";
 import { Speech, setAISpeech } from "./core/speech.js";
 import { checkAI } from "./core/ai.js";
+import { mountAssistantButton } from "./core/assistant.js";
 import { renderHome } from "./screens/home.js";
 import { renderRegion } from "./screens/region.js";
 import { renderRewards } from "./screens/rewards.js";
@@ -45,6 +46,7 @@ function startApp() {
   checkAI().then((ready) => {
     setAISpeech(ready);
     if (!ready) Speech.say(" ", { lang: "ar-EG" }); // تنشيط Web Speech الصامت
+    else mountAssistantButton(); // المساعد الصوتي يحتاج خادم OpenAI
   });
 
   splash.classList.add("hidden");
