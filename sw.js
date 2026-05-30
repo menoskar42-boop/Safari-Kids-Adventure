@@ -1,13 +1,12 @@
 // ===== Service Worker: تخزين مؤقت للعمل دون اتصال =====
-const CACHE = "safari-kids-v4";
+const CACHE = "safari-kids-v5";
 const ASSETS = [
-  "./",
-  "./index.html",
-  "./manifest.webmanifest",
-  "./css/main.css",
-  "./css/map.css",
-  "./css/games.css",
-  "./js/app.js",
+  "/app",
+  "/manifest.webmanifest",
+  "/css/main.css",
+  "/css/map.css",
+  "/css/games.css",
+  "/js/app.js",
 ];
 
 self.addEventListener("install", (e) => {
