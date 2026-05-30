@@ -77,12 +77,21 @@ export function renderHarakat({ regionId, regionIndex }) {
     stage.appendChild(row);
 
     const tools = document.createElement("div");
-    tools.style.cssText = "margin-top:16px;display:flex;gap:12px";
+    tools.style.cssText = "margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center";
     const rep = document.createElement("button");
     rep.className = "candy-btn";
     rep.textContent = "🔊 كرّر الكل";
     rep.addEventListener("click", () => { Sfx.tap(); speakAll(L); });
     tools.appendChild(rep);
+
+    // زر "التالي" متاح دائماً حتى لا يعلق الطفل
+    const nextBtn = document.createElement("button");
+    nextBtn.className = "candy-btn";
+    nextBtn.style.background = "linear-gradient(180deg,#34d399,#16a34a)";
+    nextBtn.textContent = "التالي ➡️";
+    nextBtn.addEventListener("click", () => { Sfx.tap(); next(); });
+    tools.appendChild(nextBtn);
+
     stage.appendChild(tools);
 
     speakAll(L);

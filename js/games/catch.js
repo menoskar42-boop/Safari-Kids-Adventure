@@ -48,6 +48,7 @@ export function renderCatch({ regionId, regionIndex, datasetKey, lang }) {
     const others = shuffle(items.filter((x) => x.char !== target.char)).slice(0, 5);
     const pool = shuffle([target, ...others]);
     const W = sky.clientWidth || 320;
+    const H = sky.clientHeight || 400;
 
     pool.forEach((item, idx) => {
       const el = document.createElement("div");
@@ -57,8 +58,9 @@ export function renderCatch({ regionId, regionIndex, datasetKey, lang }) {
       const f = {
         el,
         x: 10 + Math.random() * (W - 70),
-        y: -60 - idx * 80,
-        speed: 0.7 + Math.random() * 0.9,
+        // وزّع العناصر داخل المساحة المرئية فوراً حتى لا تبدو الشاشة فارغة
+        y: 20 + (idx / pool.length) * (H - 130) + Math.random() * 24,
+        speed: 1.3 + Math.random() * 1.4,
         item,
       };
       el.style.transform = `translate(${f.x}px, ${f.y}px)`;

@@ -4,6 +4,7 @@ import { Sfx } from "./core/audio.js";
 import { Speech, setAISpeech } from "./core/speech.js";
 import { checkAI } from "./core/ai.js";
 import { mountAssistantButton } from "./core/assistant.js";
+import { REGIONS } from "./data/regions.js";
 import { renderHome } from "./screens/home.js";
 import { renderRegion } from "./screens/region.js";
 import { renderRewards } from "./screens/rewards.js";
@@ -56,7 +57,12 @@ function startApp() {
 
   splash.classList.add("hidden");
   appEl.classList.remove("hidden");
-  Router.go("home");
+
+  // رابط عميق: ?region=arabic يفتح المنطقة مباشرة (قادم من صفحات SEO)
+  const wanted = new URLSearchParams(location.search).get("region");
+  const idx = wanted ? REGIONS.findIndex((r) => r.id === wanted) : -1;
+  if (idx >= 0) Router.go("region", { id: REGIONS[idx].id, index: idx });
+  else Router.go("home");
 }
 
 startBtn.addEventListener("click", startApp);

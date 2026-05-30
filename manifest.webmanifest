@@ -4,7 +4,7 @@
   "description": "مغامرة تعليمية تفاعلية للأطفال: حروف وأرقام وحيوانات وألوان وأشكال.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./index.html",
+  "start_url": "/app",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#5b3fb5",
