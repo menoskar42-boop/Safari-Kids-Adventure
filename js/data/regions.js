@@ -10,7 +10,7 @@ export const REGIONS = [
     emoji: "🔤",
     bg: "bg-arabic",
     guide: "هيا نتعلّم الحروف العربية ونجمع النجوم!",
-    ready: false,
+    ready: true,
   },
   {
     id: "english",

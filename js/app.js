@@ -5,11 +5,17 @@ import { Speech } from "./core/speech.js";
 import { renderHome } from "./screens/home.js";
 import { renderRegion } from "./screens/region.js";
 import { renderRewards } from "./screens/rewards.js";
+import { renderLearn } from "./games/learn.js";
+import { renderCatch } from "./games/catch.js";
+import { renderTrace } from "./games/trace.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
 Router.register("region", renderRegion);
 Router.register("rewards", renderRewards);
+Router.register("learn", renderLearn);
+Router.register("catch", renderCatch);
+Router.register("trace", renderTrace);
 
 // شاشة البداية
 const splash = document.getElementById("splash");
