@@ -1,5 +1,11 @@
 // ===== مولّد صفحات HTML الغنيّة للأرشفة (SSR بسيط بلا مكتبات) =====
 import { SITE, SECTIONS, getSection } from "./seoContent.js";
+import { GUIDES } from "./guidesContent.js";
+
+// دليل الآباء المرتبط بقسم (إن وُجد)
+function guideForSection(slug) {
+  return GUIDES.find((g) => g.related === slug);
+}
 
 const esc = (s) =>
   String(s)
@@ -97,6 +103,10 @@ export function renderSectionPage(slug) {
   if (!section) return null;
   const url = `${SITE.url}/${section.slug}`;
   const intro = section.intro.map((p) => `<p>${esc(p)}</p>`).join("\n");
+  const guide = guideForSection(section.slug);
+  const guideCta = guide
+    ? `<p class="seo-intro"><a href="/guides/${guide.slug}">📚 ${esc(guide.h1)} ←</a></p>`
+    : "";
 
   return `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -130,6 +140,7 @@ ${jsonLd(section)}
   <h1>${section.emoji} ${esc(section.h1)}</h1>
   <div class="seo-intro">${intro}</div>
   <a class="seo-play" href="/app?region=${section.region}">▶ العب وتعلّم الآن</a>
+  ${guideCta}
   <section aria-label="المحتوى التعليمي">
     <h2>محتوى ${esc(section.h1)}</h2>
     ${renderItems(section)}
@@ -197,6 +208,10 @@ export function renderHomePage() {
     <h2>أقسام التعلّم</h2>
     <ul class="seo-home-grid">${sections}</ul>
   </section>
+  <nav class="seo-related" aria-label="أدلة الآباء">
+    <h2>📚 أدلة الآباء</h2>
+    <ul><li><a href="/guides">نصائح وأدلة عملية لتعليم طفلك الحروف والأرقام والحيوانات ←</a></li></ul>
+  </nav>
 </main>
 <footer class="seo-footer">
   <p>عالم الاستكشاف السحري — تطبيق تعليمي تفاعلي للأطفال من ٣ إلى ٦ سنوات.</p>
@@ -214,6 +229,12 @@ export function renderSitemap() {
     ...SECTIONS.map((s) => ({
       loc: `${SITE.url}/${s.slug}`,
       priority: "0.8",
+      freq: "monthly",
+    })),
+    { loc: `${SITE.url}/guides`, priority: "0.7", freq: "monthly" },
+    ...GUIDES.map((g) => ({
+      loc: `${SITE.url}/guides/${g.slug}`,
+      priority: "0.7",
       freq: "monthly",
     })),
   ];

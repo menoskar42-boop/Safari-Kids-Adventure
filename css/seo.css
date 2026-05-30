@@ -111,6 +111,14 @@ body {
 .seo-related a { color: var(--p); text-decoration: none; font-weight: 700; }
 .seo-related a:hover { text-decoration: underline; }
 
+/* مقالات الأدلة */
+.seo-crumbs { font-size: 14px; color: #7a6ca8; margin: 4px 0; }
+.seo-crumbs a { color: var(--p); text-decoration: none; }
+.seo-meta { font-size: 14px; color: #7a6ca8; margin: 0 0 10px; }
+.seo-article section { margin: 18px 0; }
+.seo-article h2 { margin: 22px 0 8px; }
+.seo-article p { font-size: clamp(15px, 3.6vw, 18px); margin: 8px 0; }
+
 .seo-footer {
   background: #efe9ff;
   text-align: center;
