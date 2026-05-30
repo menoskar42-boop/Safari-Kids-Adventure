@@ -1,0 +1,18 @@
+{
+  "name": "safari-kids-adventure",
+  "version": "1.0.0",
+  "description": "عالم الاستكشاف السحري — تطبيق مغامرات تعليمي للأطفال مع خادم OpenAI آمن",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "license": "MIT"
+}

@@ -1,7 +1,8 @@
 // ===== نقطة بداية التطبيق =====
 import { Router } from "./core/router.js";
 import { Sfx } from "./core/audio.js";
-import { Speech } from "./core/speech.js";
+import { Speech, setAISpeech } from "./core/speech.js";
+import { checkAI } from "./core/ai.js";
 import { renderHome } from "./screens/home.js";
 import { renderRegion } from "./screens/region.js";
 import { renderRewards } from "./screens/rewards.js";
@@ -39,8 +40,12 @@ const startBtn = document.getElementById("startBtn");
 function startApp() {
   // فتح السياق الصوتي وتهيئة النطق بعد تفاعل المستخدم
   Sfx.unlock();
-  // بعض المتصفحات تحتاج نطقاً صامتاً لتفعيل الأصوات
-  Speech.say(" ", { lang: "ar-EG" });
+
+  // فحص توفّر خادم OpenAI: إن توفّر نستخدم نطق الـ AI، وإلا Web Speech
+  checkAI().then((ready) => {
+    setAISpeech(ready);
+    if (!ready) Speech.say(" ", { lang: "ar-EG" }); // تنشيط Web Speech الصامت
+  });
 
   splash.classList.add("hidden");
   appEl.classList.remove("hidden");
