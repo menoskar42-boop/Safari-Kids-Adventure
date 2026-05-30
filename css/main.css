@@ -226,12 +226,58 @@ button { font-family: inherit; cursor: pointer; border: none; }
   cursor: pointer;
   animation: bob 2.6s ease-in-out infinite;
 }
-.ar-creature.hop { animation: ar-hop .7s ease; }
+.ar-creature.hop { animation: ar-hop .8s ease; }
 @keyframes ar-hop {
-  0% { transform: translateX(-50%) translateY(0) scale(1); }
-  40% { transform: translateX(-50%) translateY(-60px) scale(1.1); }
-  100% { transform: translateX(-50%) translateY(0) scale(1); }
+  0%   { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); }
+  25%  { transform: translateX(-50%) translateY(-90px) scale(1.12) rotate(-6deg); }
+  50%  { transform: translateX(-50%) translateY(0) scale(.96) rotate(0deg); }
+  70%  { transform: translateX(-50%) translateY(-40px) scale(1.05) rotate(5deg); }
+  100% { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); }
 }
+
+/* فقاعة كلام الحيوان */
+.ar-bubble {
+  position: absolute;
+  inset-block-end: 46%;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: var(--c-ink);
+  font-weight: 800;
+  font-size: clamp(16px, 4.5vw, 22px);
+  padding: 10px 18px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  white-space: nowrap;
+  animation: pop-in .3s ease;
+  z-index: 3;
+}
+.ar-bubble::after {
+  content: "";
+  position: absolute;
+  inset-block-end: -10px;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: #fff;
+}
+
+/* تلميح أعلى الشاشة */
+.ar-hint {
+  position: absolute;
+  inset-block-start: 14px;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, .55);
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(13px, 3.6vw, 16px);
+  padding: 8px 16px;
+  border-radius: 999px;
+  z-index: 3;
+  animation: pulse 2s ease-in-out infinite;
+}
+
 .ar-picker {
   display: flex;
   gap: 10px;
@@ -250,6 +296,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
   transition: transform .12s ease;
 }
 .ar-pick:active { transform: scale(.88); }
+.ar-pick.active { background: linear-gradient(160deg, #ffd23f, #ff924c); outline: 3px solid #fff; }
 
 /* ===== المساعد الصوتي (زر عائم + فقاعة) ===== */
 .assistant-fab {

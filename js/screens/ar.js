@@ -4,7 +4,22 @@
 import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
-import { ANIMALS } from "../data/animals.js";
+
+// حيوانات بأجسام كاملة (تبدو واقفة في الغرفة وتقفز بوضوح) — خاصّة بالـ AR
+const AR_ANIMALS = [
+  { name: "أسد", en: "Lion", emoji: "🦁", body: "🦁", sound: "زئير الأسد: زئييير" },
+  { name: "نمر", en: "Tiger", emoji: "🐅", body: "🐅", sound: "النمر يزمجر" },
+  { name: "فيل", en: "Elephant", emoji: "🐘", body: "🐘", sound: "الفيل: بريم بريم" },
+  { name: "زرافة", en: "Giraffe", emoji: "🦒", body: "🦒", sound: "الزرافة طويلة جداً" },
+  { name: "قرد", en: "Monkey", emoji: "🐒", body: "🐒", sound: "القرد: أوه أوه آه آه" },
+  { name: "حصان", en: "Horse", emoji: "🐎", body: "🐎", sound: "الحصان: هي هي" },
+  { name: "كلب", en: "Dog", emoji: "🐕", body: "🐕", sound: "الكلب: هو هو" },
+  { name: "قطة", en: "Cat", emoji: "🐈", body: "🐈", sound: "القطة: مياو" },
+  { name: "أرنب", en: "Rabbit", emoji: "🐇", body: "🐇", sound: "الأرنب يقفز قفزات" },
+  { name: "دب", en: "Bear", emoji: "🐻", body: "🐻", sound: "الدب: هدير" },
+  { name: "ديناصور", en: "Dinosaur", emoji: "🦕", body: "🦕", sound: "الديناصور كبير جداً" },
+  { name: "بطريق", en: "Penguin", emoji: "🐧", body: "🐧", sound: "البطريق يمشي يتمايل" },
+];
 
 export function renderAR() {
   const screen = document.createElement("div");
@@ -33,36 +48,56 @@ export function renderAR() {
   creature.className = "ar-creature";
   stage.appendChild(creature);
 
+  // فقاعة الكلام فوق الحيوان
+  const bubble = document.createElement("div");
+  bubble.className = "ar-bubble hidden";
+  stage.appendChild(bubble);
+
+  // تلميح للطفل
+  const hint = document.createElement("div");
+  hint.className = "ar-hint";
+  hint.textContent = "اضغط على الحيوان ليقفز ويتكلّم! 👆";
+  stage.appendChild(hint);
+
   // شريط اختيار الحيوان
   const picker = document.createElement("div");
   picker.className = "ar-picker";
   screen.appendChild(picker);
 
   let stream = null;
-  let current = ANIMALS[0];
+  let current = AR_ANIMALS[0];
 
   function speakCreature(a) {
+    bubble.classList.remove("hidden");
+    bubble.textContent = `أنا ${a.name}!`;
     Speech.sequence([
-      { text: a.name, lang: "ar-EG" },
+      { text: `أنا ${a.name}`, lang: "ar-EG" },
       { text: a.en, lang: "en-US" },
       { text: a.sound, lang: "ar-EG" },
     ]);
   }
 
-  function setCreature(a) {
-    current = a;
-    creature.textContent = a.emoji;
+  function hop() {
     creature.classList.remove("hop");
     void creature.offsetWidth; // إعادة تشغيل الحركة
     creature.classList.add("hop");
+  }
+
+  function setCreature(a) {
+    current = a;
+    creature.textContent = a.body;
+    hop();
     Sfx.pop();
     speakCreature(a);
+    // تمييز الزرّ المختار
+    picker.querySelectorAll(".ar-pick").forEach((b) => b.classList.toggle("active", b.dataset.name === a.name));
   }
 
   function buildPicker() {
-    ANIMALS.slice(0, 10).forEach((a) => {
+    AR_ANIMALS.forEach((a) => {
       const b = document.createElement("button");
       b.className = "ar-pick";
+      b.dataset.name = a.name;
       b.textContent = a.emoji;
       b.addEventListener("click", () => setCreature(a));
       picker.appendChild(b);
@@ -70,10 +105,8 @@ export function renderAR() {
   }
 
   creature.addEventListener("click", () => {
-    creature.classList.remove("hop");
-    void creature.offsetWidth;
-    creature.classList.add("hop");
     Sfx.pop();
+    hop();
     speakCreature(current);
   });
 
@@ -130,3 +163,4 @@ export function renderAR() {
 
   return screen;
 }
+
