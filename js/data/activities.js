@@ -212,6 +212,8 @@ export const ACTIVITIES = {
       screen: "story",
       params: { storyId: "lion-friend" },
     },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "animals", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
   ],
   fish: [
     { emoji: "🐠", title: "استكشف البحر", desc: "اضغط على كل سمكة لتعرفها", screen: "explore",
@@ -222,6 +224,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "fish", title: "🌑 ظل السمكة", bg: "linear-gradient(180deg,#7fe0ff,#1aa7ff)" } },
     { emoji: "📖", title: "قصة: السمكة الشجاعة", desc: "استمع لقصة جميلة", screen: "story",
       params: { storyId: "brave-fish" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "fish", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#7fe0ff,#1aa7ff)" } },
   ],
   birds: [
     { emoji: "🦜", title: "استكشف الطيور", desc: "اضغط على كل طائر لتعرفه", screen: "explore",
@@ -230,6 +234,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "birds", title: "🔎 جِد الطائر", verb: "اضغط على", bg: "linear-gradient(180deg,#cdb8ff,#8a6bff)" } },
     { emoji: "🌑", title: "طابق الظل", desc: "اعرف الطائر من ظله", screen: "shadowMatch",
       params: { datasetKey: "birds", title: "🌑 ظل الطائر", bg: "linear-gradient(180deg,#cdb8ff,#8a6bff)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "birds", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#cdb8ff,#8a6bff)" } },
   ],
   insects: [
     { emoji: "🦋", title: "استكشف الحشرات", desc: "اضغط على كل حشرة لتعرفها", screen: "explore",
@@ -248,6 +254,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "fruits", title: "🌑 ظل الفاكهة", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
     { emoji: "📖", title: "قصة: شجرة التفاح", desc: "استمع لقصة جميلة", screen: "story",
       params: { storyId: "apple-tree" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "fruits", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
   ],
   colors: [
     { emoji: "🎨", title: "استكشف الألوان", desc: "اضغط على كل لون لتعرفه", screen: "explore",

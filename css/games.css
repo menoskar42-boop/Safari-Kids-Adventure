@@ -176,6 +176,51 @@
   will-change: transform;
 }
 
+/* ===== لعبة الذاكرة ===== */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 8px 16px 30px;
+}
+@media (max-width: 380px) { .memory-grid { grid-template-columns: repeat(3, 1fr); } }
+.mem-card {
+  position: relative;
+  aspect-ratio: 1;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.mem-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-card);
+  backface-visibility: hidden;
+  transition: transform .35s ease;
+  overflow: hidden;
+}
+.mem-back {
+  background: linear-gradient(160deg, var(--c-purple-2), var(--c-purple));
+  color: #fff;
+  font-size: clamp(28px, 9vw, 44px);
+}
+.mem-front {
+  background: #fff;
+  transform: rotateY(180deg);
+  font-size: clamp(32px, 10vw, 52px);
+}
+.mem-front .mem-glyph { font-size: inherit; }
+.mem-front img.mem-glyph { width: 86%; height: 86%; object-fit: contain; }
+.mem-card.flipped .mem-back { transform: rotateY(180deg); }
+.mem-card.flipped .mem-front { transform: rotateY(0); }
+.mem-card.done { animation: pulse .5s ease; }
+.mem-card.done .mem-front { outline: 4px solid var(--c-green); }
+
 /* ===== لعبة أشكال الحرف (أول/وسط/آخر) ===== */
 .lf-row {
   display: flex;
