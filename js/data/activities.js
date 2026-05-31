@@ -262,12 +262,16 @@ export const ACTIVITIES = {
       params: { datasetKey: "colors", title: "🎨 حديقة الألوان", bg: "linear-gradient(180deg,#ffe29a,#ff9a6c)" } },
     { emoji: "🔎", title: "جِد اللون", desc: "اضغط على اللون المطلوب", screen: "findIt",
       params: { datasetKey: "colors", title: "🔎 جِد اللون", verb: "اضغط على", bg: "linear-gradient(180deg,#ffe29a,#ff9a6c)" } },
+    { emoji: "🎨", title: "لوّن الصور", desc: "اختر لوناً ولوّن الرسمة", screen: "coloring",
+      params: { title: "🎨 لوّن الصور", bg: "linear-gradient(180deg,#ffe29a,#ff9a6c)" } },
   ],
   shapes: [
     { emoji: "⭐", title: "استكشف الأشكال", desc: "اضغط على كل شكل لتعرفه", screen: "explore",
       params: { datasetKey: "shapes", title: "⭐ عالم الأشكال", bg: "linear-gradient(180deg,#7ff0e6,#14b8a8)" } },
     { emoji: "🔎", title: "جِد الشكل", desc: "اضغط على الشكل المطلوب", screen: "findIt",
       params: { datasetKey: "shapes", title: "🔎 جِد الشكل", verb: "اضغط على", bg: "linear-gradient(180deg,#7ff0e6,#14b8a8)" } },
+    { emoji: "🎨", title: "لوّن الصور", desc: "اختر لوناً ولوّن الرسمة", screen: "coloring",
+      params: { title: "🎨 لوّن الصور", bg: "linear-gradient(180deg,#7ff0e6,#14b8a8)" } },
   ],
   jobs: [
     { emoji: "👋", title: "استكشف المهن", desc: "اضغط على كل مهنة لتعرفها", screen: "explore",
