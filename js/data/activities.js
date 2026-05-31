@@ -287,6 +287,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "colors", title: "🔎 جِد اللون", verb: "اضغط على", bg: "linear-gradient(180deg,#ffe29a,#ff9a6c)" } },
     { emoji: "🎨", title: "لوّن الصور", desc: "اختر لوناً ولوّن الرسمة", screen: "coloring",
       params: { title: "🎨 لوّن الصور", bg: "linear-gradient(180deg,#ffe29a,#ff9a6c)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "colors", title: "🧩 ذاكرة الألوان", bg: "linear-gradient(180deg,#ffe29a,#ff9a6c)" } },
   ],
   shapes: [
     { emoji: "⭐", title: "استكشف الأشكال", desc: "اضغط على كل شكل لتعرفه", screen: "explore",
@@ -295,6 +297,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "shapes", title: "🔎 جِد الشكل", verb: "اضغط على", bg: "linear-gradient(180deg,#7ff0e6,#14b8a8)" } },
     { emoji: "🎨", title: "لوّن الصور", desc: "اختر لوناً ولوّن الرسمة", screen: "coloring",
       params: { title: "🎨 لوّن الصور", bg: "linear-gradient(180deg,#7ff0e6,#14b8a8)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "shapes", title: "🧩 ذاكرة الأشكال", bg: "linear-gradient(180deg,#7ff0e6,#14b8a8)" } },
   ],
   jobs: [
     { emoji: "👋", title: "استكشف المهن", desc: "اضغط على كل مهنة لتعرفها", screen: "explore",
@@ -303,12 +307,16 @@ export const ACTIVITIES = {
       params: { datasetKey: "jobs", title: "🧩 من صاحب هذا العمل؟", prompt: "من يفعل هذا العمل؟ 🔊", bg: "linear-gradient(180deg,#ffd6a3,#ff7e5f)" } },
     { emoji: "🔎", title: "جِد المهنة", desc: "اضغط على المهنة المطلوبة", screen: "findIt",
       params: { datasetKey: "jobs", title: "🔎 جِد المهنة", verb: "اضغط على", bg: "linear-gradient(180deg,#ffd6a3,#ff7e5f)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "jobs", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#ffd6a3,#ff7e5f)" } },
   ],
   body: [
     { emoji: "🧍", title: "استكشف الجسم", desc: "اضغط على كل جزء لتعرفه", screen: "explore",
       params: { datasetKey: "body", title: "🧍 جسم الإنسان", bg: "linear-gradient(180deg,#ffc2d2,#ff5f8d)" } },
     { emoji: "🔎", title: "جِد الجزء", desc: "اضغط على الجزء المطلوب", screen: "findIt",
       params: { datasetKey: "body", title: "🔎 جِد الجزء", verb: "أين", bg: "linear-gradient(180deg,#ffc2d2,#ff5f8d)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "body", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#ffc2d2,#ff5f8d)" } },
   ],
   transport: [
     { emoji: "🚗", title: "استكشف المواصلات", desc: "اضغط على كل وسيلة لتعرفها", screen: "explore",

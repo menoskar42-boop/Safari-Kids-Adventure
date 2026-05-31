@@ -1,5 +1,5 @@
 // ===== Service Worker: تخزين مؤقت للعمل دون اتصال =====
-const CACHE = "safari-kids-v54";
+const CACHE = "safari-kids-v55";
 const ASSETS = [
   "/app",
   "/manifest.webmanifest",
