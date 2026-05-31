@@ -11,7 +11,6 @@ export const REGIONS = [
     bg: "bg-arabic",
     guide: "هيا نتعلّم الحروف العربية ونجمع النجوم!",
     ready: true,
-    open: true,
   },
   {
     id: "english",
@@ -21,7 +20,6 @@ export const REGIONS = [
     bg: "bg-english",
     guide: "Let's learn English letters together!",
     ready: true,
-    open: true,
   },
   {
     id: "numbers",
@@ -31,7 +29,6 @@ export const REGIONS = [
     bg: "bg-numbers",
     guide: "تعال نعدّ معاً ونلعب بالأرقام!",
     ready: true,
-    open: true,
   },
   {
     id: "animals",
@@ -51,6 +48,7 @@ export const REGIONS = [
     bg: "bg-fish",
     guide: "هيا نغوص في البحر ونكتشف الأسماك!",
     ready: true,
+    open: true,
   },
   {
     id: "birds",
@@ -60,6 +58,7 @@ export const REGIONS = [
     bg: "bg-birds",
     guide: "الطيور تطير في السماء، تعال نراها!",
     ready: true,
+    open: true,
   },
   {
     id: "insects",
@@ -72,12 +71,13 @@ export const REGIONS = [
   },
   {
     id: "fruits",
-    name: "مزرعة الفواكه",
-    nameEn: "Fruits Farm",
+    name: "الفواكه والخضروات",
+    nameEn: "Fruits & Veggies",
     emoji: "🍎",
     bg: "bg-fruits",
-    guide: "سوق الفواكه السحري ينتظرك!",
+    guide: "سوق الفواكه والخضروات السحري ينتظرك!",
     ready: true,
+    open: true,
   },
   {
     id: "colors",
@@ -107,6 +107,7 @@ export const REGIONS = [
     bg: "bg-jobs",
     guide: "تعال نتعرّف على المهن ومن يساعدنا كل يوم!",
     ready: true,
+    open: true,
   },
   {
     id: "body",
