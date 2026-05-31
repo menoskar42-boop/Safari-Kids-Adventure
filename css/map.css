@@ -64,6 +64,15 @@
   font-size: clamp(46px, 13vw, 72px);
   filter: drop-shadow(0 6px 6px rgba(0,0,0,.25));
 }
+/* صورة الكائن (بدل الإيموجي) */
+.region-card img.region-emoji,
+img.item-img {
+  width: clamp(70px, 20vw, 110px);
+  height: clamp(70px, 20vw, 110px);
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 16px;
+}
 .region-card .region-name {
   display: block;
   margin-top: 8px;

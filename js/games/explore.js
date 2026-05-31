@@ -5,6 +5,7 @@ import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
 import { gameTopbar, finishActivity } from "./common.js";
+import { glyphMarkup } from "./glyph.js";
 
 export function renderExplore({ regionId, regionIndex, datasetKey, title, bg, sound }) {
   const ds = getDataset(datasetKey);
@@ -29,7 +30,7 @@ export function renderExplore({ regionId, regionIndex, datasetKey, title, bg, so
     const card = document.createElement("button");
     card.className = "region-card";
     card.style.cssText = `animation-delay:${idx * 0.03}s;background:linear-gradient(160deg,#9be15d,#00c46a)`;
-    card.innerHTML = `<span class="region-emoji">${it.emoji}</span><span class="region-name">${it.name}</span><span class="region-name-en">${it.en}</span>`;
+    card.innerHTML = `${glyphMarkup(it, "region-emoji")}<span class="region-name">${it.name}</span><span class="region-name-en">${it.en}</span>`;
     card.addEventListener("click", () => {
       Sfx.pop();
       const seq = [
