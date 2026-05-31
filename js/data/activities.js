@@ -176,6 +176,13 @@ export const ACTIVITIES = {
       params: {},
     },
     {
+      emoji: "➖",
+      title: "الطرح البسيط",
+      desc: "كم يبقى بعد الطرح؟",
+      screen: "subtraction",
+      params: {},
+    },
+    {
       emoji: "🔢",
       title: "الرقم الناقص",
       desc: "رتّب الأرقام واملأ الناقص",

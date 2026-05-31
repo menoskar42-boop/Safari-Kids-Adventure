@@ -353,6 +353,81 @@ export function renderAddition({ regionId, regionIndex }) {
   return screen;
 }
 
+// ===== لعبة ٦: الطرح البسيط =====
+// تبدأ بعناصر، يُشطب بعضها، يختار الطفل كم بقي.
+export function renderSubtraction({ regionId, regionIndex }) {
+  const { screen, stage, back } = baseScreen("➖ الطرح البسيط", regionId, regionIndex);
+  const ROUNDS = 6;
+  let round = 0;
+
+  function render() {
+    const a = 3 + ((Math.random() * 6) | 0); // 3..8
+    const b = 1 + ((Math.random() * (a - 1)) | 0); // 1..a-1
+    const rest = a - b;
+    const emoji = rand(COUNT_EMOJIS);
+    stage.innerHTML = "";
+
+    const items = document.createElement("div");
+    items.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:min(90vw,420px);margin:10px auto;font-size:clamp(30px,8vw,46px)";
+    for (let k = 0; k < a; k++) {
+      const s = document.createElement("span");
+      s.textContent = emoji;
+      s.style.transition = "opacity .3s ease, filter .3s ease";
+      if (k >= rest) {
+        // العناصر المطروحة تُشطب بعد لحظة
+        setTimeout(() => { s.style.opacity = ".25"; s.style.filter = "grayscale(1)"; s.textContent = "❌"; }, 700);
+      }
+      items.appendChild(s);
+    }
+    stage.appendChild(items);
+
+    const ask = document.createElement("p");
+    ask.style.cssText = "font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2);font-size:clamp(18px,5vw,26px);margin:6px 0";
+    ask.textContent = `${a} ➖ ${b} = ؟`;
+    stage.appendChild(ask);
+    Speech.ar(`${a} ناقص ${b}، كم بقي؟`);
+
+    const opts = new Set([rest]);
+    while (opts.size < 3) {
+      const d = rest + (Math.random() < 0.5 ? -1 : 1) * (1 + ((Math.random() * 2) | 0));
+      if (d >= 1 && d <= 10) opts.add(d);
+    }
+    const row = document.createElement("div");
+    row.className = "choice-row";
+    shuffle([...opts]).forEach((val) => {
+      const num = NUMBERS_10[val - 1];
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.style.fontWeight = "800";
+      btn.textContent = num.arDigit;
+      btn.addEventListener("click", () => {
+        if (val === rest) {
+          btn.classList.add("correct");
+          Sfx.correct();
+          speakBoth(num);
+          awardStars(1);
+          setTimeout(nextRound, 1100);
+        } else {
+          btn.classList.add("wrong");
+          Sfx.wrong();
+          setTimeout(() => btn.classList.remove("wrong"), 500);
+        }
+      });
+      row.appendChild(btn);
+    });
+    stage.appendChild(row);
+  }
+
+  function nextRound() {
+    round++;
+    if (round >= ROUNDS) finishActivity({ regionId, regionIndex, stars: 6, onDone: back });
+    else render();
+  }
+
+  setTimeout(render, 0);
+  return screen;
+}
+
 // ===== لعبة ٤: عُدّ واختر الرقم =====
 // تظهر مجموعة عناصر، يعدّها الطفل ويختار الرقم الصحيح من بين ثلاثة.
 export function renderCountPick({ regionId, regionIndex }) {
