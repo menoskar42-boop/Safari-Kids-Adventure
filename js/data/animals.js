@@ -18,7 +18,6 @@ export const ANIMALS = [
   { id: "horse", name: "حصان", en: "Horse", emoji: "🐎", sound: "صهيل", img: "animals/horse.png" },
   { id: "sheep", name: "خروف", en: "Sheep", emoji: "🐑", sound: "مأمأة: ماااع", img: "animals/sheep.png" },
   { id: "frog", name: "ضفدع", en: "Frog", emoji: "🐸", sound: "نقيق", img: "animals/frog.png" },
-  { id: "chicken", name: "دجاجة", en: "Chicken", emoji: "🐔", sound: "كاك كاك", img: "animals/chicken.png" },
   { id: "turtle", name: "سلحفاة", en: "Turtle", emoji: "🐢", sound: "السلحفاة بطيئة", img: "animals/turtle.png" },
   { id: "rabbit", name: "أرنب", en: "Rabbit", emoji: "🐰", sound: "الأرنب يقفز", img: "animals/rabbit.png" },
   { id: "fox", name: "ثعلب", en: "Fox", emoji: "🦊", sound: "صوت الثعلب", img: "animals/fox.png" },
