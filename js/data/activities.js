@@ -46,6 +46,13 @@ export const ACTIVITIES = {
       params: {},
     },
     {
+      emoji: "✋",
+      title: "السبورة الذكية",
+      desc: "اكتب وارسم بحرية",
+      screen: "board",
+      params: {},
+    },
+    {
       emoji: "🔠",
       title: "الحرف الناقص",
       desc: "رتّب الحروف واملأ الناقص",
@@ -102,6 +109,13 @@ export const ACTIVITIES = {
       desc: "Review what you learned",
       screen: "review",
       params: { datasetKey: "english", lang: "en-US", title: "🧠 مراجعة الحروف" },
+    },
+    {
+      emoji: "✋",
+      title: "السبورة الذكية",
+      desc: "Write and draw freely",
+      screen: "board",
+      params: {},
     },
   ],
   numbers: [
