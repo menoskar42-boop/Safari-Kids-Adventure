@@ -32,6 +32,13 @@ export const ACTIVITIES = {
       params: { datasetKey: "arabic", lang: "ar-EG" },
     },
     {
+      emoji: "📘",
+      title: "شرح الحركات",
+      desc: "تعرّف على الفتحة والضمة والكسرة",
+      screen: "harakatIntro",
+      params: {},
+    },
+    {
       emoji: "ﹷ",
       title: "الحركات",
       desc: "الفتحة والضمة والكسرة",
