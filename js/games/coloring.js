@@ -73,6 +73,39 @@ const PICTURES = [
       <circle class="cl" cx="70" cy="142" r="18"/>
       <circle class="cl" cx="132" cy="142" r="18"/>`,
   },
+  {
+    name: "شجرة",
+    svg: `
+      <rect class="cl" x="91" y="120" width="18" height="58" rx="4"/>
+      <circle class="cl" cx="70" cy="100" r="30"/>
+      <circle class="cl" cx="130" cy="100" r="30"/>
+      <circle class="cl" cx="100" cy="74" r="38"/>`,
+  },
+  {
+    name: "آيس كريم",
+    svg: `
+      <polygon class="cl" points="76,112 124,112 100,182"/>
+      <circle class="cl" cx="80" cy="84" r="20"/>
+      <circle class="cl" cx="120" cy="84" r="20"/>
+      <circle class="cl" cx="100" cy="68" r="24"/>`,
+  },
+  {
+    name: "قارب",
+    svg: `
+      <rect class="cl" x="22" y="142" width="156" height="34" rx="10"/>
+      <path class="cl" d="M52 112 L148 112 L130 144 L70 144 Z"/>
+      <polygon class="cl" points="104,40 104,108 152,108"/>
+      <polygon class="cl" points="96,40 96,108 52,108"/>`,
+  },
+  {
+    name: "شمس",
+    svg: `
+      <polygon class="cl" points="92,52 108,52 100,16"/>
+      <polygon class="cl" points="92,148 108,148 100,184"/>
+      <polygon class="cl" points="52,92 52,108 16,100"/>
+      <polygon class="cl" points="148,92 148,108 184,100"/>
+      <circle class="cl" cx="100" cy="100" r="42"/>`,
+  },
 ];
 
 export function renderColoring({ regionId, regionIndex, title, bg }) {
