@@ -1,6 +1,10 @@
 // ===== وسيط OpenAI الآمن =====
 // كل الطلبات تمر عبر الخادم؛ المفتاح لا يصل المتصفح إطلاقاً.
 // يستخدم fetch المدمج في Node 18+ (لا تبعيات إضافية).
+import crypto from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const OPENAI_BASE = "https://api.openai.com/v1";
 
@@ -9,9 +13,32 @@ const TTS_VOICE = process.env.OPENAI_TTS_VOICE || "alloy";
 const CHAT_MODEL = process.env.OPENAI_CHAT_MODEL || "gpt-4o-mini";
 const STT_MODEL = process.env.OPENAI_STT_MODEL || "gpt-4o-mini-transcribe";
 
-// ذاكرة تخزين بسيطة للنطق المتكرّر (نفس النص/الصوت) لتقليل الكلفة والتأخير
-const ttsCache = new Map();
-const TTS_CACHE_MAX = 200;
+// ===== تخزين النطق دائماً على القرص (يُشارَكه كل الأطفال) =====
+// أول مرّة يُنطق فيها نصّ: نولّده بالـ AI ونحفظه ملفاً .mp3.
+// أي طلب لاحق لنفس النص (أي طفل/جهاز) يُقدَّم من الملف بلا أي استدعاء للـ AI.
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const TTS_CACHE_DIR =
+  process.env.TTS_CACHE_DIR || path.join(__dirname, ".tts-cache");
+try {
+  fs.mkdirSync(TTS_CACHE_DIR, { recursive: true });
+} catch (_e) {}
+
+// طبقة ذاكرة سريعة فوق القرص (L1) — تقلّل قراءة القرص للنصوص الشائعة
+const ttsMem = new Map();
+const TTS_MEM_MAX = 120;
+
+// مفتاح ثابت = بصمة (الموديل|الصوت|التوجيه|النص) → اسم ملف آمن
+function ttsCacheKey(text, voice, instructions) {
+  const raw = `${TTS_MODEL}|${voice || TTS_VOICE}|${instructions || ""}|${text}`;
+  return crypto.createHash("sha256").update(raw).digest("hex");
+}
+function ttsCachePath(hash) {
+  return path.join(TTS_CACHE_DIR, `${hash}.mp3`);
+}
+function memSet(hash, buf) {
+  if (ttsMem.size >= TTS_MEM_MAX) ttsMem.delete(ttsMem.keys().next().value);
+  ttsMem.set(hash, buf);
+}
 
 function key() {
   return process.env.OPENAI_API_KEY;
@@ -34,18 +61,39 @@ export function registerOpenAIRoutes(app) {
   // ===== تحويل النص إلى كلام (TTS) =====
   // body: { text, voice?, lang?, instructions? }
   app.post("/api/tts", async (req, res) => {
-    if (!ensureKey(res)) return;
     const { text, voice, instructions } = req.body || {};
     if (!text || typeof text !== "string") {
       return res.status(400).json({ error: "missing_text" });
     }
 
-    const cacheId = `${voice || TTS_VOICE}|${instructions || ""}|${text}`;
-    if (ttsCache.has(cacheId)) {
+    const hash = ttsCacheKey(text, voice, instructions);
+    const filePath = ttsCachePath(hash);
+
+    // ملاحظة: نتحقّق من الذاكرة/القرص قبل المفتاح — فالنطق المخزَّن
+    // يُقدَّم بلا أي حاجة للذكاء الاصطناعي (الـ AI يُستهلك فقط مع الميكروفون).
+
+    // 1) ذاكرة سريعة (L1)
+    const mem = ttsMem.get(hash);
+    if (mem) {
       res.setHeader("Content-Type", "audio/mpeg");
-      res.setHeader("X-Cache", "HIT");
-      return res.send(ttsCache.get(cacheId));
+      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+      res.setHeader("X-Cache", "MEM");
+      return res.send(mem);
     }
+    // 2) ملف محفوظ على القرص (دائم، مشترك بين كل الأطفال) — بلا استدعاء AI
+    try {
+      const buf = await fs.promises.readFile(filePath);
+      memSet(hash, buf);
+      res.setHeader("Content-Type", "audio/mpeg");
+      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+      res.setHeader("X-Cache", "DISK");
+      return res.send(buf);
+    } catch (_e) {
+      // غير موجود → نولّده بالـ AI لأوّل (وآخر) مرّة
+    }
+
+    // التوليد يحتاج المفتاح؛ إن لم يوجد → بديل Web Speech في المتصفح
+    if (!ensureKey(res)) return;
 
     try {
       const r = await fetch(`${OPENAI_BASE}/audio/speech`, {
@@ -72,13 +120,15 @@ export function registerOpenAIRoutes(app) {
       }
 
       const buf = Buffer.from(await r.arrayBuffer());
-      // تخزين مؤقت مع حدّ أقصى
-      if (ttsCache.size >= TTS_CACHE_MAX) {
-        ttsCache.delete(ttsCache.keys().next().value);
-      }
-      ttsCache.set(cacheId, buf);
+      // حفظ دائم على القرص + الذاكرة السريعة (atomic write لتفادي ملف ناقص)
+      memSet(hash, buf);
+      fs.promises
+        .writeFile(`${filePath}.tmp`, buf)
+        .then(() => fs.promises.rename(`${filePath}.tmp`, filePath))
+        .catch(() => {});
 
       res.setHeader("Content-Type", "audio/mpeg");
+      res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
       res.setHeader("X-Cache", "MISS");
       res.send(buf);
     } catch (e) {

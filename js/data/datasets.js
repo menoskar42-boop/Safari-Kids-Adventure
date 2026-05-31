@@ -88,3 +88,6 @@ const DATASETS = {
 export function getDataset(key) {
   return DATASETS[key];
 }
+
+// يُستخدم في سكربت تسخين النطق (server/warm-tts.js) للمرور على كل المحتوى
+export { DATASETS };
