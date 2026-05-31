@@ -186,10 +186,12 @@ button { font-family: inherit; cursor: pointer; border: none; }
   font-size: clamp(18px, 5vw, 24px);
   padding: .5em 1.3em;
   border-radius: 999px;
-  box-shadow: var(--shadow-soft);
-  transition: transform .12s ease;
+  box-shadow: var(--shadow-soft), inset 0 -3px 0 rgba(0,0,0,.12), inset 0 2px 0 rgba(255,255,255,.4);
+  transition: transform .14s cubic-bezier(.34,1.56,.64,1);
 }
-.candy-btn:active { transform: translateY(4px); box-shadow: 0 4px 0 rgba(0,0,0,.12); }
+.candy-btn:hover { transform: translateY(-2px) scale(1.04); }
+.candy-btn:active { transform: translateY(4px) scale(.97); box-shadow: 0 4px 0 rgba(0,0,0,.12); }
+.candy-btn:disabled { filter: grayscale(.4); }
 
 /* ===== طبقة المؤثرات ===== */
 .fx-layer {
