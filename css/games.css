@@ -238,6 +238,10 @@
 .color-svg .cl { transition: fill .12s ease; }
 .color-svg .cl:active { opacity: .85; }
 
+/* ===== لعبة الأنماط (ما التالي؟) ===== */
+.pat-glyph { font-size: inherit; line-height: 1; }
+img.pat-glyph { width: 1.1em; height: 1.1em; object-fit: contain; vertical-align: middle; }
+
 /* ===== لعبة أشكال الحرف (أول/وسط/آخر) ===== */
 .lf-row {
   display: flex;

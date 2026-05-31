@@ -25,6 +25,7 @@ import { renderShadowMatch, renderSoundMatch, renderFindIt } from "./games/match
 import { renderOppositesMatch } from "./games/opposites.js";
 import { renderMemory } from "./games/memory.js";
 import { renderColoring } from "./games/coloring.js";
+import { renderPattern } from "./games/pattern.js";
 import { renderGarden } from "./screens/garden.js";
 import { renderParent } from "./screens/parent.js";
 import { renderAR } from "./screens/ar.js";
@@ -60,6 +61,7 @@ Router.register("findIt", renderFindIt);
 Router.register("oppositesMatch", renderOppositesMatch);
 Router.register("memory", renderMemory);
 Router.register("coloring", renderColoring);
+Router.register("pattern", renderPattern);
 Router.register("garden", renderGarden);
 Router.register("parent", renderParent);
 Router.register("ar", renderAR);
