@@ -22,6 +22,12 @@ import { FAMILY } from "./family.js";
 import { WEATHER } from "./weather.js";
 import { SEASONS } from "./seasons.js";
 import { SENSES } from "./senses.js";
+import { CLOTHES } from "./clothes.js";
+import { SPORTS } from "./sports.js";
+import { HOME } from "./home.js";
+import { SCHOOL } from "./school.js";
+import { MUSIC } from "./music.js";
+import { PLACES } from "./places.js";
 
 const DATASETS = {
   arabic: {
@@ -57,6 +63,12 @@ const DATASETS = {
   weather: { key: "weather", lang: "ar-EG", glyphKind: "emoji", items: WEATHER },
   seasons: { key: "seasons", lang: "ar-EG", glyphKind: "emoji", items: SEASONS },
   senses: { key: "senses", lang: "ar-EG", glyphKind: "emoji", items: SENSES },
+  clothes: { key: "clothes", lang: "ar-EG", glyphKind: "emoji", items: CLOTHES },
+  sports: { key: "sports", lang: "ar-EG", glyphKind: "emoji", items: SPORTS },
+  home: { key: "home", lang: "ar-EG", glyphKind: "emoji", items: HOME },
+  school: { key: "school", lang: "ar-EG", glyphKind: "emoji", items: SCHOOL },
+  music: { key: "music", lang: "ar-EG", glyphKind: "emoji", items: MUSIC },
+  places: { key: "places", lang: "ar-EG", glyphKind: "emoji", items: PLACES },
 };
 
 export function getDataset(key) {

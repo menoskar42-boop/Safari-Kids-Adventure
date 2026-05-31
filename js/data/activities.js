@@ -334,4 +334,40 @@ export const ACTIVITIES = {
     { emoji: "🔎", title: "جِد الحاسّة", desc: "اضغط على الحاسّة المطلوبة", screen: "findIt",
       params: { datasetKey: "senses", title: "🔎 جِد الحاسّة", verb: "اضغط على", bg: "linear-gradient(180deg,#ffeed2,#fcb69f)" } },
   ],
+  clothes: [
+    { emoji: "👕", title: "استكشف الملابس", desc: "اضغط على كل قطعة لتعرفها", screen: "explore",
+      params: { datasetKey: "clothes", title: "👕 عالم الملابس", bg: "linear-gradient(180deg,#ffe7b0,#d1fdff)" } },
+    { emoji: "🔎", title: "جِد الملبس", desc: "اضغط على الملبس المطلوب", screen: "findIt",
+      params: { datasetKey: "clothes", title: "🔎 جِد الملبس", verb: "اضغط على", bg: "linear-gradient(180deg,#ffe7b0,#d1fdff)" } },
+  ],
+  sports: [
+    { emoji: "⚽", title: "استكشف الرياضات", desc: "اضغط على كل رياضة لتعرفها", screen: "explore",
+      params: { datasetKey: "sports", title: "⚽ عالم الرياضة", bg: "linear-gradient(180deg,#f5a3fb,#f5576c)" } },
+    { emoji: "🔎", title: "جِد الرياضة", desc: "اضغط على الرياضة المطلوبة", screen: "findIt",
+      params: { datasetKey: "sports", title: "🔎 جِد الرياضة", verb: "اضغط على", bg: "linear-gradient(180deg,#f5a3fb,#f5576c)" } },
+  ],
+  home: [
+    { emoji: "🛋️", title: "استكشف المنزل", desc: "اضغط على كل أداة لتعرفها", screen: "explore",
+      params: { datasetKey: "home", title: "🛋️ أدوات المنزل", bg: "linear-gradient(180deg,#cfe9d0,#deecdd)" } },
+    { emoji: "🔎", title: "جِد الأداة", desc: "اضغط على الأداة المطلوبة", screen: "findIt",
+      params: { datasetKey: "home", title: "🔎 جِد الأداة", verb: "اضغط على", bg: "linear-gradient(180deg,#cfe9d0,#deecdd)" } },
+  ],
+  school: [
+    { emoji: "🎒", title: "استكشف المدرسة", desc: "اضغط على كل أداة لتعرفها", screen: "explore",
+      params: { datasetKey: "school", title: "🎒 أدوات المدرسة", bg: "linear-gradient(180deg,#ffd29a,#ea5455)" } },
+    { emoji: "🔎", title: "جِد الأداة", desc: "اضغط على الأداة المطلوبة", screen: "findIt",
+      params: { datasetKey: "school", title: "🔎 جِد أداة المدرسة", verb: "أحضِر", bg: "linear-gradient(180deg,#ffd29a,#ea5455)" } },
+  ],
+  music: [
+    { emoji: "🎸", title: "استكشف الآلات", desc: "اضغط على كل آلة لتعرفها", screen: "explore",
+      params: { datasetKey: "music", title: "🎸 الآلات الموسيقية", bg: "linear-gradient(180deg,#cbb1e6,#8ca6db)" } },
+    { emoji: "🔎", title: "جِد الآلة", desc: "اضغط على الآلة المطلوبة", screen: "findIt",
+      params: { datasetKey: "music", title: "🔎 جِد الآلة", verb: "اعزف", bg: "linear-gradient(180deg,#cbb1e6,#8ca6db)" } },
+  ],
+  places: [
+    { emoji: "🏠", title: "استكشف الأماكن", desc: "اضغط على كل مكان لتعرفه", screen: "explore",
+      params: { datasetKey: "places", title: "🏠 الأماكن", bg: "linear-gradient(180deg,#a6ebd9,#9face6)" } },
+    { emoji: "🔎", title: "جِد المكان", desc: "اضغط على المكان المطلوب", screen: "findIt",
+      params: { datasetKey: "places", title: "🔎 جِد المكان", verb: "اذهب إلى", bg: "linear-gradient(180deg,#a6ebd9,#9face6)" } },
+  ],
 };

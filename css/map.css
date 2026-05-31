@@ -192,3 +192,9 @@ img.item-img {
 .bg-weather  { background: linear-gradient(160deg, #89f7fe, #66a6ff); }
 .bg-seasons  { background: linear-gradient(160deg, #d4fc79, #96e6a1); }
 .bg-senses   { background: linear-gradient(160deg, #ffecd2, #fcb69f); }
+.bg-clothes  { background: linear-gradient(160deg, #fddb92, #d1fdff); }
+.bg-sports   { background: linear-gradient(160deg, #f093fb, #f5576c); }
+.bg-home     { background: linear-gradient(160deg, #c1dfc4, #deecdd); }
+.bg-school   { background: linear-gradient(160deg, #fbc687, #ea5455); }
+.bg-music    { background: linear-gradient(160deg, #b993d6, #8ca6db); }
+.bg-places   { background: linear-gradient(160deg, #74ebd5, #9face6); }
