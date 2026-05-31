@@ -115,8 +115,9 @@ button { font-family: inherit; cursor: pointer; border: none; }
   justify-content: space-between;
   gap: 10px;
   padding: 12px 16px;
-  background: rgba(91, 63, 181, .85);
+  background: linear-gradient(180deg, rgba(124,95,230,.95), rgba(91,63,181,.88));
   backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(70,40,120,.28);
 }
 .topbar h2 {
   margin: 0;

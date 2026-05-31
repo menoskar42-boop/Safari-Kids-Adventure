@@ -3,8 +3,28 @@
   min-height: 100%;
   padding-bottom: 40px;
   background:
-    radial-gradient(circle at 20% 10%, rgba(255,255,255,.18), transparent 40%),
+    radial-gradient(circle at 15% 8%, rgba(255,255,255,.35), transparent 35%),
+    radial-gradient(circle at 85% 15%, rgba(255,225,120,.35), transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(120,200,255,.35), transparent 50%),
     linear-gradient(180deg, #8be9ff 0%, #a0e8af 45%, #ffe9a8 100%);
+}
+/* فقاعات زخرفية متحركة في الخلفية */
+.map-screen::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.5) 8px, transparent 9px),
+    radial-gradient(circle, rgba(255,255,255,.4) 5px, transparent 6px);
+  background-size: 180px 180px, 120px 120px;
+  background-position: 0 0, 60px 60px;
+  opacity: .5;
+  animation: float-bg 24s linear infinite;
+}
+@keyframes float-bg {
+  from { background-position: 0 0, 60px 60px; }
+  to { background-position: 180px 360px, 240px 420px; }
 }
 
 /* لافتة المرشد */
@@ -32,6 +52,16 @@
   font-weight: 700;
   color: var(--c-ink);
 }
+/* ذيل فقاعة الكلام باتجاه المرشد (RTL: يمين) */
+.guide-banner .bubble::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 9px solid transparent;
+  border-inline-start-color: var(--c-cream);
+}
 
 /* شبكة المناطق */
 .regions-grid {
@@ -55,15 +85,30 @@
   color: #fff;
   box-shadow: var(--shadow-card);
   overflow: hidden;
-  transition: transform .15s ease;
+  transition: transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s ease;
   animation: pop-in .4s ease both;
 }
-.region-card:active { transform: scale(.95); }
+/* لمعة زجاجية متحركة فوق البطاقة */
+.region-card::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  inset-inline-start: -40%;
+  width: 60%;
+  height: 220%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+.region-card:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 18px 34px rgba(70,40,120,.32); }
+.region-card:active { transform: scale(.94); }
 .region-card .region-emoji {
   display: block;
   font-size: clamp(46px, 13vw, 72px);
   filter: drop-shadow(0 6px 6px rgba(0,0,0,.25));
+  transition: transform .25s ease;
 }
+.region-card:hover .region-emoji { transform: scale(1.12) rotate(-5deg); }
 /* صورة الكائن (بدل الإيموجي) */
 .region-card img.region-emoji,
 img.item-img {
