@@ -298,4 +298,40 @@ export const ACTIVITIES = {
     { emoji: "🔎", title: "جِد الكلمة", desc: "اضغط على الكلمة المطلوبة", screen: "findIt",
       params: { datasetKey: "words", title: "🔎 جِد الكلمة", verb: "اضغط على", bg: "linear-gradient(180deg,#a8f5c8,#8fd3f4)" } },
   ],
+  feelings: [
+    { emoji: "😄", title: "استكشف المشاعر", desc: "اضغط على كل شعور لتعرفه", screen: "explore",
+      params: { datasetKey: "feelings", title: "😄 عالم المشاعر", bg: "linear-gradient(180deg,#ffd6ec,#ff9a9e)" } },
+    { emoji: "🔎", title: "جِد الشعور", desc: "اضغط على الشعور المطلوب", screen: "findIt",
+      params: { datasetKey: "feelings", title: "🔎 جِد الشعور", verb: "اعرض", bg: "linear-gradient(180deg,#ffd6ec,#ff9a9e)" } },
+  ],
+  verbs: [
+    { emoji: "🏃", title: "استكشف الأفعال", desc: "اضغط على كل فعل لتعرفه", screen: "explore",
+      params: { datasetKey: "verbs", title: "🏃 الأفعال والأنشطة", bg: "linear-gradient(180deg,#ffe6b0,#fda085)" } },
+    { emoji: "🔎", title: "جِد الفعل", desc: "اضغط على الفعل المطلوب", screen: "findIt",
+      params: { datasetKey: "verbs", title: "🔎 جِد الفعل", verb: "من", bg: "linear-gradient(180deg,#ffe6b0,#fda085)" } },
+  ],
+  family: [
+    { emoji: "👨‍👩‍👧‍👦", title: "استكشف العائلة", desc: "اضغط على كل فرد لتعرفه", screen: "explore",
+      params: { datasetKey: "family", title: "👨‍👩‍👧‍👦 أفراد العائلة", bg: "linear-gradient(180deg,#c2dbff,#c2e9fb)" } },
+    { emoji: "🔎", title: "جِد الفرد", desc: "اضغط على الفرد المطلوب", screen: "findIt",
+      params: { datasetKey: "family", title: "🔎 جِد الفرد", verb: "اضغط على", bg: "linear-gradient(180deg,#c2dbff,#c2e9fb)" } },
+  ],
+  weather: [
+    { emoji: "🌦️", title: "استكشف الطقس", desc: "اضغط على كل حالة لتعرفها", screen: "explore",
+      params: { datasetKey: "weather", title: "🌦️ الطقس والجو", bg: "linear-gradient(180deg,#a8eaff,#66a6ff)" } },
+    { emoji: "🔎", title: "جِد الطقس", desc: "اضغط على الطقس المطلوب", screen: "findIt",
+      params: { datasetKey: "weather", title: "🔎 جِد الطقس", verb: "اضغط على", bg: "linear-gradient(180deg,#a8eaff,#66a6ff)" } },
+  ],
+  seasons: [
+    { emoji: "🍂", title: "استكشف الفصول", desc: "اضغط على كل فصل لتعرفه", screen: "explore",
+      params: { datasetKey: "seasons", title: "🍂 فصول السنة", bg: "linear-gradient(180deg,#e0fcb0,#96e6a1)" } },
+    { emoji: "🔎", title: "جِد الفصل", desc: "اضغط على الفصل المطلوب", screen: "findIt",
+      params: { datasetKey: "seasons", title: "🔎 جِد الفصل", verb: "اضغط على", bg: "linear-gradient(180deg,#e0fcb0,#96e6a1)" } },
+  ],
+  senses: [
+    { emoji: "👀", title: "استكشف الحواس", desc: "اضغط على كل حاسّة لتعرفها", screen: "explore",
+      params: { datasetKey: "senses", title: "👀 الحواس الخمس", bg: "linear-gradient(180deg,#ffeed2,#fcb69f)" } },
+    { emoji: "🔎", title: "جِد الحاسّة", desc: "اضغط على الحاسّة المطلوبة", screen: "findIt",
+      params: { datasetKey: "senses", title: "🔎 جِد الحاسّة", verb: "اضغط على", bg: "linear-gradient(180deg,#ffeed2,#fcb69f)" } },
+  ],
 };

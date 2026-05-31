@@ -16,6 +16,12 @@ import { OPPOSITES_FLAT } from "./opposites.js";
 import { WORDS } from "./words.js";
 import { NUMBERS } from "./numbers.js";
 import { INSECTS } from "./insects.js";
+import { FEELINGS } from "./feelings.js";
+import { VERBS } from "./verbs.js";
+import { FAMILY } from "./family.js";
+import { WEATHER } from "./weather.js";
+import { SEASONS } from "./seasons.js";
+import { SENSES } from "./senses.js";
 
 const DATASETS = {
   arabic: {
@@ -45,6 +51,12 @@ const DATASETS = {
   words: { key: "words", lang: "ar-EG", glyphKind: "emoji", items: WORDS },
   numbers: { key: "numbers", lang: "ar-EG", glyphKind: "number", items: NUMBERS },
   insects: { key: "insects", lang: "ar-EG", glyphKind: "emoji", items: INSECTS },
+  feelings: { key: "feelings", lang: "ar-EG", glyphKind: "emoji", items: FEELINGS },
+  verbs: { key: "verbs", lang: "ar-EG", glyphKind: "emoji", items: VERBS },
+  family: { key: "family", lang: "ar-EG", glyphKind: "emoji", items: FAMILY },
+  weather: { key: "weather", lang: "ar-EG", glyphKind: "emoji", items: WEATHER },
+  seasons: { key: "seasons", lang: "ar-EG", glyphKind: "emoji", items: SEASONS },
+  senses: { key: "senses", lang: "ar-EG", glyphKind: "emoji", items: SENSES },
 };
 
 export function getDataset(key) {
