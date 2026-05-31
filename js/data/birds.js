@@ -14,4 +14,5 @@ export const BIRDS = [
   { id: "peacock", name: "طاووس", en: "Peacock", emoji: "🦚", img: "birds/peacock.png" },
   { id: "turkey", name: "ديك رومي", en: "Turkey", emoji: "🦃", img: "birds/turkey.png" },
   { id: "chicken", name: "دجاجة", en: "Chicken", emoji: "🐔", img: "birds/chicken.png" },
+  { id: "ostrich", name: "نعامة", en: "Ostrich", emoji: "🪶", img: "birds/ostrich.png" },
 ];
