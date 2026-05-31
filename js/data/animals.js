@@ -21,4 +21,5 @@ export const ANIMALS = [
   { id: "chicken", name: "دجاجة", en: "Chicken", emoji: "🐔", sound: "كاك كاك", img: "animals/chicken.png" },
   { id: "turtle", name: "سلحفاة", en: "Turtle", emoji: "🐢", sound: "السلحفاة بطيئة", img: "animals/turtle.png" },
   { id: "rabbit", name: "أرنب", en: "Rabbit", emoji: "🐰", sound: "الأرنب يقفز", img: "animals/rabbit.png" },
+  { id: "fox", name: "ثعلب", en: "Fox", emoji: "🦊", sound: "صوت الثعلب", img: "animals/fox.png" },
 ];
