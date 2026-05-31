@@ -11,6 +11,7 @@ export const REGIONS = [
     bg: "bg-arabic",
     guide: "هيا نتعلّم الحروف العربية ونجمع النجوم!",
     ready: true,
+    cat: "basics",
   },
   {
     id: "english",
@@ -20,6 +21,7 @@ export const REGIONS = [
     bg: "bg-english",
     guide: "Let's learn English letters together!",
     ready: true,
+    cat: "basics",
   },
   {
     id: "numbers",
@@ -29,6 +31,7 @@ export const REGIONS = [
     bg: "bg-numbers",
     guide: "تعال نعدّ معاً ونلعب بالأرقام!",
     ready: true,
+    cat: "basics",
   },
   {
     id: "animals",
@@ -38,6 +41,7 @@ export const REGIONS = [
     bg: "bg-animals",
     guide: "أصدقاؤنا الحيوانات في انتظارك!",
     ready: true,
+    cat: "nature",
     open: true,
   },
   {
@@ -48,6 +52,7 @@ export const REGIONS = [
     bg: "bg-fish",
     guide: "هيا نغوص في البحر ونكتشف الأسماك!",
     ready: true,
+    cat: "nature",
     open: true,
   },
   {
@@ -58,6 +63,7 @@ export const REGIONS = [
     bg: "bg-birds",
     guide: "الطيور تطير في السماء، تعال نراها!",
     ready: true,
+    cat: "nature",
     open: true,
   },
   {
@@ -68,6 +74,7 @@ export const REGIONS = [
     bg: "bg-insects",
     guide: "حشرات صغيرة تطير حولنا، تعال نتعرّف عليها!",
     ready: true,
+    cat: "nature",
   },
   {
     id: "fruits",
@@ -77,6 +84,7 @@ export const REGIONS = [
     bg: "bg-fruits",
     guide: "سوق الفواكه والخضروات السحري ينتظرك!",
     ready: true,
+    cat: "life",
     open: true,
   },
   {
@@ -87,6 +95,7 @@ export const REGIONS = [
     bg: "bg-colors",
     guide: "تعال نلعب بكل الألوان الجميلة!",
     ready: true,
+    cat: "basics",
     open: true,
   },
   {
@@ -97,6 +106,7 @@ export const REGIONS = [
     bg: "bg-shapes",
     guide: "أشكال كثيرة تنتظر أن تكتشفها!",
     ready: true,
+    cat: "basics",
     open: true,
   },
   {
@@ -107,6 +117,7 @@ export const REGIONS = [
     bg: "bg-jobs",
     guide: "تعال نتعرّف على المهن ومن يساعدنا كل يوم!",
     ready: true,
+    cat: "life",
     open: true,
   },
   {
@@ -117,6 +128,7 @@ export const REGIONS = [
     bg: "bg-body",
     guide: "تعال نتعرّف على أجزاء جسمنا!",
     ready: true,
+    cat: "self",
   },
   {
     id: "transport",
@@ -126,6 +138,7 @@ export const REGIONS = [
     bg: "bg-transport",
     guide: "تعال نركب وسائل المواصلات ونتعرّف عليها!",
     ready: true,
+    cat: "life",
   },
   {
     id: "food",
@@ -135,6 +148,7 @@ export const REGIONS = [
     bg: "bg-food",
     guide: "تعال نتعرّف على الطعام والمشروبات!",
     ready: true,
+    cat: "life",
   },
   {
     id: "weekdays",
@@ -144,6 +158,7 @@ export const REGIONS = [
     bg: "bg-weekdays",
     guide: "تعال نتعلّم أيام الأسبوع!",
     ready: true,
+    cat: "life",
   },
   {
     id: "opposites",
@@ -153,6 +168,7 @@ export const REGIONS = [
     bg: "bg-opposites",
     guide: "كبير وصغير، حار وبارد... تعال نتعلّم الأضداد!",
     ready: true,
+    cat: "think",
   },
   {
     id: "words",
@@ -162,6 +178,7 @@ export const REGIONS = [
     bg: "bg-words",
     guide: "تعال نتعلّم كلمات جديدة من حولنا!",
     ready: true,
+    cat: "basics",
   },
   {
     id: "feelings",
@@ -171,6 +188,7 @@ export const REGIONS = [
     bg: "bg-feelings",
     guide: "كيف نشعر اليوم؟ تعال نتعرّف على المشاعر!",
     ready: true,
+    cat: "self",
   },
   {
     id: "verbs",
@@ -180,6 +198,7 @@ export const REGIONS = [
     bg: "bg-verbs",
     guide: "يأكل، يلعب، يجري... تعال نتعلّم الأفعال!",
     ready: true,
+    cat: "self",
   },
   {
     id: "family",
@@ -189,6 +208,7 @@ export const REGIONS = [
     bg: "bg-family",
     guide: "تعال نتعرّف على أفراد العائلة الأحبّاء!",
     ready: true,
+    cat: "self",
   },
   {
     id: "weather",
@@ -198,6 +218,7 @@ export const REGIONS = [
     bg: "bg-weather",
     guide: "كيف هو الجو اليوم؟ تعال نكتشف الطقس!",
     ready: true,
+    cat: "nature",
   },
   {
     id: "seasons",
@@ -207,6 +228,7 @@ export const REGIONS = [
     bg: "bg-seasons",
     guide: "ربيع وصيف وخريف وشتاء... تعال نتعرّف عليها!",
     ready: true,
+    cat: "nature",
   },
   {
     id: "senses",
@@ -216,6 +238,7 @@ export const REGIONS = [
     bg: "bg-senses",
     guide: "نرى ونسمع ونشمّ... تعال نتعلّم حواسّنا!",
     ready: true,
+    cat: "self",
   },
   {
     id: "clothes",
@@ -225,6 +248,7 @@ export const REGIONS = [
     bg: "bg-clothes",
     guide: "قميص وحذاء وقبّعة... تعال نتعرّف على الملابس!",
     ready: true,
+    cat: "self",
   },
   {
     id: "sports",
@@ -234,6 +258,7 @@ export const REGIONS = [
     bg: "bg-sports",
     guide: "كرة وسباحة وجري... تعال نتعرّف على الرياضات!",
     ready: true,
+    cat: "life",
   },
   {
     id: "home",
@@ -243,6 +268,7 @@ export const REGIONS = [
     bg: "bg-home",
     guide: "سرير وكرسي وباب... تعال نتعرّف على المنزل!",
     ready: true,
+    cat: "life",
   },
   {
     id: "school",
@@ -252,6 +278,7 @@ export const REGIONS = [
     bg: "bg-school",
     guide: "كتاب وقلم وحقيبة... تعال نتجهّز للمدرسة!",
     ready: true,
+    cat: "life",
   },
   {
     id: "music",
@@ -261,6 +288,7 @@ export const REGIONS = [
     bg: "bg-music",
     guide: "بيانو وجيتار وطبلة... تعال نسمع الموسيقى!",
     ready: true,
+    cat: "life",
   },
   {
     id: "places",
@@ -270,6 +298,7 @@ export const REGIONS = [
     bg: "bg-places",
     guide: "مدرسة ومستشفى وحديقة... تعال نكتشف الأماكن!",
     ready: true,
+    cat: "life",
   },
   {
     id: "months",
@@ -279,6 +308,7 @@ export const REGIONS = [
     bg: "bg-months",
     guide: "اثنا عشر شهراً في السنة، تعال نتعلّمها!",
     ready: true,
+    cat: "life",
   },
   {
     id: "kitchen",
@@ -288,6 +318,7 @@ export const REGIONS = [
     bg: "bg-kitchen",
     guide: "ملعقة وشوكة وصحن... تعال نتعرّف على المطبخ!",
     ready: true,
+    cat: "life",
   },
   {
     id: "drinks",
@@ -297,6 +328,7 @@ export const REGIONS = [
     bg: "bg-drinks",
     guide: "ماء وحليب وعصير... تعال نتعرّف على المشروبات!",
     ready: true,
+    cat: "life",
   },
   {
     id: "nature",
@@ -306,6 +338,7 @@ export const REGIONS = [
     bg: "bg-nature",
     guide: "شمس وقمر وجبال... تعال نكتشف الطبيعة!",
     ready: true,
+    cat: "nature",
   },
   {
     id: "values",
@@ -315,6 +348,7 @@ export const REGIONS = [
     bg: "bg-values",
     guide: "قصص جميلة تعلّمنا النظافة والتعاون والصدق!",
     ready: true,
+    cat: "story",
   },
 ];
 

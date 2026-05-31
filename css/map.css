@@ -63,6 +63,26 @@
   border-inline-start-color: var(--c-cream);
 }
 
+/* عناوين الفئات على الخريطة */
+.cat-header {
+  max-width: 760px;
+  margin: 18px auto 2px;
+  padding: 8px 18px;
+  font-size: clamp(18px, 5vw, 24px);
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(0,0,0,.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cat-header .cat-en {
+  font-family: var(--font-en);
+  font-size: .6em;
+  font-weight: 600;
+  opacity: .85;
+}
+
 /* شبكة المناطق */
 .regions-grid {
   display: grid;

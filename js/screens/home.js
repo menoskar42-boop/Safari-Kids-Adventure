@@ -43,44 +43,39 @@ export function renderHome() {
   `;
   screen.appendChild(banner);
 
-  // شبكة المناطق
-  const grid = document.createElement("div");
-  grid.className = "regions-grid";
-
   // المناطق التأسيسية مفتوحة دائماً. المناطق المتقدّمة تُفتح تدريجياً:
   // كل منطقة يكملها الطفل تفتح واحدة جديدة من المتقدّمة.
   const completed = Store.completedCount();
   let lockedSeen = 0;
 
-  REGIONS.forEach((region, index) => {
-    let unlocked;
-    if (region.open) {
-      unlocked = true;
-    } else {
-      // المنطقة المتقدّمة رقم (lockedSeen) تُفتح إذا أكمل الطفل عدداً كافياً
-      unlocked = lockedSeen < completed;
-      lockedSeen++;
-    }
-    const prog = Store.regionProgress(region.id);
+  // ترتيب الفئات وعناوينها
+  const CATS = [
+    { key: "basics", label: "🔤 الأساسيات", en: "Basics" },
+    { key: "nature", label: "🦁 الحيوانات والطبيعة", en: "Animals & Nature" },
+    { key: "self", label: "🧍 أنا وعائلتي", en: "Me & Family" },
+    { key: "life", label: "🏙️ حياتي اليومية", en: "Daily Life" },
+    { key: "think", label: "🧠 مهارات التفكير", en: "Thinking" },
+    { key: "story", label: "📖 قصص وقيم", en: "Stories & Values" },
+  ];
 
+  function buildCard(region, index, unlocked) {
+    const prog = Store.regionProgress(region.id);
     const card = document.createElement("button");
     card.className = `region-card ${region.bg}`;
-    card.style.animationDelay = `${index * 0.05}s`;
+    card.style.animationDelay = `${(index % 6) * 0.05}s`;
     if (!unlocked) card.classList.add("locked");
     if (prog.completed) card.classList.add("done");
-
     card.innerHTML = `
       ${prog.stars ? `<span class="region-stars">⭐ ${prog.stars}</span>` : ""}
       <span class="region-emoji">${region.emoji}</span>
       <span class="region-name">${region.name}</span>
       <span class="region-name-en">${region.nameEn}</span>
     `;
-
     card.addEventListener("click", () => {
       Sfx.unlock();
       if (!unlocked) {
         Sfx.wrong();
-        Speech.ar("أكمل المنطقة السابقة أولاً");
+        Speech.ar("أكمل منطقة أخرى أولاً لتفتح هذه");
         card.animate(
           [{ transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "translateX(0)" }],
           { duration: 250 }
@@ -91,11 +86,36 @@ export function renderHome() {
       Speech.ar(region.guide);
       Router.go("region", { id: region.id, index });
     });
+    return card;
+  }
 
-    grid.appendChild(card);
+  // نحسب حالة الفتح بترتيب REGIONS الأصلي (حفاظاً على التدرّج)
+  const unlockedMap = new Map();
+  REGIONS.forEach((region, index) => {
+    let unlocked;
+    if (region.open) unlocked = true;
+    else { unlocked = lockedSeen < completed; lockedSeen++; }
+    unlockedMap.set(region.id, { unlocked, index });
   });
 
-  screen.appendChild(grid);
+  // نعرض كل فئة بعنوانها وشبكتها
+  CATS.forEach((cat) => {
+    const inCat = REGIONS.filter((r) => (r.cat || "life") === cat.key);
+    if (!inCat.length) return;
+
+    const header = document.createElement("h3");
+    header.className = "cat-header";
+    header.innerHTML = `${cat.label} <span class="cat-en">${cat.en}</span>`;
+    screen.appendChild(header);
+
+    const grid = document.createElement("div");
+    grid.className = "regions-grid";
+    inCat.forEach((region) => {
+      const { unlocked, index } = unlockedMap.get(region.id);
+      grid.appendChild(buildCard(region, index, unlocked));
+    });
+    screen.appendChild(grid);
+  });
 
   // ربط الأحداث بعد الإضافة
   setTimeout(() => {
