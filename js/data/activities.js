@@ -401,6 +401,24 @@ export const ACTIVITIES = {
     { emoji: "🔎", title: "جِد العنصر", desc: "اضغط على العنصر المطلوب", screen: "findIt",
       params: { datasetKey: "nature", title: "🔎 جِد عنصر الطبيعة", verb: "اضغط على", bg: "linear-gradient(180deg,#86c85f,#8DC26F)" } },
   ],
+  countries: [
+    { emoji: "🚩", title: "استكشف الأعلام", desc: "اضغط على كل علم لتعرف دولته", screen: "explore",
+      params: { datasetKey: "countries", title: "🚩 الدول العربية", bg: "linear-gradient(180deg,#f3aeb8,#ffdde1)" } },
+    { emoji: "🔎", title: "جِد الدولة", desc: "اضغط على الدولة المطلوبة", screen: "findIt",
+      params: { datasetKey: "countries", title: "🔎 جِد الدولة", verb: "اضغط على علم", bg: "linear-gradient(180deg,#f3aeb8,#ffdde1)" } },
+  ],
+  tools: [
+    { emoji: "🧰", title: "استكشف الأدوات", desc: "اضغط على كل أداة لتعرفها", screen: "explore",
+      params: { datasetKey: "tools", title: "🧰 الأدوات والمعدّات", bg: "linear-gradient(180deg,#cfd4d8,#2c3e50)" } },
+    { emoji: "🔎", title: "جِد الأداة", desc: "اضغط على الأداة المطلوبة", screen: "findIt",
+      params: { datasetKey: "tools", title: "🔎 جِد الأداة", verb: "أحضِر", bg: "linear-gradient(180deg,#cfd4d8,#2c3e50)" } },
+  ],
+  appliances: [
+    { emoji: "📺", title: "استكشف الأجهزة", desc: "اضغط على كل جهاز لتعرفه", screen: "explore",
+      params: { datasetKey: "appliances", title: "📺 الأجهزة المنزلية", bg: "linear-gradient(180deg,#a6b3bd,#eef2f3)" } },
+    { emoji: "🔎", title: "جِد الجهاز", desc: "اضغط على الجهاز المطلوب", screen: "findIt",
+      params: { datasetKey: "appliances", title: "🔎 جِد الجهاز", verb: "اضغط على", bg: "linear-gradient(180deg,#a6b3bd,#eef2f3)" } },
+  ],
   values: [
     { emoji: "🧼", title: "النظافة سرّ الصحّة", desc: "قصة عن النظافة", screen: "story", params: { storyId: "cleanliness" } },
     { emoji: "🤝", title: "التعاون قوّة", desc: "قصة عن التعاون", screen: "story", params: { storyId: "cooperation" } },
