@@ -28,6 +28,10 @@ import { HOME } from "./home.js";
 import { SCHOOL } from "./school.js";
 import { MUSIC } from "./music.js";
 import { PLACES } from "./places.js";
+import { MONTHS } from "./months.js";
+import { KITCHEN } from "./kitchen.js";
+import { DRINKS } from "./drinks.js";
+import { NATURE } from "./nature.js";
 
 const DATASETS = {
   arabic: {
@@ -69,6 +73,10 @@ const DATASETS = {
   school: { key: "school", lang: "ar-EG", glyphKind: "emoji", items: SCHOOL },
   music: { key: "music", lang: "ar-EG", glyphKind: "emoji", items: MUSIC },
   places: { key: "places", lang: "ar-EG", glyphKind: "emoji", items: PLACES },
+  months: { key: "months", lang: "ar-EG", glyphKind: "emoji", items: MONTHS },
+  kitchen: { key: "kitchen", lang: "ar-EG", glyphKind: "emoji", items: KITCHEN },
+  drinks: { key: "drinks", lang: "ar-EG", glyphKind: "emoji", items: DRINKS },
+  nature: { key: "nature", lang: "ar-EG", glyphKind: "emoji", items: NATURE },
 };
 
 export function getDataset(key) {

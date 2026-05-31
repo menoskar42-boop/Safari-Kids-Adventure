@@ -198,3 +198,7 @@ img.item-img {
 .bg-school   { background: linear-gradient(160deg, #fbc687, #ea5455); }
 .bg-music    { background: linear-gradient(160deg, #b993d6, #8ca6db); }
 .bg-places   { background: linear-gradient(160deg, #74ebd5, #9face6); }
+.bg-months   { background: linear-gradient(160deg, #fccb90, #d57eeb); }
+.bg-kitchen  { background: linear-gradient(160deg, #ffd3a5, #fd6585); }
+.bg-drinks   { background: linear-gradient(160deg, #a1ffce, #faffd1); }
+.bg-nature   { background: linear-gradient(160deg, #76b852, #8DC26F); }

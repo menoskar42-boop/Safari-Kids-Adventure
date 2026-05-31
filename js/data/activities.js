@@ -370,4 +370,28 @@ export const ACTIVITIES = {
     { emoji: "🔎", title: "جِد المكان", desc: "اضغط على المكان المطلوب", screen: "findIt",
       params: { datasetKey: "places", title: "🔎 جِد المكان", verb: "اذهب إلى", bg: "linear-gradient(180deg,#a6ebd9,#9face6)" } },
   ],
+  months: [
+    { emoji: "📆", title: "استكشف الشهور", desc: "اضغط على كل شهر لتعرفه", screen: "explore",
+      params: { datasetKey: "months", title: "📆 شهور السنة", bg: "linear-gradient(180deg,#ffd9a8,#d57eeb)" } },
+    { emoji: "🔢", title: "الشهر الناقص", desc: "رتّب الشهور واملأ الناقص", screen: "sequence",
+      params: { datasetKey: "months", title: "📆 الشهر الناقص" } },
+  ],
+  kitchen: [
+    { emoji: "🍴", title: "استكشف المطبخ", desc: "اضغط على كل أداة لتعرفها", screen: "explore",
+      params: { datasetKey: "kitchen", title: "🍴 أدوات المطبخ", bg: "linear-gradient(180deg,#ffd9b0,#fd6585)" } },
+    { emoji: "🔎", title: "جِد الأداة", desc: "اضغط على الأداة المطلوبة", screen: "findIt",
+      params: { datasetKey: "kitchen", title: "🔎 جِد أداة المطبخ", verb: "أحضِر", bg: "linear-gradient(180deg,#ffd9b0,#fd6585)" } },
+  ],
+  drinks: [
+    { emoji: "🥤", title: "استكشف المشروبات", desc: "اضغط على كل مشروب لتعرفه", screen: "explore",
+      params: { datasetKey: "drinks", title: "🥤 المشروبات", bg: "linear-gradient(180deg,#b8ffd8,#faffd1)" } },
+    { emoji: "🔎", title: "جِد المشروب", desc: "اضغط على المشروب المطلوب", screen: "findIt",
+      params: { datasetKey: "drinks", title: "🔎 جِد المشروب", verb: "أحضِر", bg: "linear-gradient(180deg,#b8ffd8,#faffd1)" } },
+  ],
+  nature: [
+    { emoji: "🌳", title: "استكشف الطبيعة", desc: "اضغط على كل عنصر لتعرفه", screen: "explore",
+      params: { datasetKey: "nature", title: "🌳 عالم الطبيعة", bg: "linear-gradient(180deg,#86c85f,#8DC26F)" } },
+    { emoji: "🔎", title: "جِد العنصر", desc: "اضغط على العنصر المطلوب", screen: "findIt",
+      params: { datasetKey: "nature", title: "🔎 جِد عنصر الطبيعة", verb: "اضغط على", bg: "linear-gradient(180deg,#86c85f,#8DC26F)" } },
+  ],
 };

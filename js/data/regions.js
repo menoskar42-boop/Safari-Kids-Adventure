@@ -271,6 +271,42 @@ export const REGIONS = [
     guide: "مدرسة ومستشفى وحديقة... تعال نكتشف الأماكن!",
     ready: true,
   },
+  {
+    id: "months",
+    name: "شهور السنة",
+    nameEn: "Months",
+    emoji: "📆",
+    bg: "bg-months",
+    guide: "اثنا عشر شهراً في السنة، تعال نتعلّمها!",
+    ready: true,
+  },
+  {
+    id: "kitchen",
+    name: "أدوات المطبخ",
+    nameEn: "Kitchen Tools",
+    emoji: "🍴",
+    bg: "bg-kitchen",
+    guide: "ملعقة وشوكة وصحن... تعال نتعرّف على المطبخ!",
+    ready: true,
+  },
+  {
+    id: "drinks",
+    name: "المشروبات",
+    nameEn: "Drinks",
+    emoji: "🥤",
+    bg: "bg-drinks",
+    guide: "ماء وحليب وعصير... تعال نتعرّف على المشروبات!",
+    ready: true,
+  },
+  {
+    id: "nature",
+    name: "عالم الطبيعة",
+    nameEn: "Nature",
+    emoji: "🌳",
+    bg: "bg-nature",
+    guide: "شمس وقمر وجبال... تعال نكتشف الطبيعة!",
+    ready: true,
+  },
 ];
 
 export function getRegion(id) {
