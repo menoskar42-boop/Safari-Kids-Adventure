@@ -169,6 +169,13 @@ export const ACTIVITIES = {
       params: {},
     },
     {
+      emoji: "➕",
+      title: "الجمع البسيط",
+      desc: "اجمع المجموعتين واختر الناتج",
+      screen: "addition",
+      params: {},
+    },
+    {
       emoji: "🔢",
       title: "الرقم الناقص",
       desc: "رتّب الأرقام واملأ الناقص",

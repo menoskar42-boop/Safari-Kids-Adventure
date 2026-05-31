@@ -277,6 +277,82 @@ export function renderCollect({ regionId, regionIndex }) {
   return screen;
 }
 
+// ===== لعبة ٥: الجمع البسيط =====
+// مجموعتان من العناصر، يجمعها الطفل ويختار المجموع الصحيح من ثلاثة.
+export function renderAddition({ regionId, regionIndex }) {
+  const { screen, stage, back } = baseScreen("➕ الجمع البسيط", regionId, regionIndex);
+  const ROUNDS = 6;
+  let round = 0;
+
+  function render() {
+    const a = 1 + ((Math.random() * 4) | 0); // 1..4
+    const b = 1 + ((Math.random() * 4) | 0); // 1..4
+    const sum = a + b;
+    const emoji = rand(COUNT_EMOJIS);
+    stage.innerHTML = "";
+
+    const group = (n) => {
+      const g = document.createElement("div");
+      g.style.cssText = "display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:40vw;font-size:clamp(26px,7vw,40px)";
+      for (let k = 0; k < n; k++) { const s = document.createElement("span"); s.textContent = emoji; g.appendChild(s); }
+      return g;
+    };
+
+    const eq = document.createElement("div");
+    eq.style.cssText = "display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px auto";
+    const plus = document.createElement("span");
+    plus.textContent = "➕";
+    plus.style.cssText = "font-size:clamp(26px,7vw,40px)";
+    eq.append(group(a), plus, group(b));
+    stage.appendChild(eq);
+
+    const ask = document.createElement("p");
+    ask.style.cssText = "font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2);font-size:clamp(18px,5vw,26px);margin:6px 0";
+    ask.textContent = `${a} ➕ ${b} = ؟`;
+    stage.appendChild(ask);
+    Speech.ar(`كم يساوي ${a} زائد ${b}؟`);
+
+    const opts = new Set([sum]);
+    while (opts.size < 3) {
+      const d = sum + (Math.random() < 0.5 ? -1 : 1) * (1 + ((Math.random() * 2) | 0));
+      if (d >= 1 && d <= 10) opts.add(d);
+    }
+    const row = document.createElement("div");
+    row.className = "choice-row";
+    shuffle([...opts]).forEach((val) => {
+      const num = NUMBERS_10[val - 1];
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.style.fontWeight = "800";
+      btn.textContent = num.arDigit;
+      btn.addEventListener("click", () => {
+        if (val === sum) {
+          btn.classList.add("correct");
+          Sfx.correct();
+          speakBoth(num);
+          awardStars(1);
+          setTimeout(nextRound, 1100);
+        } else {
+          btn.classList.add("wrong");
+          Sfx.wrong();
+          setTimeout(() => btn.classList.remove("wrong"), 500);
+        }
+      });
+      row.appendChild(btn);
+    });
+    stage.appendChild(row);
+  }
+
+  function nextRound() {
+    round++;
+    if (round >= ROUNDS) finishActivity({ regionId, regionIndex, stars: 6, onDone: back });
+    else render();
+  }
+
+  setTimeout(render, 0);
+  return screen;
+}
+
 // ===== لعبة ٤: عُدّ واختر الرقم =====
 // تظهر مجموعة عناصر، يعدّها الطفل ويختار الرقم الصحيح من بين ثلاثة.
 export function renderCountPick({ regionId, regionIndex }) {
