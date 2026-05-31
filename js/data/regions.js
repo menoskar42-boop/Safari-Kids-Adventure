@@ -307,6 +307,15 @@ export const REGIONS = [
     guide: "شمس وقمر وجبال... تعال نكتشف الطبيعة!",
     ready: true,
   },
+  {
+    id: "values",
+    name: "قصص وقيم",
+    nameEn: "Stories & Values",
+    emoji: "📖",
+    bg: "bg-values",
+    guide: "قصص جميلة تعلّمنا النظافة والتعاون والصدق!",
+    ready: true,
+  },
 ];
 
 export function getRegion(id) {

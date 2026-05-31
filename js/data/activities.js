@@ -394,4 +394,11 @@ export const ACTIVITIES = {
     { emoji: "🔎", title: "جِد العنصر", desc: "اضغط على العنصر المطلوب", screen: "findIt",
       params: { datasetKey: "nature", title: "🔎 جِد عنصر الطبيعة", verb: "اضغط على", bg: "linear-gradient(180deg,#86c85f,#8DC26F)" } },
   ],
+  values: [
+    { emoji: "🧼", title: "النظافة سرّ الصحّة", desc: "قصة عن النظافة", screen: "story", params: { storyId: "cleanliness" } },
+    { emoji: "🤝", title: "التعاون قوّة", desc: "قصة عن التعاون", screen: "story", params: { storyId: "cooperation" } },
+    { emoji: "👩", title: "مساعدة أمّي", desc: "قصة عن المساعدة", screen: "story", params: { storyId: "help-mom" } },
+    { emoji: "🌟", title: "الصدق أمانة", desc: "قصة عن الصدق", screen: "story", params: { storyId: "honesty" } },
+    { emoji: "🎁", title: "المشاركة جميلة", desc: "قصة عن المشاركة", screen: "story", params: { storyId: "sharing" } },
+  ],
 };
