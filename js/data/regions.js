@@ -62,6 +62,15 @@ export const REGIONS = [
     ready: true,
   },
   {
+    id: "insects",
+    name: "عالم الحشرات",
+    nameEn: "Insects World",
+    emoji: "🦋",
+    bg: "bg-insects",
+    guide: "حشرات صغيرة تطير حولنا، تعال نتعرّف عليها!",
+    ready: true,
+  },
+  {
     id: "fruits",
     name: "مزرعة الفواكه",
     nameEn: "Fruits Farm",

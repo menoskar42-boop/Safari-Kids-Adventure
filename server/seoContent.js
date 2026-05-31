@@ -6,6 +6,7 @@ import { NUMBERS } from "../js/data/numbers.js";
 import { ANIMALS } from "../js/data/animals.js";
 import { FISH } from "../js/data/fish.js";
 import { BIRDS } from "../js/data/birds.js";
+import { INSECTS } from "../js/data/insects.js";
 import { FRUITS } from "../js/data/fruits.js";
 import { COLORS } from "../js/data/colors.js";
 import { SHAPES } from "../js/data/shapes.js";
@@ -156,6 +157,27 @@ export const SECTIONS = [
     ],
     kind: "creature",
     items: BIRDS,
+  },
+  {
+    slug: "insects",
+    region: "insects",
+    emoji: "🦋",
+    h1: "تعلّم أسماء الحشرات للأطفال",
+    title: "تعلّم الحشرات للأطفال — فراشة ونحلة بالعربية والإنجليزية | عالم الاستكشاف السحري",
+    description:
+      "تعليم أسماء الحشرات للأطفال بالعربية والإنجليزية: الفراشة والنحلة والذبابة والخفّاش، مع ألعاب تفاعلية ممتعة لعمر ٣ إلى ٦ سنوات.",
+    keywords: [
+      "تعليم الحشرات للاطفال",
+      "اسماء الحشرات",
+      "حشرات بالعربي والانجليزي",
+      "العاب الحشرات للاطفال",
+    ],
+    intro: [
+      "تعرّف على المخلوقات الصغيرة الطائرة: الفراشة الملوّنة والنحلة المجتهدة والذبابة والخفّاش، باسمها العربي والإنجليزي.",
+      "يلعب طفلك ألعاب إيجاد الحشرة المطلوبة ومطابقة الظل، فيتعلّم أسماءها ويميّز أشكالها بمتعة.",
+    ],
+    kind: "creature",
+    items: INSECTS,
   },
   {
     slug: "fruits",

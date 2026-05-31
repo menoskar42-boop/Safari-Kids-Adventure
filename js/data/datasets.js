@@ -15,6 +15,7 @@ import { WEEKDAYS } from "./weekdays.js";
 import { OPPOSITES_FLAT } from "./opposites.js";
 import { WORDS } from "./words.js";
 import { NUMBERS } from "./numbers.js";
+import { INSECTS } from "./insects.js";
 
 const DATASETS = {
   arabic: {
@@ -43,6 +44,7 @@ const DATASETS = {
   opposites: { key: "opposites", lang: "ar-EG", glyphKind: "emoji", items: OPPOSITES_FLAT },
   words: { key: "words", lang: "ar-EG", glyphKind: "emoji", items: WORDS },
   numbers: { key: "numbers", lang: "ar-EG", glyphKind: "number", items: NUMBERS },
+  insects: { key: "insects", lang: "ar-EG", glyphKind: "emoji", items: INSECTS },
 };
 
 export function getDataset(key) {

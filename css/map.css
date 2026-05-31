@@ -130,6 +130,7 @@ img.item-img {
 .bg-animals  { background: linear-gradient(160deg, #9be15d, #00c46a); }
 .bg-fish     { background: linear-gradient(160deg, #5fd0ff, #008cff); }
 .bg-birds    { background: linear-gradient(160deg, #b794ff, #7c5fe6); }
+.bg-insects  { background: linear-gradient(160deg, #9be15d, #f6d365); }
 .bg-fruits   { background: linear-gradient(160deg, #ff8fae, #ff4d8d); }
 .bg-colors   { background: linear-gradient(160deg, #f6d365, #fda085); }
 .bg-shapes   { background: linear-gradient(160deg, #43e0d0, #1aa7a0); }

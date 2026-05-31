@@ -203,6 +203,14 @@ export const ACTIVITIES = {
     { emoji: "🌑", title: "طابق الظل", desc: "اعرف الطائر من ظله", screen: "shadowMatch",
       params: { datasetKey: "birds", title: "🌑 ظل الطائر", bg: "linear-gradient(180deg,#cdb8ff,#8a6bff)" } },
   ],
+  insects: [
+    { emoji: "🦋", title: "استكشف الحشرات", desc: "اضغط على كل حشرة لتعرفها", screen: "explore",
+      params: { datasetKey: "insects", title: "🦋 عالم الحشرات", bg: "linear-gradient(180deg,#c8f0a0,#ffe29a)" } },
+    { emoji: "🔎", title: "جِد الحشرة", desc: "اضغط على الحشرة المطلوبة", screen: "findIt",
+      params: { datasetKey: "insects", title: "🔎 جِد الحشرة", verb: "اضغط على", bg: "linear-gradient(180deg,#c8f0a0,#ffe29a)" } },
+    { emoji: "🌑", title: "طابق الظل", desc: "اعرف الحشرة من ظلها", screen: "shadowMatch",
+      params: { datasetKey: "insects", title: "🌑 ظل الحشرة", bg: "linear-gradient(180deg,#c8f0a0,#ffe29a)" } },
+  ],
   fruits: [
     { emoji: "🍎", title: "سوق الفواكه", desc: "اضغط على كل فاكهة لتعرفها", screen: "explore",
       params: { datasetKey: "fruits", title: "🍎 مزرعة الفواكه", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
