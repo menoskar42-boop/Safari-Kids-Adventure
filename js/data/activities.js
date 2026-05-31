@@ -162,6 +162,13 @@ export const ACTIVITIES = {
       params: {},
     },
     {
+      emoji: "🧮",
+      title: "عُدّ واختر",
+      desc: "عُدّ العناصر واختر الرقم الصحيح",
+      screen: "countPick",
+      params: {},
+    },
+    {
       emoji: "🔢",
       title: "الرقم الناقص",
       desc: "رتّب الأرقام واملأ الناقص",

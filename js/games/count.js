@@ -276,3 +276,77 @@ export function renderCollect({ regionId, regionIndex }) {
   setTimeout(render, 0);
   return screen;
 }
+
+// ===== لعبة ٤: عُدّ واختر الرقم =====
+// تظهر مجموعة عناصر، يعدّها الطفل ويختار الرقم الصحيح من بين ثلاثة.
+export function renderCountPick({ regionId, regionIndex }) {
+  const { screen, stage, back } = baseScreen("🔢 عُدّ واختر", regionId, regionIndex);
+  const ROUNDS = 6;
+  let round = 0;
+
+  function render() {
+    const target = 1 + ((Math.random() * 9) | 0); // 1..9
+    const emoji = rand(COUNT_EMOJIS);
+    stage.innerHTML = "";
+
+    const ask = document.createElement("p");
+    ask.style.cssText = "font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2);font-size:clamp(18px,5vw,26px);margin:4px 0";
+    ask.textContent = "كم عددها؟ 🤔";
+    stage.appendChild(ask);
+    Speech.ar("كم عددها؟");
+
+    // العناصر المعدودة
+    const items = document.createElement("div");
+    items.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:min(90vw,420px);margin:10px auto;font-size:clamp(34px,9vw,52px)";
+    for (let k = 0; k < target; k++) {
+      const s = document.createElement("span");
+      s.textContent = emoji;
+      s.style.animation = "pop-in .3s ease both";
+      s.style.animationDelay = `${k * 0.08}s`;
+      items.appendChild(s);
+    }
+    stage.appendChild(items);
+
+    // خيارات الأرقام (الصحيح + اثنان قريبان)
+    const opts = new Set([target]);
+    while (opts.size < 3) {
+      const d = target + (Math.random() < 0.5 ? -1 : 1) * (1 + ((Math.random() * 2) | 0));
+      if (d >= 1 && d <= 10) opts.add(d);
+    }
+    const choices = shuffle([...opts]);
+
+    const row = document.createElement("div");
+    row.className = "choice-row";
+    choices.forEach((val) => {
+      const num = NUMBERS_10[val - 1];
+      const b = document.createElement("button");
+      b.className = "choice";
+      b.style.fontWeight = "800";
+      b.textContent = num.arDigit;
+      b.addEventListener("click", () => {
+        if (val === target) {
+          b.classList.add("correct");
+          Sfx.correct();
+          speakBoth(num);
+          awardStars(1);
+          setTimeout(nextRound, 1100);
+        } else {
+          b.classList.add("wrong");
+          Sfx.wrong();
+          setTimeout(() => b.classList.remove("wrong"), 500);
+        }
+      });
+      row.appendChild(b);
+    });
+    stage.appendChild(row);
+  }
+
+  function nextRound() {
+    round++;
+    if (round >= ROUNDS) finishActivity({ regionId, regionIndex, stars: 6, onDone: back });
+    else render();
+  }
+
+  setTimeout(render, 0);
+  return screen;
+}
