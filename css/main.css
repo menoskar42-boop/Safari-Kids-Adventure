@@ -57,9 +57,20 @@ button { font-family: inherit; cursor: pointer; border: none; }
   animation: spin-slow 18s linear infinite;
 }
 .splash-logo {
+  position: relative;
   font-size: clamp(90px, 26vw, 190px);
   filter: drop-shadow(0 12px 18px rgba(0, 0, 0, .3));
   animation: bob 2.4s ease-in-out infinite;
+}
+/* هالة متوهّجة خلف الأسد */
+.splash-logo::after {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,225,120,.55), transparent 65%);
+  animation: pulse 2.4s ease-in-out infinite;
 }
 .splash-title {
   font-size: clamp(28px, 8vw, 56px);
@@ -81,11 +92,12 @@ button { font-family: inherit; cursor: pointer; border: none; }
   font-weight: 800;
   padding: .55em 1.4em;
   border-radius: 999px;
-  box-shadow: var(--shadow-soft), var(--shadow-card);
-  transition: transform .12s ease;
+  box-shadow: var(--shadow-soft), var(--shadow-card), inset 0 -4px 0 rgba(255,146,76,.5);
+  transition: transform .14s cubic-bezier(.34,1.56,.64,1);
   animation: pulse 1.8s ease-in-out infinite;
 }
-.big-start-btn:active { transform: scale(.94); }
+.big-start-btn:hover { transform: scale(1.07); }
+.big-start-btn:active { transform: scale(.92); }
 
 .splash-clouds .cloud {
   position: absolute;
@@ -126,31 +138,32 @@ button { font-family: inherit; cursor: pointer; border: none; }
   text-shadow: 0 2px 0 rgba(0, 0, 0, .2);
 }
 .icon-btn {
-  background: #fff;
+  background: linear-gradient(180deg, #ffffff, #f0ecff);
   color: var(--c-purple);
   font-size: clamp(18px, 5vw, 26px);
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card), inset 0 -3px 0 rgba(91,63,181,.12);
   display: grid;
   place-items: center;
-  transition: transform .12s ease;
+  transition: transform .14s cubic-bezier(.34,1.56,.64,1);
 }
-.icon-btn:active { transform: scale(.9); }
+.icon-btn:hover { transform: translateY(-2px) scale(1.08); }
+.icon-btn:active { transform: scale(.88); }
 
 /* عدّاد النجوم */
 .star-counter {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #fff;
+  background: linear-gradient(180deg, #fff7d6, #ffe9a8);
   color: var(--c-ink);
   font-weight: 800;
   font-size: clamp(16px, 4.5vw, 22px);
   padding: 6px 14px;
   border-radius: 999px;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card), inset 0 -3px 0 rgba(255,146,76,.25);
 }
 .streak-badge {
   display: inline-flex;
