@@ -251,6 +251,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "insects", title: "🔎 جِد الحشرة", verb: "اضغط على", bg: "linear-gradient(180deg,#c8f0a0,#ffe29a)" } },
     { emoji: "🌑", title: "طابق الظل", desc: "اعرف الحشرة من ظلها", screen: "shadowMatch",
       params: { datasetKey: "insects", title: "🌑 ظل الحشرة", bg: "linear-gradient(180deg,#c8f0a0,#ffe29a)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "insects", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#c8f0a0,#ffe29a)" } },
   ],
   fruits: [
     { emoji: "🍎", title: "سوق الفواكه", desc: "اضغط على كل فاكهة لتعرفها", screen: "explore",
@@ -299,12 +301,16 @@ export const ACTIVITIES = {
       params: { datasetKey: "transport", title: "🚗 عالم المواصلات", sound: true, bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
     { emoji: "🔎", title: "جِد الوسيلة", desc: "اضغط على الوسيلة المطلوبة", screen: "findIt",
       params: { datasetKey: "transport", title: "🔎 جِد الوسيلة", verb: "اضغط على", bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "transport", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
   ],
   food: [
     { emoji: "🍔", title: "استكشف الطعام", desc: "اضغط على كل طعام لتعرفه", screen: "explore",
       params: { datasetKey: "food", title: "🍔 مطبخ الطعام", bg: "linear-gradient(180deg,#ffe6a0,#fc6262)" } },
     { emoji: "🔎", title: "جِد الطعام", desc: "اضغط على الطعام المطلوب", screen: "findIt",
       params: { datasetKey: "food", title: "🔎 جِد الطعام", verb: "أحضِر", bg: "linear-gradient(180deg,#ffe6a0,#fc6262)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "food", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#ffe6a0,#fc6262)" } },
   ],
   weekdays: [
     { emoji: "📅", title: "تعلّم الأيام", desc: "اضغط على كل يوم لتعرفه", screen: "explore",
