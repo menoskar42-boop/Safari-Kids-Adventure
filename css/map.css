@@ -67,8 +67,11 @@
 /* صورة الكائن (بدل الإيموجي) */
 .region-card img.region-emoji,
 img.item-img {
-  width: clamp(70px, 20vw, 110px);
-  height: clamp(70px, 20vw, 110px);
+  display: block;
+  width: 100%;
+  max-width: clamp(120px, 34vw, 200px);
+  aspect-ratio: 1;
+  height: auto;
   object-fit: contain;
   margin: 0 auto;
   border-radius: 16px;
