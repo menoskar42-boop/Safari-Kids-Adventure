@@ -160,3 +160,35 @@
   cursor: pointer;
   will-change: transform;
 }
+
+/* ===== لعبة أشكال الحرف (أول/وسط/آخر) ===== */
+.lf-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.lf-card {
+  background: #fff;
+  border: none;
+  border-radius: 22px;
+  padding: 14px 10px;
+  min-width: clamp(90px, 28vw, 150px);
+  box-shadow: var(--shadow-card);
+  transition: transform .14s cubic-bezier(.34,1.56,.64,1);
+  animation: pop-in .3s ease both;
+}
+.lf-card:active { transform: scale(.92); }
+.lf-label {
+  font-size: clamp(12px, 3.4vw, 15px);
+  font-weight: 800;
+  color: var(--c-purple-2);
+  margin-bottom: 6px;
+}
+.lf-glyph {
+  font-size: clamp(54px, 16vw, 92px);
+  font-weight: 800;
+  color: var(--c-purple);
+  line-height: 1.1;
+}

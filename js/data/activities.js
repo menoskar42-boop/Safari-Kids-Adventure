@@ -39,6 +39,13 @@ export const ACTIVITIES = {
       params: {},
     },
     {
+      emoji: "🔡",
+      title: "أشكال الحرف",
+      desc: "الحرف في أول ووسط وآخر الكلمة",
+      screen: "letterForms",
+      params: {},
+    },
+    {
       emoji: "🔠",
       title: "الحرف الناقص",
       desc: "رتّب الحروف واملأ الناقص",
