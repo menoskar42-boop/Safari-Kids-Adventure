@@ -354,6 +354,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "jobs", title: "🔎 جِد المهنة", verb: "اضغط على", bg: "linear-gradient(180deg,#ffd6a3,#ff7e5f)" } },
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "jobs", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#ffd6a3,#ff7e5f)" } },
+    { emoji: "📖", title: "قصة: الطبيب الطيّب", desc: "استمع لقصة جميلة", screen: "story",
+      params: { storyId: "kind-doctor" } },
   ],
   body: [
     { emoji: "🧍", title: "استكشف الجسم", desc: "اضغط على كل جزء لتعرفه", screen: "explore",
@@ -374,6 +376,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "transport", title: "🧩 ركّب المركبة", bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "transport", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
+    { emoji: "📖", title: "قصة: السيّارة المجتهدة", desc: "استمع لقصة جميلة", screen: "story",
+      params: { storyId: "little-car" } },
   ],
   food: [
     { emoji: "🍔", title: "استكشف الطعام", desc: "اضغط على كل طعام لتعرفه", screen: "explore",
@@ -446,6 +450,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "weather", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#a8eaff,#66a6ff)" } },
     { emoji: "🌑", title: "طابق الظل", desc: "اعرف الطقس من ظله", screen: "shadowMatch",
       params: { datasetKey: "weather", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#a8eaff,#66a6ff)" } },
+    { emoji: "📖", title: "قصة: الشمس والمطر", desc: "استمع لقصة جميلة", screen: "story",
+      params: { storyId: "sun-and-rain" } },
   ],
   seasons: [
     { emoji: "🍂", title: "استكشف الفصول", desc: "اضغط على كل فصل لتعرفه", screen: "explore",
