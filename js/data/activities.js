@@ -80,6 +80,13 @@ export const ACTIVITIES = {
       screen: "memory",
       params: { datasetKey: "arabic", title: "🧩 ذاكرة الحروف", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
     },
+    {
+      emoji: "🔤",
+      title: "بأي حرف تبدأ؟",
+      desc: "اعرف الحرف الأول من الكلمة",
+      screen: "phonics",
+      params: { datasetKey: "arabic", lang: "ar-EG", title: "🔤 بأي حرف تبدأ؟", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
+    },
   ],
   english: [
     {
@@ -137,6 +144,13 @@ export const ACTIVITIES = {
       desc: "Flip cards and match the letters",
       screen: "memory",
       params: { datasetKey: "english", title: "🧩 Memory", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
+    },
+    {
+      emoji: "🔤",
+      title: "بأي حرف تبدأ؟",
+      desc: "Which letter does the word start with?",
+      screen: "phonics",
+      params: { datasetKey: "english", lang: "en-US", title: "🔤 First Letter", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
     },
   ],
   numbers: [
