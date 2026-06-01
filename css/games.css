@@ -300,6 +300,21 @@
   animation: bob 2.4s ease-in-out infinite;
   flex: 0 0 auto;
 }
+
+/* شخصية ميزو الناطقة */
+.miz { display: inline-block; line-height: 0; flex: 0 0 auto; }
+.miz-svg {
+  width: clamp(96px, 28vw, 150px);
+  height: auto;
+  display: block;
+  animation: bob 3s ease-in-out infinite;
+  filter: drop-shadow(0 8px 8px rgba(0,0,0,.18));
+}
+.miz-eyes { transform-box: fill-box; transform-origin: center; animation: miz-blink 4.5s infinite; }
+@keyframes miz-blink { 0%,93%,100% { transform: scaleY(1); } 96% { transform: scaleY(.12); } }
+.miz-mouth { transform-box: fill-box; transform-origin: center; transform: scaleY(.45); }
+.miz.talking .miz-mouth { animation: miz-talk .26s ease-in-out infinite; }
+@keyframes miz-talk { 0% { transform: scaleY(.3); } 50% { transform: scaleY(1.05); } 100% { transform: scaleY(.3); } }
 .lesson-teacher .teacher-bubble {
   background: #fff;
   border-radius: 18px;

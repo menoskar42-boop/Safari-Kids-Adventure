@@ -7,6 +7,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { gameTopbar, finishActivity } from "./common.js";
+import { createCharacter, MIZO_INTRO, MIZO_PRAISE } from "./character.js";
 
 export function renderLesson({ regionId, regionIndex, datasetKey, lang, title }) {
   const ds = getDataset(datasetKey);
@@ -34,7 +35,7 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title })
       <span class="lesson-pen">🖊️</span>
     </div>
     <div class="lesson-teacher">
-      <div class="teacher-char">🧒</div>
+      <div class="miz-slot"></div>
       <div class="teacher-bubble"></div>
     </div>
     <div class="lesson-controls">
@@ -49,14 +50,34 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title })
   const penEl = wrap.querySelector(".lesson-pen");
   const bubble = wrap.querySelector(".teacher-bubble");
 
+  // ميزو: شخصية الطفل المعلّم الناطقة
+  const mizo = createCharacter();
+  wrap.querySelector(".miz-slot").appendChild(mizo.el);
+  let greeted = false;
+  const pick = (a) => a[(Math.random() * a.length) | 0];
+
+  // ينطق قائمة الجُمَل ويحرّك فم ميزو طوال مدّتها التقريبية
+  function speak(parts) {
+    const chars = parts.reduce((n, p) => n + (p.text ? p.text.length : 0), 0);
+    mizo.startTalking(Math.min(9000, chars * 80 + 1600));
+    Speech.sequence(parts);
+  }
+
   function narrate(it) {
     const label = labelOf(it);
-    const parts = [{ text: `هذا ${noun} ${label}`, lang: speakLang }];
+    const parts = [];
+    if (!greeted) {
+      greeted = true;
+      MIZO_INTRO.forEach((t) => parts.push({ text: t, lang: "ar-EG" }));
+    } else if (Math.random() < 0.5) {
+      parts.push({ text: pick(MIZO_PRAISE), lang: "ar-EG" });
+    }
+    parts.push({ text: `هذا ${noun} ${label}`, lang: speakLang });
     if (it.word) {
       parts.push({ text: isAr ? `${label} مثل ${it.word}` : `${label} for ${it.word}`, lang: speakLang });
     }
     parts.push({ text: label, lang: speakLang });
-    Speech.sequence(parts);
+    speak(parts);
   }
 
   function animateWrite() {
@@ -72,9 +93,10 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title })
     const it = items[idx];
     glyphEl.textContent = glyphOf(it);
     const label = labelOf(it);
-    bubble.innerHTML = it.word
+    const greet = !greeted ? `أهلاً، أنا <b>ميزو</b> صديقك الجديد! 👋<br>` : "";
+    bubble.innerHTML = greet + (it.word
       ? `هذا ${noun} «${label}» ${it.emoji || ""}<br>${label} مثل ${it.word}`
-      : `هذا ${noun} «${label}»`;
+      : `هذا ${noun} «${label}»`);
     animateWrite();
     Sfx.pop();
     narrate(it);
