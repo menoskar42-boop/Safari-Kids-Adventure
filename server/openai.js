@@ -52,6 +52,39 @@ function ensureKey(res) {
   return true;
 }
 
+// ===== حدّ المعدّل (Rate limiting) بسيط لكل عنوان IP =====
+// يحمي من الإساءة والتكلفة غير المتوقّعة. نافذة زمنية + حدّ أقصى للطلبات.
+const RL = new Map(); // ip -> { count, resetAt }
+function clientIp(req) {
+  const fwd = req.headers["x-forwarded-for"];
+  if (fwd) return String(fwd).split(",")[0].trim();
+  return (req.socket && req.socket.remoteAddress) || "unknown";
+}
+function rateLimit({ windowMs, max }) {
+  return (req, res, next) => {
+    const ip = clientIp(req);
+    const now = Date.now();
+    let e = RL.get(ip);
+    if (!e || now > e.resetAt) { e = { count: 0, resetAt: now + windowMs }; RL.set(ip, e); }
+    e.count++;
+    if (e.count > max) {
+      res.setHeader("Retry-After", Math.ceil((e.resetAt - now) / 1000));
+      return res.status(429).json({ error: "rate_limited", fallback: true });
+    }
+    next();
+  };
+}
+// تنظيف دوري للمدخلات المنتهية (يمنع نموّ الذاكرة)
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, e] of RL) if (now > e.resetAt) RL.delete(ip);
+}, 5 * 60 * 1000).unref?.();
+
+// حدود مناسبة: النطق أوسع (كثيره مخزَّنة)، والمساعد/النسخ أضيق (يستهلكان الـ AI)
+const ttsLimit = rateLimit({ windowMs: 60000, max: 150 });
+const askLimit = rateLimit({ windowMs: 60000, max: 20 });
+const sttLimit = rateLimit({ windowMs: 60000, max: 20 });
+
 export function registerOpenAIRoutes(app) {
   // فحص توفّر الميزات (للواجهة كي تقرّر: AI أم Web Speech)
   app.get("/api/health", (_req, res) => {
@@ -60,7 +93,7 @@ export function registerOpenAIRoutes(app) {
 
   // ===== تحويل النص إلى كلام (TTS) =====
   // body: { text, voice?, lang?, instructions? }
-  app.post("/api/tts", async (req, res) => {
+  app.post("/api/tts", ttsLimit, async (req, res) => {
     const { text, voice, instructions } = req.body || {};
     if (!text || typeof text !== "string") {
       return res.status(400).json({ error: "missing_text" });
@@ -138,7 +171,7 @@ export function registerOpenAIRoutes(app) {
 
   // ===== المساعد الصوتي: سؤال الطفل → إجابة قصيرة مناسبة =====
   // body: { question, lang? }
-  app.post("/api/ask", async (req, res) => {
+  app.post("/api/ask", askLimit, async (req, res) => {
     if (!ensureKey(res)) return;
     const { question, lang } = req.body || {};
     if (!question || typeof question !== "string") {
@@ -186,7 +219,7 @@ export function registerOpenAIRoutes(app) {
 
   // ===== النسخ الصوتي (STT): صوت الطفل → نص =====
   // body: { audioBase64, mime?, lang? }
-  app.post("/api/stt", async (req, res) => {
+  app.post("/api/stt", sttLimit, async (req, res) => {
     if (!ensureKey(res)) return;
     const { audioBase64, mime, lang } = req.body || {};
     if (!audioBase64) return res.status(400).json({ error: "missing_audio" });
