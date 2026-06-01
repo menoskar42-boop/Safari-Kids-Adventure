@@ -10,6 +10,7 @@ import { FEATURES } from "../core/features.js";
 import { createCharacter } from "../games/character.js";
 
 const GUIDE = "🐨"; // المرشد اللطيف
+let greetedSession = false; // ميزو يرحّب صوتياً مرّة واحدة في الجلسة
 
 export function renderHome() {
   const screen = document.createElement("div");
@@ -55,7 +56,16 @@ export function renderHome() {
   // ميزو المرشد بدل الإيموجي الثابت (يلوّح عند فتح الخريطة)
   const guide = createCharacter();
   banner.querySelector("#profileBtn").appendChild(guide.el);
-  setTimeout(() => guide.setMood("wave", 2600), 200);
+  setTimeout(() => {
+    guide.setMood("wave", 2600);
+    // ترحيب صوتي لطيف مرّة واحدة في الجلسة (يبني الألفة دون إزعاج)
+    if (!greetedSession) {
+      greetedSession = true;
+      const spoken = bubbleMsg.replace(/<[^>]+>/g, "");
+      guide.startTalking(spoken.length * 80 + 1200);
+      Speech.ar(spoken);
+    }
+  }, 250);
   screen.appendChild(banner);
 
   // المناطق التأسيسية مفتوحة دائماً. المناطق المتقدّمة تُفتح تدريجياً:
