@@ -218,6 +218,13 @@ export const ACTIVITIES = {
       params: {},
     },
     {
+      emoji: "✏️",
+      title: "ارسم الرقم",
+      desc: "تتبّع الرقم بإصبعك",
+      screen: "trace",
+      params: { datasetKey: "numbers", title: "✏️ ارسم الرقم" },
+    },
+    {
       emoji: "🔢",
       title: "الرقم الناقص",
       desc: "رتّب الأرقام واملأ الناقص",

@@ -3,7 +3,13 @@
 // لا يفحص الشكل البصري — فقط سلامة الكود وقت التشغيل.
 
 const noop = () => {};
-const ctxProxy = new Proxy({}, { get: () => noop });
+const ctxProxy = new Proxy({}, {
+  get: (_t, p) => {
+    if (p === "getImageData") return () => ({ data: new Uint8ClampedArray(300 * 300 * 4) });
+    if (p === "measureText") return () => ({ width: 10 });
+    return noop;
+  },
+});
 
 function makeEl() {
   const store = {
@@ -69,6 +75,8 @@ const cases = [
   ["puzzle", "../js/games/puzzle.js", "renderPuzzle", { regionId: "animals", regionIndex: 0, datasetKey: "animals", title: "t" }],
   ["sort", "../js/games/sort.js", "renderSort", { regionId: "fruits", regionIndex: 0, title: "t", groups: [{ label: "فواكه", datasetKey: "fruits" }, { label: "حيوانات", datasetKey: "animals" }] }],
   ["phonics", "../js/games/phonics.js", "renderPhonics", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG", title: "t" }],
+  ["trace(letters)", "../js/games/trace.js", "renderTrace", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG" }],
+  ["trace(numbers)", "../js/games/trace.js", "renderTrace", { regionId: "numbers", regionIndex: 0, datasetKey: "numbers", title: "✏️ ارسم الرقم" }],
   ["countPick", "../js/games/count.js", "renderCountPick", { regionId: "numbers", regionIndex: 0 }],
   ["addition", "../js/games/count.js", "renderAddition", { regionId: "numbers", regionIndex: 0 }],
   ["subtraction", "../js/games/count.js", "renderSubtraction", { regionId: "numbers", regionIndex: 0 }],

@@ -9,9 +9,10 @@ const TRACE_COUNT = 6;
 const RES = 300; // دقّة داخلية ثابتة
 const THRESHOLD = 0.62; // نسبة التغطية المطلوبة (أعلى كي لا يكتمل قبل إتمام الشكل)
 
-export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
+export function renderTrace({ regionId, regionIndex, datasetKey, lang, title }) {
   const ds = getDataset(datasetKey);
   const speakLang = lang || ds.lang;
+  const noun = ds.glyphKind === "number" ? "الرقم" : "الحرف";
   const letters = shuffle(ds.items).slice(0, TRACE_COUNT);
   let idx = 0;
 
@@ -20,7 +21,7 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
   screen.style.background = "linear-gradient(180deg,#d9c2ff,#9a7bff)";
 
   const back = () => Router.go("region", { id: regionId, index: regionIndex });
-  screen.appendChild(gameTopbar("✏️ ارسم الحرف", back));
+  screen.appendChild(gameTopbar(title || "✏️ ارسم الحرف", back));
 
   const stage = document.createElement("div");
   stage.className = "stage";
@@ -38,12 +39,16 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
 
   function render() {
     const it = letters[idx];
+    // مرونة: يدعم الحروف (char/name) والأرقام (arDigit/arName) وغيرها
+    const glyph = it.char || it.arDigit || it.name;
+    const label = it.name || it.arName || "";
+    const sayDone = it.word ? examplePhrase(it, speakLang) : label;
     stage.innerHTML = "";
 
-    const title = document.createElement("p");
-    title.style.cssText = "font-weight:800;font-size:clamp(18px,5vw,24px);color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.18)";
-    title.textContent = `تتبّع الحرف: ${it.name}`;
-    stage.appendChild(title);
+    const titleEl = document.createElement("p");
+    titleEl.style.cssText = "font-weight:800;font-size:clamp(18px,5vw,24px);color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.18)";
+    titleEl.textContent = `تتبّع ${noun}: ${label}`;
+    stage.appendChild(titleEl);
 
     const box = document.createElement("div");
     box.style.cssText =
@@ -65,7 +70,7 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
       gctx.font = `bold ${RES * 0.8}px "Baloo Bhaijaan 2", sans-serif`;
       gctx.textAlign = "center";
       gctx.textBaseline = "middle";
-      gctx.fillText(it.char, RES / 2, RES / 2 + RES * 0.04);
+      gctx.fillText(glyph, RES / 2, RES / 2 + RES * 0.04);
     }
     paintGuide("#d9d0f0");
 
@@ -77,7 +82,7 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
     mctx.font = `bold ${RES * 0.8}px "Baloo Bhaijaan 2", sans-serif`;
     mctx.textAlign = "center";
     mctx.textBaseline = "middle";
-    mctx.fillText(it.char, RES / 2, RES / 2 + RES * 0.04);
+    mctx.fillText(glyph, RES / 2, RES / 2 + RES * 0.04);
     const maskData = mctx.getImageData(0, 0, RES, RES).data;
     let maskTotal = 0;
     for (let p = 3; p < maskData.length; p += 4) if (maskData[p] > 40) maskTotal++;
@@ -141,7 +146,7 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
         done = true;
         paintGuide("#34d399");
         Sfx.correct();
-        Speech.say(examplePhrase(it, speakLang), { lang: speakLang });
+        Speech.say(sayDone, { lang: speakLang });
         box.animate(
           [{ transform: "scale(1)" }, { transform: "scale(1.12)" }, { transform: "scale(1)" }],
           { duration: 500 }
@@ -166,18 +171,18 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang }) {
     clearBtn.addEventListener("click", () => { Sfx.tap(); dctx.clearRect(0, 0, RES, RES); });
     const sayBtn = document.createElement("button");
     sayBtn.className = "candy-btn";
-    sayBtn.textContent = "🔊 الحرف";
-    sayBtn.addEventListener("click", () => { Sfx.tap(); Speech.say(it.name, { lang: speakLang }); });
+    sayBtn.textContent = `🔊 ${noun}`;
+    sayBtn.addEventListener("click", () => { Sfx.tap(); Speech.say(label, { lang: speakLang }); });
     tools.append(sayBtn, clearBtn);
     stage.appendChild(tools);
 
-    Speech.ar(`ارسم حرف ${it.name}`);
+    Speech.ar(`ارسم ${noun} ${label}`);
   }
 
   function next() {
     idx++;
     if (idx >= letters.length) {
-      showCheer("🌟", "رسمت كل الحروف!", () =>
+      showCheer("🌟", "أحسنت! أكملت الرسم", () =>
         finishActivity({ regionId, regionIndex, stars: 6, onDone: back })
       );
     } else {
