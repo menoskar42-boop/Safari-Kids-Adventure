@@ -175,6 +175,61 @@ const PICTURES = [
       <circle class="cl" cx="126" cy="60" r="16"/>
       <circle class="cl" cx="100" cy="58" r="15"/>`,
   },
+  {
+    name: "روبوت",
+    svg: `
+      <circle class="cl" cx="100" cy="28" r="9"/>
+      <rect class="cl" x="68" y="42" width="64" height="50" rx="10"/>
+      <circle class="cl" cx="86" cy="66" r="8"/>
+      <circle class="cl" cx="114" cy="66" r="8"/>
+      <rect class="cl" x="60" y="98" width="80" height="66" rx="10"/>`,
+  },
+  {
+    name: "كعكة",
+    svg: `
+      <ellipse class="cl" cx="100" cy="168" rx="72" ry="12"/>
+      <rect class="cl" x="50" y="110" width="100" height="52" rx="8"/>
+      <rect class="cl" x="62" y="80" width="76" height="34" rx="8"/>
+      <rect class="cl" x="96" y="58" width="8" height="22"/>
+      <circle class="cl" cx="100" cy="52" r="8"/>`,
+  },
+  {
+    name: "بطريق",
+    svg: `
+      <ellipse class="cl" cx="100" cy="112" rx="48" ry="60"/>
+      <ellipse class="cl" cx="100" cy="122" rx="28" ry="44"/>
+      <polygon class="cl" points="100,80 120,92 100,102"/>
+      <ellipse class="cl" cx="82" cy="170" rx="15" ry="8"/>
+      <ellipse class="cl" cx="118" cy="170" rx="15" ry="8"/>`,
+  },
+  {
+    name: "فيل",
+    svg: `
+      <ellipse class="cl" cx="108" cy="108" rx="54" ry="42"/>
+      <circle class="cl" cx="66" cy="96" r="34"/>
+      <circle class="cl" cx="70" cy="92" r="18"/>
+      <rect class="cl" x="40" y="98" width="15" height="48" rx="7"/>
+      <rect class="cl" x="92" y="142" width="16" height="28" rx="5"/>
+      <rect class="cl" x="128" y="142" width="16" height="28" rx="5"/>`,
+  },
+  {
+    name: "سلحفاة",
+    svg: `
+      <ellipse class="cl" cx="98" cy="104" rx="56" ry="40"/>
+      <circle class="cl" cx="98" cy="104" r="22"/>
+      <circle class="cl" cx="152" cy="100" r="16"/>
+      <ellipse class="cl" cx="64" cy="146" rx="16" ry="9"/>
+      <ellipse class="cl" cx="132" cy="146" rx="16" ry="9"/>`,
+  },
+  {
+    name: "نحلة",
+    svg: `
+      <ellipse class="cl" cx="78" cy="76" rx="20" ry="14"/>
+      <ellipse class="cl" cx="122" cy="76" rx="20" ry="14"/>
+      <ellipse class="cl" cx="100" cy="112" rx="44" ry="34"/>
+      <rect class="cl" x="86" y="82" width="14" height="60" rx="3"/>
+      <rect class="cl" x="106" y="82" width="14" height="60" rx="3"/>`,
+  },
 ];
 
 export function renderColoring({ regionId, regionIndex, title, bg }) {
