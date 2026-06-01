@@ -1,12 +1,13 @@
 // ===== النطق الهجين: OpenAI TTS أولاً ثم Web Speech كبديل =====
 import { isAIReady, aiSpeak, aiStop } from "./ai.js";
+import { MIZO } from "../data/mizo.js";
 
 let voices = [];
 let enabled = "speechSynthesis" in window;
 let useAI = false; // يُضبط من checkAI() عبر setAISpeech()
 
-// خرائط أصوات OpenAI حسب اللغة (يمكن تعديلها لاحقاً)
-const AI_VOICE = { ar: "alloy", en: "nova" };
+// صوت ميزو الثابت لكل لغة (من ملف الهوية المركزي) — كي لا يتغيّر "صديق الطفل"
+const AI_VOICE = MIZO.voice;
 
 /** تفعيل/تعطيل النطق بالـ AI (يستدعيه app.js بعد فحص الخادم) */
 export function setAISpeech(on) {

@@ -1,39 +1,20 @@
 // ===== ميزو: شخصية الطفل المعلّم (SVG متحرّكة بفمٍ يتزامن مع الكلام) =====
 // شبه‑مجسّمة بالتدرّجات والظلال، تطرف بعينيها وتتمايل، وفمها يتحرّك أثناء النطق.
 // خفيفة، بلا أصول خارجية، وتعمل دون إنترنت. تُستخدم في شاشة "معلّم الحروف".
-export const CHARACTER_NAME = "ميزو";
+// الهوية والعبارات تأتي من المصدر المركزي js/data/mizo.js (نعيد تصديرها للتوافق).
+import { MIZO } from "../data/mizo.js";
+export {
+  MIZO,
+  MIZO_INTRO,
+  MIZO_HELLO,
+  MIZO_PRAISE,
+  MIZO_ENCOURAGE,
+  MIZO_GOAL,
+  MIZO_CATCH,
+} from "../data/mizo.js";
+export const CHARACTER_NAME = MIZO.name;
 
-// ===== بنك عبارات ميزو الثابت =====
-// كلّها عبارات محدودة ثابتة، لذا تُولَّد بالـ AI مرّة واحدة وتُخزَّن صوتاً،
-// ثم تُخدَم مجاناً للأبد (انظر server/warm-tts.js). ميزو لا يستهلك AI حيّاً.
-export const MIZO_INTRO = [
-  "أهلاً يا صديقي، أنا ميزو صاحبك الجديد!",
-  "سنتعلّم ونلعب معاً، هيا بنا نبدأ!",
-];
-export const MIZO_HELLO = [
-  "أهلاً بك من جديد يا بطل!",
-  "اشتقتُ إليك، هيا نلعب ونتعلّم!",
-  "مرحباً يا صديقي، أنا ميزو!",
-];
-export const MIZO_PRAISE = [
-  "أحسنت يا بطل!",
-  "رائع، أنت ذكيّ جداً!",
-  "ما شاء الله عليك!",
-  "أنت تتعلّم بسرعة، واصل!",
-  "عملٌ جميل، أنا فخورٌ بك!",
-  "ممتاز يا صديقي، أنت تبدع!",
-];
-export const MIZO_ENCOURAGE = [
-  "لا بأس، حاول مرّة أخرى، أنت تتحسّن!",
-  "قريب جداً، لنجرّب معاً!",
-  "لا تقلق، الأبطال يحاولون دائماً!",
-];
-export const MIZO_GOAL = [
-  "رائع! بلغتَ هدف اليوم، أنت بطل حقيقي!",
-  "أحسنت! أكملت مهامّ اليوم، أنا فخور بك!",
-];
-
-export function createCharacter(name = CHARACTER_NAME) {
+export function createCharacter(name = MIZO.name) {
   const el = document.createElement("div");
   el.className = "miz";
   el.setAttribute("aria-label", name);

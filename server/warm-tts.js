@@ -10,8 +10,8 @@ import { DATASETS } from "../js/data/datasets.js";
 import { MIZO_INTRO, MIZO_HELLO, MIZO_PRAISE, MIZO_ENCOURAGE, MIZO_GOAL } from "../js/games/character.js";
 
 const BASE = process.env.WARM_BASE || `http://localhost:${process.env.PORT || 5000}`;
-const AR = "alloy"; // صوت العربية (يطابق ما يرسله العميل)
-const EN = "nova"; // صوت الإنجليزية
+const AR = "alloy"; // صوت ميزو الثابت للعربية (يطابق ما يرسله العميل)
+const EN = "alloy"; // صوت ميزو الثابت للإنجليزية (موحّد كي لا يتغيّر الصديق)
 
 // عبارة المثال بلغة العنصر (نسخة مطابقة لِما في js/games/common.js)
 function examplePhrase(item, lang) {
