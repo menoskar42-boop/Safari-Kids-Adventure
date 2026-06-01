@@ -12,6 +12,31 @@ import {
   showRewardPopup,
 } from "../core/rewards.js";
 
+/**
+ * رفيق ميزو الصغير داخل اللعبة: يفرح عند النجاح ويتعاطف بلطف عند الخطأ.
+ * append(el.el) في أي مكان بالشاشة، ثم نادِ buddy.win() / buddy.lose().
+ */
+export function mizoBuddy() {
+  const mizo = createCharacter();
+  mizo.el.classList.add("miz-buddy");
+  let busy = 0;
+  return {
+    el: mizo.el,
+    win(say) {
+      mizo.setMood("cheer", 1200);
+      if (say) { mizo.startTalking(900); Speech.mizo(pick(MIZO_CATCH)); }
+    },
+    lose() {
+      mizo.setMood("sad", 900);
+      setTimeout(() => mizo.setMood("happy"), 950);
+    },
+    cheerBig() {
+      mizo.setMood("proud", 1600);
+      clearTimeout(busy);
+    },
+  };
+}
+
 /** عبارة المثال بلغة العنصر: "أَلِف مثل أرنب" أو "A for Apple" */
 export function examplePhrase(item, lang) {
   return lang && lang.startsWith("en")

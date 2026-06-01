@@ -5,7 +5,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, shuffle, finishActivity } from "./common.js";
+import { gameTopbar, shuffle, finishActivity, mizoBuddy } from "./common.js";
 import { glyphMarkup } from "./glyph.js";
 
 const ROUNDS = 6;
@@ -22,6 +22,9 @@ export function renderReadMatch({ regionId, regionIndex, datasetKey, lang, title
   screen.style.background = bg || "linear-gradient(180deg,#d7f0ff,#8fb8ff)";
   const back = () => Router.go("region", { id: regionId, index: regionIndex });
   screen.appendChild(gameTopbar(title || "📖 اقرأ واختر", back));
+
+  const buddy = mizoBuddy();
+  screen.appendChild(buddy.el);
 
   const stage = document.createElement("div");
   stage.className = "stage";
@@ -62,6 +65,7 @@ export function renderReadMatch({ regionId, regionIndex, datasetKey, lang, title
         if (it === target) {
           Sfx.correct();
           b.classList.add("correct");
+          buddy.win();
           Speech.say(target.name, { lang: speakLang });
           awardStars(1);
           i++;
@@ -69,6 +73,7 @@ export function renderReadMatch({ regionId, regionIndex, datasetKey, lang, title
           else setTimeout(render, 800);
         } else {
           Sfx.wrong();
+          buddy.lose();
           b.classList.add("wrong");
           setTimeout(() => b.classList.remove("wrong"), 450);
         }

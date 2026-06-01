@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, shuffle, finishActivity } from "./common.js";
+import { gameTopbar, shuffle, finishActivity, mizoBuddy } from "./common.js";
 
 const GROUPS = [
   ["ب", "ت", "ث"], ["ج", "ح", "خ"], ["د", "ذ"], ["ر", "ز"],
@@ -22,6 +22,9 @@ export function renderSimilar({ regionId, regionIndex, title }) {
   screen.style.background = "linear-gradient(180deg,#ffe9c7,#ff9a8b)";
   const back = () => Router.go("region", { id: regionId, index: regionIndex });
   screen.appendChild(gameTopbar(title || "👀 الحروف المتشابهة", back));
+
+  const buddy = mizoBuddy();
+  screen.appendChild(buddy.el);
 
   const stage = document.createElement("div");
   stage.className = "stage";
@@ -53,6 +56,7 @@ export function renderSimilar({ regionId, regionIndex, title }) {
       b.addEventListener("click", () => {
         if (ch === target) {
           Sfx.correct();
+          buddy.win();
           b.classList.add("correct");
           Speech.ar(nameOf(target));
           awardStars(1);
@@ -61,6 +65,7 @@ export function renderSimilar({ regionId, regionIndex, title }) {
           else setTimeout(render, 900);
         } else {
           Sfx.wrong();
+          buddy.lose();
           b.classList.add("wrong");
           setTimeout(() => b.classList.remove("wrong"), 450);
         }

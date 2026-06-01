@@ -1,3 +1,11 @@
+/* ===== رفيق ميزو داخل الألعاب ===== */
+.miz-buddy { display: block; margin: 0 auto; }
+.miz-buddy .miz-svg { width: clamp(56px, 16vw, 84px); }
+
+/* ===== رحلة الصداقة (شريط تقدّم) ===== */
+.fr-bar { height: 16px; border-radius: 10px; background: #e7defb; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,.12); }
+.fr-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg,#ffd23f,#ff924c); transition: width .5s ease; }
+
 /* ===== مركز المرح ===== */
 .region-card { position: relative; }
 .hub-flag {

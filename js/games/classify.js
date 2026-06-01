@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, shuffle, finishActivity } from "./common.js";
+import { gameTopbar, shuffle, finishActivity, mizoBuddy } from "./common.js";
 
 export function renderClassify({ regionId, regionIndex, setId, title }) {
   const set = getClassifySet(setId);
@@ -30,6 +30,9 @@ export function renderClassify({ regionId, regionIndex, setId, title }) {
   row.style.cssText = "display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:8px 12px";
   screen.appendChild(row);
 
+  const buddy = mizoBuddy();
+  screen.appendChild(buddy.el);
+
   function render() {
     const it = rounds[i];
     word.textContent = it.word;
@@ -44,6 +47,7 @@ export function renderClassify({ regionId, regionIndex, setId, title }) {
       b.addEventListener("click", () => {
         if (it.cat === cat) {
           Sfx.correct();
+          buddy.win();
           Speech.ar(it.word);
           awardStars(1);
           i++;
@@ -51,6 +55,7 @@ export function renderClassify({ regionId, regionIndex, setId, title }) {
           else setTimeout(render, 800);
         } else {
           Sfx.wrong();
+          buddy.lose();
           b.classList.add("wrong");
           setTimeout(() => b.classList.remove("wrong"), 450);
         }

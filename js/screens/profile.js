@@ -86,6 +86,21 @@ export function renderProfile() {
   fTitle.textContent = `صداقتك مع ميزو: المستوى ${fLevel} 💛`;
   wrap.appendChild(fTitle);
 
+  // رحلة الصداقة المرئية: شريط تقدّم + كم باقٍ للمستوى/الإكسسوار التالي
+  const xp = Store.friendship.xp || 0;
+  const inLvl = xp % 12;
+  const toNext = 12 - inLvl;
+  const UNLOCKS = { 2: "🎀 فيونكة", 3: "🎩 قبعة", 4: "👑 تاج", 5: "⭐ نجمة" };
+  const nextAcc = UNLOCKS[fLevel + 1];
+  const journey = document.createElement("div");
+  journey.style.cssText = "max-width:340px;margin:0 auto 10px";
+  journey.innerHTML = `
+    <div class="fr-bar"><div class="fr-fill" style="width:${Math.round((inLvl / 12) * 100)}%"></div></div>
+    <p style="font-size:13px;color:#7a6ca8;text-align:center;margin:6px 0">
+      باقي ${toNext} خطوات ويكبر مستوى صداقتنا${nextAcc ? ` — ويفتح ${nextAcc}` : ""} 💛
+    </p>`;
+  wrap.appendChild(journey);
+
   const preview = document.createElement("div");
   preview.style.cssText = "display:grid;place-items:center;margin:4px 0";
   const previewMizo = createCharacter();
