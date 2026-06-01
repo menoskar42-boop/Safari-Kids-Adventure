@@ -5,6 +5,7 @@ import { MIZO } from "../data/mizo.js";
 let voices = [];
 let enabled = "speechSynthesis" in window;
 let useAI = false; // يُضبط من checkAI() عبر setAISpeech()
+let speakSeq = 0; // رمز تسلسل النطق لمنع تداخل OpenAI مع Web Speech
 
 // صوت ميزو الثابت لكل لغة (من ملف الهوية المركزي) — كي لا يتغيّر "صديق الطفل"
 const AI_VOICE = MIZO.voice;
@@ -61,13 +62,17 @@ export const Speech = {
       return;
     }
     const lang = opts.lang || "ar-EG";
+    const myId = ++speakSeq; // رمز تسلسل: أيّ نطق جديد يُلغي ما قبله
 
     // المسار المفضّل: OpenAI TTS (صوت أوضح وأدفأ للأطفال)
     if (useAI && isAIReady()) {
+      // أوقف أي Web Speech عالق كي لا يتداخل صوتان معاً
+      if (enabled) { try { window.speechSynthesis.cancel(); } catch (e) {} }
       const voice = AI_VOICE[lang.slice(0, 2)] || undefined;
       aiSpeak(text, { voice, instructions: opts.instructions }).then(
-        () => { if (opts.onend) opts.onend(); },
-        () => this._webSpeak(text, opts) // أي فشل → بديل فوري
+        () => { if (myId === speakSeq && opts.onend) opts.onend(); },
+        // بديل Web Speech فقط إن لم يُستبدَل هذا النطق بنطقٍ أحدث (يمنع تداخل AI + Web)
+        () => { if (myId === speakSeq) this._webSpeak(text, opts); }
       );
       return;
     }
