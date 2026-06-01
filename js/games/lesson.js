@@ -68,8 +68,10 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title })
     const parts = [];
     if (!greeted) {
       greeted = true;
+      mizo.setMood("wave", 2800);
       MIZO_INTRO.forEach((t) => parts.push({ text: t, lang: "ar-EG" }));
     } else if (Math.random() < 0.5) {
+      mizo.setMood("cheer", 1900);
       parts.push({ text: pick(MIZO_PRAISE), lang: "ar-EG" });
     }
     parts.push({ text: `هذا ${noun} ${label}`, lang: speakLang });

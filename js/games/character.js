@@ -57,8 +57,10 @@ export function createCharacter(name = CHARACTER_NAME) {
         <circle cx="148" cy="64" r="16"/>
       </g>
       <!-- الحاجبان -->
-      <path d="M66 72 Q78 65 91 72" stroke="#46291a" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <path d="M109 72 Q122 65 134 72" stroke="#46291a" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <g class="miz-brows">
+        <path d="M66 72 Q78 65 91 72" stroke="#46291a" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M109 72 Q122 65 134 72" stroke="#46291a" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </g>
       <!-- العينان (تطرفان) -->
       <g class="miz-eyes">
         <ellipse cx="80" cy="90" rx="11" ry="13" fill="#fff"/>
@@ -75,10 +77,20 @@ export function createCharacter(name = CHARACTER_NAME) {
       <circle cx="134" cy="110" r="8" fill="#ff9d9d" opacity=".55"/>
       <!-- الفم (يتحرّك مع الكلام) -->
       <ellipse class="miz-mouth" cx="100" cy="118" rx="14" ry="9" fill="#8a3a2c"/>
+      <!-- يد تلوّح (تظهر عند الترحيب) -->
+      <g class="miz-hand">
+        <path d="M150 96 q14 -16 27 -2 q9 9 -2 21 q-10 12 -23 3 q-10 -8 -2 -22 z" fill="#f3b98e" stroke="#e0a074" stroke-width="2"/>
+      </g>
+      <!-- بريق (يظهر عند الفرح) -->
+      <g class="miz-spark" fill="#ffd23f">
+        <path d="M34 44 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z"/>
+        <path d="M170 34 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z"/>
+      </g>
     </svg>`;
 
   const mouth = el.querySelector(".miz-mouth");
   let stopTimer = null;
+  let moodTimer = null;
 
   function startTalking(ms) {
     el.classList.add("talking");
@@ -90,5 +102,15 @@ export function createCharacter(name = CHARACTER_NAME) {
     el.classList.remove("talking");
   }
 
-  return { el, startTalking, stopTalking, name, mouth };
+  const MOODS = ["happy", "cheer", "think", "wave"];
+  // يضبط تعبير ميزو (سعيد/فرِح/مفكّر/يلوّح). مع ms يعود تلقائياً لـ"happy".
+  function setMood(mood, ms) {
+    MOODS.forEach((m) => el.classList.remove("mood-" + m));
+    el.classList.add("mood-" + (MOODS.includes(mood) ? mood : "happy"));
+    clearTimeout(moodTimer);
+    if (ms) moodTimer = setTimeout(() => setMood("happy"), ms);
+  }
+  setMood("happy");
+
+  return { el, startTalking, stopTalking, setMood, name, mouth };
 }
