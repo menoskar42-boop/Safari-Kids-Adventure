@@ -226,3 +226,5 @@ img.item-img {
 .bg-countries { background: linear-gradient(160deg, #ee9ca7, #ffdde1); }
 .bg-tools    { background: linear-gradient(160deg, #bdc3c7, #2c3e50); }
 .bg-appliances { background: linear-gradient(160deg, #8e9eab, #eef2f3); }
+.bg-timeday  { background: linear-gradient(160deg, #2c3e50, #fd746c); }
+.bg-tastes   { background: linear-gradient(160deg, #f7b733, #fc4a1a); }

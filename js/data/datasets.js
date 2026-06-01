@@ -35,6 +35,8 @@ import { NATURE } from "./nature.js";
 import { COUNTRIES } from "./countries.js";
 import { TOOLS } from "./tools.js";
 import { APPLIANCES } from "./appliances.js";
+import { TIMEDAY } from "./timeday.js";
+import { TASTES } from "./tastes.js";
 
 const DATASETS = {
   arabic: {
@@ -83,6 +85,8 @@ const DATASETS = {
   countries: { key: "countries", lang: "ar-EG", glyphKind: "emoji", items: COUNTRIES },
   tools: { key: "tools", lang: "ar-EG", glyphKind: "emoji", items: TOOLS },
   appliances: { key: "appliances", lang: "ar-EG", glyphKind: "emoji", items: APPLIANCES },
+  timeday: { key: "timeday", lang: "ar-EG", glyphKind: "emoji", items: TIMEDAY },
+  tastes: { key: "tastes", lang: "ar-EG", glyphKind: "emoji", items: TASTES },
 };
 
 export function getDataset(key) {
