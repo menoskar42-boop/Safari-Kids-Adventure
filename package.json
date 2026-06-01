@@ -8,6 +8,7 @@
     "start": "node server/index.js",
     "dev": "node server/index.js",
     "warm-tts": "node server/warm-tts.js",
+    "clear-tts": "node server/clear-tts.js",
     "smoke": "node test/smoke.mjs"
   },
   "engines": {

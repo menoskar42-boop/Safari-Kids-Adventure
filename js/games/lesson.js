@@ -9,16 +9,23 @@ import { Sfx } from "../core/audio.js";
 import { gameTopbar, finishActivity } from "./common.js";
 import { createCharacter, MIZO_INTRO, MIZO_PRAISE } from "./character.js";
 
-export function renderLesson({ regionId, regionIndex, datasetKey, lang, title }) {
+export function renderLesson({ regionId, regionIndex, datasetKey, lang, title, startChar, motivate }) {
   const ds = getDataset(datasetKey);
   const speakLang = lang || ds.lang || "ar-EG";
   const isAr = speakLang.startsWith("ar");
   const noun = ds.glyphKind === "number" ? "رقم" : "حرف";
   const items = ds.items;
-  let idx = 0;
 
   const glyphOf = (it) => it.char || it.arDigit || it.name;
   const labelOf = (it) => it.name || it.arName || "";
+
+  // عند العودة من "اكتبه" نبدأ عند نفس الحرف الذي كتبه الطفل
+  let idx = 0;
+  if (startChar) {
+    const fi = items.findIndex((it) => glyphOf(it) === startChar);
+    if (fi >= 0) idx = fi;
+  }
+  let motivateOnce = !!motivate;
 
   const screen = document.createElement("div");
   screen.className = "region-screen";
@@ -95,21 +102,34 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title })
     const it = items[idx];
     glyphEl.textContent = glyphOf(it);
     const label = labelOf(it);
+    animateWrite();
+    Sfx.pop();
+    wrap.querySelector("#lsPrev").disabled = idx === 0;
+
+    // عند العودة من "اكتبه": رسالة تحفيز من ميزو بالعامية بدل إعادة الشرح
+    if (motivateOnce) {
+      motivateOnce = false;
+      greeted = true;
+      const praise = "برافو! كتبت الحرف صح يا بطل، يلا نكمّل!";
+      bubble.textContent = praise;
+      mizo.setMood("cheer", 1900);
+      mizo.startTalking(praise.length * 90 + 1000);
+      Speech.mizo(praise);
+      return;
+    }
+
     const greet = !greeted ? `أهلاً، أنا <b>ميزو</b> صديقك الجديد! 👋<br>` : "";
     bubble.innerHTML = greet + (it.word
       ? `هذا ${noun} «${label}» ${it.emoji || ""}<br>${label} مثل ${it.word}`
       : `هذا ${noun} «${label}»`);
-    animateWrite();
-    Sfx.pop();
     narrate(it);
-    wrap.querySelector("#lsPrev").disabled = idx === 0;
   }
 
   wrap.querySelector("#lsPlay").addEventListener("click", () => { animateWrite(); narrate(items[idx]); });
   wrap.querySelector("#lsWrite").addEventListener("click", () => {
     Sfx.tap();
-    // نمرّر الحرف/الرقم الحالي ليبدأ به التتبّع (لا حرف عشوائي)
-    Router.go("trace", { regionId, regionIndex, datasetKey, lang, focus: glyphOf(items[idx]) });
+    // نكتب الحرف الحالي فقط ثم نعود للدرس برسالة تحفيز من ميزو
+    Router.go("trace", { regionId, regionIndex, datasetKey, lang, focus: glyphOf(items[idx]), returnLesson: true, lessonTitle: title });
   });
   wrap.querySelector("#lsPrev").addEventListener("click", () => {
     if (idx > 0) { idx--; render(); }

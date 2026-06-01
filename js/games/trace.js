@@ -9,7 +9,7 @@ const TRACE_COUNT = 6;
 const RES = 300; // دقّة داخلية ثابتة
 const THRESHOLD = 0.62; // نسبة التغطية المطلوبة (أعلى كي لا يكتمل قبل إتمام الشكل)
 
-export function renderTrace({ regionId, regionIndex, datasetKey, lang, title, focus }) {
+export function renderTrace({ regionId, regionIndex, datasetKey, lang, title, focus, returnLesson, lessonTitle }) {
   const ds = getDataset(datasetKey);
   const speakLang = lang || ds.lang;
   const noun = ds.glyphKind === "number" ? "الرقم" : "الحرف";
@@ -17,7 +17,9 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang, title, fo
   // إن طُلب حرف/رقم محدّد (من معلّم الحروف) نجعله أول ما يُكتب
   if (focus) {
     const f = ds.items.find((x) => (x.char || x.arDigit || x.name) === focus);
-    if (f) letters = [f, ...shuffle(ds.items.filter((x) => x !== f)).slice(0, TRACE_COUNT - 1)];
+    // قادم من معلّم الحرف: حرف واحد فقط ثم نعود للدرس برسالة محفّزة
+    if (f && returnLesson) letters = [f];
+    else if (f) letters = [f, ...shuffle(ds.items.filter((x) => x !== f)).slice(0, TRACE_COUNT - 1)];
   }
   let idx = 0;
 
@@ -72,10 +74,10 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang, title, fo
     function paintGuide(color) {
       gctx.clearRect(0, 0, RES, RES);
       gctx.fillStyle = color;
-      gctx.font = `bold ${RES * 0.8}px "Baloo Bhaijaan 2", sans-serif`;
+      gctx.font = `bold ${RES * 0.6}px "Baloo Bhaijaan 2", sans-serif`;
       gctx.textAlign = "center";
       gctx.textBaseline = "middle";
-      gctx.fillText(glyph, RES / 2, RES / 2 + RES * 0.04);
+      gctx.fillText(glyph, RES / 2, RES / 2 + RES * 0.06);
     }
     paintGuide("#d9d0f0");
 
@@ -84,10 +86,10 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang, title, fo
     mask.width = mask.height = RES;
     const mctx = mask.getContext("2d");
     mctx.fillStyle = "#000";
-    mctx.font = `bold ${RES * 0.8}px "Baloo Bhaijaan 2", sans-serif`;
+    mctx.font = `bold ${RES * 0.6}px "Baloo Bhaijaan 2", sans-serif`;
     mctx.textAlign = "center";
     mctx.textBaseline = "middle";
-    mctx.fillText(glyph, RES / 2, RES / 2 + RES * 0.04);
+    mctx.fillText(glyph, RES / 2, RES / 2 + RES * 0.06);
     const maskData = mctx.getImageData(0, 0, RES, RES).data;
     let maskTotal = 0;
     for (let p = 3; p < maskData.length; p += 4) if (maskData[p] > 40) maskTotal++;
@@ -187,9 +189,16 @@ export function renderTrace({ regionId, regionIndex, datasetKey, lang, title, fo
   function next() {
     idx++;
     if (idx >= letters.length) {
-      showCheer("🌟", "أحسنت! أكملت الرسم", () =>
-        finishActivity({ regionId, regionIndex, stars: 6, onDone: back })
-      );
+      if (returnLesson) {
+        // قادم من معلّم الحرف: نعود للدرس برسالة محفّزة من ميزو (لا ننتقل لحرف آخر)
+        showCheer("✍️", "برافو! كتبت الحرف صح، يلا نكمّل!", () =>
+          Router.go("lesson", { regionId, regionIndex, datasetKey, lang, title: lessonTitle, startChar: focus, motivate: true })
+        );
+      } else {
+        showCheer("🌟", "أحسنت! أكملت الرسم", () =>
+          finishActivity({ regionId, regionIndex, stars: 6, onDone: back })
+        );
+      }
     } else {
       render();
     }
