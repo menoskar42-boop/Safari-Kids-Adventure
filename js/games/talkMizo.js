@@ -79,7 +79,7 @@ export function renderTalkMizo({ regionId, regionIndex, title }) {
   }
 
   function succeed() {
-    mizo.setMood("cheer", 1800);
+    mizo.setMood("proud", 1800);
     Sfx.correct();
     const praise = pick(MIZO_PRAISE);
     bubble.textContent = praise;
@@ -89,6 +89,7 @@ export function renderTalkMizo({ regionId, regionIndex, title }) {
   }
   function encourage() {
     const it = rounds[i];
+    mizo.setMood("sad", 1600);
     Sfx.pop();
     const msg = "محاولة جميلة! لنسمعها معاً";
     bubble.textContent = msg;
@@ -110,6 +111,7 @@ export function renderTalkMizo({ regionId, regionIndex, title }) {
       recorder.onstop = () => { stream.getTracks().forEach((t) => t.stop()); handle(); };
       recorder.start();
       listening = true;
+      mizo.setMood("listening");
       micBtn.textContent = "⏺️ أستمع... (اضغط للإنهاء)";
       bubble.textContent = "أنا أستمع إليك 🎤";
       Sfx.pop();

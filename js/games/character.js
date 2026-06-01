@@ -104,7 +104,7 @@ export function createCharacter(name = MIZO.name) {
     el.classList.remove("talking");
   }
 
-  const MOODS = ["happy", "cheer", "think", "wave"];
+  const MOODS = ["happy", "cheer", "think", "wave", "proud", "surprised", "listening", "sad"];
   // يضبط تعبير ميزو (سعيد/فرِح/مفكّر/يلوّح). مع ms يعود تلقائياً لـ"happy".
   function setMood(mood, ms) {
     MOODS.forEach((m) => el.classList.remove("mood-" + m));
