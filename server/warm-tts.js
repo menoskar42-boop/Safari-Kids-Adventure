@@ -8,7 +8,7 @@
 // أو مع عنوان مختلف:  WARM_BASE=http://localhost:5000 node server/warm-tts.js
 import { DATASETS } from "../js/data/datasets.js";
 import { MIZO_INTRO, MIZO_HELLO, MIZO_PRAISE, MIZO_ENCOURAGE, MIZO_GOAL, MIZO_CATCH } from "../js/games/character.js";
-import { MIZO_SONG } from "../js/data/mizo.js";
+import { MIZO_SONG, MIZO_CHAT } from "../js/data/mizo.js";
 
 const BASE = process.env.WARM_BASE || `http://localhost:${process.env.PORT || 5000}`;
 const AR = "alloy"; // صوت ميزو الثابت للعربية (يطابق ما يرسله العميل)
@@ -61,6 +61,8 @@ for (const ds of Object.values(DATASETS)) {
 
 // كل بنك عبارات ميزو الثابت — تُنطق دائماً بالعربية (AI مرّة واحدة ثم مخزَّنة)
 [...MIZO_INTRO, ...MIZO_HELLO, ...MIZO_PRAISE, ...MIZO_ENCOURAGE, ...MIZO_GOAL, ...MIZO_CATCH, ...MIZO_SONG].forEach((t) => add(t, AR));
+// كلمات دردشة ميزو (الأسئلة + كل الردود) — ثابتة فتُخزَّن مرّة واحدة
+MIZO_CHAT.forEach((s) => { add(s.q, AR); s.opts.forEach((o) => add(o.r, AR)); });
 
 // جُمَل المعلّم الافتراضي لكل حرف/رقم: "هذا حرف ..." و"..." منفردة
 for (const key of ["arabic", "english", "numbers"]) {
