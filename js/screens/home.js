@@ -44,11 +44,14 @@ export function renderHome() {
   const who = Store.childName ? `مرحباً يا ${Store.childName}!` : "مرحباً يا بطل!";
   // ميزو يتذكّر الطفل: ترحيب شخصي للعائد
   const f = Store.friendship;
-  let bubbleMsg;
+  // نصّ العرض (مع إيموجي وتنسيق) ونصّ منطوق صريح مستقل (يضمن "أنا ميزو" دائماً)
+  let bubbleMsg, spoken;
   if (f.visits > 1 && f.lastRegion) {
-    bubbleMsg = `${who} اشتقتُ إليك! آخر مرّة لعبنا في <b>${f.lastRegion}</b>. هيا نكمل المغامرة ✨`;
+    bubbleMsg = `${who} أنا <b>ميزو</b> 👋 اشتقتُ إليك! آخر مرّة لعبنا في <b>${f.lastRegion}</b> ✨`;
+    spoken = `${who} أنا ميزو، اشتقتُ إليك. آخر مرّة لعبنا في ${f.lastRegion}. هيا نكمل المغامرة`;
   } else {
     bubbleMsg = `${who} أنا <b>ميزو</b> 👋 اختر منطقة لنبدأ المغامرة ✨`;
+    spoken = `${who} أنا ميزو، صديقك. اختر منطقة لنبدأ المغامرة`;
   }
   banner.innerHTML = `
     <button class="guide-emoji guide-miz" id="profileBtn" style="background:none;border:none;cursor:pointer" title="ملفي"></button>
@@ -59,14 +62,8 @@ export function renderHome() {
   banner.querySelector("#profileBtn").appendChild(guide.el);
   setTimeout(() => guide.setMood("wave", 2600), 250);
   // ترحيب صوتي مرّة واحدة في الجلسة — ننتظر جاهزية الـ AI كي يستخدم صوت ميزو
-  // (OpenAI) لا Web Speech، وننطق النصّ المكتوب نفسه بلا إيموجي.
   if (!greetedSession) {
     greetedSession = true;
-    const spoken = bubbleMsg
-      .replace(/<[^>]+>/g, "")
-      .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F1E6}-\u{1F1FF}\u{200D}]/gu, "")
-      .replace(/\s+/g, " ")
-      .trim();
     whenSpeechReady().then(() => {
       guide.startTalking(spoken.length * 80 + 1200);
       Speech.ar(spoken);
