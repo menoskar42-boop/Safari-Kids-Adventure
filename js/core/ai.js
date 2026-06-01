@@ -46,6 +46,7 @@ export function aiSpeak(text, opts = {}) {
           voice: opts.voice,
           instructions: opts.instructions,
         }),
+        signal: opts.signal, // يسمح بإلغاء الطلب إن تأخّر (مهلة)
       });
       if (!r.ok) throw new Error("tts " + r.status);
 
@@ -63,6 +64,7 @@ export function aiSpeak(text, opts = {}) {
         reject(new Error("audio_play"));
       };
       await audioEl.play();
+      if (opts.onStart) opts.onStart(); // بدأ التشغيل فعلاً (نلغي مهلة البديل)
     } catch (e) {
       reject(e);
     }

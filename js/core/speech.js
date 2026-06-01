@@ -64,15 +64,32 @@ export const Speech = {
     const lang = opts.lang || "ar-EG";
     const myId = ++speakSeq; // رمز تسلسل: أيّ نطق جديد يُلغي ما قبله
 
-    // المسار المفضّل: OpenAI TTS فقط (لا نخلطه أبداً مع Web Speech لتفادي التداخل)
+    // المسار المفضّل: OpenAI TTS. وإن تعثّر/تأخّر أكثر من المهلة → Web Speech
+    // (مع إلغاء طلب الـ AI المعلّق أولاً كي لا يتداخل صوتان معاً).
     if (useAI && isAIReady()) {
-      // أوقف أي Web Speech عالق كي لا يتداخل صوتان معاً
       if (enabled) { try { window.speechSynthesis.cancel(); } catch (e) {} }
       const voice = AI_VOICE[lang.slice(0, 2)] || undefined;
-      aiSpeak(text, { voice, instructions: opts.instructions }).then(
-        () => { if (myId === speakSeq && opts.onend) opts.onend(); },
-        // عند تعذّر صوت الـ AI: نبقى صامتين (لا Web Speech) — المستخدم يريد OpenAI فقط
-        () => { if (myId === speakSeq && opts.onend) opts.onend(); }
+      const ctrl = "AbortController" in window ? new AbortController() : null;
+      let started = false, settled = false;
+      const fallback = () => {
+        if (settled) return;
+        settled = true;
+        if (myId === speakSeq) this._webSpeak(text, opts);
+        else if (opts.onend) opts.onend();
+      };
+      // مهلة: إن لم يبدأ صوت الـ AI خلال ١٠ ثوانٍ نُلغيه ونشغّل Web Speech
+      const timer = setTimeout(() => {
+        if (!started && !settled) { try { ctrl && ctrl.abort(); } catch (e) {} fallback(); }
+      }, 10000);
+      aiSpeak(text, {
+        voice,
+        instructions: opts.instructions,
+        signal: ctrl ? ctrl.signal : undefined,
+        onStart: () => { started = true; clearTimeout(timer); },
+      }).then(
+        () => { clearTimeout(timer); if (!settled) { settled = true; if (myId === speakSeq && opts.onend) opts.onend(); } },
+        // فشل: إن لم يبدأ صوت بعد → Web Speech؛ وإن كان قد بدأ ثم تعثّر → لا نخلط
+        () => { clearTimeout(timer); if (started) { if (!settled) { settled = true; if (opts.onend) opts.onend(); } } else fallback(); }
       );
       return;
     }
