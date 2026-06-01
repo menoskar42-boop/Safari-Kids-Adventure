@@ -386,13 +386,22 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
   width: clamp(96px, 28vw, 150px);
   height: auto;
   display: block;
-  animation: bob 3s ease-in-out infinite;
+  animation: miz-idle 3.4s ease-in-out infinite;
   filter: drop-shadow(0 8px 8px rgba(0,0,0,.18));
+}
+/* تمايل أحيوى أثناء الخمول (طفو + ميل خفيف) */
+@keyframes miz-idle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(-1.6deg); }
+  60% { transform: translateY(-2px) rotate(1.6deg); }
 }
 /* صورة ميزو ٣D (بدل الـ SVG) */
 .miz-img { object-fit: contain; }
 .miz-photo.talking .miz-svg { animation: miz-talk-pulse .5s ease-in-out infinite; }
 @keyframes miz-talk-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+/* تلويح فعلي باليد: اهتزاز للصورة حول محور الجسم يحاكي حركة التلويح */
+.miz-photo.waving .miz-svg { transform-origin: 50% 85%; animation: miz-hand-wave .42s ease-in-out 3; }
+@keyframes miz-hand-wave { 0%,100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
 .miz-acc-emoji {
   position: absolute;
   top: -4%; left: 50%;

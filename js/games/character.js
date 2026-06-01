@@ -46,7 +46,12 @@ export function createCharacter(name = MIZO.name) {
     el.appendChild(s);
   }
 
-  let stopTimer = null, moodTimer = null;
+  let stopTimer = null, moodTimer = null, talkLoop = null;
+  let talkOk = false, blinkOk = false;
+  // نفحص توفّر إطارات الأنيميشن (فم مفتوح / عيون مغلقة) — تُفعَّل تلقائياً عند وجودها
+  const probeTalk = new Image(); probeTalk.onload = () => { talkOk = true; }; probeTalk.src = "/assets/mizo/mizo-talk.png";
+  const probeBlink = new Image(); probeBlink.onload = () => { blinkOk = true; }; probeBlink.src = "/assets/mizo/mizo-blink.png";
+
   function show(mood) {
     const key = MOOD_IMG[mood] ? mood : "happy";
     img.src = `/assets/mizo/${MOOD_IMG[key]}.png`;
@@ -54,11 +59,20 @@ export function createCharacter(name = MIZO.name) {
   function startTalking(ms) {
     el.classList.add("talking");
     clearTimeout(stopTimer);
+    // تحريك الشفاه: تبديل سريع بين مغلق/مفتوح أثناء النطق (إن توفّرت صورة الفم المفتوح)
+    if (talkOk && !talkLoop && (img.getAttribute("src") || "").includes("mizo-wave")) {
+      let open = false;
+      talkLoop = setInterval(() => {
+        open = !open;
+        img.src = open ? "/assets/mizo/mizo-talk.png" : "/assets/mizo/mizo-wave.png";
+      }, 160);
+    }
     if (ms) stopTimer = setTimeout(stopTalking, ms);
   }
   function stopTalking() {
     clearTimeout(stopTimer);
     el.classList.remove("talking");
+    if (talkLoop) { clearInterval(talkLoop); talkLoop = null; img.src = "/assets/mizo/mizo-wave.png"; }
   }
   // يضبط تعبير ميزو. مع ms يعود تلقائياً لـ"happy".
   function setMood(mood, ms) {
@@ -67,6 +81,33 @@ export function createCharacter(name = MIZO.name) {
     if (ms) moodTimer = setTimeout(() => show("happy"), ms);
   }
   show("happy");
+
+  // ===== حيوية أثناء الخمول: لفتات عفوية كي لا يبقى ثابتاً =====
+  const IDLE_GESTURES = ["cheer", "proud", "surprised", "think", "wave"];
+  const idleLoop = setInterval(() => {
+    if (!el.isConnected) { clearInterval(idleLoop); return; }       // تنظيف عند إزالة العنصر
+    if (document.hidden) return;
+    if (el.classList.contains("talking")) return;                    // لا نقاطع الكلام
+    if (!(img.getAttribute("src") || "").includes("mizo-wave")) return; // فقط في وضع الخمول
+    const g = IDLE_GESTURES[(Math.random() * IDLE_GESTURES.length) | 0];
+    show(g);
+    el.classList.add("gesture");
+    if (g === "wave") { el.classList.add("waving"); setTimeout(() => el.classList.remove("waving"), 1300); }
+    clearTimeout(moodTimer);
+    moodTimer = setTimeout(() => { show("happy"); el.classList.remove("gesture"); }, 1300);
+  }, 6000 + Math.random() * 4000);
+
+  // ===== رمشة العين: تُفعَّل تلقائياً عند توفّر إطار العيون المغلقة =====
+  const blinkLoop = setInterval(() => {
+    if (!el.isConnected) { clearInterval(blinkLoop); return; }
+    if (!blinkOk || document.hidden) return;
+    if (el.classList.contains("talking")) return;
+    if (!(img.getAttribute("src") || "").includes("mizo-wave")) return; // يرمش في وضع الخمول
+    img.src = "/assets/mizo/mizo-blink.png";
+    setTimeout(() => {
+      if ((img.getAttribute("src") || "").includes("mizo-blink")) img.src = "/assets/mizo/mizo-wave.png";
+    }, 150);
+  }, 3500 + Math.random() * 2500);
 
   return { el, startTalking, stopTalking, setMood, name, mouth: null };
 }
