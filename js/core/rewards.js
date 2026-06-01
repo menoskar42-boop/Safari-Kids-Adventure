@@ -3,6 +3,7 @@ import { Store } from "./storage.js";
 import { Sfx } from "./audio.js";
 import { Confetti } from "./confetti.js";
 import { Speech } from "./speech.js";
+import { createCharacter } from "../games/character.js";
 
 // مجموعة العناصر القابلة للجمع (حيوانات أليفة، سيارات، أجنحة، قبعات...)
 export const COLLECTIBLES = [
@@ -84,6 +85,11 @@ export function showRewardPopup(item, onClose) {
       <p style="font-size:20px;font-weight:700;color:var(--c-ink);margin:.2em 0 1em">${item.name}</p>
       <button class="candy-btn" id="rewardOk">رائع! 🎉</button>
     </div>`;
+  // ميزو يحتفل بالمكافأة
+  const mizo = createCharacter();
+  mizo.setMood("cheer");
+  mizo.el.classList.add("cheer-miz");
+  overlay.querySelector(".cheer-card").insertBefore(mizo.el, overlay.querySelector(".cheer-text"));
   document.body.appendChild(overlay);
   Speech.ar(`حصلت على ${item.name}`);
   overlay.querySelector("#rewardOk").addEventListener("click", () => {
