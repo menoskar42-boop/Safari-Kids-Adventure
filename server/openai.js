@@ -243,11 +243,20 @@ export function registerOpenAIRoutes(app) {
 
     try {
       const bytes = Buffer.from(audioBase64, "base64");
-      const blob = new Blob([bytes], { type: mime || "audio/webm" });
+      const mimeStr = String(mime || "audio/webm");
+      // اسم الملف يجب أن يطابق الصيغة الفعلية (iOS يسجّل mp4، وكروم webm) وإلا ساء التفريغ
+      const ext = /mp4|m4a|aac/.test(mimeStr) ? "mp4"
+        : /ogg|opus/.test(mimeStr) ? "ogg"
+        : /wav/.test(mimeStr) ? "wav"
+        : /mpeg|mp3/.test(mimeStr) ? "mp3"
+        : "webm";
+      const blob = new Blob([bytes], { type: mimeStr });
       const form = new FormData();
-      form.append("file", blob, "speech.webm");
+      form.append("file", blob, `speech.${ext}`);
       form.append("model", STT_MODEL);
       if (lang) form.append("language", String(lang).slice(0, 2));
+      // سياق يساعد الموديل على فهم كلام طفل صغير بكلمات بسيطة
+      form.append("prompt", "كلام طفل صغير يتحدّث العربية بكلمات بسيطة وأسئلة قصيرة مثل: ما هذا؟ ما اسمه؟ ما لونه؟");
 
       const r = await fetch(`${OPENAI_BASE}/audio/transcriptions`, {
         method: "POST",

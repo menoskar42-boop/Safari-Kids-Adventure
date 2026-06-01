@@ -4,11 +4,14 @@
 import { isAIReady, aiAsk, aiTranscribe } from "./ai.js";
 import { Speech } from "./speech.js";
 import { Sfx } from "./audio.js";
+import { createCharacter } from "../games/character.js";
 
 let recorder = null;
 let chunks = [];
 let listening = false;
 let overlay = null;
+let mizo = null; // شخصية ميزو داخل الزرّ العائم
+const INVITE = "قول يا صاحبي، عاوز إيه؟ أنا معاك";
 
 /** هل المساعد متاح؟ (AI + دعم التسجيل) */
 export function assistantAvailable() {
@@ -28,10 +31,17 @@ export function mountAssistantButton() {
   const btn = document.createElement("button");
   btn.id = "assistantBtn";
   btn.className = "assistant-fab";
-  btn.title = "اسألني! ما هذا؟";
-  btn.innerHTML = "🎤";
+  btn.title = "اسألني! قول عاوز إيه؟";
+  mizo = createCharacter();
+  btn.appendChild(mizo.el);
+  const badge = document.createElement("span");
+  badge.className = "assistant-mic";
+  badge.textContent = "🎤";
+  btn.appendChild(badge);
   btn.addEventListener("click", toggleListen);
   document.body.appendChild(btn);
+  mizo.setMood("wave", 2200); // تحية عند أول ظهور
+  startIdleWatch();
 }
 
 function setState(state, text) {
@@ -39,8 +49,8 @@ function setState(state, text) {
   if (btn) {
     btn.classList.toggle("listening", state === "listening");
     btn.classList.toggle("thinking", state === "thinking");
-    btn.innerHTML = state === "listening" ? "⏺️" : state === "thinking" ? "💭" : "🎤";
   }
+  if (mizo) mizo.setMood(state === "listening" ? "listening" : state === "thinking" ? "think" : "happy");
   showBubble(text);
 }
 
@@ -63,7 +73,15 @@ async function toggleListen() {
     return;
   }
   if (!assistantAvailable()) return;
+  noteActivity();
+  // ميزو يرحّب بالعامية أولاً، ثم يبدأ الاستماع (كي لا يلتقط الميكروفون صوته)
+  if (mizo) { mizo.setMood("happy"); mizo.startTalking(2200); }
+  showBubble(INVITE + " 🎤");
+  Speech.mizo(INVITE, { onend: beginRecording });
+}
 
+async function beginRecording() {
+  if (!assistantAvailable() || listening) return;
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     chunks = [];
@@ -77,11 +95,11 @@ async function toggleListen() {
     recorder.start();
     listening = true;
     Sfx.pop();
-    setState("listening", "أنا أستمع... قل: ما هذا؟ 🎤");
+    setState("listening", "أنا أسمعك دلوقتي... 🎤");
     // حدّ أقصى ٦ ثوانٍ ثم نتوقّف تلقائياً
     setTimeout(() => { if (listening) stopListening(); }, 6000);
   } catch (e) {
-    setState("idle", "لم أستطع تشغيل الميكروفون 🙈");
+    setState("idle", "مقدرتش أفتح الميكروفون 🙈");
     setTimeout(() => showBubble(""), 2500);
   }
 }
@@ -92,24 +110,63 @@ function stopListening() {
 }
 
 async function handleAudio() {
+  noteActivity();
   if (!chunks.length) { setState("idle", ""); return; }
-  setState("thinking", "أفكّر... 💭");
+  setState("thinking", "بفكّر... 💭");
   Speech.stop();
   try {
     const blob = new Blob(chunks, { type: recorder.mimeType || "audio/webm" });
     const question = (await aiTranscribe(blob, "ar")).trim();
     if (!question) {
-      setState("idle", "لم أسمعك جيداً، حاول مرّة أخرى 😊");
-      Speech.ar("لم أسمعك جيداً، حاول مرّة أخرى");
+      setState("idle", "مسمعتش كويس، قول تاني 😊");
+      if (mizo) mizo.startTalking(1800);
+      Speech.mizo("مسمعتش كويس، قول تاني يا بطل");
       setTimeout(() => showBubble(""), 2600);
       return;
     }
     const answer = await aiAsk(question, "ar");
     setState("idle", answer || "");
     Sfx.correct();
+    if (mizo) mizo.startTalking((answer || "").length * 70 + 1500);
     Speech.ar(answer, { onend: () => setTimeout(() => showBubble(""), 1500) });
   } catch (e) {
-    setState("idle", "حدث خطأ بسيط، جرّب مجدداً 🙏");
+    setState("idle", "حصل خطأ بسيط، جرّب تاني 🙏");
     setTimeout(() => showBubble(""), 2600);
   }
+}
+
+// ===== تشجيع عند سكوت الطفل / عدم نشاطه =====
+let idleTimer = null;
+let nudges = 0;
+const IDLE_MS = 40000;
+const IDLE_LINES = ["يلا يا بطل نكمّل!", "إنت فين؟ تعال نلعب سوا!", "جاهز نكمّل المغامرة؟", "تعال نتعلّم حاجة حلوة!"];
+
+function idleNudge() {
+  if (document.hidden || listening) { scheduleIdle(); return; }
+  if (!mizo || nudges >= 3) return; // لا نكرّر للأبد حتى يتحرّك الطفل
+  nudges++;
+  const line = IDLE_LINES[(Math.random() * IDLE_LINES.length) | 0];
+  mizo.setMood("wave", 2000);
+  mizo.startTalking(line.length * 90 + 800);
+  showBubble(line);
+  Speech.mizo(line);
+  setTimeout(() => showBubble(""), 3200);
+  scheduleIdle();
+}
+
+function scheduleIdle() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(idleNudge, IDLE_MS);
+}
+
+function noteActivity() {
+  nudges = 0;
+  scheduleIdle();
+}
+
+function startIdleWatch() {
+  ["pointerdown", "keydown", "touchstart"].forEach((ev) =>
+    window.addEventListener(ev, noteActivity, { passive: true })
+  );
+  scheduleIdle();
 }
