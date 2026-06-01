@@ -23,7 +23,7 @@ export function mizoBuddy() {
   return {
     el: mizo.el,
     win(say) {
-      mizo.setMood("cheer", 1200);
+      mizo.setMood("proud", 1300); // علامة 👍 عند الإجابة الصحيحة
       if (say) { mizo.startTalking(900); Speech.mizo(pick(MIZO_CATCH)); }
     },
     lose() {

@@ -44,6 +44,11 @@ export function mountAssistantButton() {
   startIdleWatch();
 }
 
+/** تفاعل ميزو العائم (علامة OK عند الصح / تعاطف عند الخطأ) — يُستدعى من app.js */
+export function reactAssistant(mood, ms) {
+  if (mizo && !listening) mizo.setMood(mood, ms || 1200);
+}
+
 function setState(state, text) {
   const btn = document.getElementById("assistantBtn");
   if (btn) {
@@ -74,10 +79,11 @@ async function toggleListen() {
   }
   if (!assistantAvailable()) return;
   noteActivity();
-  // ميزو يرحّب بالعامية أولاً، ثم يبدأ الاستماع (كي لا يلتقط الميكروفون صوته)
-  if (mizo) { mizo.setMood("happy"); mizo.startTalking(2200); }
+  // ميزو يرحّب بالعامية، ثم يبدأ الاستماع بعد لحظة (تشغيل موثوق لا يعتمد على انتهاء النطق)
+  if (mizo) { mizo.setMood("happy"); mizo.startTalking(1600); }
   showBubble(INVITE + " 🎤");
-  Speech.mizo(INVITE, { onend: beginRecording });
+  Speech.mizo(INVITE);
+  setTimeout(() => { if (!listening) beginRecording(); }, 1500);
 }
 
 async function beginRecording() {

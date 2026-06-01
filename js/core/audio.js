@@ -44,6 +44,11 @@ function slide(f1, f2, start, dur, type = "sine", gainVal = 0.16) {
   osc.stop(t0 + dur + 0.02);
 }
 
+// خطّافات تفاعل ميزو عند الصح/الخطأ (يضبطها app.js)
+let onWrong = null, onCorrect = null;
+export function setOnWrong(fn) { onWrong = fn; }
+export function setOnCorrect(fn) { onCorrect = fn; }
+
 export const Sfx = {
   // يجب استدعاؤه بعد أول لمسة لفتح السياق الصوتي
   unlock() {
@@ -57,10 +62,12 @@ export const Sfx = {
   correct() {
     tone(660, 0, 0.12, "triangle");
     tone(880, 0.1, 0.16, "triangle");
+    if (onCorrect) { try { onCorrect(); } catch (e) {} } // ميزو يعمل علامة OK عند الصح
   },
 
   wrong() {
     tone(200, 0, 0.18, "sawtooth", 0.12);
+    if (onWrong) { try { onWrong(); } catch (e) {} } // تشجيع ميزو عند أي خطأ
   },
 
   // لحن النجاح/المكافأة

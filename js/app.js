@@ -1,9 +1,10 @@
 // ===== نقطة بداية التطبيق =====
 import { Router } from "./core/router.js";
-import { Sfx } from "./core/audio.js";
+import { Sfx, setOnWrong, setOnCorrect } from "./core/audio.js";
 import { Speech, setAISpeech } from "./core/speech.js";
+import { MIZO_OOPS, pick } from "./data/mizo.js";
 import { checkAI, setAIEnabled } from "./core/ai.js";
-import { mountAssistantButton } from "./core/assistant.js";
+import { mountAssistantButton, reactAssistant } from "./core/assistant.js";
 import { REGIONS } from "./data/regions.js";
 import { Store } from "./core/storage.js";
 import { renderHome } from "./screens/home.js";
@@ -92,6 +93,22 @@ Router.register("garden", renderGarden);
 Router.register("parent", renderParent);
 Router.register("ar", renderAR);
 Router.register("videos", renderVideos);
+
+// تشجيع ميزو بالعامية عند أي خطأ في أي مغامرة (متنوّع وغير متكرّر، بلا إحباط)
+let _lastOops = 0, _lastOopsLine = "";
+setOnWrong(() => {
+  const now = Date.now();
+  if (now - _lastOops < 3000) return; // لا نُكثر الكلام لو غلط بسرعة
+  _lastOops = now;
+  let line = pick(MIZO_OOPS);
+  if (line === _lastOopsLine) line = pick(MIZO_OOPS); // نوّع قدر الإمكان
+  _lastOopsLine = line;
+  reactAssistant("sad", 1200);
+  Speech.mizo(line);
+});
+
+// ميزو يعمل علامة 👍 (إعجاب) عند أي إجابة صحيحة
+setOnCorrect(() => reactAssistant("proud", 1200));
 Router.register("story", renderStory);
 Router.register("profile", renderProfile);
 Router.register("dailyPlan", renderDailyPlan);

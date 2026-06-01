@@ -85,11 +85,26 @@ export function showRewardPopup(item, onClose) {
       <p style="font-size:20px;font-weight:700;color:var(--c-ink);margin:.2em 0 1em">${item.name}</p>
       <button class="candy-btn" id="rewardOk">رائع! 🎉</button>
     </div>`;
-  // ميزو يحتفل بالمكافأة
+  // ميزو الفرحان محاطاً بنجوم تفرقع
   const mizo = createCharacter();
   mizo.setMood("cheer");
   mizo.el.classList.add("cheer-miz");
-  overlay.querySelector(".cheer-card").insertBefore(mizo.el, overlay.querySelector(".cheer-text"));
+  const celebrate = document.createElement("div");
+  celebrate.className = "miz-celebrate";
+  const burst = document.createElement("div");
+  burst.className = "star-burst";
+  const DIRS = [[-72, -46], [72, -46], [-92, 14], [92, 14], [-44, -88], [44, -88], [0, -102], [0, 56]];
+  DIRS.forEach((d, i) => {
+    const s = document.createElement("span");
+    s.textContent = "⭐";
+    s.style.setProperty("--dx", d[0] + "px");
+    s.style.setProperty("--dy", d[1] + "px");
+    s.style.animationDelay = (i * 0.12).toFixed(2) + "s";
+    burst.appendChild(s);
+  });
+  celebrate.appendChild(burst);
+  celebrate.appendChild(mizo.el);
+  overlay.querySelector(".cheer-card").insertBefore(celebrate, overlay.querySelector(".cheer-text"));
   Store.rememberReward(item.name); // ذاكرة ميزو: آخر مكافأة
   document.body.appendChild(overlay);
   Speech.ar(`حصلت على ${item.name}`);
