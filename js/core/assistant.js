@@ -114,25 +114,43 @@ async function handleAudio() {
   if (!chunks.length) { setState("idle", ""); return; }
   setState("thinking", "بفكّر... 💭");
   Speech.stop();
+
+  // الخطوة ١: تحويل الصوت إلى نص (STT)
+  let question = "";
   try {
     const blob = new Blob(chunks, { type: recorder.mimeType || "audio/webm" });
-    const question = (await aiTranscribe(blob, "ar")).trim();
-    if (!question) {
-      setState("idle", "مسمعتش كويس، قول تاني 😊");
-      if (mizo) mizo.startTalking(1800);
-      Speech.mizo("مسمعتش كويس، قول تاني يا بطل");
-      setTimeout(() => showBubble(""), 2600);
-      return;
-    }
-    const answer = await aiAsk(question, "ar");
-    setState("idle", answer || "");
-    Sfx.correct();
-    if (mizo) mizo.startTalking((answer || "").length * 70 + 1500);
-    Speech.ar(answer, { onend: () => setTimeout(() => showBubble(""), 1500) });
+    question = (await aiTranscribe(blob, "ar")).trim();
   } catch (e) {
-    setState("idle", "حصل خطأ بسيط، جرّب تاني 🙏");
+    setState("idle", "مش قادر أسمعك دلوقتي، جرّب تاني 🎤");
+    if (mizo) mizo.startTalking(1800);
+    Speech.mizo("مش قادر أسمعك دلوقتي، جرّب تاني");
     setTimeout(() => showBubble(""), 2600);
+    return;
   }
+  if (!question) {
+    setState("idle", "مسمعتش كويس، قول تاني 😊");
+    if (mizo) mizo.startTalking(1800);
+    Speech.mizo("مسمعتش كويس، قول تاني يا بطل");
+    setTimeout(() => showBubble(""), 2600);
+    return;
+  }
+
+  // الخطوة ٢: الحصول على إجابة قصيرة (Chat)
+  let answer = "";
+  try {
+    answer = await aiAsk(question, "ar");
+  } catch (e) {
+    setState("idle", "مش عارف أجاوب دلوقتي، جرّب تاني 🙏");
+    if (mizo) mizo.startTalking(1800);
+    Speech.mizo("مش عارف أجاوب دلوقتي، جرّب تاني");
+    setTimeout(() => showBubble(""), 2600);
+    return;
+  }
+
+  setState("idle", answer || "");
+  Sfx.correct();
+  if (mizo) mizo.startTalking((answer || "").length * 70 + 1500);
+  Speech.ar(answer, { onend: () => setTimeout(() => showBubble(""), 1500) });
 }
 
 // ===== تشجيع عند سكوت الطفل / عدم نشاطه =====
