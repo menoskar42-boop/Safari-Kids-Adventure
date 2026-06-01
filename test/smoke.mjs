@@ -89,6 +89,7 @@ const cases = [
   ["lesson(arabic)", "../js/games/lesson.js", "renderLesson", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG", title: "t" }],
   ["lesson(numbers)", "../js/games/lesson.js", "renderLesson", { regionId: "numbers", regionIndex: 0, datasetKey: "numbers", title: "t" }],
   ["dailyPlan", "../js/screens/dailyPlan.js", "renderDailyPlan", {}],
+  ["mizoSong", "../js/screens/mizoSong.js", "renderMizoSong", {}],
   ["ruleLesson", "../js/games/ruleLesson.js", "renderRuleLesson", { regionId: "reading", regionIndex: 3, ruleId: "madd", title: "t" }],
   ["classify", "../js/games/classify.js", "renderClassify", { regionId: "reading", regionIndex: 3, setId: "lam", title: "t" }],
   ["wordBuild", "../js/games/wordbuild.js", "renderWordBuild", { regionId: "arabic", regionIndex: 0, title: "t" }],

@@ -23,6 +23,7 @@ export function renderHome() {
     <div style="display:flex;gap:8px">
       <button class="icon-btn" id="rewardsBtn" title="كنوزي">🎁</button>
       <button class="icon-btn" id="dailyBtn" title="رحلة اليوم">🎯</button>
+      <button class="icon-btn" id="songBtn" title="نشيد ميزو">🎶</button>
       <button class="icon-btn" id="colorBtn" title="تلوين">🎨</button>
       ${FEATURES.videos ? '<button class="icon-btn" id="videosBtn" title="أغاني وفيديو">🎵</button>' : ""}
       <button class="icon-btn" id="gardenBtn" title="حديقتي">🌳</button>
@@ -161,6 +162,10 @@ export function renderHome() {
     screen.querySelector("#dailyBtn").addEventListener("click", () => {
       Sfx.tap();
       Router.go("dailyPlan");
+    });
+    screen.querySelector("#songBtn").addEventListener("click", () => {
+      Sfx.tap();
+      Router.go("mizoSong");
     });
     const videosBtn = screen.querySelector("#videosBtn");
     if (videosBtn) videosBtn.addEventListener("click", () => {
