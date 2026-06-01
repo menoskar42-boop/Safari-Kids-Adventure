@@ -110,6 +110,21 @@ export const Store = {
     return state.seen.filter((s) => s.startsWith(p)).map((s) => s.slice(p.length));
   },
 
+  // ===== نموذج الإتقان (تكرار متباعد حقيقي) =====
+  // مستوى ٠–٥ لكل عنصر: يرتفع عند الإجابة الصحيحة وينخفض عند الخطأ
+  get mastery() {
+    return state.mastery || (state.mastery = {});
+  },
+  getMastery(datasetKey, itemKey) {
+    return this.mastery[`${datasetKey}:${itemKey}`] || 0;
+  },
+  recordReview(datasetKey, itemKey, correct) {
+    const m = this.mastery;
+    const id = `${datasetKey}:${itemKey}`;
+    m[id] = Math.max(0, Math.min(5, (m[id] || 0) + (correct ? 1 : -1)));
+    persist();
+  },
+
   // ===== السلسلة اليومية =====
   // تُستدعى عند فتح التطبيق: تُحدّث السلسلة وتعيد ضبط تقدّم اليوم
   touchDaily() {

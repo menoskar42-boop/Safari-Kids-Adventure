@@ -28,12 +28,14 @@ export function renderReview({ regionId, regionIndex, datasetKey, lang, title })
   const speakLang = lang || ds.lang;
   const items = ds.items;
 
-  // العناصر المرئية سابقاً، وإلا كل العناصر
+  // اختيار متباعد: نفضّل ما رآه الطفل سابقاً، ونقدّم الأضعف إتقاناً أولاً
   const seenKeys = Store.seenKeys(datasetKey);
   let pool = items.filter((it) => seenKeys.includes(itemKey(it)));
   if (pool.length < 4) pool = items.slice();
-
-  const rounds = shuffle(pool).slice(0, ROUNDS);
+  const scored = pool
+    .map((it) => ({ it, lvl: Store.getMastery(datasetKey, itemKey(it)) }))
+    .sort((a, b) => a.lvl - b.lvl || Math.random() - 0.5);
+  const rounds = shuffle(scored.slice(0, ROUNDS).map((s) => s.it));
   let i = 0;
 
   const screen = document.createElement("div");
@@ -76,6 +78,7 @@ export function renderReview({ regionId, regionIndex, datasetKey, lang, title })
         if (itemKey(c) === itemKey(target)) {
           Sfx.correct();
           b.classList.add("correct");
+          Store.recordReview(datasetKey, itemKey(target), true); // إتقان +
           awardStars(1);
           speakItem(target, speakLang);
           i++;
@@ -84,6 +87,7 @@ export function renderReview({ regionId, regionIndex, datasetKey, lang, title })
         } else {
           Sfx.wrong();
           b.classList.add("wrong");
+          Store.recordReview(datasetKey, itemKey(target), false); // إتقان −
           setTimeout(() => b.classList.remove("wrong"), 450);
         }
       });
