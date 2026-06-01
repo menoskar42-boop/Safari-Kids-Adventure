@@ -163,6 +163,15 @@ export const Store = {
     persist();
   },
 
+  // الرقم السري لبوّابة ولي الأمر (٤ أرقام). فارغ = لم يُضبط بعد
+  get parentPin() {
+    return state.parentPin || "";
+  },
+  setParentPin(pin) {
+    state.parentPin = String(pin || "").replace(/\D/g, "").slice(0, 4);
+    persist();
+  },
+
   // تقدّم اليوم؛ تعيد true عند بلوغ الهدف لأول مرة اليوم
   addDailyProgress(n = 1) {
     const t = today();

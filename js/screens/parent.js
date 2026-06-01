@@ -108,37 +108,57 @@ export function renderParent() {
   note.textContent = "يُحفظ التقدّم على هذا الجهاز فقط.";
   wrap.appendChild(note);
 
-  // ===== بوّابة الآباء: سؤال بسيط لمنع دخول الطفل =====
+  // ===== بوّابة الآباء: رقم سري من ٤ أرقام =====
   const gate = document.createElement("div");
   gate.className = "stage";
-  const a = 3 + ((Math.random() * 6) | 0);
-  const b = 2 + ((Math.random() * 6) | 0);
+  const hasPin = !!Store.parentPin;
+  // وضع الإعداد عند أول مرّة (لا يوجد رقم سري بعد)، وإلا وضع الإدخال
+  let setupStep = hasPin ? null : 1; // 1=اكتب رقماً جديداً، 2=أكّده
+  let firstPin = "";
+
   gate.innerHTML = `
     <div class="hero-emoji">🔒</div>
     <p style="font-weight:800;color:var(--c-purple);font-size:clamp(18px,5vw,24px)">للآباء فقط</p>
-    <p style="font-weight:800;color:var(--c-ink);font-size:clamp(20px,6vw,28px)">كم يساوي ${a} + ${b}؟</p>
-    <input id="gateInput" inputmode="numeric" style="font-size:26px;font-weight:800;text-align:center;width:120px;padding:10px;border-radius:16px;border:3px solid var(--c-purple)" />
-    <div style="margin-top:14px"><button class="candy-btn" id="gateOk">دخول</button></div>
+    <p id="gateMsg" style="font-weight:800;color:var(--c-ink);font-size:clamp(18px,5vw,24px)"></p>
+    <input id="gateInput" type="password" inputmode="numeric" maxlength="4" autocomplete="off"
+      style="font-size:34px;font-weight:800;text-align:center;letter-spacing:14px;width:160px;padding:10px;border-radius:16px;border:3px solid var(--c-purple)" />
+    <div style="margin-top:14px"><button class="candy-btn" id="gateOk">تأكيد</button></div>
     <p id="gateErr" style="color:var(--c-red);font-weight:700;margin-top:8px;min-height:1.2em"></p>`;
   screen.appendChild(gate);
 
   setTimeout(() => {
     screen.querySelector("#backBtn").addEventListener("click", () => { Sfx.tap(); Router.go("home"); });
     const input = gate.querySelector("#gateInput");
+    const msg = gate.querySelector("#gateMsg");
+    const err = gate.querySelector("#gateErr");
+    const refresh = () => {
+      err.textContent = "";
+      input.value = "";
+      msg.textContent = !hasPin
+        ? (setupStep === 1 ? "اختر رقماً سرياً جديداً (٤ أرقام)" : "أعد كتابة الرقم السري للتأكيد")
+        : "أدخل الرقم السري";
+      input.focus();
+    };
+    const unlock = () => { Sfx.correct(); gate.remove(); screen.appendChild(wrap); };
+
     const submit = () => {
-      if (parseInt(input.value, 10) === a + b) {
-        Sfx.correct();
-        gate.remove();
-        screen.appendChild(wrap);
+      const v = (input.value || "").replace(/\D/g, "");
+      if (v.length !== 4) { Sfx.wrong(); err.textContent = "اكتب ٤ أرقام"; return; }
+      if (!hasPin) {
+        // إعداد رقم جديد بخطوتين (كتابة + تأكيد)
+        if (setupStep === 1) { firstPin = v; setupStep = 2; refresh(); return; }
+        if (v !== firstPin) { Sfx.wrong(); err.textContent = "الرقمان غير متطابقين، أعد المحاولة"; setupStep = 1; refresh(); return; }
+        Store.setParentPin(v);
+        unlock();
+      } else if (v === Store.parentPin) {
+        unlock();
       } else {
-        Sfx.wrong();
-        gate.querySelector("#gateErr").textContent = "إجابة غير صحيحة، حاول مجدداً";
-        input.value = "";
+        Sfx.wrong(); err.textContent = "رقم سري غير صحيح"; input.value = ""; input.focus();
       }
     };
     gate.querySelector("#gateOk").addEventListener("click", submit);
     input.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
-    input.focus();
+    refresh();
   }, 0);
 
   return screen;
