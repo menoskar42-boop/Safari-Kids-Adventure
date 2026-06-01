@@ -1,6 +1,11 @@
 // ===== مولّد صفحات HTML الغنيّة للأرشفة (SSR بسيط بلا مكتبات) =====
 import { SITE, SECTIONS, getSection } from "./seoContent.js";
 import { GUIDES } from "./guidesContent.js";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ASSETS_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "assets");
 
 // دليل الآباء المرتبط بقسم (إن وُجد)
 function guideForSection(slug) {
@@ -226,6 +231,20 @@ export function renderHomePage() {
 }
 
 // ===== sitemap.xml طبقاً لمواصفات Google =====
+// وسوم <image:image> للصور الفعلية الموجودة فقط (حيوانات/فواكه/طيور/أسماك/حشرات)
+// لتفهرسها Google Images — مصدر زيارات كبير لمواقع الأطفال.
+function imageTagsFor(section) {
+  if (!Array.isArray(section.items)) return "";
+  return section.items
+    .filter((it) => it.img && fs.existsSync(path.join(ASSETS_DIR, it.img)))
+    .map(
+      (it) =>
+        `    <image:image>\n      <image:loc>${SITE.url}/assets/${it.img}</image:loc>\n` +
+        `      <image:title>${esc(it.name || "")}</image:title>\n    </image:image>`
+    )
+    .join("\n");
+}
+
 export function renderSitemap() {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [
@@ -234,6 +253,7 @@ export function renderSitemap() {
       loc: `${SITE.url}/${s.slug}`,
       priority: "0.9",
       freq: "weekly",
+      images: imageTagsFor(s),
     })),
     { loc: `${SITE.url}/guides`, priority: "0.7", freq: "monthly" },
     ...GUIDES.map((g) => ({
@@ -248,10 +268,13 @@ export function renderSitemap() {
   const body = urls
     .map(
       (u) =>
-        `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${u.freq}</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`
+        `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${today}</lastmod>\n` +
+        `    <changefreq>${u.freq}</changefreq>\n    <priority>${u.priority}</priority>` +
+        (u.images ? `\n${u.images}` : "") +
+        `\n  </url>`
     )
     .join("\n");
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${body}\n</urlset>`;
 }
 
 // ===== robots.txt =====
