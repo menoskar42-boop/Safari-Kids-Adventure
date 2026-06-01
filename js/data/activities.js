@@ -668,6 +668,16 @@ export const ACTIVITIES = {
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "timeday", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#7b6fb0,#fd746c)" } },
   ],
+  dinosaurs: [
+    { emoji: "🦕", title: "استكشف الديناصورات", desc: "اضغط على كل عنصر لتعرفه", screen: "explore",
+      params: { datasetKey: "dinosaurs", title: "🦕 عالم الديناصورات", bg: "linear-gradient(180deg,#134e5e,#71b280)" } },
+    { emoji: "🔎", title: "جِد الديناصور", desc: "اضغط على المطلوب", screen: "findIt",
+      params: { datasetKey: "dinosaurs", title: "🔎 جِد الديناصور", verb: "اضغط على", bg: "linear-gradient(180deg,#134e5e,#71b280)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "dinosaurs", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#134e5e,#71b280)" } },
+    { emoji: "🌑", title: "طابق الظل", desc: "اعرف الديناصور من ظله", screen: "shadowMatch",
+      params: { datasetKey: "dinosaurs", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#134e5e,#71b280)" } },
+  ],
   plants: [
     { emoji: "🌱", title: "استكشف النبات", desc: "اضغط على كل عنصر لتعرفه", screen: "explore",
       params: { datasetKey: "plants", title: "🌱 عالم النبات", bg: "linear-gradient(180deg,#56ab2f,#a8e063)" } },

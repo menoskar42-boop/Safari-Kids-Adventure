@@ -40,6 +40,7 @@ import { TASTES } from "./tastes.js";
 import { HYGIENE } from "./hygiene.js";
 import { SPACE } from "./space.js";
 import { PLANTS } from "./plants.js";
+import { DINOSAURS } from "./dinosaurs.js";
 
 const DATASETS = {
   arabic: {
@@ -93,6 +94,7 @@ const DATASETS = {
   hygiene: { key: "hygiene", lang: "ar-EG", glyphKind: "emoji", items: HYGIENE },
   space: { key: "space", lang: "ar-EG", glyphKind: "emoji", items: SPACE },
   plants: { key: "plants", lang: "ar-EG", glyphKind: "emoji", items: PLANTS },
+  dinosaurs: { key: "dinosaurs", lang: "ar-EG", glyphKind: "emoji", items: DINOSAURS },
 };
 
 export function getDataset(key) {

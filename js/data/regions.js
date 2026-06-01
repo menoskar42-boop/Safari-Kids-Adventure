@@ -391,6 +391,16 @@ export const REGIONS = [
     cat: "nature",
   },
   {
+    id: "dinosaurs",
+    name: "عالم الديناصورات",
+    nameEn: "Dinosaurs",
+    emoji: "🦕",
+    bg: "bg-dinosaurs",
+    guide: "مخلوقات ضخمة عاشت قديماً... هيا نكتشف الديناصورات!",
+    ready: true,
+    cat: "nature",
+  },
+  {
     id: "countries",
     name: "الدول العربية",
     nameEn: "Arab Countries",
