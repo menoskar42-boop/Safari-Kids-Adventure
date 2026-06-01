@@ -1,6 +1,7 @@
 // ===== متابعة ولي الأمر: تقدّم الطفل في كل منطقة =====
 import { REGIONS } from "../data/regions.js";
 import { COLLECTIBLES } from "../core/rewards.js";
+import { getDataset } from "../data/datasets.js";
 import { Store } from "../core/storage.js";
 import { Router } from "../core/router.js";
 import { Sfx } from "../core/audio.js";
@@ -33,6 +34,19 @@ export function renderParent() {
     ${stat("🗺️", `${doneCount}/${REGIONS.length}`, "مناطق")}
     ${stat("🎁", `${collected}/${COLLECTIBLES.length}`, "كنوز")}`;
   wrap.appendChild(summary);
+
+  // تقدّم الإتقان (تكرار متباعد): كم عنصراً أتقنه الطفل لكل مجموعة أساسية
+  const mTitle = document.createElement("p");
+  mTitle.style.cssText = "font-weight:800;color:var(--c-ink);text-align:center;margin:4px 0 10px;font-size:clamp(15px,4.2vw,19px)";
+  mTitle.textContent = "🧠 الإتقان (إتقان = ٤ من ٥ فأكثر)";
+  wrap.appendChild(mTitle);
+
+  const mBox = document.createElement("div");
+  mBox.style.cssText = "display:flex;flex-direction:column;gap:8px;margin-bottom:18px";
+  [["arabic", "الحروف العربية"], ["english", "الحروف الإنجليزية"], ["numbers", "الأرقام"]].forEach(([key, label]) => {
+    mBox.appendChild(masteryBar(key, label));
+  });
+  wrap.appendChild(mBox);
 
   // تفصيل المناطق
   REGIONS.forEach((r) => {
@@ -170,4 +184,26 @@ function stat(icon, value, label) {
     <div style="font-weight:800;font-size:22px;color:var(--c-purple)">${value}</div>
     <div style="font-size:12px;color:#7a6ca8">${label}</div>
   </div>`;
+}
+
+// مفتاح العنصر (مطابق لِما في لعبة المراجعة)
+function mKey(it) {
+  return it.char ?? (it.value != null ? String(it.value) : it.name);
+}
+// شريط تقدّم الإتقان لمجموعة
+function masteryBar(datasetKey, label) {
+  const ds = getDataset(datasetKey);
+  const total = ds.items.length;
+  const mastered = ds.items.filter((it) => Store.getMastery(datasetKey, mKey(it)) >= 4).length;
+  const pct = total ? Math.round((mastered / total) * 100) : 0;
+  const el = document.createElement("div");
+  el.style.cssText = "background:#fff;border-radius:16px;padding:10px 14px;box-shadow:var(--shadow-card)";
+  el.innerHTML = `
+    <div style="display:flex;justify-content:space-between;font-weight:800;color:var(--c-ink);font-size:14px;margin-bottom:6px">
+      <span>${label}</span><span style="color:var(--c-purple)">${mastered}/${total}</span>
+    </div>
+    <div style="height:12px;background:#eee;border-radius:8px;overflow:hidden">
+      <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,#34d399,#10b981);border-radius:8px"></div>
+    </div>`;
+  return el;
 }
