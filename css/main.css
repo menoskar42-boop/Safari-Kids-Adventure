@@ -332,8 +332,8 @@ button { font-family: inherit; cursor: pointer; border: none; }
   position: fixed;
   inset-block-end: 18px;
   inset-inline-end: 18px;
-  width: 74px;
-  height: 74px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   border: none;
   padding: 0;
@@ -346,13 +346,13 @@ button { font-family: inherit; cursor: pointer; border: none; }
   transition: transform .12s ease;
   animation: fab-bob 3s ease-in-out infinite; /* خمول لطيف: لا يبقى ثابتاً */
 }
-.assistant-fab .miz-svg { width: 62px; height: auto; animation: none; } /* الحاوية تتمايل بدلاً منه */
+.assistant-fab .miz-svg { width: 80px; height: auto; animation: none; } /* الحاوية تتمايل بدلاً منه */
 .assistant-mic {
   position: absolute;
-  inset-block-end: -2px;
-  inset-inline-end: -2px;
-  width: 28px; height: 28px;
-  font-size: 16px;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  width: 30px; height: 30px;
+  font-size: 17px;
   background: var(--c-green);
   border-radius: 50%;
   display: grid;
