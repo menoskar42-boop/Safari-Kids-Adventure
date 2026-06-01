@@ -4,7 +4,8 @@
 import { Router } from "../core/router.js";
 import { Sfx } from "../core/audio.js";
 import { Speech } from "../core/speech.js";
-import { gameTopbar, finishActivity, shuffle } from "./common.js";
+import { gameTopbar, finishActivity, shuffle, showCheer } from "./common.js";
+import { awardStars } from "../core/rewards.js";
 
 const PALETTE = [
   "#ff5d5d", "#ff924c", "#ffd23f", "#34d399",
@@ -187,7 +188,13 @@ export function renderColoring({ regionId, regionIndex, title, bg }) {
   doneBtn.style.background = "linear-gradient(180deg,#34d399,#10b981)";
   doneBtn.textContent = "✓ انتهيت";
   doneBtn.addEventListener("click", () => {
-    finishActivity({ regionId, regionIndex, stars: 5, onDone: back });
+    if (regionId) {
+      finishActivity({ regionId, regionIndex, stars: 5, onDone: back });
+    } else {
+      // وصول سريع من الشاشة الرئيسية: مكافأة بسيطة بلا تقدّم منطقة
+      awardStars(3);
+      showCheer("🎨", "لوحة رائعة!", back);
+    }
   });
   ctrl.append(nextBtn, doneBtn);
   wrap.appendChild(ctrl);

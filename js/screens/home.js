@@ -20,6 +20,7 @@ export function renderHome() {
   topbar.innerHTML = `
     <div style="display:flex;gap:8px">
       <button class="icon-btn" id="rewardsBtn" title="كنوزي">🎁</button>
+      <button class="icon-btn" id="colorBtn" title="تلوين">🎨</button>
       ${FEATURES.videos ? '<button class="icon-btn" id="videosBtn" title="أغاني وفيديو">🎵</button>' : ""}
       <button class="icon-btn" id="gardenBtn" title="حديقتي">🌳</button>
       <button class="icon-btn" id="arBtn" title="الواقع المعزّز">📸</button>
@@ -128,6 +129,10 @@ export function renderHome() {
     screen.querySelector("#rewardsBtn").addEventListener("click", () => {
       Sfx.tap();
       Router.go("rewards");
+    });
+    screen.querySelector("#colorBtn").addEventListener("click", () => {
+      Sfx.tap();
+      Router.go("coloring", { title: "🎨 لوّن الصور" });
     });
     const videosBtn = screen.querySelector("#videosBtn");
     if (videosBtn) videosBtn.addEventListener("click", () => {
