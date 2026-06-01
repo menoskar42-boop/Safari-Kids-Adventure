@@ -1,6 +1,7 @@
 // ===== خادم Safari Kids Adventure =====
 // يقدّم الملفات الثابتة + وسيطًا آمنًا لـ OpenAI (المفتاح يبقى على الخادم فقط).
 import express from "express";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { registerOpenAIRoutes } from "./openai.js";
@@ -33,6 +34,27 @@ app.get("/sitemap.xml", (_req, res) => {
 });
 app.get("/robots.txt", (_req, res) => {
   res.type("text/plain").send(renderRobots());
+});
+
+// ===== بيان الأصول للعمل دون اتصال (PWA) — يتحدّث ذاتياً مع نموّ الملفات =====
+function listAssets(dir, base) {
+  const out = [];
+  for (const name of fs.readdirSync(dir)) {
+    const full = path.join(dir, name);
+    const rel = base + "/" + name;
+    if (fs.statSync(full).isDirectory()) out.push(...listAssets(full, rel));
+    else if (/\.(js|css)$/.test(name)) out.push(rel);
+  }
+  return out;
+}
+app.get("/asset-manifest.json", (_req, res) => {
+  const assets = [
+    "/app",
+    "/manifest.webmanifest",
+    ...listAssets(path.join(ROOT, "css"), "/css"),
+    ...listAssets(path.join(ROOT, "js"), "/js"),
+  ];
+  res.json({ assets });
 });
 
 // الرابط الرئيسي يفتح التطبيق التفاعلي مباشرة (أفضل تجربة للطفل)

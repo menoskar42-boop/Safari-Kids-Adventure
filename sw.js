@@ -1,5 +1,5 @@
 // ===== Service Worker: تخزين مؤقت للعمل دون اتصال =====
-const CACHE = "safari-kids-v89";
+const CACHE = "safari-kids-v90";
 const ASSETS = [
   "/app",
   "/manifest.webmanifest",
@@ -11,7 +11,18 @@ const ASSETS = [
 
 self.addEventListener("install", (e) => {
   e.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(ASSETS)).catch(() => {})
+    caches.open(CACHE).then(async (c) => {
+      // نخزّن كل أصول الواجهة مسبقاً (من بيان الخادم) ليعمل التطبيق دون اتصال
+      // من أوّل فتح. عند فشل البيان نكتفي بالأساسيات.
+      try {
+        const res = await fetch("/asset-manifest.json", { cache: "no-store" });
+        const data = await res.json();
+        const all = [...new Set([...ASSETS, ...(data.assets || [])])];
+        await c.addAll(all);
+      } catch (_e) {
+        await c.addAll(ASSETS).catch(() => {});
+      }
+    })
   );
   self.skipWaiting();
 });
