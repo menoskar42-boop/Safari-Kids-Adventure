@@ -191,7 +191,7 @@ export function renderHome() {
       Sfx.tap();
       Router.go("parent");
     });
-    Speech.ar("مرحباً يا بطل! اختر منطقة لنبدأ المغامرة");
+    // (أُزيل الترحيب المكرّر هنا — ميزو يرحّب مرّة واحدة بصوت OpenAI أعلى الصفحة)
   }, 0);
 
   return screen;
