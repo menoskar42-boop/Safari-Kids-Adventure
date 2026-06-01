@@ -73,6 +73,13 @@ export const ACTIVITIES = {
       screen: "review",
       params: { datasetKey: "arabic", lang: "ar-EG", title: "🧠 مراجعة الحروف" },
     },
+    {
+      emoji: "🧩",
+      title: "لعبة الذاكرة",
+      desc: "اقلب البطاقات وطابق الحروف",
+      screen: "memory",
+      params: { datasetKey: "arabic", title: "🧩 ذاكرة الحروف", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
+    },
   ],
   english: [
     {
@@ -123,6 +130,13 @@ export const ACTIVITIES = {
       desc: "Write and draw freely",
       screen: "board",
       params: {},
+    },
+    {
+      emoji: "🧩",
+      title: "لعبة الذاكرة",
+      desc: "Flip cards and match the letters",
+      screen: "memory",
+      params: { datasetKey: "english", title: "🧩 Memory", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
     },
   ],
   numbers: [
