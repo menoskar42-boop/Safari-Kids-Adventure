@@ -3,6 +3,7 @@ import { Store } from "../core/storage.js";
 import { Sfx } from "../core/audio.js";
 import { Speech } from "../core/speech.js";
 import { Confetti } from "../core/confetti.js";
+import { createCharacter } from "./character.js";
 import {
   awardStars,
   updateStarCounter,
@@ -66,6 +67,11 @@ export function showCheer(emoji, text, onClose) {
       <div class="cheer-emoji">${emoji}</div>
       <div class="cheer-text">${text}</div>
     </div>`;
+  // ميزو يهنّئ الطفل بفرح
+  const mizo = createCharacter();
+  mizo.setMood("cheer");
+  mizo.el.classList.add("cheer-miz");
+  overlay.querySelector(".cheer-card").insertBefore(mizo.el, overlay.querySelector(".cheer-text"));
   document.body.appendChild(overlay);
   setTimeout(() => {
     overlay.remove();

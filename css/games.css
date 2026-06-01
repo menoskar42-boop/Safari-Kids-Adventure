@@ -333,6 +333,9 @@
 /* ميزو داخل لافتة المرشد في الشاشة الرئيسية */
 .guide-miz { padding: 0; display: grid; place-items: center; }
 .guide-banner .miz-svg { width: clamp(62px, 17vw, 92px); }
+/* ميزو في لوحة الاحتفال */
+.cheer-miz { display: block; margin: 4px auto 0; }
+.cheer-miz .miz-svg { width: clamp(80px, 24vw, 120px); }
 .lesson-teacher .teacher-bubble {
   background: #fff;
   border-radius: 18px;
