@@ -150,6 +150,13 @@ export function renderParent() {
   note.textContent = "يُحفظ التقدّم على هذا الجهاز فقط.";
   wrap.appendChild(note);
 
+  // رابط ظاهر لصفحة المحتوى (للآباء + يقوّي الربط الداخلي) — لا يراه الطفل في مساره
+  const explore = document.createElement("a");
+  explore.href = "/explore";
+  explore.textContent = "📖 صفحة محتوى الموقع (للآباء)";
+  explore.style.cssText = "display:block;text-align:center;color:var(--c-purple);font-weight:700;font-size:13px;margin-top:8px;text-decoration:underline";
+  wrap.appendChild(explore);
+
   // ===== بوّابة الآباء: رقم سري من ٤ أرقام =====
   const gate = document.createElement("div");
   gate.className = "stage";
