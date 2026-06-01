@@ -233,6 +233,18 @@ export const Store = {
     return newDay;
   },
 
+  // ===== عجلة الحظ اليومية =====
+  get lastSpinDate() {
+    return state.lastSpinDate || "";
+  },
+  canSpinToday() {
+    return this.lastSpinDate !== today();
+  },
+  markSpun() {
+    state.lastSpinDate = today();
+    persist();
+  },
+
   // تشغيل/تعطيل الذكاء الاصطناعي والميكروفون (افتراضياً مُفعّل)
   get aiEnabled() {
     return state.aiEnabled !== false;

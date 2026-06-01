@@ -21,6 +21,7 @@ export function renderHome() {
   topbar.className = "topbar";
   topbar.innerHTML = `
     <div style="display:flex;gap:8px">
+      <button class="icon-btn" id="funBtn" title="المرح والتحدّيات">🏆</button>
       <button class="icon-btn" id="rewardsBtn" title="كنوزي">🎁</button>
       <button class="icon-btn" id="dailyBtn" title="رحلة اليوم">🎯</button>
       <button class="icon-btn" id="songBtn" title="نشيد ميزو">🎶</button>
@@ -152,6 +153,10 @@ export function renderHome() {
     screen.querySelector("#profileBtn").addEventListener("click", () => {
       Sfx.tap();
       Router.go("profile");
+    });
+    screen.querySelector("#funBtn").addEventListener("click", () => {
+      Sfx.tap();
+      Router.go("funHub");
     });
     screen.querySelector("#rewardsBtn").addEventListener("click", () => {
       Sfx.tap();
