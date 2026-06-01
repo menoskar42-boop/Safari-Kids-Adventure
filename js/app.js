@@ -49,6 +49,7 @@ import { renderChatMizo } from "./games/chatMizo.js";
 import { renderReadMatch } from "./games/readmatch.js";
 import { renderFunHub } from "./screens/funHub.js";
 import { renderSpinWheel } from "./screens/spinwheel.js";
+import { renderBadges } from "./screens/badges.js";
 import { createCharacter } from "./games/character.js";
 import { mountAdBar } from "./core/ads.js";
 
@@ -105,6 +106,7 @@ Router.register("chatMizo", renderChatMizo);
 Router.register("readMatch", renderReadMatch);
 Router.register("funHub", renderFunHub);
 Router.register("spinWheel", renderSpinWheel);
+Router.register("badges", renderBadges);
 
 // شاشة البداية
 const splash = document.getElementById("splash");
