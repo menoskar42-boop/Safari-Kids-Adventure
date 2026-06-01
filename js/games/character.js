@@ -49,8 +49,10 @@ export function createCharacter(name = MIZO.name) {
   let stopTimer = null, moodTimer = null, talkLoop = null;
   let talkOk = false, blinkOk = false;
   // نفحص توفّر إطارات الأنيميشن (فم مفتوح / عيون مغلقة) — تُفعَّل تلقائياً عند وجودها
-  const probeTalk = new Image(); probeTalk.onload = () => { talkOk = true; }; probeTalk.src = "/assets/mizo/mizo-talk.png";
-  const probeBlink = new Image(); probeBlink.onload = () => { blinkOk = true; }; probeBlink.src = "/assets/mizo/mizo-blink.png";
+  if (typeof Image !== "undefined") {
+    const probeTalk = new Image(); probeTalk.onload = () => { talkOk = true; }; probeTalk.src = "/assets/mizo/mizo-talk.png";
+    const probeBlink = new Image(); probeBlink.onload = () => { blinkOk = true; }; probeBlink.src = "/assets/mizo/mizo-blink.png";
+  }
 
   function show(mood) {
     const key = MOOD_IMG[mood] ? mood : "happy";
