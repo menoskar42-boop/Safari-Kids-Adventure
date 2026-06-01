@@ -183,6 +183,13 @@ export const ACTIVITIES = {
       params: {},
     },
     {
+      emoji: "⚖️",
+      title: "أيهما أكثر؟",
+      desc: "اضغط على المجموعة الأكثر",
+      screen: "compare",
+      params: {},
+    },
+    {
       emoji: "🔢",
       title: "الرقم الناقص",
       desc: "رتّب الأرقام واملأ الناقص",

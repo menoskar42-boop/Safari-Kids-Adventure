@@ -238,6 +238,29 @@
 .color-svg .cl { transition: fill .12s ease; }
 .color-svg .cl:active { opacity: .85; }
 
+/* ===== لعبة المقارنة (أيهما أكثر؟) ===== */
+.compare-box {
+  background: rgba(255,255,255,.92);
+  border: 4px solid transparent;
+  border-radius: 22px;
+  padding: 14px;
+  width: min(40vw, 200px);
+  min-height: 38vh;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-card);
+  transition: transform .12s ease;
+  animation: pop-in .3s ease both;
+}
+.compare-box:active { transform: scale(.95); }
+.compare-box.correct { border-color: var(--c-green); animation: pulse .5s ease; }
+.compare-box.wrong { border-color: var(--c-red); animation: shake .4s ease; }
+.compare-items {
+  font-size: clamp(26px, 7vw, 40px);
+  line-height: 1.25;
+  word-spacing: 2px;
+}
+
 /* ===== لعبة الأنماط (ما التالي؟) ===== */
 .pat-glyph { font-size: inherit; line-height: 1; }
 img.pat-glyph { width: 1.1em; height: 1.1em; object-fit: contain; vertical-align: middle; }

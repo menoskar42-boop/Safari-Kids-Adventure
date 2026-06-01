@@ -353,6 +353,64 @@ export function renderAddition({ regionId, regionIndex }) {
   return screen;
 }
 
+// ===== لعبة ٧: أيهما أكثر؟ (المقارنة) =====
+// مجموعتان بأعداد مختلفة، يضغط الطفل على الأكثر — يبني الحسّ العددي.
+export function renderCompare({ regionId, regionIndex }) {
+  const { screen, stage, back } = baseScreen("⚖️ أيهما أكثر؟", regionId, regionIndex);
+  const ROUNDS = 6;
+  let round = 0;
+
+  function render() {
+    let a = 1 + ((Math.random() * 9) | 0);
+    let b = 1 + ((Math.random() * 9) | 0);
+    while (b === a) b = 1 + ((Math.random() * 9) | 0);
+    const emoji = rand(COUNT_EMOJIS);
+    stage.innerHTML = "";
+
+    const ask = document.createElement("p");
+    ask.style.cssText = "font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2);font-size:clamp(18px,5vw,26px);margin:6px 0";
+    ask.textContent = "اضغط على المجموعة الأكثر 👆";
+    stage.appendChild(ask);
+    Speech.ar("أين توجد عناصر أكثر؟");
+
+    const wrap = document.createElement("div");
+    wrap.style.cssText = "display:flex;gap:14px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:10px auto";
+
+    const makeGroup = (n) => {
+      const g = document.createElement("button");
+      g.className = "compare-box";
+      g.innerHTML = `<div class="compare-items">${(emoji + " ").repeat(n)}</div>`;
+      g.addEventListener("click", () => {
+        const isMore = n === Math.max(a, b);
+        if (isMore) {
+          g.classList.add("correct");
+          Sfx.correct();
+          Speech.ar(`نعم، ${n} أكثر`);
+          awardStars(1);
+          setTimeout(nextRound, 1100);
+        } else {
+          g.classList.add("wrong");
+          Sfx.wrong();
+          setTimeout(() => g.classList.remove("wrong"), 500);
+        }
+      });
+      return g;
+    };
+
+    wrap.append(makeGroup(a), makeGroup(b));
+    stage.appendChild(wrap);
+  }
+
+  function nextRound() {
+    round++;
+    if (round >= ROUNDS) finishActivity({ regionId, regionIndex, stars: 6, onDone: back });
+    else render();
+  }
+
+  setTimeout(render, 0);
+  return screen;
+}
+
 // ===== لعبة ٦: الطرح البسيط =====
 // تبدأ بعناصر، يُشطب بعضها، يختار الطفل كم بقي.
 export function renderSubtraction({ regionId, regionIndex }) {
