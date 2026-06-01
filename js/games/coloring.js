@@ -230,6 +230,39 @@ const PICTURES = [
       <rect class="cl" x="86" y="82" width="14" height="60" rx="3"/>
       <rect class="cl" x="106" y="82" width="14" height="60" rx="3"/>`,
   },
+  {
+    name: "زهرة التوليب",
+    svg: `
+      <rect class="cl" x="96" y="95" width="8" height="72"/>
+      <ellipse class="cl" cx="72" cy="134" rx="22" ry="10" transform="rotate(-25 72 134)"/>
+      <ellipse class="cl" cx="128" cy="134" rx="22" ry="10" transform="rotate(25 128 134)"/>
+      <path class="cl" d="M72 75 Q72 45 100 50 Q128 45 128 75 L128 96 Q100 112 72 96 Z"/>`,
+  },
+  {
+    name: "سحابة ومطر",
+    svg: `
+      <circle class="cl" cx="78" cy="78" r="24"/>
+      <circle class="cl" cx="122" cy="78" r="28"/>
+      <circle class="cl" cx="100" cy="64" r="28"/>
+      <rect class="cl" x="62" y="78" width="76" height="24" rx="12"/>
+      <ellipse class="cl" cx="82" cy="138" rx="8" ry="14"/>
+      <ellipse class="cl" cx="118" cy="138" rx="8" ry="14"/>`,
+  },
+  {
+    name: "شمعة",
+    svg: `
+      <ellipse class="cl" cx="100" cy="58" rx="11" ry="18"/>
+      <rect class="cl" x="78" y="82" width="44" height="72" rx="6"/>
+      <rect class="cl" x="68" y="154" width="64" height="14" rx="6"/>`,
+  },
+  {
+    name: "عَلَم",
+    svg: `
+      <rect class="cl" x="48" y="46" width="7" height="124" rx="3"/>
+      <rect class="cl" x="55" y="50" width="92" height="26"/>
+      <rect class="cl" x="55" y="76" width="92" height="26"/>
+      <rect class="cl" x="55" y="102" width="92" height="26"/>`,
+  },
 ];
 
 export function renderColoring({ regionId, regionIndex, title, bg }) {
