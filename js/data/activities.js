@@ -242,6 +242,8 @@ export const ACTIVITIES = {
     },
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "animals", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
+    { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
+      params: { datasetKey: "animals", title: "🧠 نمط الحيوانات", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
   ],
   fish: [
     { emoji: "🐠", title: "استكشف البحر", desc: "اضغط على كل سمكة لتعرفها", screen: "explore",
@@ -286,6 +288,8 @@ export const ACTIVITIES = {
       params: { storyId: "apple-tree" } },
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "fruits", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
+    { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
+      params: { datasetKey: "fruits", title: "🧠 نمط الفواكه", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
   ],
   colors: [
     { emoji: "🎨", title: "استكشف الألوان", desc: "اضغط على كل لون لتعرفه", screen: "explore",
