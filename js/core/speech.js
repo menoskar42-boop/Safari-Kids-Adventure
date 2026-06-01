@@ -64,18 +64,19 @@ export const Speech = {
     const lang = opts.lang || "ar-EG";
     const myId = ++speakSeq; // رمز تسلسل: أيّ نطق جديد يُلغي ما قبله
 
-    // المسار المفضّل: OpenAI TTS (صوت أوضح وأدفأ للأطفال)
+    // المسار المفضّل: OpenAI TTS فقط (لا نخلطه أبداً مع Web Speech لتفادي التداخل)
     if (useAI && isAIReady()) {
       // أوقف أي Web Speech عالق كي لا يتداخل صوتان معاً
       if (enabled) { try { window.speechSynthesis.cancel(); } catch (e) {} }
       const voice = AI_VOICE[lang.slice(0, 2)] || undefined;
       aiSpeak(text, { voice, instructions: opts.instructions }).then(
         () => { if (myId === speakSeq && opts.onend) opts.onend(); },
-        // بديل Web Speech فقط إن لم يُستبدَل هذا النطق بنطقٍ أحدث (يمنع تداخل AI + Web)
-        () => { if (myId === speakSeq) this._webSpeak(text, opts); }
+        // عند تعذّر صوت الـ AI: نبقى صامتين (لا Web Speech) — المستخدم يريد OpenAI فقط
+        () => { if (myId === speakSeq && opts.onend) opts.onend(); }
       );
       return;
     }
+    // لا يوجد AI: نستخدم Web Speech كبديل وحيد
     this._webSpeak(text, opts);
   },
 
