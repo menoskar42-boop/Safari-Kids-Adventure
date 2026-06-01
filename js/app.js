@@ -46,6 +46,7 @@ import { renderSimilar } from "./games/similar.js";
 import { renderTalkMizo } from "./games/talkMizo.js";
 import { renderManners } from "./games/manners.js";
 import { renderChatMizo } from "./games/chatMizo.js";
+import { renderReadMatch } from "./games/readmatch.js";
 import { createCharacter } from "./games/character.js";
 import { mountAdBar } from "./core/ads.js";
 
@@ -99,6 +100,7 @@ Router.register("similar", renderSimilar);
 Router.register("talkMizo", renderTalkMizo);
 Router.register("manners", renderManners);
 Router.register("chatMizo", renderChatMizo);
+Router.register("readMatch", renderReadMatch);
 
 // شاشة البداية
 const splash = document.getElementById("splash");

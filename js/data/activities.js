@@ -297,6 +297,13 @@ export const ACTIVITIES = {
       params: { datasetKey: "animals", title: "🦁 غابة الحيوانات", sound: true },
     },
     {
+      emoji: "📖",
+      title: "اقرأ واختر",
+      desc: "اقرأ اسم الحيوان واختر صورته",
+      screen: "readMatch",
+      params: { datasetKey: "animals", title: "📖 اقرأ واختر" },
+    },
+    {
       emoji: "🌑",
       title: "طابق الظل",
       desc: "اعرف الحيوان من ظله",
@@ -372,6 +379,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "fruits", title: "🧺 أحضِر الفاكهة", verb: "أحضِر", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
     { emoji: "🌑", title: "طابق الظل", desc: "اعرف الفاكهة من ظلها", screen: "shadowMatch",
       params: { datasetKey: "fruits", title: "🌑 ظل الفاكهة", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
+    { emoji: "📖", title: "اقرأ واختر", desc: "اقرأ اسم الفاكهة واختر صورتها", screen: "readMatch",
+      params: { datasetKey: "fruits", title: "📖 اقرأ واختر", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
     { emoji: "📖", title: "قصة: شجرة التفاح", desc: "استمع لقصة جميلة", screen: "story",
       params: { storyId: "apple-tree" } },
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
@@ -471,6 +480,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "words", title: "📦 صندوق الكلمات", bg: "linear-gradient(180deg,#a8f5c8,#8fd3f4)" } },
     { emoji: "🔎", title: "جِد الكلمة", desc: "اضغط على الكلمة المطلوبة", screen: "findIt",
       params: { datasetKey: "words", title: "🔎 جِد الكلمة", verb: "اضغط على", bg: "linear-gradient(180deg,#a8f5c8,#8fd3f4)" } },
+    { emoji: "📖", title: "اقرأ واختر", desc: "اقرأ الكلمة واختر صورتها", screen: "readMatch",
+      params: { datasetKey: "words", title: "📖 اقرأ واختر", bg: "linear-gradient(180deg,#a8f5c8,#8fd3f4)" } },
   ],
   feelings: [
     { emoji: "😄", title: "استكشف المشاعر", desc: "اضغط على كل شعور لتعرفه", screen: "explore",
