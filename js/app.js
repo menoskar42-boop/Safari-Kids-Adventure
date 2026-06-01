@@ -37,6 +37,8 @@ import { renderVideos } from "./screens/videos.js";
 import { renderStory } from "./screens/story.js";
 import { renderProfile } from "./screens/profile.js";
 import { renderDailyPlan } from "./screens/dailyPlan.js";
+import { renderRuleLesson } from "./games/ruleLesson.js";
+import { renderClassify } from "./games/classify.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -79,6 +81,8 @@ Router.register("videos", renderVideos);
 Router.register("story", renderStory);
 Router.register("profile", renderProfile);
 Router.register("dailyPlan", renderDailyPlan);
+Router.register("ruleLesson", renderRuleLesson);
+Router.register("classify", renderClassify);
 
 // شاشة البداية
 const splash = document.getElementById("splash");

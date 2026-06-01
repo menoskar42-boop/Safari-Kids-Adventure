@@ -34,6 +34,16 @@ export const REGIONS = [
     cat: "basics",
   },
   {
+    id: "reading",
+    name: "تأسيس القراءة",
+    nameEn: "Reading Foundation",
+    emoji: "📖",
+    bg: "bg-reading",
+    guide: "المدود والتنوين واللام الشمسية... هيا نتعلّم القراءة!",
+    ready: true,
+    cat: "basics",
+  },
+  {
     id: "animals",
     name: "غابة الحيوانات",
     nameEn: "Animals Forest",
