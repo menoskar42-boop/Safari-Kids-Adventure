@@ -99,7 +99,7 @@ export function renderHome() {
   const unlockedMap = new Map();
   REGIONS.forEach((region, index) => {
     let unlocked;
-    if (region.open) unlocked = true;
+    if (FEATURES.unlockAll || region.open) unlocked = true;
     else { unlocked = lockedSeen < completed; lockedSeen++; }
     unlockedMap.set(region.id, { unlocked, index });
   });
