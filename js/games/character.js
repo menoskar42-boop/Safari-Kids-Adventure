@@ -65,17 +65,20 @@ export function createCharacter(name = MIZO.name) {
     // تحريك الشفاه: تبديل سريع بين مغلق/مفتوح أثناء النطق (إن توفّرت صورة الفم المفتوح)
     if (talkOk && !talkLoop && (img.getAttribute("src") || "").includes("mizo-wave")) {
       let open = false;
-      talkLoop = setInterval(() => {
+      // إيقاع كلام طبيعي: مدّة كل إطار تتغيّر قليلاً
+      const tick = () => {
         open = !open;
         img.src = open ? "/assets/mizo/mizo-talk.png" : "/assets/mizo/mizo-wave.png";
-      }, 160);
+        talkLoop = setTimeout(tick, 110 + Math.random() * 90);
+      };
+      tick();
     }
     if (ms) stopTimer = setTimeout(stopTalking, ms);
   }
   function stopTalking() {
     clearTimeout(stopTimer);
     el.classList.remove("talking");
-    if (talkLoop) { clearInterval(talkLoop); talkLoop = null; img.src = "/assets/mizo/mizo-wave.png"; }
+    if (talkLoop) { clearTimeout(talkLoop); talkLoop = null; img.src = "/assets/mizo/mizo-wave.png"; }
   }
   // يضبط تعبير ميزو. مع ms يعود تلقائياً لـ"happy".
   function setMood(mood, ms) {
@@ -98,19 +101,23 @@ export function createCharacter(name = MIZO.name) {
     if (g === "wave") { el.classList.add("waving"); setTimeout(() => el.classList.remove("waving"), 1300); }
     clearTimeout(moodTimer);
     moodTimer = setTimeout(() => { show("happy"); el.classList.remove("gesture"); }, 1300);
-  }, 6000 + Math.random() * 4000);
+  }, 7000 + Math.random() * 5000);
 
   // ===== رمشة العين: تُفعَّل تلقائياً عند توفّر إطار العيون المغلقة =====
-  const blinkLoop = setInterval(() => {
-    if (!el.isConnected) { clearInterval(blinkLoop); return; }
-    if (!blinkOk || document.hidden) return;
+  function doBlink(times) {
     if (el.classList.contains("talking")) return;
-    if (!(img.getAttribute("src") || "").includes("mizo-wave")) return; // يرمش في وضع الخمول
+    if (!(img.getAttribute("src") || "").includes("mizo-wave")) return;
     img.src = "/assets/mizo/mizo-blink.png";
     setTimeout(() => {
       if ((img.getAttribute("src") || "").includes("mizo-blink")) img.src = "/assets/mizo/mizo-wave.png";
-    }, 150);
-  }, 3500 + Math.random() * 2500);
+      if (times > 1) setTimeout(() => doBlink(times - 1), 130); // رمشة مزدوجة أحياناً
+    }, 120);
+  }
+  const blinkLoop = setInterval(() => {
+    if (!el.isConnected) { clearInterval(blinkLoop); return; }
+    if (!blinkOk || document.hidden) return;
+    doBlink(Math.random() < 0.3 ? 2 : 1);
+  }, 4000 + Math.random() * 3000);
 
   return { el, startTalking, stopTalking, setMood, name, mouth: null };
 }
