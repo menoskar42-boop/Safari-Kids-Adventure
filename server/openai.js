@@ -91,6 +91,23 @@ export function registerOpenAIRoutes(app) {
     res.json({ ok: true, ai: Boolean(key()) });
   });
 
+  // ===== حالة مخزون الصوت + سياسة استخدام الذكاء الاصطناعي (موثّقة) =====
+  // السياسة الطبقية: (1) ذاكرة سريعة → (2) ملف على القرص → (3) توليد AI لمرّة
+  // واحدة فقط ثم يُخزَّن. عبارات ميزو والدروس ثابتة وتُسخَّن مسبقاً (npm run warm-tts)
+  // فلا تستهلك AI حيّاً. عند تعطيل الأهل للـ AI أو انقطاع الشبكة → Web Speech.
+  app.get("/api/tts-status", (_req, res) => {
+    let cachedClips = 0;
+    try {
+      cachedClips = fs.readdirSync(TTS_CACHE_DIR).filter((f) => f.endsWith(".mp3")).length;
+    } catch (_e) {}
+    res.json({
+      cachedClips,
+      memCached: ttsMem.size,
+      dir: "server/.tts-cache",
+      policy: "layered: mem -> disk -> AI(once); Mizo & lessons are fixed & pre-warmable; Web Speech fallback offline/disabled",
+    });
+  });
+
   // ===== تحويل النص إلى كلام (TTS) =====
   // body: { text, voice?, lang?, instructions? }
   app.post("/api/tts", ttsLimit, async (req, res) => {
