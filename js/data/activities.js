@@ -94,6 +94,20 @@ export const ACTIVITIES = {
       screen: "phonics",
       params: { datasetKey: "arabic", lang: "ar-EG", title: "🔤 بأي حرف تبدأ؟", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
     },
+    {
+      emoji: "🧱",
+      title: "كوّن الكلمة",
+      desc: "رتّب الحروف لتكوّن الكلمة",
+      screen: "wordBuild",
+      params: { title: "🧱 كوّن الكلمة" },
+    },
+    {
+      emoji: "👀",
+      title: "الحروف المتشابهة",
+      desc: "ميّز الحرف الصحيح بين متشابهاته",
+      screen: "similar",
+      params: { title: "👀 الحروف المتشابهة" },
+    },
   ],
   english: [
     {

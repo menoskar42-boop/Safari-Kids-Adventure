@@ -39,6 +39,8 @@ import { renderProfile } from "./screens/profile.js";
 import { renderDailyPlan } from "./screens/dailyPlan.js";
 import { renderRuleLesson } from "./games/ruleLesson.js";
 import { renderClassify } from "./games/classify.js";
+import { renderWordBuild } from "./games/wordbuild.js";
+import { renderSimilar } from "./games/similar.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -83,6 +85,8 @@ Router.register("profile", renderProfile);
 Router.register("dailyPlan", renderDailyPlan);
 Router.register("ruleLesson", renderRuleLesson);
 Router.register("classify", renderClassify);
+Router.register("wordBuild", renderWordBuild);
+Router.register("similar", renderSimilar);
 
 // شاشة البداية
 const splash = document.getElementById("splash");

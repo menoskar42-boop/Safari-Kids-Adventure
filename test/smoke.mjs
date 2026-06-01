@@ -91,6 +91,8 @@ const cases = [
   ["dailyPlan", "../js/screens/dailyPlan.js", "renderDailyPlan", {}],
   ["ruleLesson", "../js/games/ruleLesson.js", "renderRuleLesson", { regionId: "reading", regionIndex: 3, ruleId: "madd", title: "t" }],
   ["classify", "../js/games/classify.js", "renderClassify", { regionId: "reading", regionIndex: 3, setId: "lam", title: "t" }],
+  ["wordBuild", "../js/games/wordbuild.js", "renderWordBuild", { regionId: "arabic", regionIndex: 0, title: "t" }],
+  ["similar", "../js/games/similar.js", "renderSimilar", { regionId: "arabic", regionIndex: 0, title: "t" }],
   ["countPick", "../js/games/count.js", "renderCountPick", { regionId: "numbers", regionIndex: 0 }],
   ["addition", "../js/games/count.js", "renderAddition", { regionId: "numbers", regionIndex: 0 }],
   ["subtraction", "../js/games/count.js", "renderSubtraction", { regionId: "numbers", regionIndex: 0 }],

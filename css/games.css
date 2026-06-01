@@ -362,6 +362,36 @@
   justify-content: center;
 }
 
+/* ===== لعبة تكوين الكلمة ===== */
+.wb-slot {
+  width: clamp(48px, 14vw, 70px);
+  height: clamp(48px, 14vw, 70px);
+  border-radius: 14px;
+  background: rgba(255,255,255,.4);
+  border: 3px dashed #fff;
+  display: grid;
+  place-items: center;
+  font-size: clamp(28px, 8vw, 44px);
+  font-weight: 800;
+  color: var(--c-purple);
+}
+.wb-slot.filled { background: #fff; border-style: solid; animation: pop-in .25s ease; }
+.wb-tile {
+  width: clamp(52px, 15vw, 76px);
+  height: clamp(52px, 15vw, 76px);
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(180deg,#fff,#ede7ff);
+  box-shadow: var(--shadow-card);
+  font-size: clamp(30px, 9vw, 48px);
+  font-weight: 800;
+  color: var(--c-ink);
+  cursor: pointer;
+  transition: transform .12s ease;
+}
+.wb-tile:active { transform: scale(.92); }
+.wb-tile.shake { animation: shake .4s ease; }
+
 /* ===== لعبة الفرز (التصنيف) ===== */
 img.sort-glyph { width: 1em; height: 1em; object-fit: contain; }
 .sort-cat { font-size: clamp(16px, 4.4vw, 22px); }
