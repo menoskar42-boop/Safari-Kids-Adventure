@@ -4,6 +4,7 @@ import { Store } from "../core/storage.js";
 import { Router } from "../core/router.js";
 import { Sfx } from "../core/audio.js";
 import { Speech } from "../core/speech.js";
+import { createCharacter } from "../games/character.js";
 
 const GUIDE = "🐨"; // الأفاتار الافتراضي
 
@@ -77,6 +78,52 @@ export function renderProfile() {
     ageRow.appendChild(b);
   });
   wrap.appendChild(ageRow);
+
+  // ===== صداقة ميزو + تخصيصه =====
+  const fLevel = Store.friendLevel;
+  const fTitle = document.createElement("p");
+  fTitle.style.cssText = "font-weight:800;color:var(--c-ink);margin:24px 0 6px;font-size:clamp(16px,4.5vw,20px)";
+  fTitle.textContent = `صداقتك مع ميزو: المستوى ${fLevel} 💛`;
+  wrap.appendChild(fTitle);
+
+  const preview = document.createElement("div");
+  preview.style.cssText = "display:grid;place-items:center;margin:4px 0";
+  const previewMizo = createCharacter();
+  preview.appendChild(previewMizo.el);
+  wrap.appendChild(preview);
+
+  const accHint = document.createElement("p");
+  accHint.style.cssText = "font-size:13px;color:#7a6ca8;text-align:center;margin:2px 0 8px";
+  accHint.textContent = "زيّن ميزو! تُفتح إكسسوارات جديدة كلّما كبرت صداقتكما 🎁";
+  wrap.appendChild(accHint);
+
+  const accRow = document.createElement("div");
+  accRow.style.cssText = "display:flex;gap:10px;justify-content:center;flex-wrap:wrap";
+  // [إيموجي, المستوى المطلوب]
+  const ACCS = [["", 1], ["🧢", 1], ["🎀", 2], ["🎩", 3], ["👑", 4], ["⭐", 5]];
+  ACCS.forEach(([acc, lvl]) => {
+    const b = document.createElement("button");
+    b.className = "wb-tile";
+    const locked = fLevel < lvl;
+    b.textContent = locked ? "🔒" : (acc || "🚫");
+    b.disabled = locked;
+    b.style.opacity = locked ? ".5" : "1";
+    if (!locked && Store.mizoAccessory === acc) b.style.outline = "4px solid var(--c-green)";
+    b.addEventListener("click", () => {
+      if (locked) return;
+      Sfx.tap();
+      Store.setMizoAccessory(acc);
+      // إعادة بناء المعاينة فوراً
+      const fresh = createCharacter();
+      previewMizo.el.replaceWith(fresh.el);
+      previewMizo.el = fresh.el;
+      fresh.setMood("cheer", 1200);
+      accRow.querySelectorAll("button").forEach((x) => (x.style.outline = "none"));
+      if (!locked) b.style.outline = "4px solid var(--c-green)";
+    });
+    accRow.appendChild(b);
+  });
+  wrap.appendChild(accRow);
 
   // اختيار الأفاتار
   const h = document.createElement("p");

@@ -3,6 +3,7 @@
 // خفيفة، بلا أصول خارجية، وتعمل دون إنترنت. تُستخدم في شاشة "معلّم الحروف".
 // الهوية والعبارات تأتي من المصدر المركزي js/data/mizo.js (نعيد تصديرها للتوافق).
 import { MIZO } from "../data/mizo.js";
+import { Store } from "../core/storage.js";
 export {
   MIZO,
   MIZO_INTRO,
@@ -18,6 +19,9 @@ export function createCharacter(name = MIZO.name) {
   const el = document.createElement("div");
   el.className = "miz";
   el.setAttribute("aria-label", name);
+  // إكسسوار الطفل المختار (يُرسم داخل SVG فيتناسب مع كل الأحجام)
+  const acc = Store.mizoAccessory;
+  const accSvg = acc ? `<text class="miz-acc" x="100" y="40" font-size="46" text-anchor="middle">${acc}</text>` : "";
   el.innerHTML = `
     <svg viewBox="0 0 200 220" class="miz-svg" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -83,6 +87,7 @@ export function createCharacter(name = MIZO.name) {
         <path d="M34 44 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z"/>
         <path d="M170 34 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z"/>
       </g>
+      ${accSvg}
     </svg>`;
 
   const mouth = el.querySelector(".miz-mouth");

@@ -179,6 +179,15 @@ export const Store = {
     persist();
   },
 
+  // إكسسوار ميزو الذي اختاره الطفل (إيموجي على رأسه) — "" = بلا
+  get mizoAccessory() {
+    return state.mizoAccessory || "";
+  },
+  setMizoAccessory(acc) {
+    state.mizoAccessory = String(acc || "").slice(0, 4);
+    persist();
+  },
+
   // الرقم السري لبوّابة ولي الأمر (٤ أرقام). فارغ = لم يُضبط بعد
   get parentPin() {
     return state.parentPin || "";
@@ -191,7 +200,19 @@ export const Store = {
   // ===== ذاكرة صداقة ميزو (يتذكّر الطفل) =====
   // آخر منطقة زارها، آخر إنجاز، آخر تاريخ نشاط، وعدد الجلسات
   get friendship() {
-    return state.friendship || (state.friendship = { lastRegion: "", lastReward: "", lastDate: "", visits: 0 });
+    return state.friendship || (state.friendship = { lastRegion: "", lastReward: "", lastDate: "", visits: 0, xp: 0, level: 1 });
+  },
+  // مستوى الصداقة يكبر كلّما تعلّم الطفل (كل ١٢ نقطة = مستوى)
+  get friendLevel() {
+    return this.friendship.level || 1;
+  },
+  addFriendship(n = 1) {
+    const f = this.friendship;
+    const before = f.level || 1;
+    f.xp = (f.xp || 0) + n;
+    f.level = Math.floor(f.xp / 12) + 1;
+    persist();
+    return f.level > before ? f.level : 0; // يعيد المستوى الجديد عند الترقية، وإلا 0
   },
   rememberRegion(name) {
     const f = this.friendship;

@@ -88,6 +88,7 @@ export function finishActivity({ regionId, regionIndex, stars = 5, onDone }) {
     Store.markDailyStep(Store.activeStep);
     Store.activeStep = null;
   }
+  Store.addFriendship(1); // تنمو صداقة ميزو مع كل نشاط
   const wasCompleted = Store.regionProgress(regionId).completed;
   awardStars(stars);
   Confetti.burst();
