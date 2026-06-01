@@ -47,6 +47,7 @@ import { renderTalkMizo } from "./games/talkMizo.js";
 import { renderManners } from "./games/manners.js";
 import { renderChatMizo } from "./games/chatMizo.js";
 import { createCharacter } from "./games/character.js";
+import { mountAdBar } from "./core/ads.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -139,6 +140,9 @@ function startApp() {
 
   splash.classList.add("hidden");
   appEl.classList.remove("hidden");
+
+  // شريط الإعلان السفلي (متوافق، مخفيّ حتى تفعيله من FEATURES.ads + مُعرّفات AdSense)
+  mountAdBar();
 
   // رابط عميق: ?region=arabic يفتح المنطقة مباشرة (قادم من صفحات SEO)
   const wanted = new URLSearchParams(location.search).get("region");

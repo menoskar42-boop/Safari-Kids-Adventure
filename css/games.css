@@ -1,3 +1,28 @@
+/* ===== شريط الإعلان السفلي (متوافق، يظهر فقط عند تفعيله) ===== */
+.ad-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 30;
+  background: #ffffff;
+  border-top: 1px solid #ececec;
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -2px 10px rgba(0,0,0,.08);
+  padding: 4px 8px;
+}
+.ad-bar-label {
+  position: absolute;
+  top: 2px;
+  inset-inline-end: 8px;
+  font-size: 10px;
+  color: #b3b3b3;
+  font-weight: 700;
+}
+body.has-ad-bar #app,
+body.has-ad-bar .splash { padding-bottom: 72px; }
+
 /* ===== أنماط شاشات الألعاب (تُستخدم لاحقاً) ===== */
 /* إتاحة: احترام تفضيل تقليل الحركة (للأطفال الحسّاسين للحركة) */
 @media (prefers-reduced-motion: reduce) {

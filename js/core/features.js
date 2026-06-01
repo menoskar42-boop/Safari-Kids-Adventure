@@ -4,4 +4,5 @@ export const FEATURES = {
   videos: false, // الأغاني والفيديوهات (يوتيوب) — مخفيّة حالياً
   stories: true, // القصص التفاعلية — مُفعّلة
   unlockAll: true, // فتح كل المناطق للمراجعة (اجعلها false لإعادة التدرّج التلقائي)
+  ads: false, // شريط إعلان سفلي (اجعلها true بعد اعتماد AdSense ووضع المُعرّفات في js/core/ads.js)
 };
