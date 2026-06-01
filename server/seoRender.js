@@ -229,8 +229,8 @@ export function renderHomePage() {
 export function renderSitemap() {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [
-    { loc: `${SITE.url}/explore`, priority: "1.0", freq: "weekly" },
-    { loc: `${SITE.url}/app`, priority: "0.9", freq: "weekly" },
+    { loc: `${SITE.url}/`, priority: "1.0", freq: "daily" },
+    { loc: `${SITE.url}/explore`, priority: "0.9", freq: "weekly" },
     ...SECTIONS.map((s) => ({
       loc: `${SITE.url}/${s.slug}`,
       priority: "0.8",
