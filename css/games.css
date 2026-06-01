@@ -345,6 +345,9 @@
 /* ميزو في لوحة الاحتفال */
 .cheer-miz { display: block; margin: 4px auto 0; }
 .cheer-miz .miz-svg { width: clamp(80px, 24vw, 120px); }
+/* ميزو في شاشة البداية */
+.splash-mizo { display: grid; place-items: center; margin: 6px 0 2px; }
+.splash-mizo .miz-svg { width: clamp(96px, 30vw, 150px); }
 .lesson-teacher .teacher-bubble {
   background: #fff;
   border-radius: 18px;

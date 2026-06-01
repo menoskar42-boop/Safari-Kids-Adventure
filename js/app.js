@@ -43,6 +43,7 @@ import { renderWordBuild } from "./games/wordbuild.js";
 import { renderSimilar } from "./games/similar.js";
 import { renderTalkMizo } from "./games/talkMizo.js";
 import { renderManners } from "./games/manners.js";
+import { createCharacter } from "./games/character.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -96,6 +97,14 @@ Router.register("manners", renderManners);
 const splash = document.getElementById("splash");
 const appEl = document.getElementById("app");
 const startBtn = document.getElementById("startBtn");
+
+// ميزو يرحّب في شاشة البداية (يلوّح) — بلا صوت قبل تفاعل المستخدم
+const splashMizoSlot = document.getElementById("splashMizo");
+if (splashMizoSlot) {
+  const splashMizo = createCharacter();
+  splashMizoSlot.appendChild(splashMizo.el);
+  splashMizo.setMood("wave", 3000);
+}
 
 function startApp() {
   // فتح السياق الصوتي وتهيئة النطق بعد تفاعل المستخدم
