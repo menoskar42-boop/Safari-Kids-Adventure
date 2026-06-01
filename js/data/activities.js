@@ -261,6 +261,8 @@ export const ACTIVITIES = {
       params: { storyId: "brave-fish" } },
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "fish", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#7fe0ff,#1aa7ff)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء صورة السمكة", screen: "puzzle",
+      params: { datasetKey: "fish", title: "🧩 ركّب السمكة", bg: "linear-gradient(180deg,#7fe0ff,#1aa7ff)" } },
   ],
   birds: [
     { emoji: "🦜", title: "استكشف الطيور", desc: "اضغط على كل طائر لتعرفه", screen: "explore",
@@ -271,6 +273,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "birds", title: "🌑 ظل الطائر", bg: "linear-gradient(180deg,#cdb8ff,#8a6bff)" } },
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "birds", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#cdb8ff,#8a6bff)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء صورة الطائر", screen: "puzzle",
+      params: { datasetKey: "birds", title: "🧩 ركّب الطائر", bg: "linear-gradient(180deg,#cdb8ff,#8a6bff)" } },
   ],
   insects: [
     { emoji: "🦋", title: "استكشف الحشرات", desc: "اضغط على كل حشرة لتعرفها", screen: "explore",
@@ -348,6 +352,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "transport", title: "🔎 جِد الوسيلة", verb: "اضغط على", bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "transport", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء وسيلة المواصلات", screen: "puzzle",
+      params: { datasetKey: "transport", title: "🧩 ركّب المركبة", bg: "linear-gradient(180deg,#a9e4ff,#2980b9)" } },
   ],
   food: [
     { emoji: "🍔", title: "استكشف الطعام", desc: "اضغط على كل طعام لتعرفه", screen: "explore",
