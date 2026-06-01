@@ -136,7 +136,7 @@ ${jsonLd(section)}
 </head>
 <body>
 <header class="seo-header">
-  <a class="seo-logo" href="/explore">🦁 عالم الاستكشاف السحري</a>
+  <a class="seo-logo" href="/">🦁 عالم الاستكشاف السحري</a>
 </header>
 <main class="seo-main">
   <h1>${section.emoji} ${esc(section.h1)}</h1>
@@ -151,7 +151,7 @@ ${jsonLd(section)}
 </main>
 <footer class="seo-footer">
   <p>عالم الاستكشاف السحري — تطبيق تعليمي تفاعلي للأطفال من ٣ إلى ٦ سنوات.</p>
-  <p><a href="/explore">العودة إلى صفحة الاستكشاف</a></p>
+  <p><a href="/">العودة إلى صفحة الاستكشاف</a></p>
 </footer>
 </body>
 </html>`;
@@ -174,13 +174,13 @@ export function renderHomePage() {
 <meta name="description" content="عالم الاستكشاف السحري: تطبيق مغامرات تعليمي للأطفال من ٣ إلى ٦ سنوات لتعليم الحروف العربية والإنجليزية والأرقام والحيوانات والألوان والأشكال بالصوت والألعاب." />
 <meta name="keywords" content="تطبيق تعليمي للاطفال، تعليم الحروف، تعليم الارقام، العاب تعليمية، تعلم العربية والانجليزية للاطفال" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
-<link rel="canonical" href="${SITE.url}/explore" />
+<link rel="canonical" href="${SITE.url}/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="${esc(SITE.name)}" />
 <meta property="og:locale" content="${SITE.locale}" />
 <meta property="og:title" content="${esc(SITE.name)}" />
 <meta property="og:description" content="تطبيق مغامرات تعليمي للأطفال: حروف وأرقام وحيوانات وألوان وأشكال بالصوت والألعاب." />
-<meta property="og:url" content="${SITE.url}/explore" />
+<meta property="og:url" content="${SITE.url}/" />
 <meta property="og:image" content="${SITE.url}/og.svg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="${SITE.twitter}" />
@@ -230,11 +230,10 @@ export function renderSitemap() {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [
     { loc: `${SITE.url}/`, priority: "1.0", freq: "daily" },
-    { loc: `${SITE.url}/explore`, priority: "0.9", freq: "weekly" },
     ...SECTIONS.map((s) => ({
       loc: `${SITE.url}/${s.slug}`,
-      priority: "0.8",
-      freq: "monthly",
+      priority: "0.9",
+      freq: "weekly",
     })),
     { loc: `${SITE.url}/guides`, priority: "0.7", freq: "monthly" },
     ...GUIDES.map((g) => ({

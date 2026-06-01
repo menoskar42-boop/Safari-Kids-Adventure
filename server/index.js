@@ -25,12 +25,23 @@ const PORT = process.env.PORT || 5000;
 // نقبل JSON كبيراً نسبياً (لإرسال صوت base64 للنسخ الصوتي)
 app.use(express.json({ limit: "8mb" }));
 
+// توحيد الروابط أمام جوجل: إزالة الشرطة المائلة الأخيرة (301) لمنع تكرار المحتوى
+app.use((req, res, next) => {
+  if (req.method === "GET" && req.path.length > 1 && req.path.endsWith("/")) {
+    const qs = req.url.slice(req.path.length);
+    return res.redirect(301, req.path.replace(/\/+$/, "") + qs);
+  }
+  next();
+});
+
 // مسارات OpenAI: ‎/api/tts , ‎/api/ask , ‎/api/stt , ‎/api/health
 registerOpenAIRoutes(app);
 
 // ===== ملفات الأرشفة (SEO) =====
 app.get("/sitemap.xml", (_req, res) => {
-  res.type("application/xml").send(renderSitemap());
+  const xml = renderSitemap().trim(); // إزالة أي سطر فارغ في البداية قد يُفسد الملف
+  res.set("Content-Type", "application/xml; charset=utf-8");
+  res.status(200).send(xml);
 });
 app.get("/robots.txt", (_req, res) => {
   res.type("text/plain").send(renderRobots());
@@ -64,14 +75,15 @@ app.get("/asset-manifest.json", (_req, res) => {
   res.json({ assets });
 });
 
-// الرابط الرئيسي يفتح التطبيق التفاعلي مباشرة (أفضل تجربة للطفل)
+// الجذر يقدّم صفحة المحتوى الغنيّة (SSR) مباشرةً — أقوى للأرشفة (يراها البوت كاملة)
+// والطفل/الوالي يفتح التطبيق التفاعلي عبر زرّ "افتح التطبيق" المؤدّي إلى /app.
 app.get("/", (_req, res) => {
-  res.sendFile(path.join(ROOT, "index.html"));
+  res.type("html").send(renderHomePage());
 });
 
-// صفحة المحتوى الغنيّة للأرشفة (SEO) على /explore
+// توحيد: ‎/explore القديم يُحوَّل دائماً إلى الجذر (منع تكرار/تشتّت)
 app.get("/explore", (_req, res) => {
-  res.type("html").send(renderHomePage());
+  res.redirect(301, "/");
 });
 
 // ===== الصفحات الثابتة (حول / الخصوصية) =====
@@ -110,9 +122,21 @@ app.get("/app", (_req, res) => {
 // تقديم ملفات الواجهة الثابتة (css/js/manifest/sw...)
 app.use(express.static(ROOT, { extensions: ["html"] }));
 
-// أي مسار غير معروف → التطبيق التفاعلي
+// أي مسار غير معروف → 404 حقيقي (لا Soft 404) كي لا تتأثّر ثقة الفهرسة
 app.get("*", (_req, res) => {
-  res.sendFile(path.join(ROOT, "index.html"));
+  res
+    .status(404)
+    .type("html")
+    .send(
+      `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8" />` +
+        `<meta name="viewport" content="width=device-width, initial-scale=1.0" />` +
+        `<meta name="robots" content="noindex" /><title>٤٠٤ — صفحة غير موجودة</title>` +
+        `<link rel="stylesheet" href="/css/seo.css" /></head><body>` +
+        `<main class="seo-main" style="text-align:center"><h1>🦁 ٤٠٤</h1>` +
+        `<p>هذه الصفحة غير موجودة في عالم الاستكشاف.</p>` +
+        `<p><a class="seo-play" href="/">العودة إلى الصفحة الرئيسية</a></p>` +
+        `<p><a href="/app">▶ افتح التطبيق التفاعلي</a></p></main></body></html>`
+    );
 });
 
 app.listen(PORT, "0.0.0.0", () => {

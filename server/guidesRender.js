@@ -87,10 +87,10 @@ ${jsonLd(guide)}
 </head>
 <body>
 <header class="seo-header">
-  <a class="seo-logo" href="/explore">🦁 عالم الاستكشاف السحري</a>
+  <a class="seo-logo" href="/">🦁 عالم الاستكشاف السحري</a>
 </header>
 <main class="seo-main">
-  <p class="seo-crumbs"><a href="/explore">الرئيسية</a> › <a href="/guides">أدلة الآباء</a> › ${esc(guide.h1)}</p>
+  <p class="seo-crumbs"><a href="/">الرئيسية</a> › <a href="/guides">أدلة الآباء</a> › ${esc(guide.h1)}</p>
   <h1>${guide.emoji} ${esc(guide.h1)}</h1>
   <p class="seo-meta">⏱️ قراءة ${guide.readMinutes} دقائق · للآباء · الأعمار ٣–٦</p>
   <article class="seo-article">${body}</article>
@@ -100,7 +100,7 @@ ${jsonLd(guide)}
 </main>
 <footer class="seo-footer">
   <p>عالم الاستكشاف السحري — تطبيق تعليمي تفاعلي للأطفال من ٣ إلى ٦ سنوات.</p>
-  <p><a href="/explore">العودة إلى صفحة الاستكشاف</a></p>
+  <p><a href="/">العودة إلى صفحة الاستكشاف</a></p>
 </footer>
 </body>
 </html>`;
@@ -133,7 +133,7 @@ export function renderGuidesIndex() {
 </head>
 <body>
 <header class="seo-header">
-  <a class="seo-logo" href="/explore">🦁 عالم الاستكشاف السحري</a>
+  <a class="seo-logo" href="/">🦁 عالم الاستكشاف السحري</a>
 </header>
 <main class="seo-main">
   <h1>📚 أدلة الآباء لتعليم الأطفال</h1>
