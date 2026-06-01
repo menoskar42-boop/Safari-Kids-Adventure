@@ -188,6 +188,30 @@ export const Store = {
     persist();
   },
 
+  // ===== ذاكرة صداقة ميزو (يتذكّر الطفل) =====
+  // آخر منطقة زارها، آخر إنجاز، آخر تاريخ نشاط، وعدد الجلسات
+  get friendship() {
+    return state.friendship || (state.friendship = { lastRegion: "", lastReward: "", lastDate: "", visits: 0 });
+  },
+  rememberRegion(name) {
+    const f = this.friendship;
+    f.lastRegion = String(name || "").slice(0, 40);
+    persist();
+  },
+  rememberReward(name) {
+    const f = this.friendship;
+    f.lastReward = String(name || "").slice(0, 40);
+    persist();
+  },
+  // تُستدعى عند بدء التطبيق: تزيد عدّاد الجلسات وتعيد true إن كان يوماً جديداً
+  touchFriendship() {
+    const f = this.friendship;
+    const t = today();
+    const newDay = f.lastDate !== t;
+    if (newDay) { f.visits = (f.visits || 0) + 1; f.lastDate = t; persist(); }
+    return newDay;
+  },
+
   // تشغيل/تعطيل الذكاء الاصطناعي والميكروفون (افتراضياً مُفعّل)
   get aiEnabled() {
     return state.aiEnabled !== false;

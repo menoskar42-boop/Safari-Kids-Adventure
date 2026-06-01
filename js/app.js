@@ -110,8 +110,9 @@ function startApp() {
   // فتح السياق الصوتي وتهيئة النطق بعد تفاعل المستخدم
   Sfx.unlock();
 
-  // تحديث السلسلة اليومية (Streak)
+  // تحديث السلسلة اليومية (Streak) + ذاكرة صداقة ميزو
   Store.touchDaily();
+  Store.touchFriendship();
 
   // تذكير وقت الشاشة (إن فعّله ولي الأمر): رسالة لطيفة بعد المدّة المحدّدة
   const stMin = Store.screenTimeMin;

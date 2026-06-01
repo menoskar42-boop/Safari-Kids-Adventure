@@ -40,9 +40,17 @@ export function renderHome() {
   const banner = document.createElement("div");
   banner.className = "guide-banner";
   const who = Store.childName ? `مرحباً يا ${Store.childName}!` : "مرحباً يا بطل!";
+  // ميزو يتذكّر الطفل: ترحيب شخصي للعائد
+  const f = Store.friendship;
+  let bubbleMsg;
+  if (f.visits > 1 && f.lastRegion) {
+    bubbleMsg = `${who} اشتقتُ إليك! آخر مرّة لعبنا في <b>${f.lastRegion}</b>. هيا نكمل المغامرة ✨`;
+  } else {
+    bubbleMsg = `${who} أنا <b>ميزو</b> 👋 اختر منطقة لنبدأ المغامرة ✨`;
+  }
   banner.innerHTML = `
     <button class="guide-emoji guide-miz" id="profileBtn" style="background:none;border:none;cursor:pointer" title="ملفي"></button>
-    <div class="bubble">${who} أنا <b>ميزو</b> 👋 اختر منطقة لنبدأ المغامرة ✨</div>
+    <div class="bubble">${bubbleMsg}</div>
   `;
   // ميزو المرشد بدل الإيموجي الثابت (يلوّح عند فتح الخريطة)
   const guide = createCharacter();

@@ -5,9 +5,11 @@ import { Sfx } from "../core/audio.js";
 import { Speech } from "../core/speech.js";
 import { ACTIVITIES } from "../data/activities.js";
 import { FEATURES } from "../core/features.js";
+import { Store } from "../core/storage.js";
 
 export function renderRegion({ id, index }) {
   const region = getRegion(id);
+  if (region) Store.rememberRegion(region.name); // ذاكرة ميزو: آخر منطقة
   const screen = document.createElement("div");
   screen.className = "region-screen";
   screen.style.background = "linear-gradient(180deg,#bfe9ff,#e9f7d8)";

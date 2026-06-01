@@ -90,6 +90,7 @@ export function showRewardPopup(item, onClose) {
   mizo.setMood("cheer");
   mizo.el.classList.add("cheer-miz");
   overlay.querySelector(".cheer-card").insertBefore(mizo.el, overlay.querySelector(".cheer-text"));
+  Store.rememberReward(item.name); // ذاكرة ميزو: آخر مكافأة
   document.body.appendChild(overlay);
   Speech.ar(`حصلت على ${item.name}`);
   overlay.querySelector("#rewardOk").addEventListener("click", () => {
