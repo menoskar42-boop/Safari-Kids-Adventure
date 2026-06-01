@@ -654,6 +654,16 @@ export const ACTIVITIES = {
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "timeday", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#7b6fb0,#fd746c)" } },
   ],
+  hygiene: [
+    { emoji: "🪥", title: "استكشف العناية", desc: "اضغط على كل عادة لتعرفها", screen: "explore",
+      params: { datasetKey: "hygiene", title: "🪥 العناية بالنفس", bg: "linear-gradient(180deg,#43cea2,#185a9d)" } },
+    { emoji: "🔎", title: "جِد الأداة", desc: "اضغط على ما تحتاجه للعناية", screen: "findIt",
+      params: { datasetKey: "hygiene", title: "🔎 جِد الأداة", verb: "اضغط على", bg: "linear-gradient(180deg,#43cea2,#185a9d)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "hygiene", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#43cea2,#185a9d)" } },
+    { emoji: "🌑", title: "طابق الظل", desc: "اعرف الأداة من ظلها", screen: "shadowMatch",
+      params: { datasetKey: "hygiene", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#43cea2,#185a9d)" } },
+  ],
   tastes: [
     { emoji: "👅", title: "استكشف الطعوم", desc: "اضغط على كل طعم لتعرفه", screen: "explore",
       params: { datasetKey: "tastes", title: "👅 عالم الطعوم", bg: "linear-gradient(180deg,#f7b733,#fc4a1a)" } },

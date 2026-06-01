@@ -261,6 +261,16 @@ export const REGIONS = [
     cat: "self",
   },
   {
+    id: "hygiene",
+    name: "العناية بالنفس",
+    nameEn: "Self Care",
+    emoji: "🪥",
+    bg: "bg-hygiene",
+    guide: "نظافتنا سرّ صحّتنا... تعال نتعلّم العناية بأنفسنا!",
+    ready: true,
+    cat: "self",
+  },
+  {
     id: "clothes",
     name: "عالم الملابس",
     nameEn: "Clothes",
