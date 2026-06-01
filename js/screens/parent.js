@@ -5,6 +5,7 @@ import { getDataset } from "../data/datasets.js";
 import { Store } from "../core/storage.js";
 import { Router } from "../core/router.js";
 import { Sfx } from "../core/audio.js";
+import { setAIEnabled } from "../core/ai.js";
 import { updateStarCounter } from "../core/rewards.js";
 
 export function renderParent() {
@@ -101,6 +102,33 @@ export function renderParent() {
   stNote.textContent = "تذكير لطيف داخل التطبيق بعد المدّة (يُطبّق عند فتح التطبيق التالي).";
   stBox.appendChild(stNote);
   wrap.appendChild(stBox);
+
+  // ===== الخصوصية والميكروفون =====
+  const privBox = document.createElement("div");
+  privBox.style.cssText = "background:#fff;border-radius:18px;padding:14px 16px;margin-top:16px;box-shadow:var(--shadow-card)";
+  privBox.innerHTML = `
+    <div style="font-weight:800;color:var(--c-ink);margin-bottom:8px">🔒 الخصوصية والميكروفون</div>
+    <p style="font-size:13px;color:#5a4e80;line-height:1.7;margin:0 0 10px">
+      • لا نجمع أيّ بيانات شخصية، وكلّ التقدّم يُحفظ على هذا الجهاز فقط.<br>
+      • الميكروفون يعمل <b>فقط عند ضغط الطفل</b> على زرّ التحدّث، ولا يُسجَّل أو يُخزَّن.<br>
+      • يُرسَل الصوت للمعالجة اللحظية فقط (نصّ) ولا يُستخدَم للتدريب، ويمكنك تعطيله أدناه.<br>
+      • النطق المسموع مخزَّن كملفات صوت محلية بعد أوّل مرّة (توفيرٌ وخصوصية).
+    </p>
+    <button class="candy-btn" id="aiToggle" style="font-size:15px"></button>`;
+  wrap.appendChild(privBox);
+  const aiBtn = privBox.querySelector("#aiToggle");
+  const paintAi = () => {
+    const on = Store.aiEnabled;
+    aiBtn.textContent = on ? "🎤 الميكروفون والذكاء الاصطناعي: مُفعّل" : "🔇 الميكروفون والذكاء الاصطناعي: مُعطّل";
+    aiBtn.style.background = on ? "linear-gradient(180deg,#34d399,#10b981)" : "linear-gradient(180deg,#9aa7ff,#6b7cff)";
+  };
+  paintAi();
+  aiBtn.addEventListener("click", () => {
+    Sfx.tap();
+    Store.setAiEnabled(!Store.aiEnabled);
+    setAIEnabled(Store.aiEnabled);
+    paintAi();
+  });
 
   // إعادة ضبط
   const reset = document.createElement("button");

@@ -188,6 +188,15 @@ export const Store = {
     persist();
   },
 
+  // تشغيل/تعطيل الذكاء الاصطناعي والميكروفون (افتراضياً مُفعّل)
+  get aiEnabled() {
+    return state.aiEnabled !== false;
+  },
+  setAiEnabled(on) {
+    state.aiEnabled = !!on;
+    persist();
+  },
+
   // الفئة العمرية لتدرّج الصعوبة: "" غير محدّد، "small" ٣–٤، "big" ٥–٦
   get ageBand() {
     return state.ageBand || "";

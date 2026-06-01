@@ -2,7 +2,7 @@
 import { Router } from "./core/router.js";
 import { Sfx } from "./core/audio.js";
 import { Speech, setAISpeech } from "./core/speech.js";
-import { checkAI } from "./core/ai.js";
+import { checkAI, setAIEnabled } from "./core/ai.js";
 import { mountAssistantButton } from "./core/assistant.js";
 import { REGIONS } from "./data/regions.js";
 import { Store } from "./core/storage.js";
@@ -110,10 +110,14 @@ function startApp() {
     setTimeout(() => showScreenTimeReminder(), stMin * 60 * 1000);
   }
 
-  // فحص توفّر خادم OpenAI: إن توفّر نستخدم نطق الـ AI، وإلا Web Speech
+  // احترام إعداد ولي الأمر لتعطيل الميكروفون/الذكاء الاصطناعي
+  setAIEnabled(Store.aiEnabled);
+
+  // فحص توفّر خادم OpenAI: إن توفّر (ولم يُعطّله ولي الأمر) نستخدم نطق الـ AI، وإلا Web Speech
   checkAI().then((ready) => {
-    setAISpeech(ready);
-    if (!ready) Speech.say(" ", { lang: "ar-EG" }); // تنشيط Web Speech الصامت
+    const on = ready && Store.aiEnabled;
+    setAISpeech(on);
+    if (!on) Speech.say(" ", { lang: "ar-EG" }); // تنشيط Web Speech الصامت
     else mountAssistantButton(); // المساعد الصوتي يحتاج خادم OpenAI
   });
 

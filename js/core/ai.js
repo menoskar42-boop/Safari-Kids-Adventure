@@ -3,7 +3,13 @@
 // كل شيء يفشل بهدوء (graceful) ليرجع التطبيق إلى Web Speech عند الحاجة.
 
 let aiAvailable = null; // null = لم يُفحص بعد
+let userDisabled = false; // يضبطه ولي الأمر (تعطيل الميكروفون/الذكاء الاصطناعي)
 let audioEl = null;
+
+/** تعطيل/تفعيل ميزات الـ AI من إعداد ولي الأمر */
+export function setAIEnabled(on) {
+  userDisabled = !on;
+}
 
 /** يفحص الخادم مرّة واحدة: هل ميزات الـ AI متاحة؟ */
 export async function checkAI() {
@@ -20,7 +26,7 @@ export async function checkAI() {
 }
 
 export function isAIReady() {
-  return aiAvailable === true;
+  return aiAvailable === true && !userDisabled;
 }
 
 /**
