@@ -238,6 +238,12 @@
 .color-svg .cl { transition: fill .12s ease; }
 .color-svg .cl:active { opacity: .85; }
 
+/* ===== لعبة الفرز (التصنيف) ===== */
+img.sort-glyph { width: 1em; height: 1em; object-fit: contain; }
+.sort-cat { font-size: clamp(16px, 4.4vw, 22px); }
+.sort-cat.ok { background: linear-gradient(180deg,#34d399,#10b981); animation: pulse .5s ease; }
+.sort-cat.no { animation: shake .4s ease; }
+
 /* ===== لعبة التركيب (بازل) ===== */
 .puz-grid {
   direction: ltr; /* الخانة الأولى أعلى-يسار لتطابق ترتيب القطع */

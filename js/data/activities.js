@@ -246,6 +246,9 @@ export const ACTIVITIES = {
       params: { datasetKey: "animals", title: "🧠 نمط الحيوانات", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
     { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء صورة الحيوان", screen: "puzzle",
       params: { datasetKey: "animals", title: "🧩 ركّب الحيوان", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
+    { emoji: "🗂️", title: "افرز: حيوان أم طائر؟", desc: "صنّف كل عنصر لفئته", screen: "sort",
+      params: { title: "🗂️ حيوان أم طائر؟", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)",
+        groups: [ { label: "حيوانات", emoji: "🦁", datasetKey: "animals" }, { label: "طيور", emoji: "🐦", datasetKey: "birds" } ] } },
   ],
   fish: [
     { emoji: "🐠", title: "استكشف البحر", desc: "اضغط على كل سمكة لتعرفها", screen: "explore",
@@ -292,6 +295,9 @@ export const ACTIVITIES = {
       params: { datasetKey: "fruits", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "fruits", title: "🧠 نمط الفواكه", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
+    { emoji: "🗂️", title: "افرز: فاكهة أم حيوان؟", desc: "صنّف كل عنصر لفئته", screen: "sort",
+      params: { title: "🗂️ فاكهة أم حيوان؟", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)",
+        groups: [ { label: "فواكه", emoji: "🍎", datasetKey: "fruits" }, { label: "حيوانات", emoji: "🦁", datasetKey: "animals" } ] } },
   ],
   colors: [
     { emoji: "🎨", title: "استكشف الألوان", desc: "اضغط على كل لون لتعرفه", screen: "explore",
