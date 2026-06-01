@@ -24,6 +24,7 @@ const MOOD_IMG = {
   listening: "mizo-listen",
   sad: "mizo-sad",
   surprised: "mizo-idea",
+  calm: "mizo-calm",
 };
 
 export function createCharacter(name = MIZO.name) {
@@ -85,7 +86,7 @@ export function createCharacter(name = MIZO.name) {
   show("happy");
 
   // ===== حيوية أثناء الخمول: لفتات عفوية كي لا يبقى ثابتاً =====
-  const IDLE_GESTURES = ["cheer", "proud", "surprised", "think", "wave"];
+  const IDLE_GESTURES = ["cheer", "proud", "surprised", "think", "wave", "calm"];
   const idleLoop = setInterval(() => {
     if (!el.isConnected) { clearInterval(idleLoop); return; }       // تنظيف عند إزالة العنصر
     if (document.hidden) return;
