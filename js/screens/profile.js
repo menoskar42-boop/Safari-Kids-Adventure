@@ -125,6 +125,14 @@ export function renderProfile() {
   });
   wrap.appendChild(accRow);
 
+  // كرت إنجاز قابل للمشاركة (بلا بيانات شخصية)
+  const shareBtn = document.createElement("button");
+  shareBtn.className = "candy-btn";
+  shareBtn.style.cssText = "display:block;margin:20px auto 0;background:linear-gradient(180deg,#34d399,#10b981)";
+  shareBtn.textContent = "📤 شارك إنجازك مع ميزو";
+  shareBtn.addEventListener("click", () => { Sfx.tap(); Router.go("shareCard"); });
+  wrap.appendChild(shareBtn);
+
   // اختيار الأفاتار
   const h = document.createElement("p");
   h.style.cssText = "font-weight:800;color:var(--c-ink);margin:22px 0 10px;font-size:clamp(16px,4.5vw,20px)";
