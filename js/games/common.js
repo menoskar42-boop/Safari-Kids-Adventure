@@ -4,6 +4,7 @@ import { Sfx } from "../core/audio.js";
 import { Speech } from "../core/speech.js";
 import { Confetti } from "../core/confetti.js";
 import { createCharacter } from "./character.js";
+import { MIZO_CATCH, pick } from "../data/mizo.js";
 import {
   awardStars,
   updateStarCounter,
@@ -67,12 +68,13 @@ export function showCheer(emoji, text, onClose) {
       <div class="cheer-emoji">${emoji}</div>
       <div class="cheer-text">${text}</div>
     </div>`;
-  // ميزو يهنّئ الطفل بفرح
+  // ميزو يهنّئ الطفل بفرح وينطق عبارة التشجيع
   const mizo = createCharacter();
   mizo.setMood("cheer");
   mizo.el.classList.add("cheer-miz");
   overlay.querySelector(".cheer-card").insertBefore(mizo.el, overlay.querySelector(".cheer-text"));
   document.body.appendChild(overlay);
+  if (text) { mizo.startTalking(text.length * 90 + 1000); Speech.ar(text); }
   setTimeout(() => {
     overlay.remove();
     if (onClose) onClose();
@@ -107,7 +109,7 @@ export function finishActivity({ regionId, regionIndex, stars = 5, onDone }) {
     else done();
   };
 
-  showCheer("🏆", "أحسنت يا بطل!", () => {
+  showCheer("🏆", pick(MIZO_CATCH), () => {
     if (reward) showRewardPopup(reward, finish);
     else finish();
   });
