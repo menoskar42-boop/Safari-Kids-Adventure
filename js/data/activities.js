@@ -380,6 +380,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "food", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#ffe6a0,#fc6262)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "food", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#ffe6a0,#fc6262)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "food", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#ffe6a0,#fc6262)" } },
   ],
   weekdays: [
     { emoji: "📅", title: "تعلّم الأيام", desc: "اضغط على كل يوم لتعرفه", screen: "explore",
@@ -466,6 +468,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "clothes", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#ffe7b0,#d1fdff)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "clothes", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#ffe7b0,#d1fdff)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "clothes", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#ffe7b0,#d1fdff)" } },
   ],
   sports: [
     { emoji: "⚽", title: "استكشف الرياضات", desc: "اضغط على كل رياضة لتعرفها", screen: "explore",
@@ -478,6 +482,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "sports", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#f5a3fb,#f5576c)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "sports", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#f5a3fb,#f5576c)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "sports", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#f5a3fb,#f5576c)" } },
   ],
   home: [
     { emoji: "🛋️", title: "استكشف المنزل", desc: "اضغط على كل أداة لتعرفها", screen: "explore",
@@ -490,6 +496,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "home", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#cfe9d0,#deecdd)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "home", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#cfe9d0,#deecdd)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "home", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#cfe9d0,#deecdd)" } },
   ],
   school: [
     { emoji: "🎒", title: "استكشف المدرسة", desc: "اضغط على كل أداة لتعرفها", screen: "explore",
@@ -502,6 +510,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "school", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#ffd29a,#ea5455)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "school", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#ffd29a,#ea5455)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "school", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#ffd29a,#ea5455)" } },
   ],
   music: [
     { emoji: "🎸", title: "استكشف الآلات", desc: "اضغط على كل آلة لتعرفها", screen: "explore",
@@ -514,6 +524,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "music", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#cbb1e6,#8ca6db)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "music", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#cbb1e6,#8ca6db)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "music", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#cbb1e6,#8ca6db)" } },
   ],
   places: [
     { emoji: "🏠", title: "استكشف الأماكن", desc: "اضغط على كل مكان لتعرفه", screen: "explore",
@@ -542,6 +554,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "kitchen", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#ffd9b0,#fd6585)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "kitchen", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#ffd9b0,#fd6585)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "kitchen", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#ffd9b0,#fd6585)" } },
   ],
   drinks: [
     { emoji: "🥤", title: "استكشف المشروبات", desc: "اضغط على كل مشروب لتعرفه", screen: "explore",
@@ -554,6 +568,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "drinks", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#b8ffd8,#faffd1)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "drinks", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#b8ffd8,#faffd1)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "drinks", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#b8ffd8,#faffd1)" } },
   ],
   nature: [
     { emoji: "🌳", title: "استكشف الطبيعة", desc: "اضغط على كل عنصر لتعرفه", screen: "explore",
@@ -566,6 +582,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "nature", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#86c85f,#8DC26F)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "nature", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#86c85f,#8DC26F)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "nature", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#86c85f,#8DC26F)" } },
   ],
   countries: [
     { emoji: "🚩", title: "استكشف الأعلام", desc: "اضغط على كل علم لتعرف دولته", screen: "explore",
@@ -590,6 +608,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "tools", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#cfd4d8,#2c3e50)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "tools", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#cfd4d8,#2c3e50)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "tools", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#cfd4d8,#2c3e50)" } },
   ],
   appliances: [
     { emoji: "📺", title: "استكشف الأجهزة", desc: "اضغط على كل جهاز لتعرفه", screen: "explore",
@@ -602,6 +622,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "appliances", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#a6b3bd,#eef2f3)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "appliances", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#a6b3bd,#eef2f3)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء الصورة", screen: "puzzle",
+      params: { datasetKey: "appliances", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#a6b3bd,#eef2f3)" } },
   ],
   values: [
     { emoji: "🧼", title: "النظافة سرّ الصحّة", desc: "قصة عن النظافة", screen: "story", params: { storyId: "cleanliness" } },
