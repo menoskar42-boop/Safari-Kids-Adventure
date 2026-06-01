@@ -81,6 +81,11 @@ export function showCheer(emoji, text, onClose) {
 
 /** إنهاء نشاط: منح نجوم، تحديث تقدّم المنطقة، احتمال مكافأة، ثم رجوع */
 export function finishActivity({ regionId, regionIndex, stars = 5, onDone }) {
+  // إن أُطلق النشاط من "رحلة اليوم" نعلّم خطوته كمكتملة
+  if (Store.activeStep != null) {
+    Store.markDailyStep(Store.activeStep);
+    Store.activeStep = null;
+  }
   const wasCompleted = Store.regionProgress(regionId).completed;
   awardStars(stars);
   Confetti.burst();

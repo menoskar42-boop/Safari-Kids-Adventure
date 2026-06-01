@@ -195,6 +195,35 @@ export const Store = {
     return before < state.dailyGoal && state.dailyStars >= state.dailyGoal;
   },
 
+  // ===== رحلة اليوم (خطة تعلّم يومية) =====
+  // تتبّع الخطوات المكتملة اليوم؛ تُصفَّر تلقائياً مع كل يوم جديد
+  get dailyPlan() {
+    const t = today();
+    if (!state.dailyPlan || state.dailyPlan.date !== t) {
+      state.dailyPlan = { date: t, done: [] };
+      persist();
+    }
+    return state.dailyPlan;
+  },
+  markDailyStep(i) {
+    const p = this.dailyPlan;
+    if (!p.done.includes(i)) { p.done.push(i); persist(); }
+  },
+  // يمنح مكافأة إكمال الرحلة مرّة واحدة؛ يعيد true إن لم تُمنح بعد
+  markDailyBonus() {
+    const p = this.dailyPlan;
+    if (!p.bonus) { p.bonus = true; persist(); return true; }
+    return false;
+  },
+  // الخطوة الجارية حالياً (تُضبط عند إطلاقها من الرحلة لتُعلَّم عند إتمامها)
+  get activeStep() {
+    return state.activeStep == null ? null : state.activeStep;
+  },
+  set activeStep(i) {
+    state.activeStep = i;
+    persist();
+  },
+
   unlockNext(index) {
     if (index + 1 > state.unlockedIndex) {
       state.unlockedIndex = index + 1;
