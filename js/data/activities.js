@@ -440,12 +440,16 @@ export const ACTIVITIES = {
       params: { datasetKey: "seasons", title: "🍂 فصول السنة", bg: "linear-gradient(180deg,#e0fcb0,#96e6a1)" } },
     { emoji: "🔎", title: "جِد الفصل", desc: "اضغط على الفصل المطلوب", screen: "findIt",
       params: { datasetKey: "seasons", title: "🔎 جِد الفصل", verb: "اضغط على", bg: "linear-gradient(180deg,#e0fcb0,#96e6a1)" } },
+    { emoji: "🌑", title: "طابق الظل", desc: "اعرف الفصل من ظله", screen: "shadowMatch",
+      params: { datasetKey: "seasons", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#e0fcb0,#96e6a1)" } },
   ],
   senses: [
     { emoji: "👀", title: "استكشف الحواس", desc: "اضغط على كل حاسّة لتعرفها", screen: "explore",
       params: { datasetKey: "senses", title: "👀 الحواس الخمس", bg: "linear-gradient(180deg,#ffeed2,#fcb69f)" } },
     { emoji: "🔎", title: "جِد الحاسّة", desc: "اضغط على الحاسّة المطلوبة", screen: "findIt",
       params: { datasetKey: "senses", title: "🔎 جِد الحاسّة", verb: "اضغط على", bg: "linear-gradient(180deg,#ffeed2,#fcb69f)" } },
+    { emoji: "🌑", title: "طابق الظل", desc: "اعرف الحاسّة من ظلها", screen: "shadowMatch",
+      params: { datasetKey: "senses", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#ffeed2,#fcb69f)" } },
   ],
   clothes: [
     { emoji: "👕", title: "استكشف الملابس", desc: "اضغط على كل قطعة لتعرفها", screen: "explore",
