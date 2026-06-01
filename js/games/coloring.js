@@ -139,6 +139,42 @@ const PICTURES = [
       <polygon class="cl" points="100,152 52,100 100,100"/>
       <polygon class="cl" points="100,152 148,100 100,100"/>`,
   },
+  {
+    name: "دبدوب",
+    svg: `
+      <circle class="cl" cx="62" cy="64" r="20"/>
+      <circle class="cl" cx="138" cy="64" r="20"/>
+      <circle class="cl" cx="100" cy="108" r="50"/>
+      <ellipse class="cl" cx="100" cy="122" rx="26" ry="20"/>
+      <circle class="cl" cx="100" cy="112" r="8"/>`,
+  },
+  {
+    name: "بطّة",
+    svg: `
+      <ellipse class="cl" cx="92" cy="122" rx="52" ry="36"/>
+      <ellipse class="cl" cx="88" cy="120" rx="26" ry="18"/>
+      <circle class="cl" cx="136" cy="80" r="26"/>
+      <polygon class="cl" points="158,76 194,86 158,98"/>`,
+  },
+  {
+    name: "قطار",
+    svg: `
+      <rect class="cl" x="48" y="58" width="20" height="34"/>
+      <rect class="cl" x="30" y="90" width="92" height="50" rx="8"/>
+      <rect class="cl" x="122" y="62" width="46" height="78" rx="6"/>
+      <circle class="cl" cx="58" cy="150" r="16"/>
+      <circle class="cl" cx="118" cy="150" r="16"/>`,
+  },
+  {
+    name: "أصيص ورد",
+    svg: `
+      <rect class="cl" x="94" y="72" width="8" height="50"/>
+      <polygon class="cl" points="70,122 130,122 122,172 78,172"/>
+      <circle class="cl" cx="100" cy="44" r="16"/>
+      <circle class="cl" cx="74" cy="60" r="16"/>
+      <circle class="cl" cx="126" cy="60" r="16"/>
+      <circle class="cl" cx="100" cy="58" r="15"/>`,
+  },
 ];
 
 export function renderColoring({ regionId, regionIndex, title, bg }) {
