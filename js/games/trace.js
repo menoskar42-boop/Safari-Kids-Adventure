@@ -9,11 +9,16 @@ const TRACE_COUNT = 6;
 const RES = 300; // دقّة داخلية ثابتة
 const THRESHOLD = 0.62; // نسبة التغطية المطلوبة (أعلى كي لا يكتمل قبل إتمام الشكل)
 
-export function renderTrace({ regionId, regionIndex, datasetKey, lang, title }) {
+export function renderTrace({ regionId, regionIndex, datasetKey, lang, title, focus }) {
   const ds = getDataset(datasetKey);
   const speakLang = lang || ds.lang;
   const noun = ds.glyphKind === "number" ? "الرقم" : "الحرف";
-  const letters = shuffle(ds.items).slice(0, TRACE_COUNT);
+  let letters = shuffle(ds.items).slice(0, TRACE_COUNT);
+  // إن طُلب حرف/رقم محدّد (من معلّم الحروف) نجعله أول ما يُكتب
+  if (focus) {
+    const f = ds.items.find((x) => (x.char || x.arDigit || x.name) === focus);
+    if (f) letters = [f, ...shuffle(ds.items.filter((x) => x !== f)).slice(0, TRACE_COUNT - 1)];
+  }
   let idx = 0;
 
   const screen = document.createElement("div");

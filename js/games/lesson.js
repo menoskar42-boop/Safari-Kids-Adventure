@@ -108,7 +108,8 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title })
   wrap.querySelector("#lsPlay").addEventListener("click", () => { animateWrite(); narrate(items[idx]); });
   wrap.querySelector("#lsWrite").addEventListener("click", () => {
     Sfx.tap();
-    Router.go("trace", { regionId, regionIndex, datasetKey, lang });
+    // نمرّر الحرف/الرقم الحالي ليبدأ به التتبّع (لا حرف عشوائي)
+    Router.go("trace", { regionId, regionIndex, datasetKey, lang, focus: glyphOf(items[idx]) });
   });
   wrap.querySelector("#lsPrev").addEventListener("click", () => {
     if (idx > 0) { idx--; render(); }
