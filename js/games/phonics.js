@@ -6,7 +6,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, shuffle, finishActivity } from "./common.js";
+import { gameTopbar, shuffle, finishActivity, mizoBuddy } from "./common.js";
 
 const ROUNDS = 8;
 
@@ -36,6 +36,9 @@ export function renderPhonics({ regionId, regionIndex, datasetKey, lang, title, 
   word.style.cssText = "text-align:center;font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2);font-size:clamp(24px,7vw,36px);margin:6px";
   screen.appendChild(word);
 
+  const buddy = mizoBuddy();
+  screen.appendChild(buddy.el);
+
   const row = document.createElement("div");
   row.className = "choice-row";
   screen.appendChild(row);
@@ -62,12 +65,14 @@ export function renderPhonics({ regionId, regionIndex, datasetKey, lang, title, 
         if (opt.char === target.char) {
           b.classList.add("correct");
           Sfx.correct();
+          buddy.win();
           Speech.say(target.name, { lang: speakLang });
           awardStars(1);
           setTimeout(nextRound, 1100);
         } else {
           b.classList.add("wrong");
           Sfx.wrong();
+          buddy.lose();
           setTimeout(() => b.classList.remove("wrong"), 500);
         }
       });
