@@ -238,6 +238,42 @@
 .color-svg .cl { transition: fill .12s ease; }
 .color-svg .cl:active { opacity: .85; }
 
+/* ===== لعبة التركيب (بازل) ===== */
+.puz-grid {
+  direction: ltr; /* الخانة الأولى أعلى-يسار لتطابق ترتيب القطع */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  width: min(80vw, 320px);
+  aspect-ratio: 1;
+  margin: 12px auto;
+}
+.puz-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--shadow-card);
+  border: 4px solid transparent;
+  cursor: pointer;
+  transition: border-color .15s ease, transform .12s ease;
+}
+.puz-cell:active { transform: scale(.96); }
+.puz-cell.sel { border-color: var(--c-purple); transform: scale(1.04); }
+.puz-cell.done { border-color: var(--c-green); }
+.puz-emoji {
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%;
+  height: 200%;
+  display: grid;
+  place-items: center;
+  font-size: min(74vw, 300px);
+  line-height: 1;
+  transition: transform .25s ease;
+  pointer-events: none;
+}
+
 /* ===== لعبة المقارنة (أيهما أكثر؟) ===== */
 .compare-box {
   background: rgba(255,255,255,.92);

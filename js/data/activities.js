@@ -244,6 +244,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "animals", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "animals", title: "🧠 نمط الحيوانات", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
+    { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء صورة الحيوان", screen: "puzzle",
+      params: { datasetKey: "animals", title: "🧩 ركّب الحيوان", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
   ],
   fish: [
     { emoji: "🐠", title: "استكشف البحر", desc: "اضغط على كل سمكة لتعرفها", screen: "explore",
