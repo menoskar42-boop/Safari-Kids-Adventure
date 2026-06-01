@@ -381,13 +381,27 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
 }
 
 /* شخصية ميزو الناطقة */
-.miz { display: inline-block; line-height: 0; flex: 0 0 auto; }
+.miz { display: inline-block; line-height: 0; flex: 0 0 auto; position: relative; }
 .miz-svg {
   width: clamp(96px, 28vw, 150px);
   height: auto;
   display: block;
   animation: bob 3s ease-in-out infinite;
   filter: drop-shadow(0 8px 8px rgba(0,0,0,.18));
+}
+/* صورة ميزو ٣D (بدل الـ SVG) */
+.miz-img { object-fit: contain; }
+.miz-photo.talking .miz-svg { animation: miz-talk-pulse .5s ease-in-out infinite; }
+@keyframes miz-talk-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+.miz-acc-emoji {
+  position: absolute;
+  top: -4%; left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(18px, 6vw, 34px);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.3));
 }
 .miz-eyes { transform-box: fill-box; transform-origin: center; animation: miz-blink 4.5s infinite; }
 @keyframes miz-blink { 0%,93%,100% { transform: scaleY(1); } 96% { transform: scaleY(.12); } }
