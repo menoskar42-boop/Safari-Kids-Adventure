@@ -43,6 +43,14 @@ export function mountAdBar() {
       data-full-width-responsive="false"></ins>`;
   document.body.appendChild(bar);
 
+  // ===== توافق COPPA: محتوى موجَّه للأطفال + إعلانات غير مخصّصة =====
+  // يُضبط في الكود نفسه (لا الاعتماد على لوحة التحكّم فقط) فيُطبَّق على كل الصفحات.
+  window.adsbygoogle = window.adsbygoogle || [];
+  window.adsbygoogle.requestNonPersonalizedAds = 1; // إعلانات غير مخصّصة (NPA)
+  try {
+    window.adsbygoogle.push({ params: { tag_for_child_directed_treatment: 1 } });
+  } catch (_e) {}
+
   loadAdSenseScript();
-  try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (_e) {}
+  try { window.adsbygoogle.push({}); } catch (_e) {}
 }

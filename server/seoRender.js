@@ -244,6 +244,7 @@ export function renderSitemap() {
     })),
     { loc: `${SITE.url}/about`, priority: "0.5", freq: "yearly" },
     { loc: `${SITE.url}/privacy`, priority: "0.4", freq: "yearly" },
+    { loc: `${SITE.url}/contact`, priority: "0.4", freq: "yearly" },
   ];
   const body = urls
     .map(
