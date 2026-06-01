@@ -330,6 +330,9 @@
 .miz.mood-cheer .miz-brows { transform: translateY(-4px); }
 /* يفكّر: إمالة بسيطة للرأس */
 .miz.mood-think .miz-svg { transform: rotate(-6deg); }
+/* ميزو داخل لافتة المرشد في الشاشة الرئيسية */
+.guide-miz { padding: 0; display: grid; place-items: center; }
+.guide-banner .miz-svg { width: clamp(62px, 17vw, 92px); }
 .lesson-teacher .teacher-bubble {
   background: #fff;
   border-radius: 18px;

@@ -7,6 +7,7 @@ import { Sfx } from "../core/audio.js";
 import { bindStarCounter, bindStreak } from "../core/rewards.js";
 import { avatarEmoji } from "./profile.js";
 import { FEATURES } from "../core/features.js";
+import { createCharacter } from "../games/character.js";
 
 const GUIDE = "🐨"; // المرشد اللطيف
 
@@ -39,9 +40,13 @@ export function renderHome() {
   banner.className = "guide-banner";
   const who = Store.childName ? `مرحباً يا ${Store.childName}!` : "مرحباً يا بطل!";
   banner.innerHTML = `
-    <button class="guide-emoji" id="profileBtn" style="background:none;border:none;cursor:pointer">${avatarEmoji()}</button>
-    <div class="bubble">${who} اختر منطقة لنبدأ المغامرة ✨</div>
+    <button class="guide-emoji guide-miz" id="profileBtn" style="background:none;border:none;cursor:pointer" title="ملفي"></button>
+    <div class="bubble">${who} أنا <b>ميزو</b> 👋 اختر منطقة لنبدأ المغامرة ✨</div>
   `;
+  // ميزو المرشد بدل الإيموجي الثابت (يلوّح عند فتح الخريطة)
+  const guide = createCharacter();
+  banner.querySelector("#profileBtn").appendChild(guide.el);
+  setTimeout(() => guide.setMood("wave", 2600), 200);
   screen.appendChild(banner);
 
   // المناطق التأسيسية مفتوحة دائماً. المناطق المتقدّمة تُفتح تدريجياً:
