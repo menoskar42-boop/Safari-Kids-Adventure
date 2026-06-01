@@ -50,6 +50,7 @@ import { renderReadMatch } from "./games/readmatch.js";
 import { renderFunHub } from "./screens/funHub.js";
 import { renderSpinWheel } from "./screens/spinwheel.js";
 import { renderBadges } from "./screens/badges.js";
+import { renderChallenge } from "./games/challenge.js";
 import { createCharacter } from "./games/character.js";
 import { mountAdBar } from "./core/ads.js";
 
@@ -107,6 +108,7 @@ Router.register("readMatch", renderReadMatch);
 Router.register("funHub", renderFunHub);
 Router.register("spinWheel", renderSpinWheel);
 Router.register("badges", renderBadges);
+Router.register("challenge", renderChallenge);
 
 // شاشة البداية
 const splash = document.getElementById("splash");
