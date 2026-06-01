@@ -108,6 +108,13 @@ export const ACTIVITIES = {
       screen: "similar",
       params: { title: "👀 الحروف المتشابهة" },
     },
+    {
+      emoji: "🎤",
+      title: "تحدّث مع ميزو",
+      desc: "كرّر الكلمة بصوتك مع ميزو",
+      screen: "talkMizo",
+      params: { title: "🎤 تحدّث مع ميزو" },
+    },
   ],
   english: [
     {
