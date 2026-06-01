@@ -107,6 +107,38 @@ const PICTURES = [
       <polygon class="cl" points="148,92 148,108 184,100"/>
       <circle class="cl" cx="100" cy="100" r="42"/>`,
   },
+  {
+    name: "قطّة",
+    svg: `
+      <polygon class="cl" points="55,72 72,32 96,74"/>
+      <polygon class="cl" points="145,72 128,32 104,74"/>
+      <circle class="cl" cx="100" cy="108" r="54"/>
+      <polygon class="cl" points="93,118 107,118 100,130"/>`,
+  },
+  {
+    name: "فِطر",
+    svg: `
+      <rect class="cl" x="82" y="100" width="36" height="72" rx="10"/>
+      <path class="cl" d="M36 102 C36 58 164 58 164 102 Z"/>
+      <circle class="cl" cx="74" cy="86" r="11"/>
+      <circle class="cl" cx="122" cy="80" r="13"/>`,
+  },
+  {
+    name: "مظلّة",
+    svg: `
+      <rect class="cl" x="96" y="98" width="8" height="64" rx="3"/>
+      <path class="cl" d="M28 100 C28 54 172 54 172 100 Z"/>
+      <polygon class="cl" points="28,100 50,120 72,100"/>
+      <polygon class="cl" points="128,100 150,120 172,100"/>`,
+  },
+  {
+    name: "طائرة ورقية",
+    svg: `
+      <polygon class="cl" points="100,28 52,100 100,100"/>
+      <polygon class="cl" points="100,28 148,100 100,100"/>
+      <polygon class="cl" points="100,152 52,100 100,100"/>
+      <polygon class="cl" points="100,152 148,100 100,100"/>`,
+  },
 ];
 
 export function renderColoring({ regionId, regionIndex, title, bg }) {
