@@ -181,9 +181,21 @@ function showScreenTimeReminder() {
   overlay.querySelector("#stOk").addEventListener("click", () => overlay.remove());
 }
 
-// تسجيل Service Worker للعمل دون اتصال (اختياري وآمن إن لم يوجد)
+// تسجيل Service Worker للعمل دون اتصال + تحديث تلقائي عند توفّر نسخة جديدة
 if ("serviceWorker" in navigator) {
+  // إن كان هناك Service Worker مُتحكّم بالفعل، فأي تغيّر للمتحكّم = نسخة جديدة → نُعيد التحميل مرّة
+  let reloaded = false;
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (reloaded) return;
+      reloaded = true;
+      window.location.reload();
+    });
+  }
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(() => {});
+    navigator.serviceWorker.register("sw.js").then((reg) => {
+      // افحص وجود تحديث دورياً وطبّقه فوراً
+      if (reg.update) setInterval(() => reg.update().catch(() => {}), 60000);
+    }).catch(() => {});
   });
 }
