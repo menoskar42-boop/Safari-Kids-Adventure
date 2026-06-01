@@ -289,6 +289,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "birds", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#cdb8ff,#8a6bff)" } },
     { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء صورة الطائر", screen: "puzzle",
       params: { datasetKey: "birds", title: "🧩 ركّب الطائر", bg: "linear-gradient(180deg,#cdb8ff,#8a6bff)" } },
+    { emoji: "📖", title: "قصة: العصفور الطائر", desc: "استمع لقصة جميلة", screen: "story",
+      params: { storyId: "little-bird" } },
   ],
   insects: [
     { emoji: "🦋", title: "استكشف الحشرات", desc: "اضغط على كل حشرة لتعرفها", screen: "explore",
@@ -328,6 +330,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "colors", title: "🧩 ذاكرة الألوان", bg: "linear-gradient(180deg,#ffe29a,#ff9a6c)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "colors", title: "🧠 نمط الألوان", bg: "linear-gradient(180deg,#ffe29a,#ff9a6c)" } },
+    { emoji: "📖", title: "قصة: قوس قزح", desc: "استمع لقصة الألوان", screen: "story",
+      params: { storyId: "rainbow-colors" } },
   ],
   shapes: [
     { emoji: "⭐", title: "استكشف الأشكال", desc: "اضغط على كل شكل لتعرفه", screen: "explore",
@@ -430,6 +434,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "family", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#c2dbff,#c2e9fb)" } },
     { emoji: "🌑", title: "طابق الظل", desc: "اعرف الفرد من ظله", screen: "shadowMatch",
       params: { datasetKey: "family", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#c2dbff,#c2e9fb)" } },
+    { emoji: "📖", title: "قصة: عائلتي الحبيبة", desc: "استمع لقصة جميلة", screen: "story",
+      params: { storyId: "family-love" } },
   ],
   weather: [
     { emoji: "🌦️", title: "استكشف الطقس", desc: "اضغط على كل حالة لتعرفها", screen: "explore",
