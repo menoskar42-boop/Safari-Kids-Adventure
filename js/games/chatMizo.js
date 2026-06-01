@@ -33,7 +33,7 @@ export function renderChatMizo({ regionId, regionIndex, title }) {
   row.style.cssText = "display:flex;flex-direction:column;gap:12px;align-items:center;margin:16px 12px";
   wrap.appendChild(row);
 
-  function say(text, ms) { mizo.startTalking(ms || text.length * 90 + 1200); Speech.ar(text); }
+  function say(text, ms) { mizo.startTalking(ms || text.length * 90 + 1200); Speech.mizo(text); }
 
   function render() {
     const step = steps[i];

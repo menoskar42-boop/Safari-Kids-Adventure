@@ -49,7 +49,7 @@ export function renderManners({ regionId, regionIndex, title }) {
   row.style.cssText = "display:flex;flex-direction:column;gap:12px;align-items:center;margin:14px 12px";
   wrap.appendChild(row);
 
-  function say(text, ms) { mizo.startTalking(ms || text.length * 85 + 1400); Speech.ar(text); }
+  function say(text, ms) { mizo.startTalking(ms || text.length * 85 + 1400); Speech.mizo(text); }
 
   function render() {
     const s = rounds[i];

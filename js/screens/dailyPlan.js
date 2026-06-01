@@ -67,7 +67,7 @@ export function renderDailyPlan() {
   setTimeout(() => {
     leadMizo.setMood(allDone ? "cheer" : "wave", 2400);
     leadMizo.startTalking(msg.length * 85 + 1200);
-    Speech.ar(msg);
+    Speech.mizo(msg);
   }, 250);
 
   const head = document.createElement("p");

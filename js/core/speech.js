@@ -65,13 +65,21 @@ export const Speech = {
     // المسار المفضّل: OpenAI TTS (صوت أوضح وأدفأ للأطفال)
     if (useAI && isAIReady()) {
       const voice = AI_VOICE[lang.slice(0, 2)] || undefined;
-      aiSpeak(text, { voice }).then(
+      aiSpeak(text, { voice, instructions: opts.instructions }).then(
         () => { if (opts.onend) opts.onend(); },
         () => this._webSpeak(text, opts) // أي فشل → بديل فوري
       );
       return;
     }
     this._webSpeak(text, opts);
+  },
+
+  /**
+   * نطق ميزو الشخصي: لهجة مصرية حيوية وسريعة قليلاً تجذب الأطفال.
+   * (نطق الحروف والقواعد يبقى عبر say/ar بالفصحى البسيطة كما هو.)
+   */
+  mizo(text, opts = {}) {
+    this.say(text, { ...opts, lang: "ar-EG", instructions: MIZO.toneInstructions, rate: opts.rate ?? 1.05 });
   },
 
   // النطق عبر متصفح الجهاز (Web Speech) — البديل الدائم

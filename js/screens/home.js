@@ -66,7 +66,7 @@ export function renderHome() {
     greetedSession = true;
     whenSpeechReady().then(() => {
       guide.startTalking(spoken.length * 80 + 1200);
-      Speech.ar(spoken);
+      Speech.mizo(spoken);
     });
   }
   screen.appendChild(banner);

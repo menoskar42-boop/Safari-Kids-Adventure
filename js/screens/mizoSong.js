@@ -58,7 +58,7 @@ export function renderMizoSong() {
       const line = MIZO_SONG[i++];
       lyric.textContent = line;
       mizo.startTalking(line.length * 95 + 600);
-      Speech.ar(line, { onend: () => setTimeout(step, 250) });
+      Speech.mizo(line, { onend: () => setTimeout(step, 250) });
     };
     step();
   }

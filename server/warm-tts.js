@@ -8,7 +8,8 @@
 // أو مع عنوان مختلف:  WARM_BASE=http://localhost:5000 node server/warm-tts.js
 import { DATASETS } from "../js/data/datasets.js";
 import { MIZO_INTRO, MIZO_HELLO, MIZO_PRAISE, MIZO_ENCOURAGE, MIZO_GOAL, MIZO_CATCH } from "../js/games/character.js";
-import { MIZO_SONG, MIZO_CHAT } from "../js/data/mizo.js";
+import { MIZO_SONG, MIZO_CHAT, MIZO } from "../js/data/mizo.js";
+const MZ = MIZO.toneInstructions; // توجيهات لهجة ميزو (لمطابقة مفاتيح الكاش)
 
 const BASE = process.env.WARM_BASE || `http://localhost:${process.env.PORT || 5000}`;
 const AR = "alloy"; // صوت ميزو الثابت للعربية (يطابق ما يرسله العميل)
@@ -21,15 +22,15 @@ function examplePhrase(item, lang) {
     : `${item.name} مثل ${item.word}`;
 }
 
-// بناء قائمة العبارات الفريدة { text, voice }
+// بناء قائمة العبارات الفريدة { text, voice, instructions }
 const seen = new Set();
 const phrases = [];
-function add(text, voice) {
+function add(text, voice, instructions = "") {
   if (!text) return;
-  const k = `${voice}|${text}`;
+  const k = `${voice}|${instructions}|${text}`;
   if (seen.has(k)) return;
   seen.add(k);
-  phrases.push({ text, voice });
+  phrases.push({ text, voice, instructions });
 }
 
 for (const ds of Object.values(DATASETS)) {
@@ -60,9 +61,10 @@ for (const ds of Object.values(DATASETS)) {
 ].forEach((t) => add(t, AR));
 
 // كل بنك عبارات ميزو الثابت — تُنطق دائماً بالعربية (AI مرّة واحدة ثم مخزَّنة)
-[...MIZO_INTRO, ...MIZO_HELLO, ...MIZO_PRAISE, ...MIZO_ENCOURAGE, ...MIZO_GOAL, ...MIZO_CATCH, ...MIZO_SONG].forEach((t) => add(t, AR));
-// كلمات دردشة ميزو (الأسئلة + كل الردود) — ثابتة فتُخزَّن مرّة واحدة
-MIZO_CHAT.forEach((s) => { add(s.q, AR); s.opts.forEach((o) => add(o.r, AR)); });
+// كلام ميزو الشخصي بلهجته المصرية (instructions = نبرة ميزو لمطابقة الكاش)
+[...MIZO_INTRO, ...MIZO_HELLO, ...MIZO_PRAISE, ...MIZO_ENCOURAGE, ...MIZO_GOAL, ...MIZO_CATCH, ...MIZO_SONG].forEach((t) => add(t, AR, MZ));
+// دردشة ميزو (الأسئلة + كل الردود) بلهجته
+MIZO_CHAT.forEach((s) => { add(s.q, AR, MZ); s.opts.forEach((o) => add(o.r, AR, MZ)); });
 
 // جُمَل المعلّم الافتراضي لكل حرف/رقم: "هذا حرف ..." و"..." منفردة
 for (const key of ["arabic", "english", "numbers"]) {
@@ -85,7 +87,7 @@ for (const p of phrases) {
     const r = await fetch(`${BASE}/api/tts`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: p.text, voice: p.voice }),
+      body: JSON.stringify({ text: p.text, voice: p.voice, instructions: p.instructions || undefined }),
     });
     if (!r.ok) { fail++; console.warn(`✗ (${r.status}) ${p.text}`); }
     else {

@@ -74,7 +74,7 @@ export function showCheer(emoji, text, onClose) {
   mizo.el.classList.add("cheer-miz");
   overlay.querySelector(".cheer-card").insertBefore(mizo.el, overlay.querySelector(".cheer-text"));
   document.body.appendChild(overlay);
-  if (text) { mizo.startTalking(text.length * 90 + 1000); Speech.ar(text); }
+  if (text) { mizo.startTalking(text.length * 90 + 1000); Speech.mizo(text); }
   setTimeout(() => {
     overlay.remove();
     if (onClose) onClose();
