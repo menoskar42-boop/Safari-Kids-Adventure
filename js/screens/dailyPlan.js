@@ -8,6 +8,8 @@ import { Sfx } from "../core/audio.js";
 import { Speech } from "../core/speech.js";
 import { Confetti } from "../core/confetti.js";
 import { awardStars } from "../core/rewards.js";
+import { createCharacter } from "../games/character.js";
+import { MIZO_CATCH, pick } from "../data/mizo.js";
 
 const ri = (id) => REGIONS.findIndex((r) => r.id === id);
 
@@ -52,6 +54,21 @@ export function renderDailyPlan() {
 
   const doneCount = plan.done.length;
   const allDone = doneCount >= steps.length;
+
+  // ميزو يقود الرحلة
+  const lead = document.createElement("div");
+  lead.className = "lesson-teacher";
+  lead.style.cssText = "max-width:460px;margin:4px auto 6px";
+  const msg = allDone ? "أحسنت! أكملنا رحلة اليوم معاً 🎉" : `${pick(MIZO_CATCH)} هذه رحلتنا اليوم، هيا بنا!`;
+  lead.innerHTML = `<div class="miz-slot"></div><div class="teacher-bubble">${msg}</div>`;
+  wrap.appendChild(lead);
+  const leadMizo = createCharacter();
+  lead.querySelector(".miz-slot").appendChild(leadMizo.el);
+  setTimeout(() => {
+    leadMizo.setMood(allDone ? "cheer" : "wave", 2400);
+    leadMizo.startTalking(msg.length * 85 + 1200);
+    Speech.ar(msg);
+  }, 250);
 
   const head = document.createElement("p");
   head.style.cssText = "text-align:center;font-weight:800;color:#5b3fb5;font-size:clamp(17px,4.6vw,22px);margin:6px 0 16px";
