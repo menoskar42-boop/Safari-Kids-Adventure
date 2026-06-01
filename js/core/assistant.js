@@ -89,7 +89,10 @@ async function toggleListen() {
 async function beginRecording() {
   if (!assistantAvailable() || listening) return;
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    // إعدادات تساعد على التقاط صوت الطفل الخافت بوضوح (تضخيم + تنقية)
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+    });
     chunks = [];
     const mime = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "";
     recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
@@ -127,17 +130,17 @@ async function handleAudio() {
     const blob = new Blob(chunks, { type: recorder.mimeType || "audio/webm" });
     question = (await aiTranscribe(blob, "ar")).trim();
   } catch (e) {
-    setState("idle", "مش قادر أسمعك دلوقتي، جرّب تاني 🎤");
-    if (mizo) mizo.startTalking(1800);
-    Speech.mizo("مش قادر أسمعك دلوقتي، جرّب تاني");
-    setTimeout(() => showBubble(""), 2600);
+    setState("idle", "مش واضح أوي، قرّب وقول تاني بصوت أعلى 🎤");
+    if (mizo) mizo.startTalking(2200);
+    Speech.mizo("مش واضح أوي، قرّب وقول تاني بصوت أعلى يا بطل");
+    setTimeout(() => showBubble(""), 3000);
     return;
   }
   if (!question) {
-    setState("idle", "مسمعتش كويس، قول تاني 😊");
-    if (mizo) mizo.startTalking(1800);
-    Speech.mizo("مسمعتش كويس، قول تاني يا بطل");
-    setTimeout(() => showBubble(""), 2600);
+    setState("idle", "مش واضح أوي، قرّب وقول تاني بصوت أعلى 😊");
+    if (mizo) mizo.startTalking(2200);
+    Speech.mizo("مش واضح أوي، قرّب شويّة وقول تاني بصوت أعلى يا بطل");
+    setTimeout(() => showBubble(""), 3000);
     return;
   }
 

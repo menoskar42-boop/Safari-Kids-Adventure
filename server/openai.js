@@ -255,6 +255,7 @@ export function registerOpenAIRoutes(app) {
       form.append("file", blob, `speech.${ext}`);
       form.append("model", STT_MODEL);
       if (lang) form.append("language", String(lang).slice(0, 2));
+      form.append("temperature", "0"); // ثبات أعلى مع كلام الأطفال غير الواضح
       // سياق يساعد الموديل على فهم كلام طفل مصري صغير بالعامية المصرية
       form.append("prompt", "كلام طفل مصري صغير يتحدّث بالعاميّة المصريّة بأسئلة بسيطة قصيرة، مثل: ده إيه؟ اسمه إيه؟ لونه إيه؟");
 
