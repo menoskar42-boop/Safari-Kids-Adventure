@@ -238,6 +238,85 @@
 .color-svg .cl { transition: fill .12s ease; }
 .color-svg .cl:active { opacity: .85; }
 
+/* ===== المعلّم الافتراضي (درس الحرف) ===== */
+.lesson {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px 30px;
+}
+.lesson-board {
+  position: relative;
+  width: min(82vw, 440px);
+  aspect-ratio: 16 / 10;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.lesson-glyph {
+  font-size: clamp(90px, 30vw, 180px);
+  font-weight: 800;
+  color: #2b2b6b;
+  line-height: 1;
+  margin-bottom: 6%;
+}
+.lesson-glyph.writing { animation: lesson-write 1.3s ease forwards; }
+@keyframes lesson-write {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.lesson-baseline {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 24%;
+  height: 6px;
+  border-radius: 3px;
+  background: #2aa9ff;
+}
+.lesson-pen {
+  position: absolute;
+  left: 50%;
+  font-size: 30px;
+  animation: lesson-pen 1.3s ease forwards;
+}
+@keyframes lesson-pen {
+  0% { top: 14%; opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 60%; opacity: 0; }
+}
+.lesson-teacher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 460px;
+}
+.lesson-teacher .teacher-char {
+  font-size: clamp(54px, 16vw, 84px);
+  animation: bob 2.4s ease-in-out infinite;
+  flex: 0 0 auto;
+}
+.lesson-teacher .teacher-bubble {
+  background: #fff;
+  border-radius: 18px;
+  padding: 12px 16px;
+  box-shadow: var(--shadow-card);
+  font-weight: 800;
+  color: var(--c-ink);
+  font-size: clamp(15px, 4.2vw, 20px);
+  line-height: 1.5;
+}
+.lesson-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /* ===== لعبة الفرز (التصنيف) ===== */
 img.sort-glyph { width: 1em; height: 1em; object-fit: contain; }
 .sort-cat { font-size: clamp(16px, 4.4vw, 22px); }

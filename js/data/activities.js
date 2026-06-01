@@ -4,6 +4,13 @@
 export const ACTIVITIES = {
   arabic: [
     {
+      emoji: "🧑‍🏫",
+      title: "معلّم الحروف",
+      desc: "شرح الحرف وكتابته بالحركة",
+      screen: "lesson",
+      params: { datasetKey: "arabic", lang: "ar-EG", title: "🧑‍🏫 معلّم الحروف" },
+    },
+    {
       emoji: "👀",
       title: "شوف واعرف",
       desc: "تصفّح الحروف واعرف كلّ حرف",
@@ -90,6 +97,13 @@ export const ACTIVITIES = {
   ],
   english: [
     {
+      emoji: "🧑‍🏫",
+      title: "معلّم الحروف",
+      desc: "Letter explanation & writing",
+      screen: "lesson",
+      params: { datasetKey: "english", lang: "en-US", title: "🧑‍🏫 Letters Teacher" },
+    },
+    {
       emoji: "👀",
       title: "شوف واعرف",
       desc: "Browse letters, know each one",
@@ -154,6 +168,13 @@ export const ACTIVITIES = {
     },
   ],
   numbers: [
+    {
+      emoji: "🧑‍🏫",
+      title: "معلّم الأرقام",
+      desc: "شرح الرقم وكتابته بالحركة",
+      screen: "lesson",
+      params: { datasetKey: "numbers", title: "🧑‍🏫 معلّم الأرقام" },
+    },
     {
       emoji: "👀",
       title: "شوف واعرف",

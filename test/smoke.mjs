@@ -45,12 +45,21 @@ function makeEl() {
   return new Proxy({}, handler);
 }
 
+// محاكاة Web Audio بما يطابق ما يستخدمه js/core/audio.js
+const audioParam = { setValueAtTime: noop, exponentialRampToValueAtTime: noop, linearRampToValueAtTime: noop, value: 0 };
+function makeAudioNode() {
+  const n = { type: "", frequency: audioParam, gain: audioParam, start: noop, stop: noop };
+  n.connect = () => n;
+  return n;
+}
+const audioCtx = { state: "running", currentTime: 0, destination: {}, resume: noop, createOscillator: makeAudioNode, createGain: makeAudioNode };
+
 global.window = {
   speechSynthesis: { getVoices: () => [], cancel: noop, speak: noop, onvoiceschanged: null },
   addEventListener: noop,
   matchMedia: () => ({ matches: false, addEventListener: noop }),
   location: { search: "" },
-  AudioContext: class { constructor() { return ctxProxy; } },
+  AudioContext: class { constructor() { return audioCtx; } },
 };
 global.document = {
   createElement: makeEl,
@@ -77,6 +86,8 @@ const cases = [
   ["phonics", "../js/games/phonics.js", "renderPhonics", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG", title: "t" }],
   ["trace(letters)", "../js/games/trace.js", "renderTrace", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG" }],
   ["trace(numbers)", "../js/games/trace.js", "renderTrace", { regionId: "numbers", regionIndex: 0, datasetKey: "numbers", title: "✏️ ارسم الرقم" }],
+  ["lesson(arabic)", "../js/games/lesson.js", "renderLesson", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG", title: "t" }],
+  ["lesson(numbers)", "../js/games/lesson.js", "renderLesson", { regionId: "numbers", regionIndex: 0, datasetKey: "numbers", title: "t" }],
   ["countPick", "../js/games/count.js", "renderCountPick", { regionId: "numbers", regionIndex: 0 }],
   ["addition", "../js/games/count.js", "renderAddition", { regionId: "numbers", regionIndex: 0 }],
   ["subtraction", "../js/games/count.js", "renderSubtraction", { regionId: "numbers", regionIndex: 0 }],
