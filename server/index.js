@@ -75,15 +75,14 @@ app.get("/asset-manifest.json", (_req, res) => {
   res.json({ assets });
 });
 
-// الجذر يقدّم صفحة المحتوى الغنيّة (SSR) مباشرةً — أقوى للأرشفة (يراها البوت كاملة)
-// والطفل/الوالي يفتح التطبيق التفاعلي عبر زرّ "افتح التطبيق" المؤدّي إلى /app.
+// الرابط الرئيسي يفتح التطبيق التفاعلي مباشرة (أفضل تجربة للطفل)
 app.get("/", (_req, res) => {
-  res.type("html").send(renderHomePage());
+  res.sendFile(path.join(ROOT, "index.html"));
 });
 
-// توحيد: ‎/explore القديم يُحوَّل دائماً إلى الجذر (منع تكرار/تشتّت)
+// صفحة المحتوى الغنيّة للأرشفة (SEO) على /explore
 app.get("/explore", (_req, res) => {
-  res.redirect(301, "/");
+  res.type("html").send(renderHomePage());
 });
 
 // ===== الصفحات الثابتة (حول / الخصوصية) =====
