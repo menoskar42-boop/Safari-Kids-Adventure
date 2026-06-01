@@ -109,32 +109,43 @@ export function renderProfile() {
 
   const accHint = document.createElement("p");
   accHint.style.cssText = "font-size:13px;color:#7a6ca8;text-align:center;margin:2px 0 8px";
-  accHint.textContent = "زيّن ميزو! تُفتح إكسسوارات جديدة كلّما كبرت صداقتكما 🎁";
+  accHint.textContent = "كل إكسسوار = إنجاز! اكسبه بالتعلّم ثمّ زيّن به ميزو 🎁";
   wrap.appendChild(accHint);
+
+  // إكسسوارات مرتبطة بإنجازات مُسمّاة (تُفتح من اللعب الطبيعي)
+  const mastered = (ds) => Object.keys(Store.mastery).filter((k) => k.startsWith(ds + ":")).length;
+  const ACCS = [
+    { acc: "", name: "بلا إكسسوار", how: "", earned: () => true },
+    { acc: "🧢", name: "قبعة المستكشف", how: "أكمل ٥ أنشطة", earned: () => (Store.friendship.xp || 0) >= 5 },
+    { acc: "🎀", name: "فيونكة الصداقة", how: "مستوى صداقة ٣", earned: () => Store.friendLevel >= 3 },
+    { acc: "📖", name: "نجمة القراءة", how: "أتقن ٣ عناصر", earned: () => Object.values(Store.mastery).filter((v) => v >= 2).length >= 3 },
+    { acc: "🔢", name: "تاج الأرقام", how: "أتقن أرقامًا", earned: () => mastered("numbers") >= 3 },
+    { acc: "🎩", name: "قبعة المثابرة", how: "العب ٣ أيام متتالية", earned: () => Store.streak >= 3 },
+    { acc: "👑", name: "تاج النجوم", how: "اجمع ١٥٠ نجمة", earned: () => Store.stars >= 150 },
+    { acc: "⭐", name: "نجمة الأبطال", how: "مستوى صداقة ٦", earned: () => Store.friendLevel >= 6 },
+  ];
 
   const accRow = document.createElement("div");
   accRow.style.cssText = "display:flex;gap:10px;justify-content:center;flex-wrap:wrap";
-  // [إيموجي, المستوى المطلوب]
-  const ACCS = [["", 1], ["🧢", 1], ["🎀", 2], ["🎩", 3], ["👑", 4], ["⭐", 5]];
-  ACCS.forEach(([acc, lvl]) => {
+  ACCS.forEach(({ acc, name, how, earned }) => {
+    const got = earned();
     const b = document.createElement("button");
     b.className = "wb-tile";
-    const locked = fLevel < lvl;
-    b.textContent = locked ? "🔒" : (acc || "🚫");
-    b.disabled = locked;
-    b.style.opacity = locked ? ".5" : "1";
-    if (!locked && Store.mizoAccessory === acc) b.style.outline = "4px solid var(--c-green)";
+    b.style.cssText = "position:relative;width:auto;min-width:64px;height:auto;padding:8px 10px;flex-direction:column;gap:2px;font-size:26px";
+    b.innerHTML = `<span>${got ? (acc || "🚫") : "🔒"}</span><span style="font-size:10px;font-weight:700;color:#7a6ca8;white-space:nowrap">${got ? name : how}</span>`;
+    b.disabled = !got;
+    b.style.opacity = got ? "1" : ".55";
+    if (got && Store.mizoAccessory === acc) b.style.outline = "4px solid var(--c-green)";
     b.addEventListener("click", () => {
-      if (locked) return;
+      if (!got) { Sfx.tap(); Speech.mizo(`لتفتح ${name}: ${how}`); return; }
       Sfx.tap();
       Store.setMizoAccessory(acc);
-      // إعادة بناء المعاينة فوراً
       const fresh = createCharacter();
       previewMizo.el.replaceWith(fresh.el);
       previewMizo.el = fresh.el;
       fresh.setMood("cheer", 1200);
       accRow.querySelectorAll("button").forEach((x) => (x.style.outline = "none"));
-      if (!locked) b.style.outline = "4px solid var(--c-green)";
+      b.style.outline = "4px solid var(--c-green)";
     });
     accRow.appendChild(b);
   });
