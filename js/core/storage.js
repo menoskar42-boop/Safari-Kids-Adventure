@@ -159,7 +159,8 @@ export const Store = {
     return state.childName || "";
   },
   setChildName(name) {
-    state.childName = String(name || "").slice(0, 20);
+    // نزيل < > لمنع أي حقن HTML عند إدراج الاسم في innerHTML
+    state.childName = String(name || "").replace(/[<>]/g, "").slice(0, 20);
     persist();
   },
 
