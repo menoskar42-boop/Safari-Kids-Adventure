@@ -5,8 +5,11 @@ import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
 import { gameTopbar, progressDots, shuffle, showCheer, finishActivity } from "./common.js";
+import { Store } from "../core/storage.js";
 
 const rand = (arr) => arr[(Math.random() * arr.length) | 0];
+// تدرّج الصعوبة حسب عمر الطفل: ٣–٤ سنوات أعداد أصغر
+const isSmall = () => Store.ageBand === "small";
 
 function speakBoth(num) {
   Speech.sequence([
@@ -285,8 +288,9 @@ export function renderAddition({ regionId, regionIndex }) {
   let round = 0;
 
   function render() {
-    const a = 1 + ((Math.random() * 4) | 0); // 1..4
-    const b = 1 + ((Math.random() * 4) | 0); // 1..4
+    const top = isSmall() ? 3 : 4;
+    const a = 1 + ((Math.random() * top) | 0);
+    const b = 1 + ((Math.random() * top) | 0);
     const sum = a + b;
     const emoji = rand(COUNT_EMOJIS);
     stage.innerHTML = "";
@@ -361,9 +365,10 @@ export function renderCompare({ regionId, regionIndex }) {
   let round = 0;
 
   function render() {
-    let a = 1 + ((Math.random() * 9) | 0);
-    let b = 1 + ((Math.random() * 9) | 0);
-    while (b === a) b = 1 + ((Math.random() * 9) | 0);
+    const cap = isSmall() ? 5 : 9;
+    let a = 1 + ((Math.random() * cap) | 0);
+    let b = 1 + ((Math.random() * cap) | 0);
+    while (b === a) b = 1 + ((Math.random() * cap) | 0);
     const emoji = rand(COUNT_EMOJIS);
     stage.innerHTML = "";
 
@@ -419,7 +424,7 @@ export function renderSubtraction({ regionId, regionIndex }) {
   let round = 0;
 
   function render() {
-    const a = 3 + ((Math.random() * 6) | 0); // 3..8
+    const a = (isSmall() ? 2 : 3) + ((Math.random() * (isSmall() ? 4 : 6)) | 0);
     const b = 1 + ((Math.random() * (a - 1)) | 0); // 1..a-1
     const rest = a - b;
     const emoji = rand(COUNT_EMOJIS);
@@ -494,7 +499,7 @@ export function renderCountPick({ regionId, regionIndex }) {
   let round = 0;
 
   function render() {
-    const target = 1 + ((Math.random() * 9) | 0); // 1..9
+    const target = 1 + ((Math.random() * (isSmall() ? 5 : 9)) | 0); // 1..5 أو 1..9
     const emoji = rand(COUNT_EMOJIS);
     stage.innerHTML = "";
 

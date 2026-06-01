@@ -172,6 +172,15 @@ export const Store = {
     persist();
   },
 
+  // الفئة العمرية لتدرّج الصعوبة: "" غير محدّد، "small" ٣–٤، "big" ٥–٦
+  get ageBand() {
+    return state.ageBand || "";
+  },
+  setAgeBand(band) {
+    state.ageBand = band === "small" || band === "big" ? band : "";
+    persist();
+  },
+
   // تقدّم اليوم؛ تعيد true عند بلوغ الهدف لأول مرة اليوم
   addDailyProgress(n = 1) {
     const t = today();

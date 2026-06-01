@@ -50,6 +50,34 @@ export function renderProfile() {
   nameInput.addEventListener("input", () => Store.setChildName(nameInput.value));
   wrap.appendChild(nameInput);
 
+  // الفئة العمرية (تُكيّف صعوبة الألعاب)
+  const ageLabel = document.createElement("p");
+  ageLabel.style.cssText = "font-weight:800;color:var(--c-ink);margin:22px 0 8px;font-size:clamp(16px,4.5vw,20px)";
+  ageLabel.textContent = "عمر الطفل (لضبط الصعوبة)";
+  wrap.appendChild(ageLabel);
+
+  const ageRow = document.createElement("div");
+  ageRow.style.cssText = "display:flex;gap:12px;justify-content:center;flex-wrap:wrap";
+  [["small", "٣ – ٤ سنوات", "🧒"], ["big", "٥ – ٦ سنوات", "👦"]].forEach(([band, txt, emo]) => {
+    const b = document.createElement("button");
+    b.className = "candy-btn";
+    b.textContent = `${emo} ${txt}`;
+    const paint = () => {
+      b.style.background = Store.ageBand === band
+        ? "linear-gradient(180deg,#34d399,#10b981)"
+        : "linear-gradient(180deg,#9aa7ff,#6b7cff)";
+    };
+    paint();
+    b.addEventListener("click", () => {
+      Sfx.tap();
+      Store.setAgeBand(Store.ageBand === band ? "" : band);
+      ageRow.querySelectorAll("button").forEach((x) => x.dispatchEvent(new Event("repaint")));
+    });
+    b.addEventListener("repaint", paint);
+    ageRow.appendChild(b);
+  });
+  wrap.appendChild(ageRow);
+
   // اختيار الأفاتار
   const h = document.createElement("p");
   h.style.cssText = "font-weight:800;color:var(--c-ink);margin:22px 0 10px;font-size:clamp(16px,4.5vw,20px)";
