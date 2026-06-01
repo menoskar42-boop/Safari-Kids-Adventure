@@ -9,9 +9,19 @@ let useAI = false; // يُضبط من checkAI() عبر setAISpeech()
 // صوت ميزو الثابت لكل لغة (من ملف الهوية المركزي) — كي لا يتغيّر "صديق الطفل"
 const AI_VOICE = MIZO.voice;
 
+// وعد جاهزية النطق: يُحَلّ بعد أن يقرّر app.js نتيجة فحص الـ AI
+let _resolveReady;
+const _readyPromise = new Promise((r) => { _resolveReady = r; });
+
 /** تفعيل/تعطيل النطق بالـ AI (يستدعيه app.js بعد فحص الخادم) */
 export function setAISpeech(on) {
   useAI = Boolean(on);
+  if (_resolveReady) { _resolveReady(); _resolveReady = null; }
+}
+
+/** يُرجع وعداً يُحَلّ عندما يُعرَف هل سنستخدم AI أم Web Speech (لتفادي سباق النطق) */
+export function whenSpeechReady() {
+  return _readyPromise;
 }
 
 function refreshVoices() {

@@ -2,7 +2,7 @@
 import { REGIONS } from "../data/regions.js";
 import { Store } from "../core/storage.js";
 import { Router } from "../core/router.js";
-import { Speech } from "../core/speech.js";
+import { Speech, whenSpeechReady } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { bindStarCounter, bindStreak } from "../core/rewards.js";
 import { avatarEmoji } from "./profile.js";
@@ -57,16 +57,21 @@ export function renderHome() {
   // ميزو المرشد بدل الإيموجي الثابت (يلوّح عند فتح الخريطة)
   const guide = createCharacter();
   banner.querySelector("#profileBtn").appendChild(guide.el);
-  setTimeout(() => {
-    guide.setMood("wave", 2600);
-    // ترحيب صوتي لطيف مرّة واحدة في الجلسة (يبني الألفة دون إزعاج)
-    if (!greetedSession) {
-      greetedSession = true;
-      const spoken = bubbleMsg.replace(/<[^>]+>/g, "");
+  setTimeout(() => guide.setMood("wave", 2600), 250);
+  // ترحيب صوتي مرّة واحدة في الجلسة — ننتظر جاهزية الـ AI كي يستخدم صوت ميزو
+  // (OpenAI) لا Web Speech، وننطق النصّ المكتوب نفسه بلا إيموجي.
+  if (!greetedSession) {
+    greetedSession = true;
+    const spoken = bubbleMsg
+      .replace(/<[^>]+>/g, "")
+      .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F1E6}-\u{1F1FF}\u{200D}]/gu, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    whenSpeechReady().then(() => {
       guide.startTalking(spoken.length * 80 + 1200);
       Speech.ar(spoken);
-    }
-  }, 250);
+    });
+  }
   screen.appendChild(banner);
 
   // المناطق التأسيسية مفتوحة دائماً. المناطق المتقدّمة تُفتح تدريجياً:
