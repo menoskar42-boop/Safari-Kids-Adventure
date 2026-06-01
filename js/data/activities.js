@@ -701,6 +701,7 @@ export const ACTIVITIES = {
       params: { datasetKey: "appliances", title: "🧩 ركّب الصورة", bg: "linear-gradient(180deg,#a6b3bd,#eef2f3)" } },
   ],
   values: [
+    { emoji: "🤝", title: "آداب وسلوك", desc: "ماذا تقول وتفعل في المواقف؟", screen: "manners", params: { title: "🤝 آداب وسلوك" } },
     { emoji: "🧼", title: "النظافة سرّ الصحّة", desc: "قصة عن النظافة", screen: "story", params: { storyId: "cleanliness" } },
     { emoji: "🤝", title: "التعاون قوّة", desc: "قصة عن التعاون", screen: "story", params: { storyId: "cooperation" } },
     { emoji: "👩", title: "مساعدة أمّي", desc: "قصة عن المساعدة", screen: "story", params: { storyId: "help-mom" } },

@@ -42,6 +42,7 @@ import { renderClassify } from "./games/classify.js";
 import { renderWordBuild } from "./games/wordbuild.js";
 import { renderSimilar } from "./games/similar.js";
 import { renderTalkMizo } from "./games/talkMizo.js";
+import { renderManners } from "./games/manners.js";
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -89,6 +90,7 @@ Router.register("classify", renderClassify);
 Router.register("wordBuild", renderWordBuild);
 Router.register("similar", renderSimilar);
 Router.register("talkMizo", renderTalkMizo);
+Router.register("manners", renderManners);
 
 // شاشة البداية
 const splash = document.getElementById("splash");

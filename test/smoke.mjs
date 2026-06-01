@@ -94,6 +94,7 @@ const cases = [
   ["wordBuild", "../js/games/wordbuild.js", "renderWordBuild", { regionId: "arabic", regionIndex: 0, title: "t" }],
   ["similar", "../js/games/similar.js", "renderSimilar", { regionId: "arabic", regionIndex: 0, title: "t" }],
   ["talkMizo", "../js/games/talkMizo.js", "renderTalkMizo", { regionId: "arabic", regionIndex: 0, title: "t" }],
+  ["manners", "../js/games/manners.js", "renderManners", { regionId: "values", regionIndex: 40, title: "t" }],
   ["countPick", "../js/games/count.js", "renderCountPick", { regionId: "numbers", regionIndex: 0 }],
   ["addition", "../js/games/count.js", "renderAddition", { regionId: "numbers", regionIndex: 0 }],
   ["subtraction", "../js/games/count.js", "renderSubtraction", { regionId: "numbers", regionIndex: 0 }],
