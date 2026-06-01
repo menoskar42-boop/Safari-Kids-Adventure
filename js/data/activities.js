@@ -654,6 +654,18 @@ export const ACTIVITIES = {
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "timeday", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#7b6fb0,#fd746c)" } },
   ],
+  plants: [
+    { emoji: "🌱", title: "استكشف النبات", desc: "اضغط على كل عنصر لتعرفه", screen: "explore",
+      params: { datasetKey: "plants", title: "🌱 عالم النبات", bg: "linear-gradient(180deg,#56ab2f,#a8e063)" } },
+    { emoji: "🌳", title: "رتّب نموّ النبتة", desc: "من البذرة إلى الثمرة", screen: "sequence",
+      params: { datasetKey: "plants", title: "🌳 كيف تنمو النبتة", bg: "linear-gradient(180deg,#56ab2f,#a8e063)" } },
+    { emoji: "🔎", title: "جِد النبات", desc: "اضغط على المطلوب", screen: "findIt",
+      params: { datasetKey: "plants", title: "🔎 جِد النبات", verb: "اضغط على", bg: "linear-gradient(180deg,#56ab2f,#a8e063)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "plants", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#56ab2f,#a8e063)" } },
+    { emoji: "🌑", title: "طابق الظل", desc: "اعرف النبات من ظله", screen: "shadowMatch",
+      params: { datasetKey: "plants", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#56ab2f,#a8e063)" } },
+  ],
   space: [
     { emoji: "🚀", title: "استكشف الفضاء", desc: "اضغط على كل عنصر لتعرفه", screen: "explore",
       params: { datasetKey: "space", title: "🚀 الفضاء والكواكب", bg: "linear-gradient(180deg,#243b55,#141e30)" } },

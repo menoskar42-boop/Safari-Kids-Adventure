@@ -381,6 +381,16 @@ export const REGIONS = [
     cat: "nature",
   },
   {
+    id: "plants",
+    name: "عالم النبات",
+    nameEn: "Plants",
+    emoji: "🌱",
+    bg: "bg-plants",
+    guide: "من البذرة إلى الشجرة... تعال نتعرّف على النبات!",
+    ready: true,
+    cat: "nature",
+  },
+  {
     id: "countries",
     name: "الدول العربية",
     nameEn: "Arab Countries",
