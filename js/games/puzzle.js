@@ -32,24 +32,28 @@ export function renderPuzzle({ regionId, regionIndex, datasetKey, title, bg }) {
   let first = null; // الخانة المختارة أولاً
   let lock = false;
 
-  function buildCell(emoji, quadrant) {
+  function buildCell(item, quadrant) {
     // quadrant: 0=أعلى يسار 1=أعلى يمين 2=أسفل يسار 3=أسفل يمين
     const col = quadrant % 2, rowq = (quadrant / 2) | 0;
     const cell = document.createElement("button");
     cell.className = "puz-cell";
-    cell.innerHTML = `<span class="puz-emoji" style="transform:translate(${-col * 50}%,${-rowq * 50}%)">${emoji}</span>`;
+    if (item.img) {
+      // قصّ الصورة الحقيقية لأربعة أرباع
+      cell.innerHTML = `<span class="puz-img" style="background-image:url(/assets/${item.img});background-position:${col * 100}% ${rowq * 100}%"></span>`;
+    } else {
+      cell.innerHTML = `<span class="puz-emoji" style="transform:translate(${-col * 50}%,${-rowq * 50}%)">${item.emoji || "⭐"}</span>`;
+    }
     return cell;
   }
 
   function render() {
     grid.innerHTML = "";
     first = null; lock = false;
-    const emoji = pics[round].emoji || "⭐";
     // ترتيب مبعثر مختلف عن الحلّ
     do { cells = shuffle([0, 1, 2, 3]); } while (cells.every((q, i) => q === i));
 
     cells.forEach((quad, slot) => {
-      const cell = buildCell(emoji, quad);
+      const cell = buildCell(pics[round], quad);
       cell.addEventListener("click", () => onTap(slot, cell));
       grid.appendChild(cell);
     });
@@ -79,11 +83,12 @@ export function renderPuzzle({ regionId, regionIndex, datasetKey, title, bg }) {
   }
 
   function redraw() {
-    const emoji = pics[round].emoji || "⭐";
     [...grid.children].forEach((cell, slot) => {
       const quad = cells[slot];
       const col = quad % 2, rowq = (quad / 2) | 0;
-      cell.querySelector(".puz-emoji").style.transform = `translate(${-col * 50}%,${-rowq * 50}%)`;
+      const im = cell.querySelector(".puz-img");
+      if (im) im.style.backgroundPosition = `${col * 100}% ${rowq * 100}%`;
+      else cell.querySelector(".puz-emoji").style.transform = `translate(${-col * 50}%,${-rowq * 50}%)`;
     });
   }
 

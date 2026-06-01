@@ -5,6 +5,7 @@ import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
 import { gameTopbar, shuffle, finishActivity } from "./common.js";
+import { glyphMarkup } from "./glyph.js";
 
 const ROUNDS = 5;
 
@@ -26,8 +27,8 @@ function choicesRow(pool, target, onPick) {
   row.className = "choice-row";
   pool.forEach((c) => {
     const b = document.createElement("button");
-    b.className = "choice";
-    b.textContent = c.emoji;
+    b.className = "choice choice-img";
+    b.innerHTML = glyphMarkup(c);
     b.addEventListener("click", () => onPick(c, b, target));
     row.appendChild(b);
   });
@@ -74,7 +75,8 @@ export function renderShadowMatch({ regionId, regionIndex, datasetKey, title, bg
       stage.appendChild(ask);
 
       const shadow = document.createElement("div");
-      shadow.textContent = target.emoji;
+      shadow.className = "shadow-glyph";
+      shadow.innerHTML = glyphMarkup(target);
       shadow.style.cssText = "font-size:clamp(110px,32vw,200px);filter:brightness(0);opacity:.85";
       stage.appendChild(shadow);
 
@@ -136,8 +138,8 @@ export function renderFindIt({ regionId, regionIndex, datasetKey, title, bg, ver
     row.className = "choice-row";
     pool.forEach((c) => {
       const b = document.createElement("button");
-      b.className = "choice";
-      b.textContent = c.emoji;
+      b.className = "choice choice-img";
+      b.innerHTML = glyphMarkup(c);
       b.addEventListener("click", () => {
         if (c.emoji === target.emoji) {
           Sfx.correct();

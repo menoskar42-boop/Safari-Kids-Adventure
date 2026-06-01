@@ -6,6 +6,7 @@ let voices = [];
 let enabled = "speechSynthesis" in window;
 let useAI = false; // يُضبط من checkAI() عبر setAISpeech()
 let speakSeq = 0; // رمز تسلسل النطق لمنع تداخل OpenAI مع Web Speech
+let aiHealthy = false; // يصبح true بعد أوّل نطق AI ناجح (يعمل + فيه رصيد) → نُخفي Web Speech
 
 // صوت ميزو الثابت لكل لغة (من ملف الهوية المركزي) — كي لا يتغيّر "صديق الطفل"
 const AI_VOICE = MIZO.voice;
@@ -71,13 +72,15 @@ export const Speech = {
       const voice = AI_VOICE[lang.slice(0, 2)] || undefined;
       const ctrl = "AbortController" in window ? new AbortController() : null;
       let started = false, settled = false;
+      // البديل (Web Speech) يُستخدم فقط إن لم يُثبت الـ AI أنه يعمل (مثلاً لا رصيد).
+      // ما دام الـ AI اشتغل بنجاح مرّة (aiHealthy) نبقى على صوت OpenAI فقط ولا نُظهر Web Speech.
       const fallback = () => {
         if (settled) return;
         settled = true;
-        if (myId === speakSeq) this._webSpeak(text, opts);
+        if (!aiHealthy && myId === speakSeq) this._webSpeak(text, opts);
         else if (opts.onend) opts.onend();
       };
-      // مهلة: إن لم يبدأ صوت الـ AI خلال ١٠ ثوانٍ نُلغيه ونشغّل Web Speech
+      // مهلة: إن لم يبدأ صوت الـ AI خلال ١٠ ثوانٍ نُلغيه (وننتقل للبديل فقط إن لم يكن الـ AI سليماً)
       const timer = setTimeout(() => {
         if (!started && !settled) { try { ctrl && ctrl.abort(); } catch (e) {} fallback(); }
       }, 10000);
@@ -85,7 +88,7 @@ export const Speech = {
         voice,
         instructions: opts.instructions,
         signal: ctrl ? ctrl.signal : undefined,
-        onStart: () => { started = true; clearTimeout(timer); },
+        onStart: () => { started = true; aiHealthy = true; clearTimeout(timer); },
       }).then(
         () => { clearTimeout(timer); if (!settled) { settled = true; if (myId === speakSeq && opts.onend) opts.onend(); } },
         // فشل: إن لم يبدأ صوت بعد → Web Speech؛ وإن كان قد بدأ ثم تعثّر → لا نخلط
