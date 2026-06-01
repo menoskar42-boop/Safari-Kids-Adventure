@@ -371,6 +371,16 @@ export const REGIONS = [
     cat: "nature",
   },
   {
+    id: "space",
+    name: "الفضاء والكواكب",
+    nameEn: "Space",
+    emoji: "🚀",
+    bg: "bg-space",
+    guide: "نجوم وكواكب وصواريخ... هيا نستكشف الفضاء!",
+    ready: true,
+    cat: "nature",
+  },
+  {
     id: "countries",
     name: "الدول العربية",
     nameEn: "Arab Countries",

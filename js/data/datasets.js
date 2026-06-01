@@ -38,6 +38,7 @@ import { APPLIANCES } from "./appliances.js";
 import { TIMEDAY } from "./timeday.js";
 import { TASTES } from "./tastes.js";
 import { HYGIENE } from "./hygiene.js";
+import { SPACE } from "./space.js";
 
 const DATASETS = {
   arabic: {
@@ -89,6 +90,7 @@ const DATASETS = {
   timeday: { key: "timeday", lang: "ar-EG", glyphKind: "emoji", items: TIMEDAY },
   tastes: { key: "tastes", lang: "ar-EG", glyphKind: "emoji", items: TASTES },
   hygiene: { key: "hygiene", lang: "ar-EG", glyphKind: "emoji", items: HYGIENE },
+  space: { key: "space", lang: "ar-EG", glyphKind: "emoji", items: SPACE },
 };
 
 export function getDataset(key) {

@@ -654,6 +654,18 @@ export const ACTIVITIES = {
     { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
       params: { datasetKey: "timeday", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#7b6fb0,#fd746c)" } },
   ],
+  space: [
+    { emoji: "🚀", title: "استكشف الفضاء", desc: "اضغط على كل عنصر لتعرفه", screen: "explore",
+      params: { datasetKey: "space", title: "🚀 الفضاء والكواكب", bg: "linear-gradient(180deg,#243b55,#141e30)" } },
+    { emoji: "🔎", title: "جِد في الفضاء", desc: "اضغط على المطلوب", screen: "findIt",
+      params: { datasetKey: "space", title: "🔎 جِد في الفضاء", verb: "اضغط على", bg: "linear-gradient(180deg,#243b55,#141e30)" } },
+    { emoji: "🧩", title: "لعبة الذاكرة", desc: "اقلب البطاقات المتشابهة", screen: "memory",
+      params: { datasetKey: "space", title: "🧩 ذاكرة الفضاء", bg: "linear-gradient(180deg,#243b55,#141e30)" } },
+    { emoji: "🌑", title: "طابق الظل", desc: "اعرف العنصر من ظله", screen: "shadowMatch",
+      params: { datasetKey: "space", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#243b55,#141e30)" } },
+    { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
+      params: { datasetKey: "space", title: "🧠 ما التالي؟", bg: "linear-gradient(180deg,#243b55,#141e30)" } },
+  ],
   hygiene: [
     { emoji: "🪥", title: "استكشف العناية", desc: "اضغط على كل عادة لتعرفها", screen: "explore",
       params: { datasetKey: "hygiene", title: "🪥 العناية بالنفس", bg: "linear-gradient(180deg,#43cea2,#185a9d)" } },
