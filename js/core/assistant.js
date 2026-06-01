@@ -150,7 +150,8 @@ async function handleAudio() {
   setState("idle", answer || "");
   Sfx.correct();
   if (mizo) mizo.startTalking((answer || "").length * 70 + 1500);
-  Speech.ar(answer, { onend: () => setTimeout(() => showBubble(""), 1500) });
+  // ميزو يجيب بصوته المصري
+  Speech.mizo(answer, { onend: () => setTimeout(() => showBubble(""), 1500) });
 }
 
 // ===== تشجيع عند سكوت الطفل / عدم نشاطه =====

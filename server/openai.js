@@ -197,9 +197,9 @@ export function registerOpenAIRoutes(app) {
 
     const isAr = !lang || String(lang).startsWith("ar");
     const system = isAr
-      ? "أنت مرشد لطيف ومرح في تطبيق تعليمي لطفل عمره ٣ إلى ٥ سنوات اسمه عالم الاستكشاف السحري. " +
-        "أجب بجملة واحدة قصيرة جداً وبسيطة بالعربية الفصحى المبسّطة، بكلمات يفهمها طفل صغير. " +
-        "كن إيجابياً ومشجّعاً. لا تستخدم رموزاً أو تنسيقاً، فقط نصاً منطوقاً."
+      ? "أنت ميزو، صديق لطيف ومرح لطفل عمره ٣ إلى ٦ سنوات في تطبيق عالم الاستكشاف السحري. " +
+        "الطفل يكلّمك بالعاميّة المصريّة. أجب بجملة واحدة قصيرة جداً وبسيطة بالعاميّة المصريّة بكلمات يفهمها طفل صغير. " +
+        "كن إيجابياً ومشجّعاً. بلا رموز أو تنسيق، فقط كلام منطوق."
       : "You are a friendly, cheerful guide in a learning app for a 3-5 year old child. " +
         "Answer with one very short, simple sentence a small child understands. " +
         "Be positive and encouraging. No symbols or formatting, just spoken text.";
@@ -255,8 +255,8 @@ export function registerOpenAIRoutes(app) {
       form.append("file", blob, `speech.${ext}`);
       form.append("model", STT_MODEL);
       if (lang) form.append("language", String(lang).slice(0, 2));
-      // سياق يساعد الموديل على فهم كلام طفل صغير بكلمات بسيطة
-      form.append("prompt", "كلام طفل صغير يتحدّث العربية بكلمات بسيطة وأسئلة قصيرة مثل: ما هذا؟ ما اسمه؟ ما لونه؟");
+      // سياق يساعد الموديل على فهم كلام طفل مصري صغير بالعامية المصرية
+      form.append("prompt", "كلام طفل مصري صغير يتحدّث بالعاميّة المصريّة بأسئلة بسيطة قصيرة، مثل: ده إيه؟ اسمه إيه؟ لونه إيه؟");
 
       const r = await fetch(`${OPENAI_BASE}/audio/transcriptions`, {
         method: "POST",
