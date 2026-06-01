@@ -4,9 +4,13 @@
 import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
+import { createCharacter } from "../games/character.js";
+import { pick, MIZO_CATCH } from "../data/mizo.js";
 
 // حيوانات بأجسام كاملة (تبدو واقفة في الغرفة وتقفز بوضوح) — خاصّة بالـ AR
+// أول عنصر = ميزو نفسه يزور غرفة الطفل!
 const AR_ANIMALS = [
+  { name: "ميزو", en: "Mizo", emoji: "🧒", isMizo: true },
   { name: "أسد", en: "Lion", emoji: "🦁", body: "🦁", sound: "زئير الأسد: زئييير" },
   { name: "نمر", en: "Tiger", emoji: "🐅", body: "🐅", sound: "النمر يزمجر" },
   { name: "فيل", en: "Elephant", emoji: "🐘", body: "🐘", sound: "الفيل: بريم بريم" },
@@ -66,6 +70,7 @@ export function renderAR() {
 
   let stream = null;
   let current = AR_ANIMALS[0];
+  let mizoChar = null;
 
   function speakCreature(a) {
     bubble.classList.remove("hidden");
@@ -83,12 +88,30 @@ export function renderAR() {
     creature.classList.add("hop");
   }
 
+  function mizoSay(line) {
+    bubble.classList.remove("hidden");
+    bubble.textContent = line;
+    if (mizoChar) mizoChar.startTalking(line.length * 90 + 800);
+    Speech.mizo(line);
+  }
+
   function setCreature(a) {
     current = a;
-    creature.textContent = a.body;
-    hop();
-    Sfx.pop();
-    speakCreature(a);
+    if (a.isMizo) {
+      creature.textContent = "";
+      if (!mizoChar) mizoChar = createCharacter();
+      if (mizoChar.el.parentNode !== creature) creature.appendChild(mizoChar.el);
+      hop();
+      Sfx.pop();
+      mizoChar.setMood("wave", 1800);
+      mizoSay("أهلاً! أنا ميزو، جيت أزورك في أوضتك!");
+    } else {
+      if (mizoChar && mizoChar.el.parentNode === creature) creature.removeChild(mizoChar.el);
+      creature.textContent = a.body;
+      hop();
+      Sfx.pop();
+      speakCreature(a);
+    }
     // تمييز الزرّ المختار
     picker.querySelectorAll(".ar-pick").forEach((b) => b.classList.toggle("active", b.dataset.name === a.name));
   }
@@ -107,7 +130,12 @@ export function renderAR() {
   creature.addEventListener("click", () => {
     Sfx.pop();
     hop();
-    speakCreature(current);
+    if (current.isMizo) {
+      if (mizoChar) mizoChar.setMood("cheer", 1400);
+      mizoSay(pick(MIZO_CATCH));
+    } else {
+      speakCreature(current);
+    }
   });
 
   async function startCamera() {

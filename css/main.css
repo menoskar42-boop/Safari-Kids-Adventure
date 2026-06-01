@@ -254,6 +254,8 @@ button { font-family: inherit; cursor: pointer; border: none; }
   animation: bob 2.6s ease-in-out infinite;
 }
 .ar-creature.hop { animation: ar-hop .8s ease; }
+/* ميزو داخل الواقع المعزّز يأخذ حجماً مناسباً */
+.ar-creature .miz-svg { width: clamp(150px, 46vw, 260px); filter: drop-shadow(0 18px 20px rgba(0,0,0,.55)); }
 @keyframes ar-hop {
   0%   { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); }
   25%  { transform: translateX(-50%) translateY(-90px) scale(1.12) rotate(-6deg); }
