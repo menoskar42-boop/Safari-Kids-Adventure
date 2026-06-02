@@ -5,6 +5,7 @@ import { isAIReady, aiAsk, aiTranscribe } from "./ai.js";
 import { Speech } from "./speech.js";
 import { Sfx } from "./audio.js";
 import { createCharacter } from "../games/character.js";
+import { track } from "./analytics.js";
 
 let recorder = null;
 let chunks = [];
@@ -103,6 +104,7 @@ async function beginRecording() {
     };
     recorder.start();
     listening = true;
+    track("use_voice_assistant"); // استخدم المساعد الصوتي ميزو
     Sfx.pop();
     setState("listening", "أنا أسمعك دلوقتي... 🎤");
     // حدّ أقصى ٦ ثوانٍ ثم نتوقّف تلقائياً

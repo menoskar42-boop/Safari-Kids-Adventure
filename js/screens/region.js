@@ -7,10 +7,14 @@ import { ACTIVITIES } from "../data/activities.js";
 import { FEATURES } from "../core/features.js";
 import { Store } from "../core/storage.js";
 import { regionHook } from "../data/mizo.js";
+import { track } from "../core/analytics.js";
 
 export function renderRegion({ id, index }) {
   const region = getRegion(id);
-  if (region) Store.rememberRegion(region.name); // ذاكرة ميزو: آخر منطقة
+  if (region) {
+    Store.rememberRegion(region.name); // ذاكرة ميزو: آخر منطقة
+    track("start_adventure", { region_id: id, region_name: region.name }); // بدأ مغامرة
+  }
   const screen = document.createElement("div");
   screen.className = "region-screen";
   screen.style.background = "linear-gradient(180deg,#bfe9ff,#e9f7d8)";

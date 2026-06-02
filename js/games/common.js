@@ -5,6 +5,7 @@ import { Speech } from "../core/speech.js";
 import { Confetti } from "../core/confetti.js";
 import { createCharacter } from "./character.js";
 import { MIZO_CATCH, pick } from "../data/mizo.js";
+import { track } from "../core/analytics.js";
 import {
   awardStars,
   updateStarCounter,
@@ -115,6 +116,7 @@ export function finishActivity({ regionId, regionIndex, stars = 5, onDone }) {
   }
   Store.addFriendship(1); // تنمو صداقة ميزو مع كل نشاط
   const wasCompleted = Store.regionProgress(regionId).completed;
+  track("complete_activity", { region_id: regionId, stars, first_time: !wasCompleted }); // أكمل نشاط
   awardStars(stars);
   Confetti.burst();
   Store.setRegionStars(regionId, (Store.regionProgress(regionId).stars || 0) + stars);

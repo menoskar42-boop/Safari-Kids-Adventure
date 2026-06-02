@@ -4,6 +4,7 @@ import { Sfx } from "./audio.js";
 import { Confetti } from "./confetti.js";
 import { Speech } from "./speech.js";
 import { createCharacter } from "../games/character.js";
+import { track } from "./analytics.js";
 
 // مجموعة العناصر القابلة للجمع (حيوانات أليفة، سيارات، أجنحة، قبعات...)
 export const COLLECTIBLES = [
@@ -36,6 +37,7 @@ export function updateStarCounter() {
 /** منح نجوم مع مؤثرات */
 export function awardStars(n = 1) {
   Store.addStars(n);
+  track("earn_stars", { value: n, total_stars: Store.stars }); // جمع نجوم
   Sfx.star();
   Confetti.stars();
   updateStarCounter();
