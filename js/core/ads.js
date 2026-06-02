@@ -7,8 +7,8 @@ import { FEATURES } from "./features.js";
 
 // ✅ بعد اعتماد موقعك في AdSense، ضع المُعرّفين هنا ثم اجعل FEATURES.ads = true
 export const ADS = {
-  publisherId: "", // مثال: "ca-pub-XXXXXXXXXXXXXXXX"
-  slotId: "",      // مثال: "1234567890"
+  publisherId: "ca-pub-3132188303904900", // معرّف ناشر AdSense (للحساب كله)
+  slotId: "",      // ← ضع معرّف وحدة الإعلان من لوحة AdSense بعد القبول (مثال: "1234567890")
 };
 
 let mounted = false;
@@ -17,6 +17,8 @@ let scriptLoaded = false;
 function loadAdSenseScript() {
   if (scriptLoaded || !ADS.publisherId) return;
   scriptLoaded = true;
+  // المكتبة محمَّلة أصلاً من index.html (للتحقّق) → لا نكرّر الوسم
+  if (document.querySelector('script[src*="adsbygoogle.js"]')) return;
   const s = document.createElement("script");
   s.async = true;
   s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADS.publisherId}`;
