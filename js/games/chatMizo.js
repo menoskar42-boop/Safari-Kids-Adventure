@@ -5,7 +5,8 @@ import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { gameTopbar, shuffle, finishActivity } from "./common.js";
 import { createCharacter } from "./character.js";
-import { MIZO_CHAT } from "../data/mizo.js";
+import { MIZO_CHAT, adaptDisplay } from "../data/mizo.js";
+import { Store } from "../core/storage.js";
 
 export function renderChatMizo({ regionId, regionIndex, title }) {
   const steps = MIZO_CHAT;
@@ -34,10 +35,12 @@ export function renderChatMizo({ regionId, regionIndex, title }) {
   wrap.appendChild(row);
 
   function say(text, ms) { mizo.startTalking(ms || text.length * 90 + 1200); Speech.mizo(text); }
+  // النص المعروض يطابق المنطوق (تأنيث حسب الجنس + مناداة بالاسم)
+  const disp = (t) => adaptDisplay(t, Store.childGender, Store.childName);
 
   function render() {
     const step = steps[i];
-    bubble.textContent = step.q;
+    bubble.textContent = disp(step.q);
     mizo.setMood("happy");
     row.innerHTML = "";
     setTimeout(() => say(step.q), 150);
@@ -49,7 +52,7 @@ export function renderChatMizo({ regionId, regionIndex, title }) {
       b.addEventListener("click", () => {
         Sfx.pop();
         row.innerHTML = "";
-        bubble.textContent = opt.r;
+        bubble.textContent = disp(opt.r);
         mizo.setMood("cheer", 1600);
         say(opt.r, opt.r.length * 90 + 1200);
         i++;

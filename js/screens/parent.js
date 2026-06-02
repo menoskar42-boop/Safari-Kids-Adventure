@@ -80,9 +80,16 @@ export function renderParent() {
   const gBox = document.createElement("div");
   gBox.style.cssText =
     "background:#fff;border-radius:18px;padding:14px;margin-top:18px;box-shadow:var(--shadow-card);text-align:center";
-  gBox.innerHTML = `<div style="font-weight:800;color:var(--c-ink);margin-bottom:6px">👦👧 الطفل ولد أم بنت؟</div>
+  gBox.innerHTML = `<div style="font-weight:800;color:var(--c-ink);margin-bottom:6px">👦👧 اسم الطفل ونوعه</div>
     <p style="font-size:12px;color:#7a6ca8;margin:0 0 10px">يخاطب ميزو الطفل بالصيغة الصحيحة وينادي باسمه.</p>
+    <label style="display:block;font-size:13px;color:#7a6ca8;margin-bottom:4px">✏️ اسم الطفل (ليناديه ميزو)</label>
+    <input class="name-input" type="text" maxlength="20" placeholder="اكتب اسم طفلك هنا"
+      style="width:100%;max-width:280px;box-sizing:border-box;padding:10px 14px;border:2px solid #c7cdff;border-radius:14px;font-size:16px;text-align:center;margin-bottom:12px;outline:none" />
     <div class="gender-row" style="display:flex;gap:12px;justify-content:center"></div>`;
+  const nameInput = gBox.querySelector(".name-input");
+  nameInput.value = Store.childName;
+  // عند تغيير الاسم نحفظه (ومقطعه الصوتي يُولَّد مرّة واحدة لاحقاً عبر nameclip)
+  nameInput.addEventListener("input", () => Store.setChildName(nameInput.value));
   const gRow = gBox.querySelector(".gender-row");
   [["boy", "ولد 👦"], ["girl", "بنت 👧"]].forEach(([val, label]) => {
     const b = document.createElement("button");

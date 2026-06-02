@@ -6,6 +6,8 @@ import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
 import { gameTopbar, shuffle, finishActivity } from "./common.js";
 import { createCharacter } from "./character.js";
+import { adaptDisplay } from "../data/mizo.js";
+import { Store } from "../core/storage.js";
 
 const SITUATIONS = [
   { emoji: "🎁", q: "أعطاك صديقك هديّة، ماذا تقول؟", options: [{ t: "شُكراً لك", ok: true }, { t: "لا شيء", ok: false }] },
@@ -50,11 +52,12 @@ export function renderManners({ regionId, regionIndex, title }) {
   wrap.appendChild(row);
 
   function say(text, ms) { mizo.startTalking(ms || text.length * 85 + 1400); Speech.mizo(text); }
+  const disp = (t) => adaptDisplay(t, Store.childGender, Store.childName);
 
   function render() {
     const s = rounds[i];
     pic.textContent = s.emoji;
-    bubble.textContent = s.q;
+    bubble.textContent = disp(s.q);
     mizo.setMood("happy");
     row.innerHTML = "";
     setTimeout(() => say(s.q), 150);
@@ -68,6 +71,7 @@ export function renderManners({ regionId, regionIndex, title }) {
         if (opt.ok) {
           Sfx.correct();
           mizo.setMood("cheer", 1600);
+          bubble.textContent = disp(`أحسنت! نقول: ${opt.t}`);
           say(`أحسنت! نقول: ${opt.t}`, 1900);
           awardStars(1);
           i++;

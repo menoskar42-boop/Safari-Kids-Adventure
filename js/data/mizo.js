@@ -155,6 +155,13 @@ const FEM_MAP = [
   ["إنت", "إنتي"],
 ];
 
+/** نصّ معروض مطابق للمنطوق: تأنيث حسب الجنس + مناداة بالاسم (للفقاعات) */
+export function adaptDisplay(text, gender, name) {
+  let t = gender === "girl" ? femAdapt(text) : String(text);
+  if (name) t = "يا " + name + "، " + t;
+  return t;
+}
+
 /** يحوّل عبارة ميزو لصيغة المؤنّث (للبنت) بأمان دون إفساد الكلمات المركّبة */
 export function femAdapt(text) {
   let t = String(text);

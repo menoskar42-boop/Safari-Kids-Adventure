@@ -8,7 +8,7 @@ import { bindStarCounter, bindStreak } from "../core/rewards.js";
 import { avatarEmoji } from "./profile.js";
 import { FEATURES } from "../core/features.js";
 import { createCharacter } from "../games/character.js";
-import { MIZO_WELCOME, pick } from "../data/mizo.js";
+import { MIZO_WELCOME, pick, adaptDisplay } from "../data/mizo.js";
 
 const GUIDE = "🐨"; // المرشد اللطيف
 let greetedSession = false; // ميزو يرحّب صوتياً مرّة واحدة في الجلسة
@@ -43,15 +43,16 @@ export function renderHome() {
   // لافتة المرشد (تعرض أفاتار الطفل واسمه، وتفتح الملف عند الضغط)
   const banner = document.createElement("div");
   banner.className = "guide-banner";
-  const childPrefix = Store.childName ? `يا ${Store.childName}! ` : "";
   const f = Store.friendship;
   // «هوك» ترحيب مصري مختلف كل مرّة يجذب الطفل، مع ذكر العودة للعائد أحياناً
   let hook = pick(MIZO_WELCOME);
   if (f.visits > 1 && f.lastRegion && Math.random() < 0.5) {
     hook = `وحشتني يا بطل! أنا ميزو، آخر مرّة لعبنا في ${f.lastRegion}، يلا نكمّل!`;
   }
-  const spoken = childPrefix + hook;
-  const bubbleMsg = `${childPrefix}${hook.replace(/ميزو/g, "<b>ميزو</b>")} 👋✨`;
+  const spoken = hook; // Speech.mizo يضيف الاسم وصيغة الجنس تلقائياً
+  // الفقاعة المعروضة تطابق المنطوق (جنس + اسم)
+  const displayed = adaptDisplay(hook, Store.childGender, Store.childName);
+  const bubbleMsg = `${displayed.replace(/ميزو/g, "<b>ميزو</b>")} 👋✨`;
   banner.innerHTML = `
     <button class="guide-emoji guide-miz" id="profileBtn" style="background:none;border:none;cursor:pointer" title="ملفي"></button>
     <div class="bubble">${bubbleMsg}</div>
