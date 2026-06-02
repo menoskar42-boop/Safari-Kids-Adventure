@@ -40,6 +40,11 @@ body {
 }
 .seo-intro p { font-size: clamp(15px, 3.6vw, 18px); margin: 10px 0; }
 
+/* قوائم المحتوى النصّي الغنيّ (الطريقة/ماذا يتعلّم/الأمان) */
+.seo-prose { margin: 12px 0 18px; padding-inline-start: 22px; line-height: 1.9; }
+.seo-prose li { font-size: clamp(14px, 3.4vw, 17px); margin: 8px 0; }
+.seo-main h3 { font-size: clamp(15px, 3.6vw, 18px); margin: 18px 0 6px; color: var(--p2); }
+
 .seo-play {
   display: inline-block;
   background: linear-gradient(180deg, #ffd23f, #ff924c);
