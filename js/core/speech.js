@@ -8,6 +8,16 @@ let useAI = false; // يُضبط من checkAI() عبر setAISpeech()
 let speakSeq = 0; // رمز تسلسل النطق لمنع تداخل OpenAI مع Web Speech
 let aiHealthy = false; // يصبح true بعد أوّل نطق AI ناجح (يعمل + فيه رصيد) → نُخفي Web Speech
 
+// مستمعو حالة النطق (يتكلّم/توقّف) — لمزامنة شفاه ميزو لحظياً مع أيّ صوت
+let speakingCbs = [];
+export function onSpeaking(cb) {
+  speakingCbs.push(cb);
+  return () => { speakingCbs = speakingCbs.filter((x) => x !== cb); };
+}
+function emitSpeaking(on) {
+  for (const cb of speakingCbs) { try { cb(on); } catch (e) {} }
+}
+
 // صوت ميزو الثابت لكل لغة (من ملف الهوية المركزي) — كي لا يتغيّر "صديق الطفل"
 const AI_VOICE = MIZO.voice;
 
@@ -88,11 +98,11 @@ export const Speech = {
         voice,
         instructions: opts.instructions,
         signal: ctrl ? ctrl.signal : undefined,
-        onStart: () => { started = true; aiHealthy = true; clearTimeout(timer); },
+        onStart: () => { started = true; aiHealthy = true; clearTimeout(timer); emitSpeaking(true); },
       }).then(
-        () => { clearTimeout(timer); if (!settled) { settled = true; if (myId === speakSeq && opts.onend) opts.onend(); } },
+        () => { clearTimeout(timer); emitSpeaking(false); if (!settled) { settled = true; if (myId === speakSeq && opts.onend) opts.onend(); } },
         // فشل: إن لم يبدأ صوت بعد → Web Speech؛ وإن كان قد بدأ ثم تعثّر → لا نخلط
-        () => { clearTimeout(timer); if (started) { if (!settled) { settled = true; if (opts.onend) opts.onend(); } } else fallback(); }
+        () => { clearTimeout(timer); if (started) { emitSpeaking(false); if (!settled) { settled = true; if (opts.onend) opts.onend(); } } else fallback(); }
       );
       return;
     }
@@ -123,7 +133,8 @@ export const Speech = {
       u.pitch = opts.pitch ?? 1.15; // نبرة ودودة
       const v = pickVoice(lang);
       if (v) u.voice = v;
-      if (opts.onend) u.onend = opts.onend;
+      u.onstart = () => emitSpeaking(true);
+      u.onend = () => { emitSpeaking(false); if (opts.onend) opts.onend(); };
       window.speechSynthesis.speak(u);
     } catch (e) {
       if (opts.onend) setTimeout(opts.onend, 300);
