@@ -168,6 +168,9 @@ function startApp() {
   splash.classList.add("hidden");
   appEl.classList.remove("hidden");
 
+  // نبضة كل دقيقة لاحتساب وقت الاستخدام (للوحة ولي الأمر) — فقط والصفحة ظاهرة
+  setInterval(() => { if (!document.hidden) Store.addUsageMinutes(1); }, 60000);
+
   // شريط الإعلان السفلي (متوافق، مخفيّ حتى تفعيله من FEATURES.ads + مُعرّفات AdSense)
   mountAdBar();
 

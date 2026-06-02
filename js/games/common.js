@@ -127,6 +127,7 @@ export function finishActivity({ regionId, regionIndex, stars = 5, onDone }) {
     Store.activeStep = null;
   }
   Store.addFriendship(1); // تنمو صداقة ميزو مع كل نشاط
+  Store.logActivity(stars); // سجلّ النشاط اليومي (للوحة ولي الأمر)
   const wasCompleted = Store.regionProgress(regionId).completed;
   track("complete_activity", { region_id: regionId, stars, first_time: !wasCompleted }); // أكمل نشاط
   awardStars(stars);

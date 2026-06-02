@@ -89,6 +89,35 @@ export function renderParent() {
     ${stat("🎁", `${collected}/${COLLECTIBLES.length}`, "كنوز")}`;
   wrap.appendChild(summary);
 
+  // ===== نشاط آخر ٧ أيام + إجمالي الأسبوع (رسم بسيط) =====
+  const week = Store.last7Days();
+  const DOW = ["أحد", "إثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"];
+  const maxActs = Math.max(1, ...week.map((d) => d.acts));
+  const wkActs = week.reduce((s, d) => s + d.acts, 0);
+  const wkMin = week.reduce((s, d) => s + d.min, 0);
+  const wkBox = document.createElement("div");
+  wkBox.style.cssText = "background:#fff;border-radius:18px;padding:14px;margin-bottom:18px;box-shadow:var(--shadow-card)";
+  const bars = week
+    .map((d) => {
+      const h = Math.round((d.acts / maxActs) * 64) + (d.acts ? 6 : 2);
+      const today = d.date === week[6].date;
+      return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+        <span style="font-size:11px;color:#7a6ca8;font-weight:800">${d.acts || ""}</span>
+        <div style="width:60%;height:${h}px;border-radius:6px;background:${d.acts ? "linear-gradient(180deg,#7c5cff,#5b3fb5)" : "#e7e3f6"}"></div>
+        <span style="font-size:10px;color:${today ? "var(--c-purple)" : "#9b90c0"};font-weight:${today ? "800" : "600"}">${DOW[d.dow]}</span>
+      </div>`;
+    })
+    .join("");
+  wkBox.innerHTML = `
+    <div style="font-weight:800;color:var(--c-ink);margin-bottom:10px">📅 نشاط آخر ٧ أيام</div>
+    <div style="display:flex;align-items:flex-end;gap:6px;height:90px">${bars}</div>
+    <div style="display:flex;justify-content:space-around;margin-top:12px;font-size:13px;color:#5a4e80;font-weight:700">
+      <span>📚 ${wkActs} نشاط</span>
+      <span>⏱️ ${wkMin} دقيقة</span>
+    </div>
+    <p style="font-size:11px;color:#9b90c0;margin:8px 0 0;text-align:center">إجمالي هذا الأسبوع — يُحفظ على هذا الجهاز فقط</p>`;
+  wrap.appendChild(wkBox);
+
   // تقدّم الإتقان (تكرار متباعد): كم عنصراً أتقنه الطفل لكل مجموعة أساسية
   const mTitle = document.createElement("p");
   mTitle.style.cssText = "font-weight:800;color:var(--c-ink);text-align:center;margin:4px 0 10px;font-size:clamp(15px,4.2vw,19px)";

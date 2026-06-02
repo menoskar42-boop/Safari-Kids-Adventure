@@ -426,6 +426,46 @@ export const Store = {
     persist();
   },
 
+  // ===== سجلّ نشاط آخر الأيام (للوحة ولي الأمر: نشاط أسبوعي + وقت استخدام) =====
+  get activityLog() {
+    return state.activityLog || (state.activityLog = {});
+  },
+  _pruneLog() {
+    const log = state.activityLog || {};
+    const keys = Object.keys(log).sort();
+    while (keys.length > 14) delete log[keys.shift()]; // نحتفظ بآخر ١٤ يوماً فقط
+  },
+  // تُستدعى عند إكمال نشاط: تزيد عدّاد اليوم ونجومه
+  logActivity(stars = 0) {
+    const t = today();
+    const e = this.activityLog[t] || (this.activityLog[t] = { acts: 0, stars: 0, min: 0 });
+    e.acts += 1;
+    e.stars += stars;
+    this._pruneLog();
+    persist();
+  },
+  // تُستدعى دورياً (نبضة كل دقيقة) لاحتساب وقت الاستخدام
+  addUsageMinutes(n = 1) {
+    const t = today();
+    const e = this.activityLog[t] || (this.activityLog[t] = { acts: 0, stars: 0, min: 0 });
+    e.min += n;
+    this._pruneLog();
+    persist();
+  },
+  // آخر ٧ أيام (الأقدم → الأحدث): [{ date, dow, acts, stars, min }]
+  last7Days() {
+    const out = [];
+    const now = new Date();
+    for (let i = 6; i >= 0; i--) {
+      const dt = new Date(now);
+      dt.setDate(now.getDate() - i);
+      const key = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, "0")}-${String(dt.getDate()).padStart(2, "0")}`;
+      const e = (state.activityLog || {})[key] || { acts: 0, stars: 0, min: 0 };
+      out.push({ date: key, dow: dt.getDay(), acts: e.acts || 0, stars: e.stars || 0, min: e.min || 0 });
+    }
+    return out;
+  },
+
   unlockNext(index) {
     if (index + 1 > state.unlockedIndex) {
       state.unlockedIndex = index + 1;
