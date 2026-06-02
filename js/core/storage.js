@@ -4,6 +4,7 @@ const KEY = "safari-kids-save-v1";
 const DEFAULT_STATE = {
   stars: 0,
   childName: "",
+  childGender: "", // "boy" | "girl" | "" (الافتراضي ولد)
   // تقدّم كل منطقة: regionId -> { stars, completed:boolean }
   regions: {},
   // المكافآت المجمّعة: مصفوفة معرّفات
@@ -176,6 +177,15 @@ export const Store = {
   setChildName(name) {
     // نزيل < > لمنع أي حقن HTML عند إدراج الاسم في innerHTML
     state.childName = String(name || "").replace(/[<>]/g, "").slice(0, 20);
+    persist();
+  },
+
+  // جنس الطفل لمخاطبة ميزو بالصيغة الصحيحة (افتراضي ولد)
+  get childGender() {
+    return state.childGender === "girl" ? "girl" : "boy";
+  },
+  setChildGender(g) {
+    state.childGender = g === "girl" ? "girl" : "boy";
     persist();
   },
 

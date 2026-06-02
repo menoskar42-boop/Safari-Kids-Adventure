@@ -76,6 +76,30 @@ export function renderParent() {
   guidesLink.textContent = "📖 أدلة ومعلومات للآباء";
   wrap.appendChild(guidesLink);
 
+  // ===== جنس الطفل: ليخاطبه ميزو بالصيغة الصحيحة (افتراضي ولد) =====
+  const gBox = document.createElement("div");
+  gBox.style.cssText =
+    "background:#fff;border-radius:18px;padding:14px;margin-top:18px;box-shadow:var(--shadow-card);text-align:center";
+  gBox.innerHTML = `<div style="font-weight:800;color:var(--c-ink);margin-bottom:6px">👦👧 الطفل ولد أم بنت؟</div>
+    <p style="font-size:12px;color:#7a6ca8;margin:0 0 10px">يخاطب ميزو الطفل بالصيغة الصحيحة وينادي باسمه.</p>
+    <div class="gender-row" style="display:flex;gap:12px;justify-content:center"></div>`;
+  const gRow = gBox.querySelector(".gender-row");
+  [["boy", "ولد 👦"], ["girl", "بنت 👧"]].forEach(([val, label]) => {
+    const b = document.createElement("button");
+    b.className = "candy-btn";
+    b.textContent = label;
+    const paint = () => {
+      const on = Store.childGender === val;
+      b.style.background = on ? "linear-gradient(180deg,#34d399,#10b981)" : "linear-gradient(180deg,#9aa7ff,#6b7cff)";
+      b.style.opacity = on ? "1" : ".75";
+    };
+    paint();
+    b.addEventListener("click", () => { Sfx.tap(); Store.setChildGender(val); gRow.querySelectorAll("button").forEach((x) => x.dispatchEvent(new Event("repaint"))); });
+    b.addEventListener("repaint", paint);
+    gRow.appendChild(b);
+  });
+  wrap.appendChild(gBox);
+
   // تذكير وقت الشاشة
   const stBox = document.createElement("div");
   stBox.style.cssText =

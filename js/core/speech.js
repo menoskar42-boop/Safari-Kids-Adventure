@@ -1,6 +1,8 @@
 // ===== النطق الهجين: OpenAI TTS أولاً ثم Web Speech كبديل =====
 import { isAIReady, aiSpeak, aiStop } from "./ai.js";
-import { MIZO } from "../data/mizo.js";
+import { MIZO, femAdapt } from "../data/mizo.js";
+import { Store } from "./storage.js";
+import { playChildName } from "./nameclip.js";
 
 let voices = [];
 let enabled = "speechSynthesis" in window;
@@ -115,7 +117,23 @@ export const Speech = {
    * (نطق الحروف والقواعد يبقى عبر say/ar بالفصحى البسيطة كما هو.)
    */
   mizo(text, opts = {}) {
-    this.say(text, { ...opts, lang: "ar-EG", instructions: MIZO.toneInstructions, rate: opts.rate ?? 1.05 });
+    // صيغة جنس الطفل (افتراضي ولد) — الحروف/القواعد تبقى عبر say/ar بلا تغيير
+    let t = text;
+    try { if (Store.childGender === "girl") t = femAdapt(text); } catch (e) {}
+    const mizoOpts = { ...opts, lang: "ar-EG", instructions: MIZO.toneInstructions, rate: opts.rate ?? 1.05 };
+    let name = "";
+    try { name = Store.childName; } catch (e) {}
+    if (name) {
+      if (useAI && isAIReady()) {
+        // مقطع الاسم المخزّن (localStorage) ثم الجملة المخزّنة — يحافظ على التخزين الصوتي
+        playChildName().then(() => this.say(t, mizoOpts));
+        return;
+      }
+      // Web Speech المجاني: الاسم inline بلا أي تكلفة
+      this.say("يا " + name + "، " + t, mizoOpts);
+      return;
+    }
+    this.say(t, mizoOpts);
   },
 
   // النطق عبر متصفح الجهاز (Web Speech) — البديل الدائم
