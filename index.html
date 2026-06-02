@@ -8,6 +8,24 @@
   <meta name="keywords" content="تعليم الأطفال, تعليم الحروف, تعليم الأرقام, تأسيس القراءة, حروف عربية, حروف إنجليزية, ألعاب تعليمية, أطفال, ميزو" />
   <title>🦁 عالم الاستكشاف السحري — تطبيق تعليمي للأطفال مع ميزو</title>
 
+  <!-- Google Analytics 4 (آمن للأطفال: إخفاء الـ IP؛ متوافق مع إعلانات جوجل لاحقاً) -->
+  <!-- ضع معرّف القياس G-XXXXXXXXXX في GA_ID بالأسفل لتفعيل الإحصاءات (يبقى معطّلاً بدونه) -->
+  <script>
+    window.GA_ID = ""; // ← ضع هنا "G-XXXXXXXXXX" بتاع موقع الأطفال
+    (function () {
+      var id = window.GA_ID;
+      if (!id || !/^G-/.test(id)) return; // لا يُفعَّل التتبّع إلا بمعرّف صحيح
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", id, { anonymize_ip: true });
+    })();
+  </script>
+
   <link rel="canonical" href="https://mykid.oscardevs.com/" />
 
   <!-- Open Graph / مشاركة اجتماعية -->

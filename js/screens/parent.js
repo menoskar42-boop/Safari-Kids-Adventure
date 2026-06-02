@@ -68,7 +68,10 @@ export function renderParent() {
   addProfBtn.style.cssText = "padding:8px 14px;font-size:14px";
   addProfBtn.addEventListener("click", () => {
     Sfx.tap();
-    Store.createProfile("", "boy"); // يُنشأ ويُصبح الفعّال؛ يكتب ولي الأمر الاسم بالأسفل
+    // نطلب الاسم فوراً (أوضح لولي الأمر) — يُلغى بلا إنشاء إن ضغط إلغاء
+    const name = window.prompt("اسم الطفل الجديد:", "");
+    if (name === null) return; // ألغى ولي الأمر
+    Store.createProfile(name.trim(), "boy"); // يصبح الفعّال؛ يضبط الجنس بالأسفل
     Router.go("parent");
   });
   profRow.appendChild(addProfBtn);
