@@ -114,6 +114,14 @@
   .regions-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* ===== تحسينات الشاشات العريضة/التابلت فقط (≥900px) — الموبايل لا يتأثّر إطلاقاً ===== */
+@media (min-width: 900px) {
+  .regions-grid { grid-template-columns: repeat(4, 1fr); max-width: 960px; }
+  .cat-header { max-width: 960px; }
+  .guide-banner { max-width: 820px; margin-inline: auto; }
+  .resume-btn { max-width: 820px; margin-inline: auto; }
+}
+
 .region-card {
   position: relative;
   border: none;
