@@ -118,6 +118,24 @@ app.get("/app", (_req, res) => {
   res.sendFile(path.join(ROOT, "index.html"));
 });
 
+// تقديم WebP تلقائياً بدل PNG للمتصفحات الداعمة (توفير حجم بلا أي تغيير في كود التطبيق).
+// نحتفظ بكل ملفات PNG؛ لو لم يوجد ملف .webp مرادف نقدّم PNG كما هو (تراجع تلقائي آمن).
+app.use((req, res, next) => {
+  if (
+    req.method === "GET" &&
+    req.path.endsWith(".png") &&
+    (req.headers.accept || "").includes("image/webp")
+  ) {
+    const webpAbs = path.join(ROOT, req.path.slice(0, -4) + ".webp");
+    if (fs.existsSync(webpAbs)) {
+      res.setHeader("Vary", "Accept"); // كي لا تخلط الـCDN بين webp وpng
+      const qs = req.url.slice(req.path.length);
+      req.url = req.path.slice(0, -4) + ".webp" + qs;
+    }
+  }
+  next();
+});
+
 // تقديم ملفات الواجهة الثابتة (css/js/manifest/sw...)
 app.use(express.static(ROOT, { extensions: ["html"] }));
 
