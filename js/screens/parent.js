@@ -24,6 +24,56 @@ export function renderParent() {
   const wrap = document.createElement("div");
   wrap.style.cssText = "max-width:620px;margin:0 auto;padding:16px 16px 40px";
 
+  // ===== أطفالي: التبديل بين ملفات الأطفال (لكلٍّ اسمه وجنسه وإحصائياته) =====
+  const profBox = document.createElement("div");
+  profBox.style.cssText = "background:#fff;border-radius:18px;padding:14px;margin-bottom:18px;box-shadow:var(--shadow-card)";
+  profBox.innerHTML = `<div style="font-weight:800;color:var(--c-ink);margin-bottom:4px">👨‍👩‍👧 أطفالي</div>
+    <p style="font-size:12px;color:#7a6ca8;margin:0 0 10px">اختَر الطفل الذي يلعب الآن — لكلٍّ تقدّمه وإحصائياته المستقلّة.</p>
+    <div class="prof-row" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center"></div>`;
+  const profRow = profBox.querySelector(".prof-row");
+  Store.profiles.forEach((p) => {
+    const chip = document.createElement("div");
+    chip.style.cssText =
+      "position:relative;display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:14px;font-weight:800;cursor:pointer;color:var(--c-ink);border:2px solid " +
+      (p.active ? "#10b981" : "#c7cdff") + ";background:" + (p.active ? "#e7fff6" : "#f3f4ff");
+    const tag = document.createElement("span");
+    tag.textContent = (p.gender === "girl" ? "👧 " : "👦 ") + (p.name || "طفل جديد");
+    chip.appendChild(tag);
+    chip.addEventListener("click", () => {
+      if (p.active) return;
+      Sfx.tap();
+      Store.switchProfile(p.id);
+      Router.go("parent"); // إعادة بناء اللوحة ببيانات الطفل المختار
+    });
+    if (Store.profiles.length > 1) {
+      const del = document.createElement("button");
+      del.textContent = "✕";
+      del.title = "حذف هذا الطفل";
+      del.style.cssText =
+        "border:none;background:#ff6b8a;color:#fff;border-radius:50%;width:20px;height:20px;font-size:11px;line-height:1;cursor:pointer;padding:0";
+      del.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (confirm(`حذف ملف «${p.name || "طفل"}» وكل تقدّمه؟`)) {
+          Store.deleteProfile(p.id);
+          Router.go("parent");
+        }
+      });
+      chip.appendChild(del);
+    }
+    profRow.appendChild(chip);
+  });
+  const addProfBtn = document.createElement("button");
+  addProfBtn.className = "candy-btn";
+  addProfBtn.textContent = "➕ طفل جديد";
+  addProfBtn.style.cssText = "padding:8px 14px;font-size:14px";
+  addProfBtn.addEventListener("click", () => {
+    Sfx.tap();
+    Store.createProfile("", "boy"); // يُنشأ ويُصبح الفعّال؛ يكتب ولي الأمر الاسم بالأسفل
+    Router.go("parent");
+  });
+  profRow.appendChild(addProfBtn);
+  wrap.appendChild(profBox);
+
   // ملخّص
   const collected = Store.state.collection.length;
   const doneCount = REGIONS.filter((r) => Store.regionProgress(r.id).completed).length;

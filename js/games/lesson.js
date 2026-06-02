@@ -9,7 +9,7 @@ import { Sfx } from "../core/audio.js";
 import { gameTopbar, finishActivity } from "./common.js";
 import { createCharacter, MIZO_INTRO, MIZO_HELLO, MIZO_PRAISE } from "./character.js";
 import { Store } from "../core/storage.js";
-import { adaptDisplay } from "../data/mizo.js";
+import { adaptDisplay, femAdapt } from "../data/mizo.js";
 
 export function renderLesson({ regionId, regionIndex, datasetKey, lang, title, startChar, motivate }) {
   const ds = getDataset(datasetKey);
@@ -76,21 +76,23 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title, s
     const label = labelOf(it);
     const parts = [];
     let greetHtml = "";
+    // صيغة جنس الطفل (ولد افتراضياً) على كلام ميزو المصري — للنطق والعرض معاً
+    const fem = (t) => (Store.childGender === "girl" ? femAdapt(t) : t);
     if (!greeted) {
       greeted = true;
       // «صديقك الجديد» مرّة واحدة فقط في حياة الطفل؛ بعدها ترحيب العودة
       if (!Store.metMizo) {
         Store.markMetMizo();
         mizo.setMood("wave", 2800);
-        MIZO_INTRO.forEach((t) => parts.push({ text: t, lang: "ar-EG" }));
+        MIZO_INTRO.forEach((t) => parts.push({ text: fem(t), lang: "ar-EG" }));
       } else {
         mizo.setMood("wave", 2200);
-        parts.push({ text: pick(MIZO_HELLO), lang: "ar-EG" });
+        parts.push({ text: fem(pick(MIZO_HELLO)), lang: "ar-EG" });
       }
       greetHtml = parts.map((p) => p.text.replace(/ميزو/g, "<b>ميزو</b>")).join("<br>") + "<br>";
     } else if (Math.random() < 0.5) {
       mizo.setMood("cheer", 1900);
-      const pr = pick(MIZO_PRAISE);
+      const pr = fem(pick(MIZO_PRAISE));
       parts.push({ text: pr, lang: "ar-EG" });
       greetHtml = pr.replace(/ميزو/g, "<b>ميزو</b>") + "<br>";
     }

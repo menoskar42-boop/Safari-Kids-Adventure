@@ -1,5 +1,9 @@
 // ===== إدارة الحفظ (التقدّم والمكافآت) =====
-const KEY = "safari-kids-save-v1";
+// نظام ملفات متعدّدة: كل طفل له اسمه وجنسه وإحصائياته المستقلّة.
+// المفتاح القديم (KEY) يبقى للترحيل؛ كل ملف يُخزَّن تحت "KEY:معرّف".
+const KEY = "safari-kids-save-v1"; // مفتاح الطفل الوحيد القديم (يُرحَّل مرّة واحدة)
+const PKEY = "safari-kids-profiles-v1"; // سجلّ الملفات: { activeId, list:[{id,name,gender}] }
+const stateKey = (id) => KEY + ":" + id; // مفتاح حالة كل ملف على حدة
 
 const DEFAULT_STATE = {
   stars: 0,
@@ -36,11 +40,10 @@ function yesterdayOf(dateStr) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
-let state = load();
-
-function load() {
+// تحميل حالة ملف معيّن (مدموجة مع الافتراضي لضمان كل الحقول)
+function loadState(id) {
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(stateKey(id));
     if (!raw) return structuredClone(DEFAULT_STATE);
     return { ...structuredClone(DEFAULT_STATE), ...JSON.parse(raw) };
   } catch (e) {
@@ -48,9 +51,57 @@ function load() {
   }
 }
 
+function newId() {
+  return "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+// تهيئة سجلّ الملفات أول مرّة: نرحّل الطفل القديم (إن وُجد) كأوّل ملف، وإلا ننشئ ملفاً افتراضياً
+function initRegistry() {
+  try {
+    const raw = localStorage.getItem(PKEY);
+    if (raw) {
+      const reg = JSON.parse(raw);
+      if (reg && Array.isArray(reg.list) && reg.list.length && reg.activeId) {
+        // تأمين: لو الـ activeId غير موجود في القائمة نُصلّحه
+        if (!reg.list.some((p) => p.id === reg.activeId)) reg.activeId = reg.list[0].id;
+        return reg;
+      }
+    }
+  } catch (e) {}
+  // أوّل تشغيل بنظام الملفات
+  const id = newId();
+  let legacy = null;
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) legacy = { ...structuredClone(DEFAULT_STATE), ...JSON.parse(raw) };
+  } catch (e) {}
+  const st = legacy || structuredClone(DEFAULT_STATE);
+  try { localStorage.setItem(stateKey(id), JSON.stringify(st)); } catch (e) {}
+  const reg = {
+    activeId: id,
+    list: [{ id, name: st.childName || "", gender: st.childGender === "girl" ? "girl" : "boy" }],
+  };
+  try { localStorage.setItem(PKEY, JSON.stringify(reg)); } catch (e) {}
+  return reg;
+}
+
+let registry = initRegistry();
+let state = loadState(registry.activeId);
+
+function saveRegistry() {
+  try { localStorage.setItem(PKEY, JSON.stringify(registry)); } catch (e) {}
+}
+
 function persist() {
   try {
-    localStorage.setItem(KEY, JSON.stringify(state));
+    localStorage.setItem(stateKey(registry.activeId), JSON.stringify(state));
+    // نُبقي الاسم/الجنس في السجلّ محدَّثَين ليظهرا صحيحَين في قائمة الملفات
+    const entry = registry.list.find((p) => p.id === registry.activeId);
+    if (entry) {
+      entry.name = state.childName || "";
+      entry.gender = state.childGender === "girl" ? "girl" : "boy";
+    }
+    saveRegistry();
   } catch (e) {
     /* قد يكون التخزين ممتلئاً أو محظوراً — نتجاهل بهدوء */
   }
@@ -59,6 +110,57 @@ function persist() {
 export const Store = {
   get state() {
     return state;
+  },
+
+  // ===== ملفات الأطفال المتعدّدة =====
+  // كل طفل: اسم + جنس + إحصائيات مستقلّة. ولي الأمر يبدّل بينهم من لوحته.
+  get profiles() {
+    return registry.list.map((p) => ({
+      id: p.id,
+      name: p.name || "",
+      gender: p.gender === "girl" ? "girl" : "boy",
+      active: p.id === registry.activeId,
+    }));
+  },
+  get activeProfileId() {
+    return registry.activeId;
+  },
+  // التبديل لملف آخر: نحفظ الحالي ثم نُحمّل حالة الملف المطلوب
+  switchProfile(id) {
+    if (id === registry.activeId || !registry.list.some((p) => p.id === id)) return false;
+    persist();
+    registry.activeId = id;
+    saveRegistry();
+    state = loadState(id);
+    return true;
+  },
+  // إنشاء ملف جديد والتبديل إليه مباشرةً
+  createProfile(name = "", gender = "boy") {
+    persist(); // احفظ الملف الحالي قبل التبديل
+    const id = newId();
+    const st = structuredClone(DEFAULT_STATE);
+    st.childName = String(name || "").replace(/[<>]/g, "").slice(0, 20);
+    st.childGender = gender === "girl" ? "girl" : "boy";
+    try { localStorage.setItem(stateKey(id), JSON.stringify(st)); } catch (e) {}
+    registry.list.push({ id, name: st.childName, gender: st.childGender });
+    registry.activeId = id;
+    saveRegistry();
+    state = st;
+    return id;
+  },
+  // حذف ملف (لا يُحذف آخر ملف متبقٍّ)
+  deleteProfile(id) {
+    if (registry.list.length <= 1) return false;
+    const idx = registry.list.findIndex((p) => p.id === id);
+    if (idx < 0) return false;
+    registry.list.splice(idx, 1);
+    try { localStorage.removeItem(stateKey(id)); } catch (e) {}
+    if (registry.activeId === id) {
+      registry.activeId = registry.list[0].id;
+      state = loadState(registry.activeId);
+    }
+    saveRegistry();
+    return true;
   },
 
   addStars(n) {
