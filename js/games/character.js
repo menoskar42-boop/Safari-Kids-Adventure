@@ -64,7 +64,8 @@ export function createCharacter(name = MIZO.name) {
     el.classList.add("talking");
     clearTimeout(stopTimer);
     // تحريك الشفاه: تبديل سريع بين مغلق/مفتوح أثناء النطق (إن توفّرت صورة الفم المفتوح)
-    if (talkOk && !talkLoop && (img.getAttribute("src") || "").includes("mizo-wave")) {
+    // يعمل في كل الحالات المزاجية — أي كلام = شفاه تتحرّك (الأولوية لمزامنة الشفاه أثناء النطق)
+    if (talkOk && !talkLoop) {
       let open = false;
       // إيقاع كلام طبيعي: مدّة كل إطار تتغيّر قليلاً
       const tick = () => {
