@@ -8,6 +8,7 @@ import { bindStarCounter, bindStreak } from "../core/rewards.js";
 import { avatarEmoji } from "./profile.js";
 import { FEATURES } from "../core/features.js";
 import { createCharacter } from "../games/character.js";
+import { MIZO_WELCOME, pick } from "../data/mizo.js";
 
 const GUIDE = "🐨"; // المرشد اللطيف
 let greetedSession = false; // ميزو يرحّب صوتياً مرّة واحدة في الجلسة
@@ -42,18 +43,15 @@ export function renderHome() {
   // لافتة المرشد (تعرض أفاتار الطفل واسمه، وتفتح الملف عند الضغط)
   const banner = document.createElement("div");
   banner.className = "guide-banner";
-  const who = Store.childName ? `مرحباً يا ${Store.childName}!` : "مرحباً يا بطل!";
-  // ميزو يتذكّر الطفل: ترحيب شخصي للعائد
+  const childPrefix = Store.childName ? `يا ${Store.childName}! ` : "";
   const f = Store.friendship;
-  // نصّ العرض (مع إيموجي وتنسيق) ونصّ منطوق صريح مستقل (يضمن "أنا ميزو" دائماً)
-  let bubbleMsg, spoken;
-  if (f.visits > 1 && f.lastRegion) {
-    bubbleMsg = `${who} أنا <b>ميزو</b> 👋 اشتقتُ إليك! آخر مرّة لعبنا في <b>${f.lastRegion}</b> ✨`;
-    spoken = `${who} أنا ميزو، اشتقتُ إليك. آخر مرّة لعبنا في ${f.lastRegion}. هيا نكمل المغامرة`;
-  } else {
-    bubbleMsg = `${who} أنا <b>ميزو</b> 👋 اختر منطقة لنبدأ المغامرة ✨`;
-    spoken = `${who} أنا ميزو، صديقك. اختر منطقة لنبدأ المغامرة`;
+  // «هوك» ترحيب مصري مختلف كل مرّة يجذب الطفل، مع ذكر العودة للعائد أحياناً
+  let hook = pick(MIZO_WELCOME);
+  if (f.visits > 1 && f.lastRegion && Math.random() < 0.5) {
+    hook = `وحشتني يا بطل! أنا ميزو، آخر مرّة لعبنا في ${f.lastRegion}، يلا نكمّل!`;
   }
+  const spoken = childPrefix + hook;
+  const bubbleMsg = `${childPrefix}${hook.replace(/ميزو/g, "<b>ميزو</b>")} 👋✨`;
   banner.innerHTML = `
     <button class="guide-emoji guide-miz" id="profileBtn" style="background:none;border:none;cursor:pointer" title="ملفي"></button>
     <div class="bubble">${bubbleMsg}</div>

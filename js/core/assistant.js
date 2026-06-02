@@ -2,7 +2,7 @@
 // التدفّق: تسجيل الميكروفون → STT → سؤال → إجابة قصيرة → نطق.
 // يحتاج خادم OpenAI (isAIReady). إن لم يتوفّر، يُخفى الزر.
 import { isAIReady, aiAsk, aiTranscribe } from "./ai.js";
-import { Speech, onSpeaking } from "./speech.js";
+import { Speech } from "./speech.js";
 import { Sfx } from "./audio.js";
 import { createCharacter } from "../games/character.js";
 
@@ -40,9 +40,7 @@ export function mountAssistantButton() {
   btn.appendChild(badge);
   btn.addEventListener("click", toggleListen);
   document.body.appendChild(btn);
-  mizo.setMood("wave", 2200); // تحية عند أول ظهور
-  // مزامنة الشفاه لحظياً: تتحرّك أثناء أيّ نطق (اسم سمكة، حرف، إجابة...) وتتوقّف بانتهائه
-  onSpeaking((on) => { if (!mizo || listening) return; if (on) mizo.startTalking(0); else mizo.stopTalking(); });
+  mizo.setMood("wave", 2200); // تحية عند أول ظهور (مزامنة الشفاه تتم تلقائياً داخل createCharacter)
   startIdleWatch();
 }
 

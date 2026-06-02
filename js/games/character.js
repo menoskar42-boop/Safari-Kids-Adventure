@@ -3,6 +3,7 @@
 // الهوية والعبارات من المصدر المركزي js/data/mizo.js (نعيد تصديرها للتوافق).
 import { MIZO } from "../data/mizo.js";
 import { Store } from "../core/storage.js";
+import { onSpeaking } from "../core/speech.js";
 export {
   MIZO,
   MIZO_INTRO,
@@ -118,6 +119,13 @@ export function createCharacter(name = MIZO.name) {
     if (!blinkOk || document.hidden) return;
     doBlink(Math.random() < 0.3 ? 2 : 1);
   }, 4000 + Math.random() * 3000);
+
+  // أي كلام في الموقع = ميزو يتكلّمه → شفاهه تتحرّك لحظياً مع الصوت الفعلي
+  let offSpeak = null;
+  offSpeak = onSpeaking((on) => {
+    if (!el.isConnected) { if (offSpeak) offSpeak(); offSpeak = null; return; }
+    if (on) startTalking(0); else stopTalking();
+  });
 
   return { el, startTalking, stopTalking, setMood, name, mouth: null };
 }
