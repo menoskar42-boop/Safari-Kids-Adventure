@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, shuffle, finishActivity } from "./common.js";
+import { gameTopbar, shuffle, finishActivity, diffCount } from "./common.js";
 import { glyphMarkup } from "./glyph.js";
 
 const ROUNDS = 5;
@@ -39,7 +39,7 @@ function runRounds({ stage, items, regionId, regionIndex, back, stars, setup }) 
   let round = 0;
   function render() {
     const target = shuffle(items)[0];
-    const others = shuffle(items.filter((x) => x.emoji !== target.emoji)).slice(0, 2);
+    const others = shuffle(items.filter((x) => x.emoji !== target.emoji)).slice(0, diffCount(1, 2));
     const pool = shuffle([target, ...others]);
     stage.innerHTML = "";
     setup(stage, target, pool, onPick);
@@ -124,7 +124,7 @@ export function renderFindIt({ regionId, regionIndex, datasetKey, title, bg, ver
 
   function render() {
     const target = shuffle(items)[0];
-    const others = shuffle(items.filter((x) => x.emoji !== target.emoji)).slice(0, 5);
+    const others = shuffle(items.filter((x) => x.emoji !== target.emoji)).slice(0, diffCount(3, 5));
     const pool = shuffle([target, ...others]);
     stage.innerHTML = "";
 

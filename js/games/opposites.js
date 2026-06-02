@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, progressDots, shuffle, finishActivity } from "./common.js";
+import { gameTopbar, progressDots, shuffle, finishActivity, diffCount } from "./common.js";
 
 export function renderOppositesMatch({ regionId, regionIndex }) {
   const rounds = shuffle(OPPOSITES);
@@ -29,7 +29,7 @@ export function renderOppositesMatch({ regionId, regionIndex }) {
 
     // مشتّتات: أطراف من أزواج أخرى
     const others = shuffle(OPPOSITES.filter((p) => p !== pair))
-      .slice(0, 2)
+      .slice(0, diffCount(1, 2))
       .map((p) => (Math.random() < 0.5 ? p.a : p.b));
     const choices = shuffle([answer, ...others]);
 

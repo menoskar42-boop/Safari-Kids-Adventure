@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, shuffle, finishActivity } from "./common.js";
+import { gameTopbar, shuffle, finishActivity, diffCount } from "./common.js";
 
 const ROUNDS = 5;
 
@@ -45,7 +45,7 @@ export function renderCatch({ regionId, regionIndex, datasetKey, lang }) {
     prompt.innerHTML = `اصطد ما يبدأ بحرف <b style="font-size:1.4em">${target.char}</b>`;
     Speech.ar(`اصطد ما يبدأ بحرف ${target.name}`);
 
-    const others = shuffle(items.filter((x) => x.char !== target.char)).slice(0, 5);
+    const others = shuffle(items.filter((x) => x.char !== target.char)).slice(0, diffCount(3, 5));
     const pool = shuffle([target, ...others]);
     const W = sky.clientWidth || 320;
     const H = sky.clientHeight || 400;

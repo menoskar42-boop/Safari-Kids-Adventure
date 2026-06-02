@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, progressDots, shuffle, showCheer, finishActivity } from "./common.js";
+import { gameTopbar, progressDots, shuffle, showCheer, finishActivity, diffCount } from "./common.js";
 import { Store } from "../core/storage.js";
 
 const rand = (arr) => arr[(Math.random() * arr.length) | 0];
@@ -115,7 +115,7 @@ export function renderBigNumbers({ regionId, regionIndex }) {
     stage.appendChild(listen);
 
     // خيارات: الرقم الصحيح + جاران مشتّتان
-    const others = shuffle(pool.filter((n) => n.value !== target.value)).slice(0, 2);
+    const others = shuffle(pool.filter((n) => n.value !== target.value)).slice(0, diffCount(1, 2));
     const choices = shuffle([target, ...others]);
 
     const row = document.createElement("div");

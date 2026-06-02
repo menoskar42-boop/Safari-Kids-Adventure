@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, progressDots, shuffle, finishActivity, examplePhrase } from "./common.js";
+import { gameTopbar, progressDots, shuffle, finishActivity, examplePhrase, diffCount } from "./common.js";
 
 export function renderLearn({ regionId, regionIndex, datasetKey, lang }) {
   const ds = getDataset(datasetKey);
@@ -50,7 +50,7 @@ export function renderLearn({ regionId, regionIndex, datasetKey, lang }) {
     stage.appendChild(ask);
 
     // خيارات: المثال الصحيح + اثنان مشتّتان
-    const distractors = shuffle(items.filter((x) => x.emoji !== it.emoji)).slice(0, 2);
+    const distractors = shuffle(items.filter((x) => x.emoji !== it.emoji)).slice(0, diffCount(1, 2));
     const choices = shuffle([it, ...distractors]);
 
     const row = document.createElement("div");

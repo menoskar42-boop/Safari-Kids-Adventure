@@ -55,6 +55,12 @@ export function shuffle(arr) {
   return a;
 }
 
+/** قيمة تتغيّر حسب فئة عمر الطفل: الصغار (٣-٤) أسهل، الكبار (٥-٦) والافتراضي أصعب.
+ *  مثال: diffCount(1, 2) → مشتّت واحد للصغار (خياران) ومشتّتان للكبار (٣ خيارات). */
+export function diffCount(small, big) {
+  return Store.ageBand === "small" ? small : big;
+}
+
 /** شريط علوي موحّد للألعاب */
 export function gameTopbar(title, onBack) {
   const bar = document.createElement("div");

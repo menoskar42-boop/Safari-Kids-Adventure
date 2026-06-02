@@ -6,7 +6,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, progressDots, shuffle, finishActivity } from "./common.js";
+import { gameTopbar, progressDots, shuffle, finishActivity, diffCount } from "./common.js";
 
 const ROUNDS = 6;
 const WIN = 3; // طول السلسلة المعروضة
@@ -71,7 +71,7 @@ export function renderSequence({ regionId, regionIndex, datasetKey, lang, title 
     stage.appendChild(seqRow);
 
     // الخيارات
-    const distractors = shuffle(items.filter((x) => x !== answer)).slice(0, 2);
+    const distractors = shuffle(items.filter((x) => x !== answer)).slice(0, diffCount(1, 2));
     const choices = shuffle([answer, ...distractors]);
     const opts = document.createElement("div");
     opts.className = "choice-row";

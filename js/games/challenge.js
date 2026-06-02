@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, shuffle, showCheer } from "./common.js";
+import { gameTopbar, shuffle, showCheer, diffCount } from "./common.js";
 import { glyphMarkup } from "./glyph.js";
 import { pick, MIZO_PRAISE, MIZO_ENCOURAGE, MIZO_CATCH } from "../data/mizo.js";
 
@@ -24,7 +24,7 @@ export function renderChallenge() {
     const picks = shuffle(pool).slice(0, 2); // سؤالان كحدّ أقصى لكل قسم للتنوّع
     picks.forEach((target) => {
       if (questions.length >= ROUNDS) return;
-      const distractors = shuffle(pool.filter((x) => x !== target)).slice(0, 2);
+      const distractors = shuffle(pool.filter((x) => x !== target)).slice(0, diffCount(1, 2));
       questions.push({ target, options: shuffle([target, ...distractors]), lang: ds.lang || "ar-EG" });
     });
   }
