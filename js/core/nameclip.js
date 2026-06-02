@@ -7,14 +7,15 @@ import { MIZO } from "../data/mizo.js";
 
 let nameAudio = null;
 
-const lsKey = (name) => "mizoNameClip:" + name;
+// v2: بلا فاصلة في آخر النص لتقليل الصمت الزائد آخر المقطع (تقليل الفجوة)
+const lsKey = (name) => "mizoNameClip:v2:" + name;
 
 async function fetchNameClip(name) {
   const r = await fetch("/api/tts", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      text: "يا " + name + "،",
+      text: "يا " + name,
       voice: MIZO.voice.ar,
       instructions: MIZO.toneInstructions,
     }),
@@ -54,10 +55,17 @@ export async function playChildName() {
     try {
       if (!nameAudio) nameAudio = new Audio();
       nameAudio.src = dataUrl;
-      nameAudio.onended = () => resolve(true);
-      nameAudio.onerror = () => resolve(false);
+      let done = false;
+      const finish = (v) => { if (!done) { done = true; resolve(v); } };
+      // نُنهي الانتظار قبل نهاية المقطع بقليل كي تبدأ الجملة فوراً بلا فجوة محسوسة
+      nameAudio.ontimeupdate = () => {
+        const d = nameAudio.duration;
+        if (d && isFinite(d) && d - nameAudio.currentTime <= 0.12) finish(true);
+      };
+      nameAudio.onended = () => finish(true);
+      nameAudio.onerror = () => finish(false);
       const p = nameAudio.play();
-      if (p && p.catch) p.catch(() => resolve(false));
+      if (p && p.catch) p.catch(() => finish(false));
     } catch (e) {
       resolve(false);
     }

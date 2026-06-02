@@ -7,7 +7,9 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { gameTopbar, finishActivity } from "./common.js";
-import { createCharacter, MIZO_INTRO, MIZO_PRAISE } from "./character.js";
+import { createCharacter, MIZO_INTRO, MIZO_HELLO, MIZO_PRAISE } from "./character.js";
+import { Store } from "../core/storage.js";
+import { adaptDisplay } from "../data/mizo.js";
 
 export function renderLesson({ regionId, regionIndex, datasetKey, lang, title, startChar, motivate }) {
   const ds = getDataset(datasetKey);
@@ -73,19 +75,36 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title, s
   function narrate(it) {
     const label = labelOf(it);
     const parts = [];
+    let greetHtml = "";
     if (!greeted) {
       greeted = true;
-      mizo.setMood("wave", 2800);
-      MIZO_INTRO.forEach((t) => parts.push({ text: t, lang: "ar-EG" }));
+      // «صديقك الجديد» مرّة واحدة فقط في حياة الطفل؛ بعدها ترحيب العودة
+      if (!Store.metMizo) {
+        Store.markMetMizo();
+        mizo.setMood("wave", 2800);
+        MIZO_INTRO.forEach((t) => parts.push({ text: t, lang: "ar-EG" }));
+      } else {
+        mizo.setMood("wave", 2200);
+        parts.push({ text: pick(MIZO_HELLO), lang: "ar-EG" });
+      }
+      greetHtml = parts.map((p) => p.text.replace(/ميزو/g, "<b>ميزو</b>")).join("<br>") + "<br>";
     } else if (Math.random() < 0.5) {
       mizo.setMood("cheer", 1900);
-      parts.push({ text: pick(MIZO_PRAISE), lang: "ar-EG" });
+      const pr = pick(MIZO_PRAISE);
+      parts.push({ text: pr, lang: "ar-EG" });
+      greetHtml = pr.replace(/ميزو/g, "<b>ميزو</b>") + "<br>";
     }
     parts.push({ text: `هذا ${noun} ${label}`, lang: speakLang });
     if (it.word) {
       parts.push({ text: isAr ? `${label} مثل ${it.word}` : `${label} for ${it.word}`, lang: speakLang });
     }
     parts.push({ text: label, lang: speakLang });
+
+    // النصّ المكتوب يطابق المنطوق (نفس جُمَل الترحيب والشرح)
+    bubble.innerHTML = greetHtml + (it.word
+      ? `هذا ${noun} «${label}» ${it.emoji || ""}<br>${isAr ? `${label} مثل ${it.word}` : `${label} for ${it.word}`}`
+      : `هذا ${noun} «${label}»`);
+
     speak(parts);
   }
 
@@ -101,7 +120,6 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title, s
   function render() {
     const it = items[idx];
     glyphEl.textContent = glyphOf(it);
-    const label = labelOf(it);
     animateWrite();
     Sfx.pop();
     wrap.querySelector("#lsPrev").disabled = idx === 0;
@@ -111,17 +129,15 @@ export function renderLesson({ regionId, regionIndex, datasetKey, lang, title, s
       motivateOnce = false;
       greeted = true;
       const praise = "برافو! كتبت الحرف صح يا بطل، يلا نكمّل!";
-      bubble.textContent = praise;
+      // النصّ المعروض يطابق المنطوق (تأنيث حسب الجنس + مناداة بالاسم)
+      bubble.textContent = adaptDisplay(praise, Store.childGender, Store.childName);
       mizo.setMood("cheer", 1900);
       mizo.startTalking(praise.length * 90 + 1000);
       Speech.mizo(praise);
       return;
     }
 
-    const greet = !greeted ? `أهلاً، أنا <b>ميزو</b> صديقك الجديد! 👋<br>` : "";
-    bubble.innerHTML = greet + (it.word
-      ? `هذا ${noun} «${label}» ${it.emoji || ""}<br>${label} مثل ${it.word}`
-      : `هذا ${noun} «${label}»`);
+    // narrate يضبط الفقاعة والنطق معاً (نفس الجُمَل) — والترحيب مرّة واحدة فقط
     narrate(it);
   }
 

@@ -234,6 +234,15 @@ export const Store = {
     f.lastReward = String(name || "").slice(0, 40);
     persist();
   },
+  // هل تعرّف الطفل على ميزو من قبل؟ (لتقديمه «صديقك الجديد» مرّة واحدة فقط)
+  get metMizo() {
+    return Boolean(this.friendship.met);
+  },
+  markMetMizo() {
+    const f = this.friendship;
+    if (!f.met) { f.met = true; persist(); }
+  },
+
   // تُستدعى عند بدء التطبيق: تزيد عدّاد الجلسات وتعيد true إن كان يوماً جديداً
   touchFriendship() {
     const f = this.friendship;
