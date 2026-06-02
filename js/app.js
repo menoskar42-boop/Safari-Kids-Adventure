@@ -190,8 +190,9 @@ function showScreenTimeReminder() {
   overlay.className = "cheer";
   overlay.innerHTML = `
     <div class="cheer-card">
-      <div class="cheer-emoji">🌙</div>
-      <div class="cheer-text">حان وقت الراحة!</div>
+      <img src="/assets/mizo/mizo-sleep.png" alt="ميزو" width="200" height="auto"
+        style="max-width:60%;height:auto;margin:0 auto 4px" />
+      <div class="cheer-text">حان وقت الراحة! 🌙</div>
       <p style="font-size:18px;font-weight:700;color:var(--c-ink);margin:.2em 0 1em">
         أحسنت اليوم يا بطل 🌟<br>لنأخذ استراحة قصيرة.</p>
       <button class="candy-btn" id="stOk">حسناً 👍</button>

@@ -24,8 +24,18 @@ const MOOD_IMG = {
   think: "mizo-think",
   listening: "mizo-listen",
   sad: "mizo-sad",
-  surprised: "mizo-idea",
+  surprised: "mizo-surprised",
   calm: "mizo-calm",
+  // ===== وضعيات ميزو الجديدة =====
+  teach: "mizo-teach",       // عند السبّورة — للدروس
+  trophy: "mizo-trophy",     // رافع الكأس — مكافأة
+  win: "mizo-win",           // يقفز بالكأس — فوز
+  thumbs: "mizo-thumbs",     // 👍 — إجابة صحيحة
+  explore: "mizo-explore",   // مستكشف — مغامرة
+  sleep: "mizo-sleep",       // نايم — وقت الراحة
+  point: "mizo-point",       // يأشّر — توجيه
+  hi: "mizo-hi",             // يلوّح — ترحيب
+  medal: "mizo-medal",       // ميدالية — إنجاز
 };
 
 export function createCharacter(name = MIZO.name) {
@@ -50,6 +60,9 @@ export function createCharacter(name = MIZO.name) {
 
   let stopTimer = null, moodTimer = null, talkLoop = null;
   let talkOk = false, blinkOk = false;
+  // وضعيات «مشهدية» تبقى ثابتة أثناء الكلام (لا تتحرّك شفاهها كي لا تفقد الوضعية)
+  const STATIC_MOODS = new Set(["win", "trophy", "sleep", "medal", "podium", "point", "explore"]);
+  let currentMood = "happy";
   // نفحص توفّر إطارات الأنيميشن (فم مفتوح / عيون مغلقة) — تُفعَّل تلقائياً عند وجودها
   if (typeof Image !== "undefined") {
     const probeTalk = new Image(); probeTalk.onload = () => { talkOk = true; }; probeTalk.src = "/assets/mizo/mizo-talk.png";
@@ -58,14 +71,15 @@ export function createCharacter(name = MIZO.name) {
 
   function show(mood) {
     const key = MOOD_IMG[mood] ? mood : "happy";
+    currentMood = key;
     img.src = `/assets/mizo/${MOOD_IMG[key]}.png`;
   }
   function startTalking(ms) {
     el.classList.add("talking");
     clearTimeout(stopTimer);
     // تحريك الشفاه: تبديل سريع بين مغلق/مفتوح أثناء النطق (إن توفّرت صورة الفم المفتوح)
-    // يعمل في كل الحالات المزاجية — أي كلام = شفاه تتحرّك (الأولوية لمزامنة الشفاه أثناء النطق)
-    if (talkOk && !talkLoop) {
+    // يعمل في كل الحالات المزاجية — أي كلام = شفاه تتحرّك (عدا الوضعيات المشهدية الثابتة)
+    if (talkOk && !talkLoop && !STATIC_MOODS.has(currentMood)) {
       let open = false;
       // إيقاع كلام طبيعي: مدّة كل إطار تتغيّر قليلاً
       const tick = () => {

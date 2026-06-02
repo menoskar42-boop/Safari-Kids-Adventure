@@ -24,7 +24,7 @@ export function mizoBuddy() {
   return {
     el: mizo.el,
     win(say) {
-      mizo.setMood("proud", 1300); // علامة 👍 عند الإجابة الصحيحة
+      mizo.setMood("thumbs", 1300); // 👍 إبهام لأعلى عند الإجابة الصحيحة
       if (say) { mizo.startTalking(900); Speech.mizo(pick(MIZO_CATCH)); }
     },
     lose() {
@@ -106,9 +106,9 @@ export function showCheer(emoji, text, onClose) {
       <div class="cheer-emoji">${emoji}</div>
       <div class="cheer-text">${text}</div>
     </div>`;
-  // ميزو يهنّئ الطفل بفرح وينطق عبارة التشجيع
+  // ميزو يهنّئ الطفل رافعاً الكأس (وضعية الفوز تبقى ثابتة أثناء النطق)
   const mizo = createCharacter();
-  mizo.setMood("cheer");
+  mizo.setMood("trophy");
   mizo.el.classList.add("cheer-miz");
   overlay.querySelector(".cheer-card").insertBefore(mizo.el, overlay.querySelector(".cheer-text"));
   document.body.appendChild(overlay);
@@ -167,7 +167,8 @@ export function showCertificate(regionId, onClose) {
       <p class="cert-line">تُمنح هذه الشهادة إلى</p>
       <p class="cert-name">${name}</p>
       <p class="cert-line">لإكماله بنجاح وتميّز 🌟</p>
-      <div class="cert-seal">🦁</div>
+      <img src="/assets/mizo/mizo-trophy.png" alt="ميزو" width="150" height="auto"
+        class="cert-seal" style="height:auto;object-fit:contain" />
       <p class="cert-foot">عالم الاستكشاف السحري</p>
       <button class="candy-btn" id="certOk">رائع! 🎉</button>
     </div>`;
