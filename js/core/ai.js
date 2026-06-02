@@ -36,22 +36,24 @@ export function isAIReady() {
  */
 export function aiSpeak(text, opts = {}) {
   return new Promise(async (resolve, reject) => {
-    if (!text) return resolve();
+    if (!text && !opts.preparedUrl) return resolve();
     try {
-      const r = await fetch("/api/tts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          text,
-          voice: opts.voice,
-          instructions: opts.instructions,
-        }),
-        signal: opts.signal, // يسمح بإلغاء الطلب إن تأخّر (مهلة)
-      });
-      if (!r.ok) throw new Error("tts " + r.status);
-
-      const blob = await r.blob();
-      const url = URL.createObjectURL(blob);
+      let url = opts.preparedUrl; // صوت محضَّر مسبقاً (يُخفي زمن التحميل) إن وُجد
+      if (!url) {
+        const r = await fetch("/api/tts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text,
+            voice: opts.voice,
+            instructions: opts.instructions,
+          }),
+          signal: opts.signal, // يسمح بإلغاء الطلب إن تأخّر (مهلة)
+        });
+        if (!r.ok) throw new Error("tts " + r.status);
+        const blob = await r.blob();
+        url = URL.createObjectURL(blob);
+      }
       if (!audioEl) audioEl = new Audio();
       else audioEl.pause();
       audioEl.src = url;
@@ -69,6 +71,21 @@ export function aiSpeak(text, opts = {}) {
       reject(e);
     }
   });
+}
+
+/** يجهّز صوت الجملة مسبقاً (تنزيل فقط) ويُعيد Object URL جاهزاً للتشغيل الفوري بلا فجوة */
+export function aiPrepareTTS(text, opts = {}) {
+  return (async () => {
+    if (!text) return null;
+    const r = await fetch("/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, voice: opts.voice, instructions: opts.instructions }),
+    });
+    if (!r.ok) throw new Error("tts " + r.status);
+    const blob = await r.blob();
+    return URL.createObjectURL(blob);
+  })();
 }
 
 /** إيقاف نطق الـ AI الحالي */

@@ -1,5 +1,5 @@
 // ===== النطق الهجين: OpenAI TTS أولاً ثم Web Speech كبديل =====
-import { isAIReady, aiSpeak, aiStop } from "./ai.js";
+import { isAIReady, aiSpeak, aiStop, aiPrepareTTS } from "./ai.js";
 import { MIZO, femAdapt } from "../data/mizo.js";
 import { Store } from "./storage.js";
 import { playChildName } from "./nameclip.js";
@@ -99,6 +99,7 @@ export const Speech = {
       aiSpeak(text, {
         voice,
         instructions: opts.instructions,
+        preparedUrl: opts.preparedUrl, // صوت محضَّر مسبقاً (يُلغي زمن التحميل)
         signal: ctrl ? ctrl.signal : undefined,
         onStart: () => { started = true; aiHealthy = true; clearTimeout(timer); emitSpeaking(true); },
       }).then(
@@ -125,8 +126,17 @@ export const Speech = {
     try { name = Store.childName; } catch (e) {}
     if (name) {
       if (useAI && isAIReady()) {
-        // مقطع الاسم المخزّن (localStorage) ثم الجملة المخزّنة — يحافظ على التخزين الصوتي
-        playChildName().then(() => this.say(t, mizoOpts));
+        // نحضّر صوت الجملة بالتوازي مع نطق اسم الطفل لإخفاء زمن التحميل (تقليل الفجوة)
+        let prep = null;
+        try { prep = aiPrepareTTS(t, { voice: AI_VOICE.ar, instructions: mizoOpts.instructions }); } catch (e) {}
+        playChildName().then(() => {
+          if (prep) {
+            prep.then((url) => this.say(t, { ...mizoOpts, preparedUrl: url }))
+                .catch(() => this.say(t, mizoOpts)); // فشل التحضير → المسار العادي
+          } else {
+            this.say(t, mizoOpts);
+          }
+        });
         return;
       }
       // Web Speech المجاني: الاسم inline بلا أي تكلفة
