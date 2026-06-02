@@ -328,6 +328,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "animals", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
     { emoji: "🧠", title: "ما التالي؟", desc: "أكمل النمط المتكرّر", screen: "pattern",
       params: { datasetKey: "animals", title: "🧠 نمط الحيوانات", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
+    { emoji: "🔎", title: "اكتشف المختلف", desc: "جِد الحيوان المختلف مع ميزو", screen: "spotDiff",
+      params: { datasetKey: "animals", title: "🔎 اكتشف المختلف", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
     { emoji: "🧩", title: "ركّب الصورة", desc: "رتّب أجزاء صورة الحيوان", screen: "puzzle",
       params: { datasetKey: "animals", title: "🧩 ركّب الحيوان", bg: "linear-gradient(180deg,#c7f0d0,#7fd99b)" } },
     { emoji: "🗂️", title: "افرز: حيوان أم طائر؟", desc: "صنّف كل عنصر لفئته", screen: "sort",

@@ -185,6 +185,11 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
 .reveal-hint { animation: reveal-pulse .6s ease-in-out 2; outline: 4px solid var(--c-green); outline-offset: 2px; border-radius: 14px; }
 @keyframes reveal-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
+/* لعبة اكتشف المختلف */
+.spot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 420px; margin: 6px auto 24px; padding: 0 16px; }
+.spot-glyph { font-size: clamp(46px, 15vw, 74px); }
+@media (min-width: 620px) { .spot-grid { grid-template-columns: repeat(3, 1fr); max-width: 560px; } }
+
 /* لوحة التشجيع */
 .cheer {
   position: fixed;
