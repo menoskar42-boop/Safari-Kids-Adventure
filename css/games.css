@@ -181,6 +181,9 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
 .shadow-glyph .item-img { width: clamp(130px, 36vw, 220px); height: auto; max-width: none; }
 .choice.correct { animation: pulse .5s ease; outline: 5px solid var(--c-green); }
 .choice.wrong { animation: shake .4s ease; outline: 5px solid var(--c-red); }
+/* لحظة تعليمية: إبراز الإجابة الصحيحة بعد تكرار الخطأ */
+.reveal-hint { animation: reveal-pulse .6s ease-in-out 2; outline: 4px solid var(--c-green); outline-offset: 2px; border-radius: 14px; }
+@keyframes reveal-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
 /* لوحة التشجيع */
 .cheer {

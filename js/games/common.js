@@ -61,6 +61,12 @@ export function diffCount(small, big) {
   return Store.ageBand === "small" ? small : big;
 }
 
+/** لحظة تعليمية: بعد محاولات خاطئة نُبرز الإجابة الصحيحة بصرياً (نبضة خضراء)
+ *  كي يتعلّم الطفل المفهوم الصحيح بدل التخمين، ثم تكمل اللعبة على نجاح. */
+export function revealAnswer(correctBtn) {
+  if (correctBtn) correctBtn.classList.add("reveal-hint");
+}
+
 /** شريط علوي موحّد للألعاب */
 export function gameTopbar(title, onBack) {
   const bar = document.createElement("div");

@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, progressDots, shuffle, finishActivity, diffCount } from "./common.js";
+import { gameTopbar, progressDots, shuffle, finishActivity, diffCount, revealAnswer } from "./common.js";
 
 export function renderOppositesMatch({ regionId, regionIndex }) {
   const rounds = shuffle(OPPOSITES);
@@ -52,23 +52,37 @@ export function renderOppositesMatch({ regionId, regionIndex }) {
 
     const row = document.createElement("div");
     row.className = "choice-row";
+    let wrong = 0, correctBtn = null, solved = false;
+    const advance = () => {
+      i++;
+      if (i >= rounds.length) setTimeout(() => finishActivity({ regionId, regionIndex, stars: 7, onDone: back }), 900);
+      else setTimeout(render, 1000);
+    };
     choices.forEach((c) => {
       const b = document.createElement("button");
       b.className = "choice";
       b.innerHTML = `<div>${c.emoji}</div><div style="font-size:.34em;font-weight:800;color:var(--c-ink)">${c.name}</div>`;
+      if (c === answer) correctBtn = b;
       b.addEventListener("click", () => {
+        if (solved) return;
         if (c === answer) {
+          solved = true;
           Sfx.correct();
           b.classList.add("correct");
           awardStars(1);
           Speech.ar(`${ask.name} ضدّ ${answer.name}`);
-          i++;
-          if (i >= rounds.length) setTimeout(() => finishActivity({ regionId, regionIndex, stars: 7, onDone: back }), 900);
-          else setTimeout(render, 1000);
+          advance();
         } else {
           Sfx.wrong();
           b.classList.add("wrong");
           setTimeout(() => b.classList.remove("wrong"), 450);
+          // لحظة تعليمية: بعد محاولتين نُبرز الإجابة وننطقها
+          if (++wrong >= 2) {
+            solved = true;
+            revealAnswer(correctBtn);
+            Speech.mizo("شوف، ضدّ " + ask.name + " هو " + answer.name);
+            setTimeout(advance, 2000);
+          }
         }
       });
       row.appendChild(b);

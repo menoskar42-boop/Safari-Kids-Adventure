@@ -6,7 +6,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, progressDots, shuffle, finishActivity, diffCount } from "./common.js";
+import { gameTopbar, progressDots, shuffle, finishActivity, diffCount, revealAnswer } from "./common.js";
 
 const ROUNDS = 6;
 const WIN = 3; // طول السلسلة المعروضة
@@ -76,26 +76,44 @@ export function renderSequence({ regionId, regionIndex, datasetKey, lang, title 
     const opts = document.createElement("div");
     opts.className = "choice-row";
     opts.style.marginTop = "24px";
+    let wrong = 0, correctBtn = null, solved = false;
+    const fillGap = () => {
+      const gapCell = seqRow.querySelector('[data-gap="1"]');
+      if (gapCell) { gapCell.innerHTML = `<span style="font-weight:800">${glyph(answer)}</span>`; gapCell.style.background = "#fff"; gapCell.style.color = "var(--c-purple)"; }
+    };
+    const advance = () => {
+      round++;
+      if (round >= ROUNDS) setTimeout(() => finishActivity({ regionId, regionIndex, stars: 7, onDone: back }), 900);
+      else setTimeout(render, 1000);
+    };
     choices.forEach((c) => {
       const b = document.createElement("button");
       b.className = "choice";
       b.innerHTML = `<span style="font-weight:800">${glyph(c)}</span>`;
+      if (c === answer) correctBtn = b;
       b.addEventListener("click", () => {
+        if (solved) return;
         if (c === answer) {
+          solved = true;
           Sfx.correct();
           b.classList.add("correct");
-          // املأ الفجوة
-          const gapCell = seqRow.querySelector('[data-gap="1"]');
-          if (gapCell) { gapCell.innerHTML = `<span style="font-weight:800">${glyph(answer)}</span>`; gapCell.style.background = "#fff"; gapCell.style.color = "var(--c-purple)"; }
+          fillGap();
           awardStars(1);
           speakName(answer, speakLang);
-          round++;
-          if (round >= ROUNDS) setTimeout(() => finishActivity({ regionId, regionIndex, stars: 7, onDone: back }), 900);
-          else setTimeout(render, 1000);
+          advance();
         } else {
           Sfx.wrong();
           b.classList.add("wrong");
           setTimeout(() => b.classList.remove("wrong"), 450);
+          // لحظة تعليمية: بعد محاولتين نُبرز الناقص ونملأه وننطقه
+          if (++wrong >= 2) {
+            solved = true;
+            revealAnswer(correctBtn);
+            fillGap();
+            Speech.mizo("الناقص هو");
+            setTimeout(() => speakName(answer, speakLang), 800);
+            setTimeout(advance, 2000);
+          }
         }
       });
       opts.appendChild(b);

@@ -4,7 +4,7 @@ import { Router } from "../core/router.js";
 import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
-import { gameTopbar, progressDots, shuffle, finishActivity, examplePhrase, diffCount } from "./common.js";
+import { gameTopbar, progressDots, shuffle, finishActivity, examplePhrase, diffCount, revealAnswer } from "./common.js";
 
 export function renderLearn({ regionId, regionIndex, datasetKey, lang }) {
   const ds = getDataset(datasetKey);
@@ -55,12 +55,16 @@ export function renderLearn({ regionId, regionIndex, datasetKey, lang }) {
 
     const row = document.createElement("div");
     row.className = "choice-row";
+    let wrong = 0, correctBtn = null, solved = false;
     choices.forEach((c) => {
       const b = document.createElement("button");
       b.className = "choice";
       b.textContent = c.emoji;
+      if (c === it) correctBtn = b;
       b.addEventListener("click", () => {
+        if (solved) return;
         if (c === it) {
+          solved = true;
           Sfx.correct();
           b.classList.add("correct");
           awardStars(1);
@@ -70,6 +74,14 @@ export function renderLearn({ regionId, regionIndex, datasetKey, lang }) {
           Sfx.wrong();
           b.classList.add("wrong");
           setTimeout(() => b.classList.remove("wrong"), 500);
+          // لحظة تعليمية: بعد محاولتين نُبرز الإجابة وننطقها ليتعلّم الطفل
+          if (++wrong >= 2) {
+            solved = true;
+            revealAnswer(correctBtn);
+            Speech.mizo("شوف يا بطل، دي " + it.word);
+            setTimeout(() => { Speech.say(it.word, { lang: speakLang }); }, 1100);
+            setTimeout(next, 2100);
+          }
         }
       });
       row.appendChild(b);
