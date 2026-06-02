@@ -13,6 +13,7 @@ export function renderRegion({ id, index }) {
   const region = getRegion(id);
   if (region) {
     Store.rememberRegion(region.name); // ذاكرة ميزو: آخر منطقة
+    Store.setLastSpot(id, index); // لزرّ «كمّل من حيث وقفت»
     track("start_adventure", { region_id: id, region_name: region.name }); // بدأ مغامرة
   }
   const screen = document.createElement("div");

@@ -38,6 +38,24 @@
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
 }
+
+/* زرّ «كمّل من حيث وقفت» */
+.resume-btn {
+  display: block;
+  margin: -4px 16px 8px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffd23f, #ff924c);
+  color: #5a3a00;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: clamp(15px, 4vw, 18px);
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  width: calc(100% - 32px);
+}
+.resume-btn:active { transform: scale(0.97); }
 .guide-banner .guide-emoji {
   font-size: clamp(44px, 12vw, 64px);
   animation: bob 2.6s ease-in-out infinite;

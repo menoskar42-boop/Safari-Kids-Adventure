@@ -71,6 +71,22 @@ export function renderHome() {
   }
   screen.appendChild(banner);
 
+  // زرّ «كمّل من حيث وقفت» — وصول سريع لآخر منطقة زارها الطفل
+  const spot = Store.lastSpot;
+  if (spot) {
+    const r = REGIONS.find((x) => x.id === spot.regionId);
+    if (r) {
+      const resume = document.createElement("button");
+      resume.className = "resume-btn";
+      resume.innerHTML = `▶ كمّل: ${r.emoji} ${r.name}`;
+      resume.addEventListener("click", () => {
+        Sfx.whoosh();
+        Router.go("region", { id: r.id, index: spot.index });
+      });
+      screen.appendChild(resume);
+    }
+  }
+
   // المناطق التأسيسية مفتوحة دائماً. المناطق المتقدّمة تُفتح تدريجياً:
   // كل منطقة يكملها الطفل تفتح واحدة جديدة من المتقدّمة.
   const completed = Store.completedCount();

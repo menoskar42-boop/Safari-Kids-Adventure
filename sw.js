@@ -1,5 +1,5 @@
 // ===== Service Worker: تخزين مؤقت للعمل دون اتصال =====
-const CACHE = "safari-kids-v175";
+const CACHE = "safari-kids-v176";
 const ASSETS = [
   "/app",
   "/manifest.webmanifest",
@@ -47,14 +47,12 @@ self.addEventListener("fetch", (e) => {
     e.request.mode === "navigate" ||
     (e.request.headers.get("accept") || "").includes("text/html");
   if (isNavigation) {
+    // الشبكة أولاً، والرجوع لقشرة التطبيق المخزّنة مسبقاً عند انقطاع الاتصال.
+    // لا نخزّن صفحات HTML (مثل /explore و/guides) كي لا يتضخّم الكاش بلا داعٍ.
     e.respondWith(
-      fetch(e.request)
-        .then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {});
-          return res;
-        })
-        .catch(() => caches.match(e.request).then((c) => c || caches.match("/app")))
+      fetch(e.request).catch(() =>
+        caches.match(e.request).then((c) => c || caches.match("/app"))
+      )
     );
     return;
   }

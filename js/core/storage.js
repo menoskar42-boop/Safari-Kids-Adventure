@@ -466,6 +466,15 @@ export const Store = {
     return out;
   },
 
+  // آخر منطقة فتحها الطفل (لزرّ «كمّل من حيث وقفت» في الرئيسية)
+  get lastSpot() {
+    return state.lastSpot || null;
+  },
+  setLastSpot(regionId, index) {
+    state.lastSpot = { regionId, index };
+    persist();
+  },
+
   unlockNext(index) {
     if (index + 1 > state.unlockedIndex) {
       state.unlockedIndex = index + 1;
