@@ -102,7 +102,7 @@ export function renderHome() {
       Sfx.unlock();
       if (!unlocked) {
         Sfx.wrong();
-        Speech.ar("أكمل منطقة أخرى أولاً لتفتح هذه");
+        Speech.mizo("اكمّل مغامرة تانية الأول علشان تفتح دي يا بطل");
         card.animate(
           [{ transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "translateX(0)" }],
           { duration: 250 }
@@ -110,8 +110,7 @@ export function renderHome() {
         return;
       }
       Sfx.whoosh();
-      Speech.ar(region.guide);
-      Router.go("region", { id: region.id, index });
+      Router.go("region", { id: region.id, index }); // ميزو يرحّب بالعامية داخل المنطقة
     });
     return card;
   }

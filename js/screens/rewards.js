@@ -46,7 +46,7 @@ export function renderRewards() {
     } else {
       card.addEventListener("click", () => {
         Sfx.tap();
-        Speech.ar("تعلّم أكثر لتفتح هذا الكنز");
+        Speech.mizo("اتعلّم أكتر علشان تفتح الكنز ده");
       });
     }
     grid.appendChild(card);

@@ -57,7 +57,7 @@ export function renderPuzzle({ regionId, regionIndex, datasetKey, title, bg }) {
       cell.addEventListener("click", () => onTap(slot, cell));
       grid.appendChild(cell);
     });
-    Speech.ar(`ركّب صورة ${pics[round].name}`);
+    Speech.mizo(`كوّن صورة ${pics[round].name}`);
   }
 
   function onTap(slot, cell) {

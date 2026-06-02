@@ -85,7 +85,7 @@ export function renderVideos() {
       Router.go("home");
     });
     renderGrid();
-    Speech.ar("اختر أغنية أو فيديو لتتعلّم وتستمتع");
+    Speech.mizo("اختار أغنية أو فيديو تتعلّم وتستمتع");
   }, 0);
 
   return screen;

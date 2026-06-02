@@ -105,3 +105,15 @@ export const MIZO_CHAT = [
 ];
 
 export const pick = (a) => a[(Math.random() * a.length) | 0];
+
+// «هوكات» دخول المغامرة (عامية مصرية) — {r} يُستبدل باسم المنطقة
+export const MIZO_REGION_HOOKS = [
+  "يلا بينا في {r}! هنلعب ونتعلّم سوا!",
+  "وصلنا {r}! جاهز نكتشف يا بطل؟",
+  "أهلاً بينا في {r}! يلا نبدأ المرح!",
+  "هايل! دخلنا {r}، يلا نلعب ونلمّ نجوم!",
+  "تعال يا نجم، {r} مستنياك!",
+  "جاهز يا بطل؟ {r} فيها مغامرة حلوة!",
+  "يا سلام! {r}.. يلا نبدأ سوا!",
+];
+export const regionHook = (name) => pick(MIZO_REGION_HOOKS).replace("{r}", name);

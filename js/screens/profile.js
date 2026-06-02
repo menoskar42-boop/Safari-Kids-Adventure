@@ -184,7 +184,7 @@ export function renderProfile() {
       current.textContent = c.emoji;
       grid.querySelectorAll(".region-card").forEach((x) => (x.style.background = "#cdbfe6"));
       card.style.background = "linear-gradient(160deg,#ffd23f,#ff924c)";
-      Speech.ar("اخترت صورتك");
+      Speech.mizo("غيّرت صورتك، حلوة أوي!");
     });
     grid.appendChild(card);
   });

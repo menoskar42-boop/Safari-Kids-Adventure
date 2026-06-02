@@ -81,7 +81,7 @@ export function renderShadowMatch({ regionId, regionIndex, datasetKey, title, bg
       stage.appendChild(shadow);
 
       stage.appendChild(choicesRow(pool, target, onPick));
-      Speech.ar("أيّ حيوان يطابق الظل؟");
+      Speech.mizo("أنهي حيوان زيّ الضلّ ده؟");
     },
   });
   return screen;
@@ -132,7 +132,7 @@ export function renderFindIt({ regionId, regionIndex, datasetKey, title, bg, ver
     ask.style.cssText = "font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2);font-size:clamp(18px,5vw,24px)";
     ask.textContent = `${action} ${target.name}`;
     stage.appendChild(ask);
-    Speech.ar(`${action} ${target.name}`);
+    Speech.mizo(`${action} ${target.name}`);
 
     const row = document.createElement("div");
     row.className = "choice-row";

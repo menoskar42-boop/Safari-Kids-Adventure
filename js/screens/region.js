@@ -6,6 +6,7 @@ import { Speech } from "../core/speech.js";
 import { ACTIVITIES } from "../data/activities.js";
 import { FEATURES } from "../core/features.js";
 import { Store } from "../core/storage.js";
+import { regionHook } from "../data/mizo.js";
 
 export function renderRegion({ id, index }) {
   const region = getRegion(id);
@@ -51,6 +52,8 @@ export function renderRegion({ id, index }) {
       list.appendChild(btn);
     });
     screen.appendChild(list);
+    // هوك دخول مصري مرح يجذب الطفل (مختلف كل مرّة)
+    setTimeout(() => Speech.mizo(regionHook(region.name)), 250);
   } else {
     // رسالة قريباً
     const soon = document.createElement("div");
@@ -67,7 +70,7 @@ export function renderRegion({ id, index }) {
         Sfx.tap();
         Router.go("home");
       });
-      Speech.ar("هذه المنطقة قيد البناء، سنفتحها قريباً");
+      Speech.mizo("المغامرة دي لسه بنجهّزها، هتفتح قريب أوي!");
     }, 0);
   }
 

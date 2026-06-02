@@ -376,7 +376,7 @@ export function renderCompare({ regionId, regionIndex }) {
     ask.style.cssText = "font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2);font-size:clamp(18px,5vw,26px);margin:6px 0";
     ask.textContent = "اضغط على المجموعة الأكثر 👆";
     stage.appendChild(ask);
-    Speech.ar("أين توجد عناصر أكثر؟");
+    Speech.mizo("فين العدد الأكبر يا بطل؟");
 
     const wrap = document.createElement("div");
     wrap.style.cssText = "display:flex;gap:14px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:10px auto";

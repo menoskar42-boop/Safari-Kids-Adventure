@@ -59,7 +59,7 @@ export function renderDailyPlan() {
   const lead = document.createElement("div");
   lead.className = "lesson-teacher";
   lead.style.cssText = "max-width:460px;margin:4px auto 6px";
-  const msg = allDone ? "أحسنت! أكملنا رحلة اليوم معاً 🎉" : `${pick(MIZO_CATCH)} هذه رحلتنا اليوم، هيا بنا!`;
+  const msg = allDone ? "برافو! خلّصنا رحلة النهارده سوا 🎉" : `${pick(MIZO_CATCH)} دي رحلتنا النهارده، يلا بينا!`;
   lead.innerHTML = `<div class="miz-slot"></div><div class="teacher-bubble">${msg}</div>`;
   wrap.appendChild(lead);
   const leadMizo = createCharacter();
@@ -97,7 +97,7 @@ export function renderDailyPlan() {
   // مكافأة إكمال الرحلة (مرّة واحدة في اليوم)
   if (allDone && Store.markDailyBonus()) {
     awardStars(5);
-    setTimeout(() => { Confetti.stars(); Speech.ar("أحسنت! أكملت رحلة اليوم، أنت بطل"); }, 200);
+    setTimeout(() => { Confetti.stars(); Speech.mizo("برافو! خلّصت رحلة النهارده، إنت بطل!"); }, 200);
   }
 
   screen.appendChild(wrap);

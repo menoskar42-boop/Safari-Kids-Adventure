@@ -57,7 +57,7 @@ export function renderSort({ regionId, regionIndex, title, bg, groups }) {
         if (idx === gi) {
           b.classList.add("ok");
           Sfx.correct();
-          Speech.ar(`أحسنت، ${it.name} من ${g.label}`);
+          Speech.mizo(`برافو، ${it.name} من ${g.label}`);
           awardStars(1);
           setTimeout(nextRound, 1000);
         } else {

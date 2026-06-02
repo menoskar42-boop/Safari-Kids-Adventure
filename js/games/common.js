@@ -125,7 +125,7 @@ export function finishActivity({ regionId, regionIndex, stars = 5, onDone }) {
   const reward = Math.random() < 0.7 ? grantRandomCollectible() : null;
 
   const done = () => {
-    Speech.ar("أحسنت! لقد أكملت المهمة");
+    Speech.mizo("برافو! خلّصت المهمة يا بطل");
     if (onDone) onDone();
   };
 

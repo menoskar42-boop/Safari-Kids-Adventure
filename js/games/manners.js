@@ -76,7 +76,7 @@ export function renderManners({ regionId, regionIndex, title }) {
         } else {
           Sfx.wrong();
           b.classList.add("wrong");
-          say("هيا نفكّر مرّة أخرى", 1400);
+          say("يلا نفكّر تاني", 1400);
           setTimeout(() => b.classList.remove("wrong"), 500);
         }
       });
