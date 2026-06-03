@@ -204,6 +204,10 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
 }
 .story-art .story-char { width: clamp(130px, 38vw, 210px); height: auto; }
 .story-emoji { font-size: clamp(74px, 22vw, 130px); }
+/* مشهد بشخصيتين تتفاعلان */
+.story-art.duo { top: 60%; width: 90%; display: flex; gap: 3%; align-items: flex-end; justify-content: center; }
+.story-art.duo .actor { flex: 0 1 auto; }
+.story-art.duo .actor .story-char { width: clamp(96px, 30vw, 165px); }
 @keyframes story-float { 0%,100% { transform: translate(-50%,-50%); } 50% { transform: translate(-50%,-62%); } }
 .story-bubble {
   position: absolute; top: 10px; left: 12px; right: 12px; margin: 0 auto; max-width: 90%;

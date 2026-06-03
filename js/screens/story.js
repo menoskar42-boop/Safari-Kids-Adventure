@@ -57,10 +57,14 @@ export function renderStory({ regionId, regionIndex, storyId }) {
     const scene = document.createElement("div");
     scene.className = "story-scene";
     const artEmoji = sc.art || sc.emoji || "";
-    const artSvg = sceneArtSvg(artEmoji); // رسم SVG احترافي إن وُجد، وإلا إيموجي
+    const mainSvg = sceneArtSvg(artEmoji) || `<span class="story-emoji">${artEmoji}</span>`;
+    const withSvg = sc.with ? sceneArtSvg(sc.with) : null; // شخصية ثانية تتفاعل في المشهد
+    const artHtml = withSvg
+      ? `<div class="story-art duo" title="اقرأ لي"><div class="actor">${withSvg}</div><div class="actor">${mainSvg}</div></div>`
+      : `<div class="story-art" title="اقرأ لي">${mainSvg}</div>`;
     scene.innerHTML = `
       <div class="story-bg">${sceneBackdrop(sc.bg || REGION_BG[story.region] || "sky")}</div>
-      <div class="story-art" title="اقرأ لي">${artSvg || `<span class="story-emoji">${artEmoji}</span>`}</div>`;
+      ${artHtml}`;
     const bubble = document.createElement("div");
     bubble.className = "story-bubble";
     bubble.textContent = sc.text;

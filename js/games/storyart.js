@@ -57,6 +57,16 @@ const BACKDROPS = {
     <rect width="400" height="300" fill="url(#g)"/>${sun(330, 50, 26)}${cloud(120, 64, .8, 30)}<rect y="225" width="400" height="75" fill="#9aa3ad"/><rect y="248" width="400" height="6" fill="#fff" opacity=".7"/>
     <g transform="translate(60 120)"><rect width="70" height="105" fill="#ffb86c"/><rect x="10" y="14" width="20" height="20" fill="#bfe3ff"/><rect x="40" y="14" width="20" height="20" fill="#bfe3ff"/></g>
     <g transform="translate(280 110)"><rect width="80" height="115" fill="#8fd3c0"/><rect x="12" y="16" width="22" height="22" fill="#bfe3ff"/><rect x="46" y="16" width="22" height="22" fill="#bfe3ff"/></g>`,
+  clinic: () => `${grad("g", `<stop offset="0" stop-color="#eef8fc"/><stop offset="1" stop-color="#dceff7"/>`)}
+    <rect width="400" height="300" fill="url(#g)"/><rect y="226" width="400" height="74" fill="#cfe6f0"/>
+    <rect x="34" y="38" width="56" height="56" rx="9" fill="#fff" stroke="#e3eef4" stroke-width="2"/><rect x="55" y="46" width="14" height="40" rx="3" fill="#e8413a"/><rect x="42" y="59" width="40" height="14" rx="3" fill="#e8413a"/>
+    <rect x="300" y="116" width="72" height="110" fill="#bfe0ee"/><rect x="300" y="148" width="72" height="4" fill="#fff"/><rect x="300" y="184" width="72" height="4" fill="#fff"/>
+    <rect x="120" y="186" width="180" height="20" rx="6" fill="#7aa7d8"/><rect x="120" y="164" width="44" height="42" rx="8" fill="#9cc0e6"/>`,
+  room: () => `${grad("g", `<stop offset="0" stop-color="#ffe9d6"/><stop offset="1" stop-color="#ffdcc4"/>`)}
+    <rect width="400" height="300" fill="url(#g)"/><rect y="220" width="400" height="80" fill="#d8a878"/>
+    <rect x="250" y="48" width="104" height="82" rx="6" fill="#bfe3ff" stroke="#fff" stroke-width="6"/><line x1="302" y1="48" x2="302" y2="130" stroke="#fff" stroke-width="4"/><line x1="250" y1="89" x2="354" y2="89" stroke="#fff" stroke-width="4"/>
+    <rect x="36" y="150" width="150" height="70" rx="10" fill="#9a7cf0"/><rect x="36" y="150" width="46" height="70" rx="10" fill="#b9a3f5"/>
+    <rect x="120" y="58" width="52" height="40" rx="4" fill="#fff" stroke="#e0c0a0" stroke-width="3"/>`,
 };
 
 /** يُرجع SVG خلفية المشهد (نصّ HTML) */
