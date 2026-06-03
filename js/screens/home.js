@@ -57,17 +57,16 @@ export function renderHome() {
     <button class="guide-emoji guide-miz" id="profileBtn" style="background:none;border:none;cursor:pointer" title="ملفي"></button>
     <div class="bubble">${bubbleMsg}</div>
   `;
-  // ميزو المرشد بدل الإيموجي الثابت (يلوّح عند فتح الخريطة)
-  const guide = createCharacter();
-  banner.querySelector("#profileBtn").appendChild(guide.el);
-  setTimeout(() => guide.setMood("wave", 2600), 250);
+  // ميزو المرشد: أنيميشن ٣D يلوّح (مولّد بالذكاء الاصطناعي، شفّاف وخفيف) بدل الرسم الثابت
+  const guideImg = document.createElement("img");
+  guideImg.className = "guide-anim";
+  guideImg.src = "/assets/mizo/mizo-wave-anim.webp";
+  guideImg.alt = "ميزو";
+  banner.querySelector("#profileBtn").appendChild(guideImg);
   // ترحيب صوتي مرّة واحدة في الجلسة — ننتظر جاهزية الـ AI كي يستخدم صوت ميزو
   if (!greetedSession) {
     greetedSession = true;
-    whenSpeechReady().then(() => {
-      guide.startTalking(spoken.length * 80 + 1200);
-      Speech.mizo(spoken);
-    });
+    whenSpeechReady().then(() => { Speech.mizo(spoken); });
   }
   screen.appendChild(banner);
 

@@ -60,6 +60,7 @@
   font-size: clamp(44px, 12vw, 64px);
   animation: bob 2.6s ease-in-out infinite;
 }
+.guide-anim { width: clamp(64px, 18vw, 96px); height: auto; display: block; }
 .guide-banner .bubble {
   position: relative;
   flex: 1;
