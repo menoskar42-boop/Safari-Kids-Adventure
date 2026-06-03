@@ -199,9 +199,11 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
 .story-bg, .story-bg .story-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .story-art {
   position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%);
-  font-size: clamp(74px, 22vw, 130px); cursor: pointer; filter: drop-shadow(0 6px 8px rgba(0,0,0,.25));
+  cursor: pointer; filter: drop-shadow(0 6px 8px rgba(0,0,0,.25));
   animation: story-float 3.5s ease-in-out infinite;
 }
+.story-art .story-char { width: clamp(130px, 38vw, 210px); height: auto; }
+.story-emoji { font-size: clamp(74px, 22vw, 130px); }
 @keyframes story-float { 0%,100% { transform: translate(-50%,-50%); } 50% { transform: translate(-50%,-62%); } }
 .story-bubble {
   position: absolute; top: 10px; left: 12px; right: 12px; margin: 0 auto; max-width: 90%;
@@ -209,8 +211,8 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
   font-weight: 800; font-size: clamp(15px, 4vw, 20px); line-height: 1.6;
   padding: 10px 14px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,.15); text-align: center;
 }
-.story-narrator { position: absolute; bottom: 4px; left: 6px; width: clamp(60px, 18vw, 92px); z-index: 3; }
-.story-narrator .miz-img { width: 100%; height: auto; }
+.miz.story-narrator { display: block; margin: 2px auto 0; }
+.story-narrator .miz-svg { width: clamp(64px, 19vw, 92px); }
 
 /* لعبة المتاهة */
 .maze-grid { display: grid; gap: 0; width: min(82vw, 360px); aspect-ratio: 1; margin: 10px auto; background: #fff; border-radius: 14px; padding: 6px; box-shadow: var(--shadow-card); }

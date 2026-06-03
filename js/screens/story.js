@@ -6,6 +6,7 @@ import { Sfx } from "../core/audio.js";
 import { Confetti } from "../core/confetti.js";
 import { gameTopbar, finishActivity } from "../games/common.js";
 import { sceneBackdrop } from "../games/storyart.js";
+import { sceneArtSvg } from "../games/storychars.js";
 import { createCharacter } from "../games/character.js";
 import { storyTone } from "../data/mizo.js";
 
@@ -55,20 +56,22 @@ export function renderStory({ regionId, regionIndex, storyId }) {
     // مشهد مصوّر: خلفية SVG متحرّكة + بطل + فقاعة حوار + ميزو السارد
     const scene = document.createElement("div");
     scene.className = "story-scene";
+    const artEmoji = sc.art || sc.emoji || "";
+    const artSvg = sceneArtSvg(artEmoji); // رسم SVG احترافي إن وُجد، وإلا إيموجي
     scene.innerHTML = `
       <div class="story-bg">${sceneBackdrop(sc.bg || REGION_BG[story.region] || "sky")}</div>
-      <div class="story-art" title="اقرأ لي">${sc.art || sc.emoji || ""}</div>`;
+      <div class="story-art" title="اقرأ لي">${artSvg || `<span class="story-emoji">${artEmoji}</span>`}</div>`;
     const bubble = document.createElement("div");
     bubble.className = "story-bubble";
     bubble.textContent = sc.text;
     scene.appendChild(bubble);
-    // ميزو السارد — تعبيره يتغيّر حسب مزاج المشهد
+    scene.querySelector(".story-art").addEventListener("click", () => { Sfx.pop(); speakScene(sc); });
+    stage.appendChild(scene);
+    // ميزو السارد أسفل المشهد (لا يغطّي النص) — تعبيره يتغيّر حسب مزاج المشهد
     const narrator = createCharacter();
     narrator.el.classList.add("story-narrator");
     narrator.setMood(MOOD_MIZO[sc.mood] || "happy");
-    scene.appendChild(narrator.el);
-    scene.querySelector(".story-art").addEventListener("click", () => { Sfx.pop(); speakScene(sc); });
-    stage.appendChild(scene);
+    stage.appendChild(narrator.el);
 
     const nav = document.createElement("div");
     nav.style.cssText = "display:flex;gap:12px;justify-content:center;margin-top:16px";
