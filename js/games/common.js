@@ -24,8 +24,14 @@ export function mizoBuddy() {
   return {
     el: mizo.el,
     win(say) {
-      mizo.setMood("thumbs", 1300); // 👍 إبهام لأعلى عند الإجابة الصحيحة
-      if (say) { mizo.startTalking(900); Speech.mizo(pick(MIZO_CATCH)); }
+      if (say) Speech.mizo(pick(MIZO_CATCH));
+      // أنيميشن ٣D (تصفيق أو إبهام) يظهر فوق الرفيق لحظة الإجابة الصحيحة
+      const clip = document.createElement("img");
+      clip.className = "buddy-clap";
+      clip.alt = "ميزو";
+      clip.src = "/assets/mizo/" + (Math.random() < 0.5 ? "mizo-clap" : "mizo-praise") + ".webp";
+      mizo.el.appendChild(clip);
+      setTimeout(() => clip.remove(), 1900);
     },
     lose() {
       mizo.setMood("sad", 900);

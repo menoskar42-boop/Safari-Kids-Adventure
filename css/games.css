@@ -1,5 +1,6 @@
 /* ===== رفيق ميزو داخل الألعاب ===== */
 .miz-buddy { display: block; margin: 0 auto; }
+.buddy-clap { position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); width: 185%; height: auto; max-width: none; z-index: 5; pointer-events: none; filter: drop-shadow(0 4px 6px rgba(0,0,0,.25)); }
 .miz-buddy .miz-svg { width: clamp(56px, 16vw, 84px); }
 
 /* ===== رحلة الصداقة (شريط تقدّم) ===== */
