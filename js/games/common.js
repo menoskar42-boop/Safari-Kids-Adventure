@@ -101,9 +101,11 @@ export function showCheer(emoji, text, onClose) {
   Sfx.win();
   const overlay = document.createElement("div");
   overlay.className = "cheer";
+  // تنويع: ميزو يحتفل بالقفز والقصاصات أو بالتصفيق (أنيميشن ٣D من فيديو AI)
+  const clip = Math.random() < 0.5 ? "mizo-celebrate" : "mizo-clap";
   overlay.innerHTML = `
     <div class="cheer-card">
-      <img class="cheer-anim" src="/assets/mizo/mizo-celebrate.webp" alt="ميزو" />
+      <img class="cheer-anim" src="/assets/mizo/${clip}.webp" alt="ميزو" />
       <div class="cheer-text">${text}</div>
     </div>`;
   document.body.appendChild(overlay);
