@@ -91,9 +91,40 @@ const ART = {
   "🤝": OBJECTS.handshake,
 };
 
+// ===== تعبيرات وعناصر إضافية — لإزالة كل الإيموجي من القصص =====
+const expr = {
+  sleep: () => bob(`<circle cx="60" cy="64" r="34" fill="#f6c98e"/><path d="M44 60 q8 6 16 0 M64 60 q8 6 16 0" stroke="#7a4a35" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M52 78 q8 5 16 0" stroke="#7a4a35" stroke-width="3" fill="none" stroke-linecap="round"/><text x="84" y="44" font-size="15" fill="#7aa7d8" font-weight="bold">z<animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/></text><text x="94" y="32" font-size="10" fill="#9fc0e0" font-weight="bold">z</text>`, 3),
+  joy: () => bob(`<circle cx="60" cy="62" r="34" fill="#f6c98e"/>${blink(50, 56)}${blink(70, 56)}<path d="M46 72 q14 16 28 0" stroke="#7a4a35" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="42" cy="66" r="5" fill="#ff9d9d" opacity=".5"/><circle cx="78" cy="66" r="5" fill="#ff9d9d" opacity=".5"/>`),
+  love: () => bob(`<circle cx="60" cy="62" r="34" fill="#f6c98e"/><path d="M50 52 l4 4 4 -4 a3 3 0 0 0 -8 0z" fill="#ff4d6d"/><path d="M66 52 l4 4 4 -4 a3 3 0 0 0 -8 0z" fill="#ff4d6d"/><path d="M48 74 q12 12 24 0" stroke="#7a4a35" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="42" cy="68" r="5" fill="#ff7aa0" opacity=".6"/><circle cx="78" cy="68" r="5" fill="#ff7aa0" opacity=".6"/>`),
+  worried: () => bob(`<circle cx="60" cy="62" r="34" fill="#f6c98e"/>${blink(50, 58)}${blink(70, 58)}<path d="M44 50 q6 -3 12 0 M64 50 q6 -3 12 0" stroke="#7a4a35" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="60" cy="78" r="4" fill="none" stroke="#7a4a35" stroke-width="3"/>`, 3),
+  sick: () => bob(`<circle cx="60" cy="62" r="34" fill="#e7d49c"/>${blink(50, 58, 3)}${blink(70, 58, 3)}<path d="M48 80 q12 -6 24 0" stroke="#7a4a35" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="42" cy="68" r="6" fill="#ff8a8a" opacity=".7"/><circle cx="78" cy="68" r="6" fill="#ff8a8a" opacity=".7"/><rect x="72" y="70" width="24" height="6" rx="3" fill="#fff" stroke="#bbb"/><rect x="90" y="70" width="6" height="6" rx="2" fill="#e8413a"/><rect x="40" y="34" width="16" height="6" rx="3" fill="#7ec8f0"/>`, 3),
+};
+const obj2 = {
+  house: () => bob(`<rect x="36" y="68" width="48" height="50" fill="#ffb86c"/><polygon points="28,68 60,40 92,68" fill="#c0392b"/><rect x="54" y="92" width="16" height="26" fill="#7d4a2a"/><rect x="42" y="76" width="12" height="12" fill="#bfe3ff"/><rect x="66" y="76" width="12" height="12" fill="#bfe3ff"/>`, 3),
+  tap: () => bob(`<rect x="40" y="44" width="10" height="28" rx="4" fill="#9aa3ad"/><rect x="40" y="44" width="34" height="9" rx="4" fill="#9aa3ad"/><rect x="68" y="50" width="9" height="14" rx="4" fill="#9aa3ad"/>${[0, 1, 2].map(i => `<ellipse cx="72" cy="76" rx="3" ry="5" fill="#4fb8e6"><animate attributeName="cy" values="72;104;72" dur="1.1s" begin="${i * 0.35}s" repeatCount="indefinite"/></ellipse>`).join("")}`, 3),
+  plate: () => bob(`<rect x="22" y="62" width="3" height="28" rx="1.5" fill="#9aa3ad"/><rect x="96" y="62" width="3" height="28" rx="1.5" fill="#9aa3ad"/><ellipse cx="60" cy="84" rx="34" ry="10" fill="#cfd8e3"/><ellipse cx="60" cy="80" rx="34" ry="14" fill="#fff" stroke="#dfe6ef" stroke-width="2"/><ellipse cx="60" cy="78" rx="20" ry="8" fill="#eef2f7"/>`, 3),
+  teddy: () => bob(`<circle cx="40" cy="44" r="9" fill="#a06f44"/><circle cx="80" cy="44" r="9" fill="#a06f44"/><circle cx="60" cy="56" r="24" fill="#c08a55"/>${blink(52, 52, 2.6)}${blink(68, 52, 2.6)}<circle cx="60" cy="60" r="4" fill="#6b4a2a"/><ellipse cx="60" cy="98" rx="22" ry="18" fill="#c08a55"/>`),
+  timer: () => bob(`<circle cx="60" cy="68" r="30" fill="#fff" stroke="#6b4fb0" stroke-width="4"/><rect x="54" y="30" width="12" height="9" rx="2" fill="#6b4fb0"/><g><animateTransform attributeName="transform" type="rotate" from="0 60 68" to="360 60 68" dur="3s" repeatCount="indefinite"/><line x1="60" y1="68" x2="60" y2="48" stroke="#e8413a" stroke-width="3" stroke-linecap="round"/></g><circle cx="60" cy="68" r="3" fill="#6b4fb0"/>`, 2.5),
+  stetho: () => bob(`<path d="M40 40 v22 a20 20 0 0 0 40 0 v-2" fill="none" stroke="#3a4a6b" stroke-width="5"/><circle cx="40" cy="38" r="4" fill="#3a4a6b"/><circle cx="80" cy="84" r="11" fill="#7aa7d8" stroke="#3a4a6b" stroke-width="3"/>`, 2.6),
+  nest: () => bob(`<ellipse cx="60" cy="80" rx="38" ry="20" fill="#a9713e"/><ellipse cx="60" cy="74" rx="30" ry="13" fill="#7a4f28"/><circle cx="48" cy="70" r="8" fill="#bfe3ff"/><circle cx="60" cy="68" r="8" fill="#cfeaff"/><circle cx="72" cy="70" r="8" fill="#bfe3ff"/>`, 3),
+  wave: () => bob(`<path d="M16 70 q15 -16 30 0 t30 0 t30 0 L106 104 L16 104 Z" fill="#2f9fd6"><animateTransform attributeName="transform" type="translate" values="0 0;-10 0;0 0" dur="2s" repeatCount="indefinite"/></path><path d="M16 82 q15 -12 30 0 t30 0 t30 0 L106 110 L16 110 Z" fill="#1f86bf"/>`, 2.4),
+  wind: () => bob(`${[0, 1, 2].map(i => `<path d="M28 ${50 + i * 14} h${32 - i * 6} a7 7 0 1 0 -7 -7" fill="none" stroke="#9fb9d6" stroke-width="4" stroke-linecap="round"><animate attributeName="opacity" values=".4;1;.4" dur="1.6s" begin="${i * 0.2}s" repeatCount="indefinite"/></path>`).join("")}`, 2.5),
+  hand: () => bob(`<rect x="48" y="58" width="24" height="36" rx="11" fill="#f3c79b"/>${[0, 1, 2, 3].map(i => `<rect x="${46 + i * 8}" y="${38 - (i === 1 || i === 2 ? 6 : 0)}" width="7" height="${26 + (i === 1 || i === 2 ? 8 : 0)}" rx="3.5" fill="#f3c79b"/>`).join("")}<rect x="38" y="62" width="14" height="7" rx="3.5" fill="#f1c191" transform="rotate(-32 44 65)"/>`, 2.4),
+  give: () => bob(`<circle cx="60" cy="46" r="9" fill="#ffd23f"/><path d="M28 72 q32 22 64 0 q-7 15 -32 15 q-25 0 -32 -15z" fill="#f3c79b"/><circle cx="42" cy="70" r="4" fill="#f1c191"/><circle cx="78" cy="70" r="4" fill="#f1c191"/>`, 2.6),
+  party: () => bob(`<polygon points="28,98 50,48 72,92" fill="#ffd23f"/><polygon points="34,86 50,48 46,88" fill="#ff924c"/>${[[60, 40, "#e8413a"], [78, 52, "#4caf50"], [86, 36, "#2f9fd6"], [70, 62, "#a06cd5"], [52, 34, "#ff924c"]].map(([x, y, c]) => `<circle cx="${x}" cy="${y}" r="4" fill="${c}"><animate attributeName="cy" values="${y};${y - 9};${y}" dur="1s" begin="${x % 5 * 0.1}s" repeatCount="indefinite"/></circle>`).join("")}`, 2),
+  colorball: (c) => bob(`<circle cx="60" cy="64" r="30" fill="${c}"/><ellipse cx="50" cy="54" rx="9" ry="6" fill="#fff" opacity=".35"/>`),
+};
+Object.assign(ART, {
+  "😴": expr.sleep, "😄": expr.joy, "😊": expr.joy, "😍": expr.love, "🥰": expr.love,
+  "😟": expr.worried, "😳": expr.worried, "🤒": expr.sick,
+  "🏡": obj2.house, "🚰": obj2.tap, "🍽️": obj2.plate, "🧸": obj2.teddy, "⏱️": obj2.timer,
+  "🩺": obj2.stetho, "🪹": obj2.nest, "🌊": obj2.wave, "🌬️": obj2.wind, "🖐️": obj2.hand,
+  "🤲": obj2.give, "🎉": obj2.party,
+  "🔴": () => obj2.colorball("#e8413a"), "🟢": () => obj2.colorball("#4caf50"), "🟣": () => obj2.colorball("#a06cd5"),
+});
+
 /** هل لدينا رسم SVG لهذا الإيموجي؟ */
 export function hasArt(emoji) { return Boolean(ART[emoji]); }
-
 /** يُرجع رسم SVG كرتوني متحرّك للعنصر، أو null إن لم يوجد */
 export function sceneArtSvg(emoji) {
   const fn = ART[emoji];
