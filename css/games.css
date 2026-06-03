@@ -185,6 +185,33 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
 .reveal-hint { animation: reveal-pulse .6s ease-in-out 2; outline: 4px solid var(--c-green); outline-offset: 2px; border-radius: 14px; }
 @keyframes reveal-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
+/* ===== القصص المصوّرة ===== */
+.story-scene {
+  position: relative;
+  width: min(92vw, 560px);
+  aspect-ratio: 4 / 3;
+  margin: 6px auto 14px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 4px solid #fff;
+}
+.story-bg, .story-bg .story-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.story-art {
+  position: absolute; left: 50%; top: 56%; transform: translate(-50%, -50%);
+  font-size: clamp(74px, 22vw, 130px); cursor: pointer; filter: drop-shadow(0 6px 8px rgba(0,0,0,.25));
+  animation: story-float 3.5s ease-in-out infinite;
+}
+@keyframes story-float { 0%,100% { transform: translate(-50%,-50%); } 50% { transform: translate(-50%,-62%); } }
+.story-bubble {
+  position: absolute; top: 10px; left: 12px; right: 12px; margin: 0 auto; max-width: 90%;
+  background: rgba(255,255,255,.96); color: var(--c-ink);
+  font-weight: 800; font-size: clamp(15px, 4vw, 20px); line-height: 1.6;
+  padding: 10px 14px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,.15); text-align: center;
+}
+.story-narrator { position: absolute; bottom: 4px; left: 6px; width: clamp(60px, 18vw, 92px); z-index: 3; }
+.story-narrator .miz-img { width: 100%; height: auto; }
+
 /* لعبة اكتشف المختلف */
 .spot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 420px; margin: 6px auto 24px; padding: 0 16px; }
 .spot-glyph { font-size: clamp(46px, 15vw, 74px); }

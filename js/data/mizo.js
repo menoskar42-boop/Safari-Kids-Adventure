@@ -14,6 +14,24 @@ export const MIZO = {
     "warm and excited, like a kid's favorite cartoon friend.",
 };
 
+// ===== نبرة سرد القصص: ميزو سارد قصص مصري يتفاعل مع الأحداث ويغيّر نبرته =====
+// (تُمرَّر كـ instructions للـ TTS لكل مشهد حسب مزاجه — تُخزَّن صوتاً مرّة واحدة)
+export const STORY_BASE_TONE =
+  "You are Mizo, a warm and captivating EGYPTIAN ARABIC children's storyteller for a 3-6 year old. " +
+  "Narrate in lively Cairo-dialect Egyptian Arabic like a beloved cartoon storyteller who ACTS OUT the story, " +
+  "pausing for effect and changing your tone to match each moment of the story.";
+export const STORY_MOODS = {
+  calm: " Right now: speak gently, slowly and warmly.",
+  happy: " Right now: speak brightly, cheerfully and with a big smile.",
+  excited: " Right now: speak with rising excitement and playful energy.",
+  scared: " Right now: lower your voice with soft, gentle suspense — never frightening for a young child.",
+  sad: " Right now: speak softly and tenderly, with empathy.",
+  wonder: " Right now: speak with wide-eyed awe and amazement.",
+};
+export function storyTone(mood) {
+  return STORY_BASE_TONE + (STORY_MOODS[mood] || STORY_MOODS.calm);
+}
+
 // ===== بنوك العبارات الثابتة =====
 export const MIZO_INTRO = [
   "أهلاً يا بطل! أنا ميزو صاحبك الجديد!",

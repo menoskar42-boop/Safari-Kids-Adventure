@@ -82,6 +82,7 @@ const cases = [
   ["coloring(home)", "../js/games/coloring.js", "renderColoring", { title: "t" }],
   ["pattern", "../js/games/pattern.js", "renderPattern", { regionId: "colors", regionIndex: 0, datasetKey: "colors", title: "t" }],
   ["spotDiff", "../js/games/spotdiff.js", "renderSpotDiff", { regionId: "animals", regionIndex: 0, datasetKey: "animals", title: "t" }],
+  ["story", "../js/screens/story.js", "renderStory", { regionId: "animals", regionIndex: 0, storyId: "lion-friend" }],
   ["puzzle", "../js/games/puzzle.js", "renderPuzzle", { regionId: "animals", regionIndex: 0, datasetKey: "animals", title: "t" }],
   ["sort", "../js/games/sort.js", "renderSort", { regionId: "fruits", regionIndex: 0, title: "t", groups: [{ label: "فواكه", datasetKey: "fruits" }, { label: "حيوانات", datasetKey: "animals" }] }],
   ["phonics", "../js/games/phonics.js", "renderPhonics", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG", title: "t" }],

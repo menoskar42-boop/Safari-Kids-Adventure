@@ -5,6 +5,18 @@ import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { Confetti } from "../core/confetti.js";
 import { gameTopbar, finishActivity } from "../games/common.js";
+import { sceneBackdrop } from "../games/storyart.js";
+import { createCharacter } from "../games/character.js";
+import { storyTone } from "../data/mizo.js";
+
+// مزاج المشهد → تعبير وجه ميزو السارد
+const MOOD_MIZO = { calm: "happy", happy: "cheer", excited: "surprised", scared: "think", sad: "sad", wonder: "surprised" };
+// خلفية افتراضية حسب منطقة القصة (تُستخدم إن لم يحدّد المشهد خلفيته)
+const REGION_BG = {
+  animals: "forest", fish: "sea", birds: "sky", fruits: "farm", numbers: "night",
+  colors: "meadow", shapes: "meadow", values: "home", family: "home", jobs: "street",
+  transport: "street", weather: "sky",
+};
 
 export function renderStory({ regionId, regionIndex, storyId }) {
   const story = getStory(storyId);
@@ -22,7 +34,8 @@ export function renderStory({ regionId, regionIndex, storyId }) {
   screen.appendChild(stage);
 
   function speakScene(sc) {
-    Speech.ar(sc.text);
+    // ميزو يسرد بنبرة تتفاعل مع مزاج المشهد (سارد قصص محترف يغيّر نبرته)
+    Speech.say(sc.text, { lang: "ar-EG", instructions: storyTone(sc.mood), rate: 0.98 });
   }
 
   function render() {
@@ -39,18 +52,23 @@ export function renderStory({ regionId, regionIndex, storyId }) {
     }
     stage.appendChild(dots);
 
-    const big = document.createElement("div");
-    big.className = "hero-emoji";
-    big.textContent = sc.emoji;
-    big.style.cursor = "pointer";
-    big.addEventListener("click", () => { Sfx.pop(); speakScene(sc); });
-    stage.appendChild(big);
-
-    const text = document.createElement("p");
-    text.style.cssText =
-      "font-weight:800;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2);font-size:clamp(18px,5vw,24px);max-width:560px;line-height:1.7;margin:8px auto";
-    text.textContent = sc.text;
-    stage.appendChild(text);
+    // مشهد مصوّر: خلفية SVG متحرّكة + بطل + فقاعة حوار + ميزو السارد
+    const scene = document.createElement("div");
+    scene.className = "story-scene";
+    scene.innerHTML = `
+      <div class="story-bg">${sceneBackdrop(sc.bg || REGION_BG[story.region] || "sky")}</div>
+      <div class="story-art" title="اقرأ لي">${sc.art || sc.emoji || ""}</div>`;
+    const bubble = document.createElement("div");
+    bubble.className = "story-bubble";
+    bubble.textContent = sc.text;
+    scene.appendChild(bubble);
+    // ميزو السارد — تعبيره يتغيّر حسب مزاج المشهد
+    const narrator = createCharacter();
+    narrator.el.classList.add("story-narrator");
+    narrator.setMood(MOOD_MIZO[sc.mood] || "happy");
+    scene.appendChild(narrator.el);
+    scene.querySelector(".story-art").addEventListener("click", () => { Sfx.pop(); speakScene(sc); });
+    stage.appendChild(scene);
 
     const nav = document.createElement("div");
     nav.style.cssText = "display:flex;gap:12px;justify-content:center;margin-top:16px";
