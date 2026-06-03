@@ -5,6 +5,7 @@ import { isAIReady, aiAsk, aiTranscribe } from "./ai.js";
 import { Speech } from "./speech.js";
 import { Sfx } from "./audio.js";
 import { createCharacter } from "../games/character.js";
+import { onSpeaking } from "./speech.js";
 import { track } from "./analytics.js";
 
 let recorder = null;
@@ -12,7 +13,18 @@ let chunks = [];
 let listening = false;
 let overlay = null;
 let mizo = null; // شخصية ميزو داخل الزرّ العائم
+let idleImg = null; // أنيميشن وقوف ميزو (٣D) — يظهر عند السكون
+let speaking = false;
 const INVITE = "قول يا صاحبي، عاوز إيه؟ أنا معاك";
+
+// يُظهر أنيميشن الوقوف عند السكون، وميزو المتفاعل (نطق/إنصات/تفكير) عند النشاط
+function updateMizoView() {
+  const btn = document.getElementById("assistantBtn");
+  if (!btn || !mizo || !idleImg) return;
+  const active = speaking || btn.classList.contains("listening") || btn.classList.contains("thinking");
+  mizo.el.style.display = active ? "" : "none";
+  idleImg.style.display = active ? "none" : "";
+}
 
 /** هل المساعد متاح؟ (AI + دعم التسجيل) */
 export function assistantAvailable() {
@@ -35,6 +47,13 @@ export function mountAssistantButton() {
   btn.title = "اسألني! قول عاوز إيه؟";
   mizo = createCharacter();
   btn.appendChild(mizo.el);
+  // أنيميشن ٣D لميزو واقف (idle) — الحالة الافتراضية عند السكون
+  idleImg = document.createElement("img");
+  idleImg.className = "assistant-idle";
+  idleImg.alt = "ميزو";
+  idleImg.src = "/assets/mizo/mizo-idle.webp";
+  btn.appendChild(idleImg);
+  onSpeaking((on) => { speaking = on; updateMizoView(); });
   const badge = document.createElement("span");
   badge.className = "assistant-mic";
   badge.textContent = "🎤";
@@ -42,6 +61,7 @@ export function mountAssistantButton() {
   btn.addEventListener("click", toggleListen);
   document.body.appendChild(btn);
   mizo.setMood("wave", 2200); // تحية عند أول ظهور (مزامنة الشفاه تتم تلقائياً داخل createCharacter)
+  updateMizoView();
   startIdleWatch();
 }
 
@@ -57,6 +77,7 @@ function setState(state, text) {
     btn.classList.toggle("thinking", state === "thinking");
   }
   if (mizo) mizo.setMood(state === "listening" ? "listening" : state === "thinking" ? "think" : "happy");
+  updateMizoView();
   showBubble(text);
 }
 

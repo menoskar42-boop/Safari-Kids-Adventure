@@ -347,6 +347,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
   animation: fab-bob 3s ease-in-out infinite; /* خمول لطيف: لا يبقى ثابتاً */
 }
 .assistant-fab .miz-svg { width: 98px; height: auto; animation: none; } /* الحاوية تتمايل بدلاً منه */
+.assistant-idle { width: 96%; height: auto; display: block; }
 .assistant-mic {
   position: absolute;
   inset-block-end: 0;
