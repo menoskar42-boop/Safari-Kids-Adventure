@@ -270,6 +270,7 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
   100% { transform: scale(1) rotate(0); opacity: 1; }
 }
 .cheer .cheer-emoji { font-size: clamp(70px, 20vw, 120px); animation: wobble .6s ease infinite; }
+.cheer-anim { width: clamp(150px, 46vw, 230px); height: auto; display: block; margin: 0 auto; }
 .cheer .cheer-text { font-size: clamp(22px, 6vw, 34px); font-weight: 800; color: var(--c-purple); margin: 10px 0; }
 
 /* شهادة الإنجاز */
