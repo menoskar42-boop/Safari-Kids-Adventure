@@ -7,31 +7,40 @@ const blink = (cx, cy, r = 3.4) => `
   <g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#3a2a20"/><circle cx="${cx + 1}" cy="${cy - 1}" r="1.1" fill="#fff"/>
   <animateTransform attributeName="transform" type="scale" additive="sum" values="1 1;1 1;1 0.1;1 1" keyTimes="0;0.92;0.96;1" dur="4.5s" repeatCount="indefinite"/></g>`;
 
-// وجه ودود (عينان ترمشان + ابتسامة + خدّان)
+// وجه ودود معبّر (حواجب + عيون كبيرة بلمعة ترمش + أنف + ابتسامة + خدّان)
 const face = (cx, cy, skin, r = 26) => `
   <circle cx="${cx}" cy="${cy}" r="${r}" fill="${skin}"/>
-  <g style="transform-box:fill-box;transform-origin:center">${blink(cx - 9, cy - 2)}${blink(cx + 9, cy - 2)}</g>
-  <path d="M${cx - 9} ${cy + 8} Q${cx} ${cy + 16} ${cx + 9} ${cy + 8}" stroke="#7a4a35" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-  <circle cx="${cx - 14}" cy="${cy + 5}" r="3.6" fill="#ff9d9d" opacity=".55"/>
-  <circle cx="${cx + 14}" cy="${cy + 5}" r="3.6" fill="#ff9d9d" opacity=".55"/>`;
+  <path d="M${cx - 15} ${cy - 9} q5 -4 11 -1.5" stroke="#6a4630" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M${cx + 4} ${cy - 10.5} q6 -2.5 11 1.5" stroke="#6a4630" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <g style="transform-box:fill-box;transform-origin:center">
+    <ellipse cx="${cx - 8.5}" cy="${cy - 1}" rx="5" ry="6.4" fill="#fff"/><circle cx="${cx - 7.5}" cy="${cy + 0.4}" r="3.4" fill="#43332a"/><circle cx="${cx - 6.2}" cy="${cy - 1.4}" r="1.3" fill="#fff"/>
+    <ellipse cx="${cx + 8.5}" cy="${cy - 1}" rx="5" ry="6.4" fill="#fff"/><circle cx="${cx + 9.5}" cy="${cy + 0.4}" r="3.4" fill="#43332a"/><circle cx="${cx + 10.8}" cy="${cy - 1.4}" r="1.3" fill="#fff"/>
+    <animateTransform attributeName="transform" type="scale" additive="sum" values="1 1;1 1;1 0.1;1 1" keyTimes="0;0.9;0.95;1" dur="4.6s" repeatCount="indefinite"/>
+  </g>
+  <path d="M${cx - 1.5} ${cy + 3.5} q1.5 2.5 3 0" stroke="#d99a66" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M${cx - 8} ${cy + 9} q8 8 16 0" stroke="#a85a45" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <circle cx="${cx - 15.5}" cy="${cy + 6}" r="3.6" fill="#ff9d9d" opacity=".55"/>
+  <circle cx="${cx + 15.5}" cy="${cy + 6}" r="3.6" fill="#ff9d9d" opacity=".55"/>`;
 
 // تمايل لطيف للجسم كلّه
 const bob = (inner, dur = 2.6) =>
   `<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="${dur}s" repeatCount="indefinite"/>${inner}</g>`;
 
-// طفل/شخص عام (قابل للتخصيص): شعر/قميص/بنطلون أو فستان
-function person({ skin = "#f1c191", hair = "#3a2a20", shirt = "#2f6fdb", pants = "#c08a4e", dress = null, longHair = false, extra = "" } = {}) {
+// طفل/شخص عام (قابل للتخصيص): شعر/قميص/بنطلون أو فستان — بأسلوب كرتوني فلات مصقول
+function person({ skin = "#f1c191", hair = "#3a2a20", shirt = "#2f6fdb", pants = "#39507a", shoe = "#2746c9", dress = null, longHair = false, extra = "" } = {}) {
+  const legs = `<rect x="50" y="116" width="9" height="22" rx="4" fill="${pants}"/><rect x="61" y="116" width="9" height="22" rx="4" fill="${pants}"/>
+    <path d="M45 138 q0 -7 8 -7 h4 q3 0 3 4 v4 h-15z" fill="${shoe}"/><path d="M75 138 q0 -7 -8 -7 h-4 q-3 0 -3 4 v4 h15z" fill="${shoe}"/>
+    <path d="M46 137 h13 M61 137 h13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>`;
   const body = dress
-    ? `<path d="M44 86 L76 86 L86 128 L34 128 Z" fill="${dress}"/>` // فستان
-    : `<rect x="42" y="84" width="36" height="40" rx="15" fill="${shirt}"/>
-       <rect x="46" y="120" width="11" height="20" rx="5" fill="${pants}"/><rect x="63" y="120" width="11" height="20" rx="5" fill="${pants}"/>
-       <ellipse cx="51" cy="141" rx="8" ry="4.5" fill="#2746c9"/><ellipse cx="69" cy="141" rx="8" ry="4.5" fill="#2746c9"/>`;
-  const arms = `<rect x="34" y="86" width="9" height="28" rx="4.5" fill="${dress || shirt}"/><rect x="77" y="86" width="9" height="28" rx="4.5" fill="${dress || shirt}"/>
-    <circle cx="38" cy="114" r="5.5" fill="${skin}"/><circle cx="82" cy="114" r="5.5" fill="${skin}"/>`;
+    ? `<path d="M45 84 q15 -9 30 0 L86 128 L34 128 Z" fill="${dress}"/><path d="M45 84 q15 -9 30 0 v5 q-15 8 -30 0z" fill="rgba(0,0,0,.07)"/><ellipse cx="60" cy="103" rx="5" ry="5" fill="rgba(255,255,255,.3)"/>`
+    : `${legs}<path d="M44 86 q16 -10 32 0 v26 q0 10 -10 10 h-12 q-10 0 -10 -10 z" fill="${shirt}"/><path d="M52 84 q8 7 16 0" stroke="rgba(255,255,255,.45)" stroke-width="2.2" fill="none"/>`;
+  const arms = `<rect x="34" y="86" width="9" height="27" rx="4.5" fill="${dress || shirt}"/><rect x="77" y="86" width="9" height="27" rx="4.5" fill="${dress || shirt}"/>
+    <circle cx="38" cy="115" r="5.6" fill="${skin}"/><circle cx="82" cy="115" r="5.6" fill="${skin}"/>`;
+  const neck = `<rect x="55" y="74" width="10" height="12" rx="3" fill="${skin}"/>`;
   const hairSvg = longHair
-    ? `<path d="M32 56 Q30 96 40 104 L44 70 Z" fill="${hair}"/><path d="M88 56 Q90 96 80 104 L76 70 Z" fill="${hair}"/><path d="M34 50 Q60 22 86 50 Q86 36 60 30 Q34 36 34 50 Z" fill="${hair}"/>`
-    : `<path d="M35 50 Q60 22 85 50 Q85 34 60 30 Q35 34 35 50 Z" fill="${hair}"/>`;
-  return bob(`${arms}${body}${hairSvg}${face(60, 54, skin)}${extra}`);
+    ? `<path d="M30 58 Q27 104 42 112 L48 70 Z" fill="${hair}"/><path d="M90 58 Q93 104 78 112 L72 70 Z" fill="${hair}"/><path d="M31 58 Q29 22 60 20 Q91 22 89 58 Q80 44 60 45 Q40 44 31 58 Z" fill="${hair}"/><path d="M44 32 Q60 25 76 32" stroke="rgba(255,255,255,.22)" stroke-width="3" fill="none"/>`
+    : `<path d="M33 58 Q30 23 60 21 Q90 23 87 58 Q78 44 60 45 Q42 44 33 58 Z" fill="${hair}"/><path d="M44 33 Q60 26 76 33" stroke="rgba(255,255,255,.2)" stroke-width="3" fill="none"/>`;
+  return bob(`${arms}${neck}${body}${hairSvg}${face(60, 52, skin)}${extra}`);
 }
 
 // شخصيات جاهزة

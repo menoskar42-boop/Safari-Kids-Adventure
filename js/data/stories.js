@@ -74,11 +74,11 @@ export const STORIES = [
     emoji: "🤝",
     region: "values",
     scenes: [
-      { emoji: "🧸", mood: "calm", text: "بعد اللعب، لُعَب الأصحاب اتبعتروا في كل حتة في الأوضة." },
-      { emoji: "😟", mood: "sad", text: "واحد منهم زِهِق وقال: الترتيب لوحدي صعب أوي..." },
-      { emoji: "🤝", mood: "excited", text: "وجِت الفكرة! الأصحاب كلهم اتعاونوا مع بعض في الترتيب." },
-      { emoji: "⏱️", mood: "wonder", text: "وفي كام دقيقة... بقت الأوضة مرتّبة ولامعة!" },
-      { emoji: "🎉", mood: "happy", text: "بالتعاون بنخلّص أي حاجة بسرعة وفرح." },
+      { emoji: "🧸", art: "🧒", bg: "room", props: ["toys"], mood: "calm", text: "بعد اللعب، لُعَب الأصحاب اتبعتروا في كل حتة في الأوضة." },
+      { emoji: "😟", art: "🧒", bg: "room", props: ["toys"], mood: "sad", text: "واحد منهم زِهِق وقال: الترتيب لوحدي صعب أوي..." },
+      { emoji: "🤝", art: "🧒", with: "👦", bg: "room", mood: "excited", text: "وجِت الفكرة! الأصحاب كلهم اتعاونوا مع بعض في الترتيب." },
+      { emoji: "⏱️", art: "🧒", bg: "room", mood: "wonder", text: "وفي كام دقيقة... بقت الأوضة مرتّبة ولامعة!" },
+      { emoji: "🎉", art: "🧒", with: "👦", bg: "room", mood: "happy", text: "بالتعاون بنخلّص أي حاجة بسرعة وفرح." },
     ],
   },
   {
@@ -87,9 +87,9 @@ export const STORIES = [
     emoji: "👩",
     region: "values",
     scenes: [
-      { emoji: "👩", bg: "room", mood: "sad", text: "كانت ماما ليلى تعبانة وهي بتجهّز الأكل." },
+      { emoji: "👩", art: "👩", bg: "room", props: ["pot"], mood: "sad", text: "كانت ماما ليلى تعبانة وهي بتجهّز الأكل على البوتاجاز." },
       { emoji: "🤔", art: "👧", bg: "room", mood: "calm", text: "فليلى وقفت تفكّر: أساعد ماما الحبيبة إزاي؟" },
-      { emoji: "🍽️", art: "👧", with: "🍽️", bg: "room", mood: "happy", text: "وبكل حب، رصّت الأطباق على السفرة بنفسها." },
+      { emoji: "🍽️", art: "👧", bg: "room", props: ["table-plates"], mood: "happy", text: "وبكل حب، رصّت الأطباق على الترابيزة بنفسها." },
       { emoji: "🥰", art: "👩", with: "👧", bg: "room", mood: "happy", text: "فماما ابتسمت ابتسامة كبيرة وحضنت ليلى." },
       { emoji: "❤️", art: "👩", with: "👧", bg: "room", mood: "wonder", text: "فمساعدة الأهل بتملا البيت حب ودفا." },
     ],

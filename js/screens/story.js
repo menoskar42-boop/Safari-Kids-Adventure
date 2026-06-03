@@ -5,7 +5,7 @@ import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { Confetti } from "../core/confetti.js";
 import { gameTopbar, finishActivity } from "../games/common.js";
-import { sceneBackdrop } from "../games/storyart.js";
+import { sceneBackdrop, sceneProps } from "../games/storyart.js";
 import { sceneArtSvg } from "../games/storychars.js";
 import { createCharacter } from "../games/character.js";
 import { storyTone } from "../data/mizo.js";
@@ -62,9 +62,11 @@ export function renderStory({ regionId, regionIndex, storyId }) {
     const artHtml = withSvg
       ? `<div class="story-art duo" title="اقرأ لي"><div class="actor">${withSvg}</div><div class="actor">${mainSvg}</div></div>`
       : `<div class="story-art" title="اقرأ لي">${mainSvg}</div>`;
+    const propsHtml = sc.props ? `<div class="story-props">${sceneProps(sc.props)}</div>` : "";
     scene.innerHTML = `
       <div class="story-bg">${sceneBackdrop(sc.bg || REGION_BG[story.region] || "sky")}</div>
-      ${artHtml}`;
+      ${artHtml}
+      ${propsHtml}`;
     const bubble = document.createElement("div");
     bubble.className = "story-bubble";
     bubble.textContent = sc.text;

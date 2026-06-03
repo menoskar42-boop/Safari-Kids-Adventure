@@ -76,3 +76,21 @@ export function sceneBackdrop(bg) {
 }
 
 export const STORY_BACKDROPS = Object.keys(BACKDROPS);
+
+// ===== عناصر مشهدية (props) تُجسّد نصّ القصة — طبقة أمامية فوق الشخصيات =====
+// إحداثيات المشهد 0..400 ×0..300 (أسفل الكادر للأشياء الأمامية كالطاولة).
+const PROPS = {
+  "table-plates": `<rect x="116" y="234" width="174" height="15" rx="5" fill="#b07a45"/><rect x="130" y="249" width="12" height="44" fill="#8a5a2e"/><rect x="264" y="249" width="12" height="44" fill="#8a5a2e"/><ellipse cx="158" cy="234" rx="22" ry="7" fill="#fff" stroke="#e0e6ee" stroke-width="2"/><ellipse cx="203" cy="232" rx="22" ry="7" fill="#fff" stroke="#e0e6ee" stroke-width="2"/><ellipse cx="248" cy="234" rx="22" ry="7" fill="#fff" stroke="#e0e6ee" stroke-width="2"/>`,
+  table: `<rect x="120" y="236" width="170" height="15" rx="5" fill="#b07a45"/><rect x="132" y="251" width="12" height="42" fill="#8a5a2e"/><rect x="266" y="251" width="12" height="42" fill="#8a5a2e"/>`,
+  pot: `<rect x="250" y="252" width="92" height="40" rx="6" fill="#9aa3ad"/><rect x="262" y="232" width="66" height="22" rx="6" fill="#6b6f76"/><rect x="256" y="228" width="78" height="6" rx="3" fill="#555"/><ellipse cx="295" cy="228" rx="9" ry="4" fill="#ffe08a" opacity=".7"><animate attributeName="cy" values="228;220;228" dur="2.2s" repeatCount="indefinite"/></ellipse>`,
+  toys: `<rect x="48" y="262" width="26" height="26" rx="4" fill="#e8413a"/><rect x="86" y="268" width="22" height="22" rx="4" fill="#2f9fd6"/><circle cx="330" cy="278" r="14" fill="#ffd23f"/><polygon points="296,292 310,264 324,292" fill="#4caf50"/>`,
+  basket: `<path d="M250 250 h70 l-8 38 h-54 z" fill="#e07b39"/><path d="M250 250 h70" stroke="#a85a24" stroke-width="4"/><path d="M258 250 q27 -26 54 0" fill="none" stroke="#a85a24" stroke-width="4"/>`,
+  flowers: `${[40, 120, 300, 360].map((x, i) => `<g transform="translate(${x} ${280 - (i % 2) * 8})"><rect x="-2" y="0" width="4" height="14" fill="#4caf50"/>${[0, 72, 144, 216, 288].map(a => `<ellipse cx="0" cy="-6" rx="3.5" ry="6" fill="${["#ff7eb6", "#ffd23f", "#a06cd5"][i % 3]}" transform="rotate(${a})"/>`).join("")}<circle r="3" fill="#fff"/></g>`).join("")}`,
+};
+
+/** طبقة عناصر مشهدية (SVG) تُجسّد أحداث النصّ */
+export function sceneProps(list) {
+  if (!list || !list.length) return "";
+  const inner = list.map((k) => PROPS[k] || "").join("");
+  return `<svg class="story-svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+}
