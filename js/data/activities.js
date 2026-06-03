@@ -391,6 +391,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "fruits", title: "🧠 نمط الفواكه", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
     { emoji: "🔎", title: "اكتشف المختلف", desc: "جِد الفاكهة المختلفة مع ميزو", screen: "spotDiff",
       params: { datasetKey: "fruits", title: "🔎 اكتشف المختلف", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
+    { emoji: "📏", title: "رتّب حسب الحجم", desc: "من الأصغر للأكبر مع ميزو", screen: "seriation",
+      params: { datasetKey: "fruits", title: "📏 رتّب حسب الحجم", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)" } },
     { emoji: "🗂️", title: "افرز: فاكهة أم حيوان؟", desc: "صنّف كل عنصر لفئته", screen: "sort",
       params: { title: "🗂️ فاكهة أم حيوان؟", bg: "linear-gradient(180deg,#ffc2d6,#ff6f9c)",
         groups: [ { label: "فواكه", emoji: "🍎", datasetKey: "fruits" }, { label: "حيوانات", emoji: "🦁", datasetKey: "animals" } ] } },
