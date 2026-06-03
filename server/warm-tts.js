@@ -8,7 +8,8 @@
 // أو مع عنوان مختلف:  WARM_BASE=http://localhost:5000 node server/warm-tts.js
 import { DATASETS } from "../js/data/datasets.js";
 import { MIZO_INTRO, MIZO_HELLO, MIZO_PRAISE, MIZO_ENCOURAGE, MIZO_GOAL, MIZO_CATCH } from "../js/games/character.js";
-import { MIZO_SONG, MIZO_CHAT, MIZO_OOPS, MIZO_WELCOME, MIZO, femAdapt } from "../js/data/mizo.js";
+import { MIZO_SONG, MIZO_CHAT, MIZO_OOPS, MIZO_WELCOME, MIZO, femAdapt, storyTone } from "../js/data/mizo.js";
+import { STORIES } from "../js/data/stories.js";
 const MZ = MIZO.toneInstructions; // توجيهات لهجة ميزو (لمطابقة مفاتيح الكاش)
 
 const BASE = process.env.WARM_BASE || `http://localhost:${process.env.PORT || 5000}`;
@@ -66,6 +67,10 @@ const addMizo = (t) => { add(t, AR, MZ); const f = femAdapt(t); if (f !== t) add
 [...MIZO_INTRO, ...MIZO_HELLO, ...MIZO_PRAISE, ...MIZO_ENCOURAGE, ...MIZO_GOAL, ...MIZO_CATCH, ...MIZO_SONG, ...MIZO_OOPS, ...MIZO_WELCOME].forEach(addMizo);
 // دردشة ميزو (الأسئلة + كل الردود) بلهجته
 MIZO_CHAT.forEach((s) => { addMizo(s.q); s.opts.forEach((o) => addMizo(o.r)); });
+// سرد القصص: كل مشهد بنبرته الخاصّة حسب مزاجه (لمطابقة مفتاح Speech.say في story.js)
+STORIES.forEach((story) => {
+  story.scenes.forEach((sc) => add(sc.text, AR, storyTone(sc.mood)));
+});
 
 // جُمَل المعلّم الافتراضي لكل حرف/رقم: "هذا حرف ..." و"..." منفردة
 for (const key of ["arabic", "english", "numbers"]) {
