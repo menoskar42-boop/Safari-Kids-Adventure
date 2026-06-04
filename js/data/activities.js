@@ -813,6 +813,8 @@ export const ACTIVITIES = {
       params: { setId: "lam", title: "☀️🌙 اللام الشمسية والقمرية" } },
     { emoji: "ة", title: "التاء المربوطة والمفتوحة", desc: "صنّف الكلمات", screen: "classify",
       params: { setId: "ta", title: "ة/ت التاء المربوطة والمفتوحة" } },
+    { emoji: "👈", title: "ده ولا دي؟", desc: "هذا للمذكّر وهذه للمؤنّث", screen: "genderPick",
+      params: { title: "👈 ده ولا دي؟" } },
   ],
   tastes: [
     { emoji: "👅", title: "استكشف الطعوم", desc: "اضغط على كل طعم لتعرفه", screen: "explore",
