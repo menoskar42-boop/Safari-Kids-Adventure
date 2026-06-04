@@ -526,6 +526,8 @@ export const ACTIVITIES = {
       params: { datasetKey: "family", title: "🧩 ذاكرة", bg: "linear-gradient(180deg,#c2dbff,#c2e9fb)" } },
     { emoji: "🌑", title: "طابق الظل", desc: "اعرف الفرد من ظله", screen: "shadowMatch",
       params: { datasetKey: "family", title: "🌑 طابق الظل", bg: "linear-gradient(180deg,#c2dbff,#c2e9fb)" } },
+    { emoji: "😊", title: "اعرف الإحساس", desc: "اعرف إحساس الوجه", screen: "emotions",
+      params: { title: "😊 اعرف الإحساس", bg: "linear-gradient(180deg,#c2dbff,#c2e9fb)" } },
     { emoji: "📖", title: "قصة: عائلتي الحبيبة", desc: "استمع لقصة جميلة", screen: "story",
       params: { storyId: "family-love" } },
   ],

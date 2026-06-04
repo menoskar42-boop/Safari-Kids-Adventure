@@ -87,6 +87,7 @@ const cases = [
   ["seriation", "../js/games/seriation.js", "renderSeriation", { regionId: "fruits", regionIndex: 0, datasetKey: "fruits", title: "t" }],
   ["maze", "../js/games/maze.js", "renderMaze", { regionId: "animals", regionIndex: 0, title: "t" }],
   ["dotToDot", "../js/games/dotdot.js", "renderDotToDot", { regionId: "numbers", regionIndex: 0, title: "t" }],
+  ["emotions", "../js/games/emotions.js", "renderEmotions", { regionId: "family", regionIndex: 0, title: "t" }],
   ["puzzle", "../js/games/puzzle.js", "renderPuzzle", { regionId: "animals", regionIndex: 0, datasetKey: "animals", title: "t" }],
   ["sort", "../js/games/sort.js", "renderSort", { regionId: "fruits", regionIndex: 0, title: "t", groups: [{ label: "فواكه", datasetKey: "fruits" }, { label: "حيوانات", datasetKey: "animals" }] }],
   ["phonics", "../js/games/phonics.js", "renderPhonics", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG", title: "t" }],
