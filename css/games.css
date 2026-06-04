@@ -753,3 +753,32 @@ img.pat-glyph { width: 1.1em; height: 1.1em; object-fit: contain; vertical-align
   font-size: clamp(56px, 17vw, 100px);
   line-height: 1.1;
 }
+
+/* ===== لعبة "دوّر على الكلمة" (الكلمة جوّه الجملة) ===== */
+.fw-sentence {
+  direction: rtl;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  justify-content: center;
+  align-items: center;
+  margin: 18px auto;
+  max-width: 92%;
+}
+.fw-word {
+  font-family: inherit;
+  font-size: clamp(24px, 6.4vw, 36px);
+  font-weight: 800;
+  color: var(--c-purple-2);
+  background: #fff;
+  border: 3px solid transparent;
+  border-radius: 16px;
+  padding: 8px 16px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform .12s ease, background .2s ease;
+  animation: pop-in .3s ease both;
+}
+.fw-word:active { transform: scale(.92); }
+.fw-word.correct { background: #c8f7c5; border-color: #2ecc71; color: #1e7d3a; }
+.fw-word.wrong { background: #ffd6d6; border-color: #ff6b6b; animation: shake .4s; }

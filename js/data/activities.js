@@ -819,6 +819,8 @@ export const ACTIVITIES = {
       params: { title: "🔢 واحد ولا كتير؟" } },
     { emoji: "❓", title: "ميزو بيسأل", desc: "أدوات السؤال: مين وفين وإمتى", screen: "askWord",
       params: { title: "❓ ميزو بيسأل" } },
+    { emoji: "🔎", title: "دوّر على الكلمة", desc: "اضغط على الكلمة المطلوبة في الجملة", screen: "findWord",
+      params: { title: "🔎 دوّر على الكلمة" } },
   ],
   tastes: [
     { emoji: "👅", title: "استكشف الطعوم", desc: "اضغط على كل طعم لتعرفه", screen: "explore",
