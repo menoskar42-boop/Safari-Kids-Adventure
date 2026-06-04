@@ -187,6 +187,14 @@ export const ACTIVITIES = {
       screen: "phonics",
       params: { datasetKey: "english", lang: "en-US", title: "🔤 First Letter", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
     },
+    {
+      emoji: "🧑",
+      title: "Pronouns: he/she/they",
+      desc: "Pick the right pronoun",
+      screen: "pronoun",
+      advanced: true,
+      params: { lang: "en-US", title: "🧑 Pick the pronoun", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
+    },
   ],
   numbers: [
     {
@@ -821,6 +829,8 @@ export const ACTIVITIES = {
       params: { title: "❓ ميزو بيسأل" } },
     { emoji: "🔎", title: "دوّر على الكلمة", desc: "اضغط على الكلمة المطلوبة في الجملة", screen: "findWord",
       params: { title: "🔎 دوّر على الكلمة" } },
+    { emoji: "🧑", title: "الضمير الصح", desc: "هو وهي وهم وهنّ", screen: "pronoun", advanced: true,
+      params: { title: "🧑 الضمير الصح" } },
   ],
   tastes: [
     { emoji: "👅", title: "استكشف الطعوم", desc: "اضغط على كل طعم لتعرفه", screen: "explore",

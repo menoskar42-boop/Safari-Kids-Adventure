@@ -5,4 +5,5 @@ export const FEATURES = {
   stories: true, // القصص التفاعلية — مُفعّلة
   unlockAll: true, // فتح كل المناطق للمراجعة (اجعلها false لإعادة التدرّج التلقائي)
   ads: false, // شريط إعلان سفلي (اجعلها true بعد اعتماد AdSense ووضع المُعرّفات في js/core/ads.js)
+  advancedGrammarForAll: true, // مؤقّت: إظهار ألعاب القواعد المتقدّمة للجميع للاختبار. اجعلها false لتقييدها بإعداد ولي الأمر (أكبر من ٦)
 };

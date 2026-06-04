@@ -29,9 +29,10 @@ export function renderRegion({ id, index }) {
   `;
   screen.appendChild(topbar);
 
-  // نُخفي أنشطة الميزات المعطّلة (القصص حالياً)
+  // نُخفي أنشطة الميزات المعطّلة (القصص حالياً) + القواعد المتقدّمة (إلا لو فُتحت)
+  const showAdvanced = FEATURES.advancedGrammarForAll || Store.advancedUnlocked;
   const activities = (ACTIVITIES[id] || []).filter(
-    (a) => !(a.screen === "story" && !FEATURES.stories)
+    (a) => !(a.screen === "story" && !FEATURES.stories) && !(a.advanced && !showAdvanced)
   );
 
   if (region.ready && activities && activities.length) {

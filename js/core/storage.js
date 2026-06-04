@@ -384,6 +384,15 @@ export const Store = {
     persist();
   },
 
+  // فتح ألعاب القواعد المتقدّمة (للأطفال الأكبر من ٦): يحدّده ولي الأمر
+  get advancedUnlocked() {
+    return !!state.advancedUnlocked;
+  },
+  setAdvancedUnlocked(on) {
+    state.advancedUnlocked = !!on;
+    persist();
+  },
+
   // تقدّم اليوم؛ تعيد true عند بلوغ الهدف لأول مرة اليوم
   addDailyProgress(n = 1) {
     const t = today();

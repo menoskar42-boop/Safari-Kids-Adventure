@@ -92,6 +92,8 @@ const cases = [
   ["numberPick", "../js/games/grammarNumber.js", "renderNumberPick", { regionId: "reading", regionIndex: 0, title: "t" }],
   ["askWord", "../js/games/grammarAsk.js", "renderAskWord", { regionId: "reading", regionIndex: 0, title: "t" }],
   ["findWord", "../js/games/grammarFindWord.js", "renderFindWord", { regionId: "reading", regionIndex: 0, title: "t" }],
+  ["pronoun(ar)", "../js/games/grammarPronoun.js", "renderPronoun", { regionId: "reading", regionIndex: 0, title: "t" }],
+  ["pronoun(en)", "../js/games/grammarPronoun.js", "renderPronoun", { regionId: "english", regionIndex: 1, title: "t", lang: "en-US" }],
   ["puzzle", "../js/games/puzzle.js", "renderPuzzle", { regionId: "animals", regionIndex: 0, datasetKey: "animals", title: "t" }],
   ["sort", "../js/games/sort.js", "renderSort", { regionId: "fruits", regionIndex: 0, title: "t", groups: [{ label: "فواكه", datasetKey: "fruits" }, { label: "حيوانات", datasetKey: "animals" }] }],
   ["phonics", "../js/games/phonics.js", "renderPhonics", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG", title: "t" }],

@@ -79,6 +79,28 @@ export function renderProfile() {
   });
   wrap.appendChild(ageRow);
 
+  // فتح ألعاب القواعد المتقدّمة (للأطفال الأكبر من ٦ سنوات)
+  const advLabel = document.createElement("p");
+  advLabel.style.cssText = "font-weight:800;color:var(--c-ink);margin:18px 0 8px;font-size:clamp(14px,4vw,17px)";
+  advLabel.textContent = "🧑‍🎓 ألعاب القواعد المتقدّمة (أكبر من ٦ سنوات)";
+  wrap.appendChild(advLabel);
+
+  const advBtn = document.createElement("button");
+  advBtn.className = "candy-btn";
+  const paintAdv = () => {
+    advBtn.textContent = Store.advancedUnlocked ? "✅ مفتوحة" : "🔒 مقفولة";
+    advBtn.style.background = Store.advancedUnlocked
+      ? "linear-gradient(180deg,#34d399,#10b981)"
+      : "linear-gradient(180deg,#9aa7ff,#6b7cff)";
+  };
+  paintAdv();
+  advBtn.addEventListener("click", () => {
+    Sfx.tap();
+    Store.setAdvancedUnlocked(!Store.advancedUnlocked);
+    paintAdv();
+  });
+  wrap.appendChild(advBtn);
+
   // ===== صداقة ميزو + تخصيصه =====
   const fLevel = Store.friendLevel;
   const fTitle = document.createElement("p");
