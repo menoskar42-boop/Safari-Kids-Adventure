@@ -835,6 +835,8 @@ export const ACTIVITIES = {
       params: { title: "🔗 الاسم الموصول" } },
     { emoji: "🗣️", title: "نوع الأسلوب", desc: "تعجب ونداء وأمر واستفهام ونفي", screen: "style", advanced: true,
       params: { title: "🗣️ نوع الأسلوب" } },
+    { emoji: "🎯", title: "مين الفاعل؟", desc: "الفاعل والمبتدأ والخبر في الجملة", screen: "subject", advanced: true,
+      params: { title: "🎯 مين الفاعل؟" } },
   ],
   tastes: [
     { emoji: "👅", title: "استكشف الطعوم", desc: "اضغط على كل طعم لتعرفه", screen: "explore",
