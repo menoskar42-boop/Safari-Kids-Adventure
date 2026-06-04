@@ -287,6 +287,8 @@ export const ACTIVITIES = {
       screen: "story",
       params: { storyId: "count-stars" },
     },
+    { emoji: "✏️", title: "وصّل النقاط", desc: "اربط الأرقام بالترتيب لتظهر الصورة", screen: "dotToDot",
+      params: { title: "🔢 وصّل النقاط", bg: "linear-gradient(180deg,#cfe9ff,#9ec9f5)" } },
   ],
   animals: [
     {

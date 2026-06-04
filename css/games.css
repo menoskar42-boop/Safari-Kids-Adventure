@@ -220,6 +220,19 @@ body.has-ad-bar .splash { padding-bottom: 72px; }
 .miz.story-narrator { display: block; margin: 2px auto 0; }
 .story-narrator .miz-svg { width: clamp(64px, 19vw, 92px); }
 
+/* لعبة وصّل النقاط */
+.dot-wrap { width: min(86vw, 380px); margin: 8px auto 22px; }
+.dot-svg { width: 100%; height: auto; aspect-ratio: 1; background: #fff; border-radius: 18px; box-shadow: var(--shadow-card); }
+.dot-node { cursor: pointer; }
+.dot-node circle { fill: #eaf1ff; stroke: #8aa6e0; stroke-width: 1.2; transition: fill .15s; }
+.dot-node text { fill: #4a5a8a; font-weight: 800; pointer-events: none; }
+.dot-node.next circle { fill: #ffd23f; stroke: #f4a200; animation: dot-pulse 1s ease-in-out infinite; }
+.dot-node.done circle { fill: #34d399; stroke: #10b981; }
+.dot-node.done text { fill: #fff; }
+@keyframes dot-pulse { 0%,100% { r: 6.5; } 50% { r: 8.5; } }
+.dot-line { stroke: #5b3fb5; stroke-width: 2.4; stroke-linecap: round; }
+.dot-reveal { animation: pop-in .4s ease; }
+
 /* لعبة المتاهة */
 .maze-grid { display: grid; gap: 0; width: min(82vw, 360px); aspect-ratio: 1; margin: 10px auto; background: #fff; border-radius: 14px; padding: 6px; box-shadow: var(--shadow-card); }
 .maze-cell { position: relative; display: grid; place-items: center; box-sizing: border-box; }
