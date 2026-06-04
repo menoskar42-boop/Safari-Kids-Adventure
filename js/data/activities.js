@@ -817,6 +817,8 @@ export const ACTIVITIES = {
       params: { title: "👈 ده ولا دي؟" } },
     { emoji: "🔢", title: "واحد ولا كتير؟", desc: "المفرد والجمع", screen: "numberPick",
       params: { title: "🔢 واحد ولا كتير؟" } },
+    { emoji: "❓", title: "ميزو بيسأل", desc: "أدوات السؤال: مين وفين وإمتى", screen: "askWord",
+      params: { title: "❓ ميزو بيسأل" } },
   ],
   tastes: [
     { emoji: "👅", title: "استكشف الطعوم", desc: "اضغط على كل طعم لتعرفه", screen: "explore",
