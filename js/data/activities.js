@@ -831,6 +831,8 @@ export const ACTIVITIES = {
       params: { title: "🔎 دوّر على الكلمة" } },
     { emoji: "🧑", title: "الضمير الصح", desc: "هو وهي وهم وهنّ", screen: "pronoun", advanced: true,
       params: { title: "🧑 الضمير الصح" } },
+    { emoji: "🔗", title: "الاسم الموصول", desc: "الذي والتي والذين واللاتي", screen: "relative", advanced: true,
+      params: { title: "🔗 الاسم الموصول" } },
   ],
   tastes: [
     { emoji: "👅", title: "استكشف الطعوم", desc: "اضغط على كل طعم لتعرفه", screen: "explore",

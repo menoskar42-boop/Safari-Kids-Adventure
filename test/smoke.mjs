@@ -94,6 +94,7 @@ const cases = [
   ["findWord", "../js/games/grammarFindWord.js", "renderFindWord", { regionId: "reading", regionIndex: 0, title: "t" }],
   ["pronoun(ar)", "../js/games/grammarPronoun.js", "renderPronoun", { regionId: "reading", regionIndex: 0, title: "t" }],
   ["pronoun(en)", "../js/games/grammarPronoun.js", "renderPronoun", { regionId: "english", regionIndex: 1, title: "t", lang: "en-US" }],
+  ["relative", "../js/games/grammarRelative.js", "renderRelative", { regionId: "reading", regionIndex: 0, title: "t" }],
   ["puzzle", "../js/games/puzzle.js", "renderPuzzle", { regionId: "animals", regionIndex: 0, datasetKey: "animals", title: "t" }],
   ["sort", "../js/games/sort.js", "renderSort", { regionId: "fruits", regionIndex: 0, title: "t", groups: [{ label: "فواكه", datasetKey: "fruits" }, { label: "حيوانات", datasetKey: "animals" }] }],
   ["phonics", "../js/games/phonics.js", "renderPhonics", { regionId: "arabic", regionIndex: 0, datasetKey: "arabic", lang: "ar-EG", title: "t" }],
