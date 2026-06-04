@@ -744,3 +744,12 @@ img.pat-glyph { width: 1.1em; height: 1.1em; object-fit: contain; vertical-align
   font-size: clamp(26px, 7vw, 38px);
   font-weight: 800;
 }
+.gn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(56px, 17vw, 100px);
+  line-height: 1.1;
+}

@@ -815,6 +815,8 @@ export const ACTIVITIES = {
       params: { setId: "ta", title: "ة/ت التاء المربوطة والمفتوحة" } },
     { emoji: "👈", title: "ده ولا دي؟", desc: "هذا للمذكّر وهذه للمؤنّث", screen: "genderPick",
       params: { title: "👈 ده ولا دي؟" } },
+    { emoji: "🔢", title: "واحد ولا كتير؟", desc: "المفرد والجمع", screen: "numberPick",
+      params: { title: "🔢 واحد ولا كتير؟" } },
   ],
   tastes: [
     { emoji: "👅", title: "استكشف الطعوم", desc: "اضغط على كل طعم لتعرفه", screen: "explore",
