@@ -195,6 +195,14 @@ export const ACTIVITIES = {
       advanced: true,
       params: { lang: "en-US", title: "🧑 Pick the pronoun", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
     },
+    {
+      emoji: "🔤",
+      title: "a or an?",
+      desc: "Choose the right article",
+      screen: "article",
+      advanced: true,
+      params: { title: "🔤 a or an?", bg: "linear-gradient(180deg,#bfe3ff,#7aa8f0)" },
+    },
   ],
   numbers: [
     {
