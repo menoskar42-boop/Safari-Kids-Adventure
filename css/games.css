@@ -739,6 +739,14 @@ img.pat-glyph { width: 1.1em; height: 1.1em; object-fit: contain; vertical-align
   margin-top: 4px;
 }
 .gp-word b { color: var(--c-purple); }
+.gp-sentence {
+  direction: rtl;
+  font-size: clamp(28px, 7.5vw, 44px);
+  font-weight: 800;
+  color: var(--c-purple-2);
+  line-height: 1.5;
+  padding: 6px 4px;
+}
 .gp-opt {
   min-width: clamp(96px, 30vw, 140px);
   font-size: clamp(26px, 7vw, 38px);

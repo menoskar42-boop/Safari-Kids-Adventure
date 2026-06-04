@@ -833,6 +833,8 @@ export const ACTIVITIES = {
       params: { title: "🧑 الضمير الصح" } },
     { emoji: "🔗", title: "الاسم الموصول", desc: "الذي والتي والذين واللاتي", screen: "relative", advanced: true,
       params: { title: "🔗 الاسم الموصول" } },
+    { emoji: "🗣️", title: "نوع الأسلوب", desc: "تعجب ونداء وأمر واستفهام ونفي", screen: "style", advanced: true,
+      params: { title: "🗣️ نوع الأسلوب" } },
   ],
   tastes: [
     { emoji: "👅", title: "استكشف الطعوم", desc: "اضغط على كل طعم لتعرفه", screen: "explore",
