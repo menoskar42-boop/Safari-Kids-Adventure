@@ -42,6 +42,12 @@ manifest، أو أي وسم `<meta>`) يجب أن يتبعه فورًا فحص �
 
 ### ٣) مخالفات الفهرسة/الأرشفة في Bing التي رصدناها
 
+> مرجع كامل محفوظ في المستودع: [`docs/bing-webmaster-help-center.md`](docs/bing-webmaster-help-center.md)
+> (ملخّص Bing Webmaster Help Center — أرجع إليه عند أي عمل خاص بالفهرسة/الزحف/الـ SEO).
+> من أهم بنوده ذات الصلة بنا: العنوان يجب ألّا يكون طويلًا، الروابط يجب ألّا تشير
+> إلى محتوى غير موجود («Linking to content that doesn't exist»)، احترام robots.txt
+> و canonical و NOINDEX، وأن Bing يقرأ JSON-LD / Open Graph / Microdata.
+
 - **طول العنوان `<title>`:** يجب ألّا يكون كبيرًا — اجعله ضمن **~60 حرفًا** وتجنّب
   بدايته برمز/إيموجي. (هذه مخالفة سبق أن رصدناها في Bing: «العنوان كبير».)
 - **طول `<meta name="description">`:** ضمن ~155–160 حرفًا.
