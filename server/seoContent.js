@@ -25,6 +25,8 @@ export const SITE = {
   shortName: "Safari Kids",
   locale: "ar_AR",
   twitter: "@oscardevs",
+  datePublished: "2026-06-08",
+  dateModified: "2026-06-10",
 };
 
 // أقسام الموقع — كل قسم يصبح صفحة قابلة للأرشفة بمحتوى غنيّ.
