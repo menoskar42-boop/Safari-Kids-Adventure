@@ -73,7 +73,7 @@ function jsonLd(section) {
         name: section.h1,
         description: section.description,
         url,
-        image: `${SITE.url}/og.svg`,
+        image: `${SITE.url}/og.png`,
         inLanguage: ["ar", "en"],
         educationalLevel: "Preschool",
         typicalAgeRange: "3-6",
@@ -82,7 +82,7 @@ function jsonLd(section) {
         teaches: section.keywords.slice(0, 3).join(", "),
         audience: { "@type": "EducationalAudience", educationalRole: "student" },
         isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.url },
-        publisher: { "@type": "Organization", name: SITE.shortName, url: SITE.url, logo: { "@type": "ImageObject", url: `${SITE.url}/og.svg` } },
+        publisher: { "@type": "Organization", name: SITE.shortName, url: SITE.url, logo: { "@type": "ImageObject", url: `${SITE.url}/og.png` } },
         hasPart: itemList,
       },
       {
@@ -134,12 +134,12 @@ export function renderSectionPage(slug) {
 <meta property="og:title" content="${esc(section.title)}" />
 <meta property="og:description" content="${esc(section.description)}" />
 <meta property="og:url" content="${url}" />
-<meta property="og:image" content="${SITE.url}/og.svg" />
+<meta property="og:image" content="${SITE.url}/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="${SITE.twitter}" />
 <meta name="twitter:title" content="${esc(section.title)}" />
 <meta name="twitter:description" content="${esc(section.description)}" />
-<meta name="twitter:image" content="${SITE.url}/og.svg" />
+<meta name="twitter:image" content="${SITE.url}/og.png" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>${section.emoji}</text></svg>" />
 <link rel="stylesheet" href="/css/seo.css" />
 ${jsonLd(section)}
@@ -191,10 +191,10 @@ export function renderHomePage() {
 <meta property="og:title" content="${esc(SITE.name)}" />
 <meta property="og:description" content="تطبيق مغامرات تعليمي للأطفال: حروف وأرقام وحيوانات وألوان وأشكال بالصوت والألعاب." />
 <meta property="og:url" content="${SITE.url}/explore" />
-<meta property="og:image" content="${SITE.url}/og.svg" />
+<meta property="og:image" content="${SITE.url}/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="${SITE.twitter}" />
-<meta name="twitter:image" content="${SITE.url}/og.svg" />
+<meta name="twitter:image" content="${SITE.url}/og.png" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦁</text></svg>" />
 <link rel="stylesheet" href="/css/seo.css" />
 <script type="application/ld+json">${JSON.stringify({

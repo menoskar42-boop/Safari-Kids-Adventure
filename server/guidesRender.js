@@ -21,7 +21,7 @@ function jsonLd(guide) {
         description: guide.description,
         url,
         mainEntityOfPage: { "@type": "WebPage", "@id": url },
-        image: `${SITE.url}/og.svg`,
+        image: `${SITE.url}/og.png`,
         inLanguage: "ar",
         datePublished: SITE.datePublished,
         dateModified: SITE.dateModified,
@@ -29,7 +29,7 @@ function jsonLd(guide) {
         audience: { "@type": "Audience", audienceType: "Parents" },
         author: { "@type": "Organization", name: SITE.shortName, url: SITE.url },
         isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.url },
-        publisher: { "@type": "Organization", name: SITE.shortName, url: SITE.url, logo: { "@type": "ImageObject", url: `${SITE.url}/og.svg` } },
+        publisher: { "@type": "Organization", name: SITE.shortName, url: SITE.url, logo: { "@type": "ImageObject", url: `${SITE.url}/og.png` } },
       },
       {
         "@type": "BreadcrumbList",
