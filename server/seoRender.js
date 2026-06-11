@@ -323,7 +323,7 @@ function imageTagsFor(section) {
 }
 
 export function renderSitemap() {
-  const today = new Date().toISOString().slice(0, 10);
+  const lastmod = SITE.dateModified;
   const urls = [
     { loc: `${SITE.url}/`, priority: "1.0", freq: "daily" },
     { loc: `${SITE.url}/explore`, priority: "0.9", freq: "weekly" },
@@ -346,7 +346,7 @@ export function renderSitemap() {
   const body = urls
     .map(
       (u) =>
-        `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${today}</lastmod>\n` +
+        `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n` +
         `    <changefreq>${u.freq}</changefreq>\n    <priority>${u.priority}</priority>` +
         (u.images ? `\n${u.images}` : "") +
         `\n  </url>`
