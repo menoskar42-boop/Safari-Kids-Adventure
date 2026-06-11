@@ -86,6 +86,10 @@ export function renderGuidePage(slug) {
 <meta name="twitter:site" content="${SITE.twitter}" />
 <meta name="twitter:title" content="${esc(guide.title)}" />
 <meta name="twitter:description" content="${esc(guide.description)}" />
+<meta property="og:image" content="${SITE.url}/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="${SITE.url}/og.png" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>${guide.emoji}</text></svg>" />
 <link rel="stylesheet" href="/css/seo.css" />
 ${jsonLd(guide)}
@@ -124,7 +128,7 @@ export function renderGuidesIndex() {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>أدلة الآباء لتعليم الأطفال — حروف وأرقام وحيوانات | عالم الاستكشاف السحري</title>
+<title>أدلة الآباء لتعليم الأطفال | عالم الاستكشاف السحري</title>
 <meta name="description" content="مجموعة أدلة عملية للآباء لتعليم الأطفال من ٣ إلى ٦ سنوات: الحروف العربية والإنجليزية، الأرقام والعدّ، والحيوانات وأصواتها، بأنشطة وألعاب مجرّبة." />
 <meta name="keywords" content="ادلة تعليم الاطفال، كيف اعلم طفلي، نصائح تربوية، تعليم ما قبل المدرسة" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -133,6 +137,11 @@ export function renderGuidesIndex() {
 <meta property="og:title" content="أدلة الآباء لتعليم الأطفال" />
 <meta property="og:description" content="أدلة عملية لتعليم الأطفال الحروف والأرقام والحيوانات بأنشطة وألعاب." />
 <meta property="og:url" content="${SITE.url}/guides" />
+<meta property="og:image" content="${SITE.url}/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="${SITE.url}/og.png" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
 <link rel="stylesheet" href="/css/seo.css" />
 </head>

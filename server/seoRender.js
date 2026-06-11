@@ -180,7 +180,7 @@ export function renderHomePage() {
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>${esc(SITE.name)} — تطبيق تعليمي تفاعلي للأطفال</title>
+<title>استكشف كل أقسام التعلّم | عالم الاستكشاف السحري</title>
 <meta name="description" content="عالم الاستكشاف السحري: تطبيق مغامرات تعليمي للأطفال من ٣ إلى ٦ سنوات لتعليم الحروف العربية والإنجليزية والأرقام والحيوانات والألوان والأشكال بالصوت والألعاب." />
 <meta name="keywords" content="تطبيق تعليمي للاطفال، تعليم الحروف، تعليم الارقام، العاب تعليمية، تعلم العربية والانجليزية للاطفال" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
