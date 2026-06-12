@@ -5,7 +5,7 @@ import { Speech } from "../core/speech.js";
 import { Sfx } from "../core/audio.js";
 import { awardStars } from "../core/rewards.js";
 import { gameTopbar, shuffle, finishActivity, diffCount } from "./common.js";
-import { glyphMarkup } from "./glyph.js";
+import { glyphMarkup, glyphEmoji } from "./glyph.js";
 
 const ROUNDS = 5;
 
@@ -76,7 +76,8 @@ export function renderShadowMatch({ regionId, regionIndex, datasetKey, title, bg
 
       const shadow = document.createElement("div");
       shadow.className = "shadow-glyph";
-      shadow.innerHTML = glyphMarkup(target);
+      // الظل يُبنى من الإيموجي دائماً (silhouette): الصور الفوتوغرافية تُسوَّد كمربّع.
+      shadow.innerHTML = glyphEmoji(target);
       shadow.style.cssText = "font-size:clamp(110px,32vw,200px);filter:brightness(0);opacity:.85";
       stage.appendChild(shadow);
 

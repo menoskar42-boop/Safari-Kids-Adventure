@@ -13,6 +13,12 @@ export function glyphMarkup(it, cls = "item-glyph") {
   return `<span class="${cls}">${it.emoji}</span>`;
 }
 
+/** يعرض الإيموجي دائماً (للظل/silhouette: الصور الفوتوغرافية المستطيلة
+ *  تتحوّل إلى مربّع أسود مع brightness(0)، بينما الإيموجي يعطي شكلاً ظليّاً سليماً). */
+export function glyphEmoji(it, cls = "item-glyph") {
+  return `<span class="${cls}">${it.emoji || ""}</span>`;
+}
+
 /** للأماكن التي تحتاج عنصر DOM جاهز */
 export function glyphNode(it, cls = "item-glyph") {
   const wrap = document.createElement("span");
