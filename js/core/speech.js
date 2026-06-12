@@ -89,7 +89,9 @@ export const Speech = {
       const fallback = () => {
         if (settled) return;
         settled = true;
-        if (!aiHealthy && myId === speakSeq) this._webSpeak(text, opts);
+        aiHealthy = false; // فشل توليد الصوت: لم يعد الـ AI سليماً (مثلاً نفاد الرصيد/الحصة)
+        // نضمن دائماً سماع الطفل لصوت ميزو عبر Web Speech، ما لم يُلغَ هذا النطق بنطقٍ أحدث.
+        if (myId === speakSeq) this._webSpeak(text, opts);
         else if (opts.onend) opts.onend();
       };
       // مهلة: إن لم يبدأ صوت الـ AI خلال ١٠ ثوانٍ نُلغيه (وننتقل للبديل فقط إن لم يكن الـ AI سليماً)

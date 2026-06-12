@@ -5,6 +5,13 @@
 let aiAvailable = null; // null = لم يُفحص بعد
 let userDisabled = false; // يضبطه ولي الأمر (تعطيل الميكروفون/الذكاء الاصطناعي)
 let audioEl = null;
+// عند فشل OpenAI (نفاد الرصيد/الحصة 429، أو خطأ خادم 5xx) نُبرّد الـ AI مؤقتاً
+// كي ينتقل التطبيق فوراً إلى Web Speech بلا تأخّر، ثم نعيد المحاولة بعد انتهاء التبريد.
+let aiCooldownUntil = 0;
+const AI_COOLDOWN_MS = 60000;
+function noteAIFailure(status) {
+  if (status === 429 || status >= 500) aiCooldownUntil = Date.now() + AI_COOLDOWN_MS;
+}
 
 /** تعطيل/تفعيل ميزات الـ AI من إعداد ولي الأمر */
 export function setAIEnabled(on) {
@@ -26,7 +33,7 @@ export async function checkAI() {
 }
 
 export function isAIReady() {
-  return aiAvailable === true && !userDisabled;
+  return aiAvailable === true && !userDisabled && Date.now() >= aiCooldownUntil;
 }
 
 /**
@@ -50,7 +57,7 @@ export function aiSpeak(text, opts = {}) {
           }),
           signal: opts.signal, // يسمح بإلغاء الطلب إن تأخّر (مهلة)
         });
-        if (!r.ok) throw new Error("tts " + r.status);
+        if (!r.ok) { noteAIFailure(r.status); throw new Error("tts " + r.status); }
         const blob = await r.blob();
         url = URL.createObjectURL(blob);
       }
@@ -82,7 +89,7 @@ export function aiPrepareTTS(text, opts = {}) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, voice: opts.voice, instructions: opts.instructions }),
     });
-    if (!r.ok) throw new Error("tts " + r.status);
+    if (!r.ok) { noteAIFailure(r.status); throw new Error("tts " + r.status); }
     const blob = await r.blob();
     return URL.createObjectURL(blob);
   })();
