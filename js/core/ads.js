@@ -11,7 +11,7 @@ export const ADS = {
   slotId: "",      // ← ضع معرّف وحدة الإعلان من لوحة AdSense بعد القبول (مثال: "1234567890")
 };
 
-let mounted = false;
+let shown = false;
 let scriptLoaded = false;
 
 function loadAdSenseScript() {
@@ -26,15 +26,20 @@ function loadAdSenseScript() {
   document.head.appendChild(s);
 }
 
-/** يركّب شريط الإعلان السفلي مرّة واحدة — لا يفعل شيئاً ما لم يُفعَّل وتُضبَط المُعرّفات */
-export function mountAdBar() {
-  if (mounted) return;
+/**
+ * يُظهر شريط الإعلان السفلي — يُستدعى فقط من شاشات الكبار (لوحة ولي الأمر).
+ * توافق COPPA/Families: لا يُطلَب أيّ إعلان إطلاقاً على شاشات الطفل، لأن الطلب
+ * (push) يحدث هنا فقط. ويبقى الشريط مخفياً حتى تُفعَّل FEATURES.ads وتُضبَط المُعرّفات.
+ */
+export function showAdBar() {
+  if (shown) return;
   if (!FEATURES.ads || !ADS.publisherId || !ADS.slotId) return; // يبقى مخفياً حتى الاعتماد
-  mounted = true;
+  shown = true;
   document.body.classList.add("has-ad-bar");
 
   const bar = document.createElement("div");
   bar.className = "ad-bar";
+  bar.id = "adBar";
   bar.setAttribute("aria-hidden", "true");
   bar.innerHTML = `
     <span class="ad-bar-label">إعلان</span>
@@ -45,8 +50,7 @@ export function mountAdBar() {
       data-full-width-responsive="false"></ins>`;
   document.body.appendChild(bar);
 
-  // ===== توافق COPPA: محتوى موجَّه للأطفال + إعلانات غير مخصّصة =====
-  // يُضبط في الكود نفسه (لا الاعتماد على لوحة التحكّم فقط) فيُطبَّق على كل الصفحات.
+  // ===== توافق COPPA: محتوى موجَّه للأطفال + إعلانات غير مخصّصة (قبل أيّ ad push) =====
   window.adsbygoogle = window.adsbygoogle || [];
   window.adsbygoogle.requestNonPersonalizedAds = 1; // إعلانات غير مخصّصة (NPA)
   try {
@@ -55,4 +59,12 @@ export function mountAdBar() {
 
   loadAdSenseScript();
   try { window.adsbygoogle.push({}); } catch (_e) {}
+}
+
+/** يُزيل شريط الإعلان — يُستدعى عند مغادرة شاشة الكبار (وعلى كل شاشات الطفل). */
+export function hideAdBar() {
+  document.body.classList.remove("has-ad-bar");
+  const bar = document.getElementById("adBar");
+  if (bar) bar.remove();
+  shown = false; // أيّ دخول لاحق لشاشة الكبار يُنشئ طلباً جديداً نظيفاً
 }

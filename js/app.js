@@ -67,7 +67,8 @@ import { renderSpinWheel } from "./screens/spinwheel.js";
 import { renderBadges } from "./screens/badges.js";
 import { renderChallenge } from "./games/challenge.js";
 import { createCharacter } from "./games/character.js";
-import { mountAdBar } from "./core/ads.js";
+// ملاحظة: شريط الإعلان لم يعُد يُركَّب هنا — يُدار حصراً من الموجّه (Router)
+// ليظهر على شاشة ولي الأمر فقط، فلا يُطلَب أيّ إعلان على شاشات الطفل (COPPA/Families).
 
 // تسجيل الشاشات
 Router.register("home", renderHome);
@@ -198,9 +199,6 @@ function startApp() {
 
   // نبضة كل دقيقة لاحتساب وقت الاستخدام (للوحة ولي الأمر) — فقط والصفحة ظاهرة
   setInterval(() => { if (!document.hidden) Store.addUsageMinutes(1); }, 60000);
-
-  // شريط الإعلان السفلي (متوافق، مخفيّ حتى تفعيله من FEATURES.ads + مُعرّفات AdSense)
-  mountAdBar();
 
   // رابط عميق: ?region=arabic يفتح المنطقة مباشرة (قادم من صفحات SEO)
   const wanted = new URLSearchParams(location.search).get("region");
