@@ -17,7 +17,8 @@ let scriptLoaded = false;
 function loadAdSenseScript() {
   if (scriptLoaded || !ADS.publisherId) return;
   scriptLoaded = true;
-  // المكتبة محمَّلة أصلاً من index.html (للتحقّق) → لا نكرّر الوسم
+  // المكتبة لم تعُد في <head> — تُحقَن هنا ديناميكياً مرّة واحدة (guard أعلاه)،
+  // ولا يحدث ذلك إلا من showAdBar داخل قسم ولي الأمر بعد اجتياز البوّابة.
   if (document.querySelector('script[src*="adsbygoogle.js"]')) return;
   const s = document.createElement("script");
   s.async = true;

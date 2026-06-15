@@ -1,6 +1,6 @@
 // ===== موجّه بسيط بين الشاشات =====
 import { Speech } from "./speech.js";
-import { showAdBar, hideAdBar } from "./ads.js";
+import { hideAdBar } from "./ads.js";
 
 const routes = new Map();
 const app = document.getElementById("app");
@@ -23,10 +23,9 @@ export const Router = {
     app.innerHTML = "";
     app.scrollTop = 0;
     current = { name, params };
-    // توافق COPPA/Families: الإعلان على شاشة الكبار (ولي الأمر) فقط، ويُزال على
-    // كل شاشات الطفل — فلا يُطلَب أيّ إعلان في سياق موجَّه للأطفال.
-    if (name === "parent") showAdBar();
-    else hideAdBar();
+    // توافق COPPA/Families: نُزيل أيّ إعلان عند كل انتقال. الإعلان لا يظهر إلا بعد
+    // اجتياز بوّابة الآباء داخل شاشة ولي الأمر (تُستدعى showAdBar من هناك حصراً).
+    hideAdBar();
     const node = render(params);
     if (node instanceof Node) app.appendChild(node);
   },
