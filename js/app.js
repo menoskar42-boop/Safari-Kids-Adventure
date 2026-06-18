@@ -67,8 +67,6 @@ import { renderSpinWheel } from "./screens/spinwheel.js";
 import { renderBadges } from "./screens/badges.js";
 import { renderChallenge } from "./games/challenge.js";
 import { createCharacter } from "./games/character.js";
-// ملاحظة: شريط الإعلان لم يعُد يُركَّب هنا — يُدار حصراً من الموجّه (Router)
-// ليظهر على شاشة ولي الأمر فقط، فلا يُطلَب أيّ إعلان على شاشات الطفل (COPPA/Families).
 
 // تسجيل الشاشات
 Router.register("home", renderHome);

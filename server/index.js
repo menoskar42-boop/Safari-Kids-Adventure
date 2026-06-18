@@ -46,11 +46,6 @@ app.get("/sitemap.xml", (_req, res) => {
 app.get("/robots.txt", (_req, res) => {
   res.type("text/plain").send(renderRobots());
 });
-// ads.txt لـ AdSense: معرّف الناشر الافتراضي مضبوط (يمكن تجاوزه بمتغيّر البيئة ADSENSE_PUB)
-app.get("/ads.txt", (_req, res) => {
-  const pub = process.env.ADSENSE_PUB || "pub-3132188303904900";
-  res.type("text/plain").send(`google.com, ${pub}, DIRECT, f08c47fec0942fa0\n`);
-});
 
 // ===== بيان الأصول للعمل دون اتصال (PWA) — يتحدّث ذاتياً مع نموّ الملفات =====
 function listAssets(dir, base) {

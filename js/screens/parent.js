@@ -7,7 +7,6 @@ import { Router } from "../core/router.js";
 import { Sfx } from "../core/audio.js";
 import { setAIEnabled } from "../core/ai.js";
 import { updateStarCounter } from "../core/rewards.js";
-import { showAdBar } from "../core/ads.js";
 
 export function renderParent() {
   const screen = document.createElement("div");
@@ -302,9 +301,7 @@ export function renderParent() {
         : "أدخل الرقم السري";
       input.focus();
     };
-    // بعد اجتياز البوّابة فقط: نُظهر لوحة الكبار ونحمّل/نطلب الإعلان (حقن المكتبة
-    // ديناميكياً مرّة واحدة + بناء وحدة الإعلان). لا يحدث أيّ من هذا قبل البوّابة.
-    const unlock = () => { Sfx.correct(); gate.remove(); screen.appendChild(wrap); showAdBar(); };
+    const unlock = () => { Sfx.correct(); gate.remove(); screen.appendChild(wrap); };
 
     const submit = () => {
       const v = (input.value || "").replace(/\D/g, "");
